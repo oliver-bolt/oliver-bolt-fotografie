@@ -76,17 +76,17 @@ const WorkCategory = () => {
   }
 
   return (
-    <>
+    <div className="min-h-screen" style={{ width: "100vw", maxWidth: "100vw", marginLeft: "calc(-50vw + 50%)" }}>
       <Navbar invertColors={!pastHero} />
       <main>
-        {/* Hero — full-bleed, fixed height, cover crop */}
+        {/* Hero — true full-bleed via 100vw wrapper */}
         <motion.div
           ref={heroRef}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.9 }}
           className="relative w-full"
-          style={{ height: "clamp(360px, 65vh, 760px)" }}
+          style={{ height: "clamp(360px, 62vh, 760px)" }}
         >
           <img
             src={heroImage}
@@ -94,23 +94,20 @@ const WorkCategory = () => {
             className="absolute inset-0 w-full h-full object-cover object-center"
             loading="eager"
           />
-          {/* Subtle gradient for text readability */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/20 to-transparent" />
-          {/* Overlay — vertically centered, offset from left */}
-          <div
-            className="absolute left-0 right-0"
-            style={{ top: "50%", transform: "translateY(-50%)" }}
-          >
-            <div className="px-5 md:px-[12vw]">
-              <p className="text-[20px] md:text-[26px] font-medium text-white leading-relaxed max-w-[440px]">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          {/* Gradient for text readability */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/25 to-transparent" />
+          {/* Overlay — vertically centered */}
+          <div className="absolute inset-0 flex items-center">
+            <div className="pl-[6vw] md:pl-[12vw] pr-5">
+              <p className="text-[18px] md:text-[22px] font-medium text-white leading-relaxed max-w-[520px]">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
               </p>
             </div>
           </div>
         </motion.div>
 
-        {/* Masonry 2-column image grid — no text, no titles */}
-        <section className="px-3 md:px-[5vw] py-6 md:py-10">
+        {/* Masonry 2-column image grid */}
+        <section className="px-2 md:px-[2vw] py-3 md:py-5">
           <style>{`
             @media (min-width: 768px) {
               .masonry-grid {
@@ -122,7 +119,7 @@ const WorkCategory = () => {
             className="masonry-grid"
             style={{
               columns: "1",
-              columnGap: "12px",
+              columnGap: "8px",
             }}
           >
             {allImages.map((img, i) => (
@@ -132,7 +129,7 @@ const WorkCategory = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-30px" }}
                 transition={{ duration: 0.7, ease: "easeOut" }}
-                style={{ breakInside: "avoid", marginBottom: "12px" }}
+                style={{ breakInside: "avoid", marginBottom: "8px" }}
               >
                 <button
                   onClick={() => openLightbox(i)}
@@ -195,7 +192,7 @@ const WorkCategory = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </div>
   );
 };
 
