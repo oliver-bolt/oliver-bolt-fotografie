@@ -2,7 +2,7 @@ import { useParams, Navigate } from "react-router-dom";
 import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
-import { seriesData, seriesCategories } from "@/data/series";
+import { seriesData, seriesCategories, categoryHeroes } from "@/data/series";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -39,7 +39,7 @@ const WorkCategory = () => {
     s.images.map((img) => ({ ...img, projectTitle: s.title }))
   );
 
-  const heroImage = matchingProjects[0]?.cover;
+  const heroImage = categoryHeroes[categoryLabel as keyof typeof categoryHeroes] || matchingProjects[0]?.cover;
 
   const openLightbox = (index: number) => setLightboxIndex(index);
   const closeLightbox = () => setLightboxIndex(null);
