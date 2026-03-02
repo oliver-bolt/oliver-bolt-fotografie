@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 16 },
   visible: {
     opacity: 1,
     y: 0,
@@ -15,9 +15,9 @@ const fadeUp = {
 const About = () => (
   <>
     <Navbar />
-    <main className="pt-28 pb-24">
+    <main className="pt-32 md:pt-40 pb-28 md:pb-36">
       <section className="px-6 md:px-12 lg:px-20">
-        <div className="flex flex-col md:flex-row gap-16 md:gap-24 items-start">
+        <div className="flex flex-col md:flex-row gap-16 md:gap-28 items-start">
           {/* Portrait */}
           <motion.div
             initial="hidden"
@@ -39,9 +39,9 @@ const About = () => (
             animate="visible"
             variants={fadeUp}
             transition={{ delay: 0.2 }}
-            className="w-full md:w-3/5 max-w-xl"
+            className="w-full md:w-3/5 max-w-lg"
           >
-            <h1 className="font-serif text-4xl md:text-5xl font-light text-foreground mb-8">
+            <h1 className="font-serif text-3xl md:text-4xl font-light text-foreground mb-8">
               Über den Fotografen
             </h1>
 
@@ -64,8 +64,8 @@ const About = () => (
               </p>
             </div>
 
-            <div className="mt-12 pt-8 border-t border-border">
-              <h2 className="font-serif text-xl font-light text-foreground mb-4">Künstlerisches Statement</h2>
+            <div className="mt-14 pt-8 border-t border-border">
+              <h2 className="font-serif text-lg font-light text-foreground mb-4">Künstlerisches Statement</h2>
               <p className="font-sans text-sm text-muted-foreground leading-relaxed italic">
                 „Fotografie ist für mich kein Festhalten von Momenten, sondern ein
                 Sichtbarmachen von Atmosphären. Ich suche nicht das spektakuläre Bild,
@@ -74,8 +74,8 @@ const About = () => (
               </p>
             </div>
 
-            <div className="mt-12 pt-8 border-t border-border">
-              <h2 className="font-serif text-xl font-light text-foreground mb-4">Ausstellungen & Vita</h2>
+            <div className="mt-14 pt-8 border-t border-border">
+              <h2 className="font-serif text-lg font-light text-foreground mb-4">Ausstellungen & Vita</h2>
               <ul className="font-sans text-sm text-muted-foreground space-y-2">
                 <li>2024 — „Urban Silence" · Galerie Raum, Berlin</li>
                 <li>2023 — „Coastal Erosion" · Festival Images, Vevey</li>
