@@ -4,21 +4,27 @@ import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { seriesCategories } from "@/data/series";
 
-const Navbar = () => {
+interface NavbarProps {
+  invertColors?: boolean;
+}
+
+const Navbar = ({ invertColors = false }: NavbarProps) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [workOpen, setWorkOpen] = useState(false);
   const location = useLocation();
 
+  const textColor = invertColors ? "text-white" : "text-foreground";
+  const mutedColor = invertColors ? "text-white/70 hover:text-white" : "text-muted-foreground hover:text-foreground";
+
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm">
+    <header className={cn("fixed top-0 left-0 right-0 z-50", !invertColors && "bg-background/95 backdrop-blur-sm")}>
       <nav className="flex items-center justify-between px-5 md:px-10 lg:px-16 py-5">
-        <Link to="/" className="text-sm font-medium tracking-wide text-foreground">
+        <Link to="/" className={cn("text-[22px] md:text-[26px] tracking-tight", textColor)}>
           Oliver Bolt
         </Link>
 
         {/* Desktop */}
         <ul className="hidden md:flex items-center gap-8">
-          {/* Work with dropdown */}
           <li
             className="relative"
             onMouseEnter={() => setWorkOpen(true)}
@@ -27,10 +33,8 @@ const Navbar = () => {
             <Link
               to="/portfolio"
               className={cn(
-                "text-sm tracking-wide transition-opacity duration-300",
-                location.pathname === "/portfolio"
-                  ? "text-foreground"
-                  : "text-muted-foreground hover:text-foreground"
+                "text-sm tracking-wide transition-colors duration-200",
+                location.pathname === "/portfolio" ? textColor : mutedColor
               )}
             >
               Work
@@ -38,12 +42,15 @@ const Navbar = () => {
 
             {workOpen && (
               <div className="absolute top-full right-0 pt-2">
-                <ul className="flex flex-col gap-2 min-w-[180px]">
+                <ul className="flex flex-col gap-2 min-w-[160px] text-right">
                   {seriesCategories.map((cat) => (
                     <li key={cat}>
                       <Link
                         to={`/portfolio?category=${encodeURIComponent(cat)}`}
-                        className="text-sm text-muted-foreground hover:text-foreground hover:underline transition-colors block py-1"
+                        className={cn(
+                          "text-sm transition-colors block py-1 hover:underline",
+                          invertColors ? "text-white/70 hover:text-white" : "text-muted-foreground hover:text-foreground"
+                        )}
                       >
                         {cat}
                       </Link>
@@ -58,10 +65,8 @@ const Navbar = () => {
             <Link
               to="/about"
               className={cn(
-                "text-sm tracking-wide transition-opacity duration-300",
-                location.pathname === "/about"
-                  ? "text-foreground"
-                  : "text-muted-foreground hover:text-foreground"
+                "text-sm tracking-wide transition-colors duration-200",
+                location.pathname === "/about" ? textColor : mutedColor
               )}
             >
               About
@@ -73,7 +78,7 @@ const Navbar = () => {
               href="https://instagram.com/ollie.bolt"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm tracking-wide text-muted-foreground hover:text-foreground transition-opacity duration-300"
+              className={cn("text-sm tracking-wide transition-colors duration-200", mutedColor)}
             >
               Instagram
             </a>
@@ -83,7 +88,7 @@ const Navbar = () => {
         {/* Mobile toggle */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden text-foreground"
+          className={cn("md:hidden", textColor)}
           aria-label="Menu"
         >
           {mobileOpen ? <X size={20} /> : <Menu size={20} />}

@@ -5,7 +5,7 @@ import seriesIndustrial from "@/assets/series-industrial.jpg";
 import seriesNorthern from "@/assets/series-northern.jpg";
 import seriesDocumentary from "@/assets/series-documentary.jpg";
 
-export type SeriesCategory = "Documentary" | "Street & Subculture" | "Motion / Action";
+export type SeriesCategory = "Street" | "Travel" | "Editorial";
 
 export interface SeriesImage {
   src: string;
@@ -29,9 +29,9 @@ export interface Series {
 }
 
 export const seriesCategories: SeriesCategory[] = [
-  "Documentary",
-  "Street & Subculture",
-  "Motion / Action",
+  "Street",
+  "Travel",
+  "Editorial",
 ];
 
 export const seriesData: Series[] = [
@@ -40,7 +40,7 @@ export const seriesData: Series[] = [
     title: "Urban Silence",
     year: "2024",
     location: "Berlin, DE",
-    category: "Documentary",
+    category: "Editorial",
     cover: seriesUrban,
     excerpt: "Geometrische Reduktion urbaner Strukturen auf ihr visuelles Minimum.",
     description:
@@ -64,7 +64,7 @@ export const seriesData: Series[] = [
     title: "Coastal Erosion",
     year: "2023",
     location: "Normandie, FR",
-    category: "Documentary",
+    category: "Travel",
     cover: seriesCoastal,
     excerpt: "Langzeitbelichtungen an der Grenze zwischen Land und Meer.",
     description:
@@ -87,7 +87,7 @@ export const seriesData: Series[] = [
     title: "Fleeting Moments",
     year: "2024",
     location: "Tokyo, JP",
-    category: "Street & Subculture",
+    category: "Street",
     cover: seriesStreet,
     excerpt: "Silhouetten und Lichtspiele im urbanen Dschungel.",
     description:
@@ -110,7 +110,7 @@ export const seriesData: Series[] = [
     title: "Industrial Poetry",
     year: "2023",
     location: "Ruhrgebiet, DE",
-    category: "Documentary",
+    category: "Editorial",
     cover: seriesIndustrial,
     excerpt: "Vergessene Räume industrieller Vergangenheit.",
     description:
@@ -133,7 +133,7 @@ export const seriesData: Series[] = [
     title: "Northern Light",
     year: "2022",
     location: "Lofoten, NO",
-    category: "Motion / Action",
+    category: "Travel",
     cover: seriesNorthern,
     excerpt: "Arktische Lichtstimmungen zwischen Tag und Nacht.",
     description:
@@ -156,7 +156,7 @@ export const seriesData: Series[] = [
     title: "Human Traces",
     year: "2024",
     location: "Verschiedene Orte",
-    category: "Street & Subculture",
+    category: "Street",
     cover: seriesDocumentary,
     excerpt: "Porträts von Handwerkern und ihren verschwindenden Berufen.",
     description:
