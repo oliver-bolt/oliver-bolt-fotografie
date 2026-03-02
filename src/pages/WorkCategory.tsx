@@ -95,22 +95,22 @@ const WorkCategory = () => {
             loading="eager"
           />
           {/* Subtle gradient for text readability */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/15 to-transparent" />
-          {/* Overlay — vertically centered, left-aligned */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/20 to-transparent" />
+          {/* Overlay — vertically centered, offset from left */}
           <div
             className="absolute left-0 right-0"
             style={{ top: "50%", transform: "translateY(-50%)" }}
           >
-            <div className="px-5 md:px-[8vw]">
-              <p className="text-[22px] md:text-[28px] font-medium text-white leading-relaxed max-w-[560px]">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            <div className="px-5 md:px-[12vw]">
+              <p className="text-[20px] md:text-[26px] font-medium text-white leading-relaxed max-w-[440px]">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
               </p>
             </div>
           </div>
         </motion.div>
 
         {/* Masonry 2-column image grid — no text, no titles */}
-        <section className="px-4 md:px-[8vw] py-10 md:py-16">
+        <section className="px-3 md:px-[5vw] py-6 md:py-10">
           <style>{`
             @media (min-width: 768px) {
               .masonry-grid {
@@ -122,7 +122,7 @@ const WorkCategory = () => {
             className="masonry-grid"
             style={{
               columns: "1",
-              columnGap: "16px",
+              columnGap: "12px",
             }}
           >
             {allImages.map((img, i) => (
@@ -132,7 +132,7 @@ const WorkCategory = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-30px" }}
                 transition={{ duration: 0.7, ease: "easeOut" }}
-                style={{ breakInside: "avoid", marginBottom: "16px" }}
+                style={{ breakInside: "avoid", marginBottom: "12px" }}
               >
                 <button
                   onClick={() => openLightbox(i)}
