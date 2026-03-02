@@ -79,25 +79,30 @@ const WorkCategory = () => {
     <>
       <Navbar invertColors={!pastHero} />
       <main>
-        {/* Hero — fixed height, cover crop */}
+        {/* Hero — full-bleed, fixed height, cover crop */}
         <motion.div
           ref={heroRef}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.9 }}
           className="relative w-full"
-          style={{ height: "75vh" }}
+          style={{ height: "clamp(360px, 65vh, 760px)" }}
         >
           <img
             src={heroImage}
             alt={`${categoryLabel} — Hero`}
-            className="w-full h-full object-cover object-center"
+            className="absolute inset-0 w-full h-full object-cover object-center"
             loading="eager"
           />
-          {/* Overlay — single flowing lorem ipsum text, same size as brand */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-full max-w-[1240px] px-5 md:px-10 lg:px-16">
-              <p className="text-[26px] md:text-[30px] font-medium text-white leading-relaxed max-w-[600px]">
+          {/* Subtle gradient for text readability */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/15 to-transparent" />
+          {/* Overlay — vertically centered, left-aligned */}
+          <div
+            className="absolute left-0 right-0"
+            style={{ top: "50%", transform: "translateY(-50%)" }}
+          >
+            <div className="px-5 md:px-[8vw]">
+              <p className="text-[22px] md:text-[28px] font-medium text-white leading-relaxed max-w-[560px]">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
               </p>
             </div>
@@ -105,51 +110,43 @@ const WorkCategory = () => {
         </motion.div>
 
         {/* Masonry 2-column image grid — no text, no titles */}
-        <section className="px-5 md:px-10 lg:px-16 py-16 md:py-24">
+        <section className="px-4 md:px-[8vw] py-10 md:py-16">
+          <style>{`
+            @media (min-width: 768px) {
+              .masonry-grid {
+                columns: 2 !important;
+              }
+            }
+          `}</style>
           <div
-            className="max-w-[1240px]"
+            className="masonry-grid"
             style={{
               columns: "1",
-              columnGap: "1.5rem",
+              columnGap: "16px",
             }}
           >
-            <style>{`
-              @media (min-width: 768px) {
-                .masonry-grid {
-                  columns: 2 !important;
-                }
-              }
-            `}</style>
-            <div
-              className="masonry-grid"
-              style={{
-                columns: "1",
-                columnGap: "1.5rem",
-              }}
-            >
-              {allImages.map((img, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-30px" }}
-                  transition={{ duration: 0.7, ease: "easeOut" }}
-                  style={{ breakInside: "avoid", marginBottom: "1.5rem" }}
+            {allImages.map((img, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-30px" }}
+                transition={{ duration: 0.7, ease: "easeOut" }}
+                style={{ breakInside: "avoid", marginBottom: "16px" }}
+              >
+                <button
+                  onClick={() => openLightbox(i)}
+                  className="block w-full bg-transparent border-none p-0 cursor-pointer"
                 >
-                  <button
-                    onClick={() => openLightbox(i)}
-                    className="block w-full bg-transparent border-none p-0 cursor-pointer"
-                  >
-                    <img
-                      src={img.src}
-                      alt={img.alt}
-                      className="w-full object-cover"
-                      loading="lazy"
-                    />
-                  </button>
-                </motion.div>
-              ))}
-            </div>
+                  <img
+                    src={img.src}
+                    alt={img.alt}
+                    className="w-full object-cover"
+                    loading="lazy"
+                  />
+                </button>
+              </motion.div>
+            ))}
           </div>
         </section>
       </main>
