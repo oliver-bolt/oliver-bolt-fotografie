@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 16 },
   visible: {
     opacity: 1,
     y: 0,
@@ -23,13 +23,13 @@ const Contact = () => {
   return (
     <>
       <Navbar />
-      <main className="pt-28 pb-24">
-        <section className="px-6 md:px-12 lg:px-20 max-w-2xl">
+      <main className="pt-32 md:pt-40 pb-28 md:pb-36">
+        <section className="px-6 md:px-12 lg:px-20 max-w-lg">
           <motion.div initial="hidden" animate="visible" variants={fadeUp}>
-            <h1 className="font-serif text-4xl md:text-5xl font-light text-foreground mb-4">
+            <h1 className="font-serif text-3xl md:text-4xl font-light text-foreground mb-4">
               Kontakt
             </h1>
-            <p className="font-sans text-sm text-muted-foreground mb-12">
+            <p className="font-sans text-sm text-muted-foreground mb-14">
               Anfragen zu Prints, Ausstellungen oder Kollaborationen.
             </p>
           </motion.div>
@@ -41,8 +41,8 @@ const Contact = () => {
             transition={{ delay: 0.15 }}
           >
             {sent ? (
-              <div className="py-16 text-center">
-                <p className="font-serif text-2xl font-light text-foreground mb-2">Vielen Dank.</p>
+              <div className="py-16">
+                <p className="font-serif text-xl font-light text-foreground mb-2">Vielen Dank.</p>
                 <p className="font-sans text-sm text-muted-foreground">
                   Ihre Nachricht wurde gesendet. Ich melde mich zeitnah.
                 </p>
@@ -84,15 +84,15 @@ const Contact = () => {
                 </div>
                 <button
                   type="submit"
-                  className="px-10 py-4 border border-foreground text-foreground text-xs tracking-widest uppercase font-sans hover:bg-foreground hover:text-background transition-all duration-500"
+                  className="text-xs tracking-widest uppercase font-sans text-foreground border-b border-foreground/30 hover:border-foreground pb-1 transition-colors"
                 >
-                  Senden
+                  Senden →
                 </button>
               </form>
             )}
           </motion.div>
 
-          <div className="mt-16 pt-8 border-t border-border">
+          <div className="mt-20 pt-8 border-t border-border">
             <p className="text-xs text-muted-foreground font-sans tracking-wide">
               mail@photographer.com · Instagram · LinkedIn
             </p>
