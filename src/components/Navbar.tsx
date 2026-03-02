@@ -4,9 +4,9 @@ import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navItems = [
-  { label: "Serien", path: "/portfolio" },
-  { label: "Über", path: "/about" },
-  { label: "Kontakt", path: "/contact" },
+  { label: "Work", path: "/portfolio" },
+  { label: "About", path: "/about" },
+  { label: "Contact", path: "/contact" },
 ];
 
 const Navbar = () => {
@@ -14,20 +14,20 @@ const Navbar = () => {
   const location = useLocation();
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-sm">
-      <nav className="flex items-center justify-between px-6 md:px-12 lg:px-20 py-6">
-        <Link to="/" className="font-serif text-xl tracking-wider font-light text-foreground">
-          Portfolio
+    <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm">
+      <nav className="flex items-center justify-between px-5 md:px-10 lg:px-16 py-5">
+        <Link to="/" className="text-sm font-medium tracking-wide text-foreground">
+          Studio Name
         </Link>
 
         {/* Desktop */}
-        <ul className="hidden md:flex items-center gap-10">
+        <ul className="hidden md:flex items-center gap-8">
           {navItems.map((item) => (
             <li key={item.path}>
               <Link
                 to={item.path}
                 className={cn(
-                  "text-sm tracking-widest uppercase font-sans font-light transition-colors duration-300",
+                  "text-sm tracking-wide transition-opacity duration-300",
                   location.pathname === item.path
                     ? "text-foreground"
                     : "text-muted-foreground hover:text-foreground"
@@ -51,15 +51,15 @@ const Navbar = () => {
 
       {/* Mobile menu */}
       {open && (
-        <div className="md:hidden bg-background px-6 pb-8">
-          <ul className="flex flex-col gap-6">
+        <div className="md:hidden bg-background px-5 pb-8">
+          <ul className="flex flex-col gap-5">
             {navItems.map((item) => (
               <li key={item.path}>
                 <Link
                   to={item.path}
                   onClick={() => setOpen(false)}
                   className={cn(
-                    "text-sm tracking-widest uppercase font-sans font-light",
+                    "text-sm tracking-wide",
                     location.pathname === item.path
                       ? "text-foreground"
                       : "text-muted-foreground"
