@@ -45,7 +45,7 @@ const About = () => (
               About
             </h1>
 
-            <div className="space-y-5 text-muted-foreground leading-relaxed">
+            <div className="space-y-5 text-foreground leading-relaxed">
               <p>
                 Seit über zehn Jahren bewege ich mich an der Schnittstelle von dokumentarischer
                 und künstlerischer Fotografie. Meine Arbeit ist geprägt von langen
@@ -66,7 +66,7 @@ const About = () => (
 
             <div className="mt-12 pt-8 border-t border-border">
               <h2 className="text-lg font-medium text-foreground mb-4">Statement</h2>
-              <p className="text-sm text-muted-foreground leading-relaxed italic">
+              <p className="text-sm text-foreground leading-relaxed italic">
                 „Fotografie ist für mich kein Festhalten von Momenten, sondern ein
                 Sichtbarmachen von Atmosphären. Ich suche nicht das spektakuläre Bild,
                 sondern das ehrliche."
@@ -75,7 +75,7 @@ const About = () => (
 
             <div className="mt-12 pt-8 border-t border-border">
               <h2 className="text-lg font-medium text-foreground mb-4">Exhibitions</h2>
-              <ul className="text-sm text-muted-foreground space-y-2">
+              <ul className="text-sm text-foreground space-y-2">
                 <li>2024 — „Urban Silence" · Galerie Raum, Berlin</li>
                 <li>2023 — „Coastal Erosion" · Festival Images, Vevey</li>
                 <li>2023 — „Industrial Poetry" · Museum Folkwang, Essen</li>

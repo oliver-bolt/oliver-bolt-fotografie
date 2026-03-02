@@ -47,10 +47,10 @@ const SeriesDetail = () => {
             className="w-full h-full object-cover"
             loading="eager"
           />
-          {/* Centered container, left-aligned text, same size as brand */}
+          {/* Centered container, left-aligned text */}
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="w-full max-w-[1240px] px-5 md:px-10 lg:px-16">
-              <h1 className="text-[22px] md:text-[26px] text-white font-normal">
+              <h1 className="text-[26px] md:text-[30px] text-white font-medium">
                 {series.title}
               </h1>
             </div>
@@ -60,19 +60,19 @@ const SeriesDetail = () => {
         {/* Title + meta */}
         <section className="px-5 md:px-10 lg:px-16 pt-20 md:pt-28 mb-16 md:mb-20 max-w-[1240px]">
           <motion.div initial="hidden" animate="visible" variants={fade}>
-            <p className="text-xs tracking-widest uppercase text-muted-foreground mb-4">
+            <p className="text-xs tracking-widest uppercase text-foreground mb-4">
               {series.year} · {series.location} · {series.category}
             </p>
             <h2 className="text-[36px] md:text-[48px] font-semibold text-foreground leading-[1.1] mb-6">
               {series.title}
             </h2>
-            <p className="text-muted-foreground leading-relaxed max-w-2xl">
+            <p className="text-foreground leading-relaxed max-w-2xl">
               {series.description}
             </p>
           </motion.div>
         </section>
 
-        {/* Asymmetric gallery */}
+        {/* Image gallery */}
         <section className="px-5 md:px-10 lg:px-16 mb-20 md:mb-28 max-w-[1240px]">
           <div className="space-y-6 md:space-y-8">
             {series.images.map((img, i) => {
@@ -133,11 +133,11 @@ const SeriesDetail = () => {
         <section className="px-5 md:px-10 lg:px-16 mb-16 md:mb-20 max-w-2xl">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade}>
             <h2 className="text-lg font-semibold text-foreground mb-4">Background</h2>
-            <p className="text-sm text-muted-foreground leading-relaxed mb-8">
+            <p className="text-sm text-foreground leading-relaxed mb-8">
               {series.background}
             </p>
             <h3 className="text-base font-medium text-foreground mb-3">Technical Approach</h3>
-            <p className="text-sm text-muted-foreground leading-relaxed">
+            <p className="text-sm text-foreground leading-relaxed">
               {series.technical}
             </p>
           </motion.div>
@@ -147,7 +147,7 @@ const SeriesDetail = () => {
         {series.quote && (
           <section className="px-5 md:px-10 lg:px-16 py-10 border-t border-border mb-16 md:mb-20">
             <blockquote className="max-w-lg">
-              <p className="text-sm text-muted-foreground italic leading-relaxed">
+              <p className="text-sm text-foreground italic leading-relaxed">
                 "{series.quote}"
               </p>
             </blockquote>
@@ -158,7 +158,7 @@ const SeriesDetail = () => {
         <section className="px-5 md:px-10 lg:px-16 pb-16">
           <Link
             to="/"
-            className="text-sm text-muted-foreground hover:text-foreground hover:underline transition-colors"
+            className="text-sm text-foreground hover:underline transition-colors"
           >
             ← Back to Work
           </Link>
