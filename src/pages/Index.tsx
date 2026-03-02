@@ -1,7 +1,6 @@
-import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { seriesData, SeriesCategory } from "@/data/series";
+import { seriesData } from "@/data/series";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -15,22 +14,9 @@ const fade = {
 };
 
 const Index = () => {
-  const [activeCategory, setActiveCategory] = useState<string | null>(null);
-  const navigate = useNavigate();
-
-  const handleCategoryChange = (cat: string | null) => {
-    setActiveCategory(cat);
-    const el = document.getElementById("projects");
-    if (el) el.scrollIntoView({ behavior: "smooth" });
-  };
-
-  const filtered = activeCategory
-    ? seriesData.filter((s) => s.category === activeCategory)
-    : seriesData;
-
   return (
     <>
-      <Navbar onCategoryChange={handleCategoryChange} />
+      <Navbar />
       <main>
         {/* Hero — headline only */}
         <section className="px-5 md:px-10 lg:px-16 pt-36 md:pt-48 pb-28 md:pb-40">
@@ -44,7 +30,7 @@ const Index = () => {
         {/* Projects — Balboa editorial list */}
         <section id="projects" className="px-5 md:px-10 lg:px-16 pb-24 md:pb-32">
           <div className="max-w-[1240px] space-y-24 md:space-y-32">
-            {filtered.map((series) => (
+            {seriesData.map((series) => (
               <motion.div
                 key={series.id}
                 initial="hidden"

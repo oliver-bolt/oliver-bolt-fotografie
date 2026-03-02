@@ -5,7 +5,7 @@ import seriesIndustrial from "@/assets/series-industrial.jpg";
 import seriesNorthern from "@/assets/series-northern.jpg";
 import seriesDocumentary from "@/assets/series-documentary.jpg";
 
-export type SeriesCategory = "Street" | "Travel" | "Editorial";
+export type SeriesCategory = "Action" | "Travel" | "Projects";
 
 export interface SeriesImage {
   src: string;
@@ -29,9 +29,9 @@ export interface Series {
 }
 
 export const seriesCategories: SeriesCategory[] = [
-  "Street",
+  "Action",
   "Travel",
-  "Editorial",
+  "Projects",
 ];
 
 export const seriesData: Series[] = [
@@ -40,7 +40,7 @@ export const seriesData: Series[] = [
     title: "Urban Silence",
     year: "2024",
     location: "Berlin, DE",
-    category: "Editorial",
+    category: "Projects",
     cover: seriesUrban,
     excerpt: "Geometrische Reduktion urbaner Strukturen auf ihr visuelles Minimum.",
     description:
@@ -87,7 +87,7 @@ export const seriesData: Series[] = [
     title: "Fleeting Moments",
     year: "2024",
     location: "Tokyo, JP",
-    category: "Street",
+    category: "Action",
     cover: seriesStreet,
     excerpt: "Silhouetten und Lichtspiele im urbanen Dschungel.",
     description:
@@ -110,7 +110,7 @@ export const seriesData: Series[] = [
     title: "Industrial Poetry",
     year: "2023",
     location: "Ruhrgebiet, DE",
-    category: "Editorial",
+    category: "Projects",
     cover: seriesIndustrial,
     excerpt: "Vergessene Räume industrieller Vergangenheit.",
     description:
@@ -156,7 +156,7 @@ export const seriesData: Series[] = [
     title: "Human Traces",
     year: "2024",
     location: "Verschiedene Orte",
-    category: "Street",
+    category: "Action",
     cover: seriesDocumentary,
     excerpt: "Porträts von Handwerkern und ihren verschwindenden Berufen.",
     description:
