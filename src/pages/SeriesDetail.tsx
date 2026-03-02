@@ -5,8 +5,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import NotFound from "./NotFound";
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 16 },
+const fade = {
+  hidden: { opacity: 0, y: 12 },
   visible: {
     opacity: 1,
     y: 0,
@@ -23,29 +23,13 @@ const SeriesDetail = () => {
   return (
     <>
       <Navbar />
-      <main className="pt-32 md:pt-40 pb-28 md:pb-36">
-        {/* Header */}
-        <section className="px-6 md:px-12 lg:px-20 mb-10 md:mb-14 max-w-3xl">
-          <motion.div initial="hidden" animate="visible" variants={fadeUp}>
-            <p className="text-xs tracking-widest uppercase text-muted-foreground font-sans mb-4">
-              {series.year} · {series.location} · {series.category}
-            </p>
-            <h1 className="font-serif text-3xl md:text-4xl lg:text-5xl font-light text-foreground mb-6">
-              {series.title}
-            </h1>
-            <p className="font-sans text-sm text-muted-foreground leading-relaxed">
-              {series.description}
-            </p>
-          </motion.div>
-        </section>
-
-        {/* Hero image */}
+      <main className="pt-20 md:pt-24 pb-24 md:pb-32">
+        {/* Hero image with subtle text overlay */}
         <motion.div
           initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1 }}
-          className="mb-12 md:mb-20"
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.9 }}
+          className="relative mb-16 md:mb-24"
         >
           <img
             src={series.cover}
@@ -53,24 +37,73 @@ const SeriesDetail = () => {
             className="w-full aspect-[21/9] object-cover"
             loading="eager"
           />
+          <div className="absolute bottom-0 left-0 right-0 p-5 md:p-10 lg:p-16">
+            <p className="text-sm text-white/80 max-w-lg leading-relaxed">
+              {series.excerpt}
+            </p>
+          </div>
         </motion.div>
 
-        {/* Gallery — mixed layouts */}
-        <section className="px-6 md:px-12 lg:px-20 mb-20 md:mb-28">
+        {/* Title + meta */}
+        <section className="px-5 md:px-10 lg:px-16 mb-16 md:mb-20 max-w-[1240px]">
+          <motion.div initial="hidden" animate="visible" variants={fade}>
+            <p className="text-xs tracking-widest uppercase text-muted-foreground mb-4">
+              {series.year} · {series.location} · {series.category}
+            </p>
+            <h1 className="text-[36px] md:text-[48px] font-medium text-foreground leading-[1.1] mb-6">
+              {series.title}
+            </h1>
+            <p className="text-muted-foreground leading-relaxed max-w-2xl">
+              {series.description}
+            </p>
+          </motion.div>
+        </section>
+
+        {/* Asymmetric gallery grid */}
+        <section className="px-5 md:px-10 lg:px-16 mb-20 md:mb-28 max-w-[1240px]">
           <div className="space-y-6 md:space-y-8">
             {series.images.map((img, i) => {
-              // Create rhythm: full, 2-col, 2-col, full, 3-col...
-              const pattern = i % 5;
-              
-              if (pattern === 0 || pattern === 3) {
-                // Full width
+              const pattern = i % 4;
+
+              // Row: two images side by side (left smaller, right larger)
+              if (pattern === 0 && series.images[i + 1]) {
                 return (
                   <motion.div
                     key={i}
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, margin: "-50px" }}
-                    variants={fadeUp}
+                    variants={fade}
+                    className="grid grid-cols-1 md:grid-cols-[2fr_3fr] gap-6 md:gap-8"
+                  >
+                    <img
+                      src={img.src}
+                      alt={img.alt}
+                      className="w-full aspect-[3/4] object-cover"
+                      loading="lazy"
+                    />
+                    <img
+                      src={series.images[i + 1].src}
+                      alt={series.images[i + 1].alt}
+                      className="w-full aspect-[3/4] object-cover"
+                      loading="lazy"
+                    />
+                  </motion.div>
+                );
+              }
+
+              // Skip paired image
+              if (pattern === 1) return null;
+
+              // Full width
+              if (pattern === 2) {
+                return (
+                  <motion.div
+                    key={i}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-50px" }}
+                    variants={fade}
                   >
                     <img
                       src={img.src}
@@ -81,75 +114,65 @@ const SeriesDetail = () => {
                   </motion.div>
                 );
               }
-              
-              // 2-column pair
-              if (pattern === 1) {
-                const next = series.images[i + 1];
+
+              // Two images reversed (right smaller, left larger)
+              if (pattern === 3 && series.images[i + 1]) {
                 return (
                   <motion.div
                     key={i}
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, margin: "-50px" }}
-                    variants={fadeUp}
-                    className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8"
+                    variants={fade}
+                    className="grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-6 md:gap-8"
                   >
                     <img
                       src={img.src}
                       alt={img.alt}
-                      className="w-full aspect-[4/5] object-cover"
+                      className="w-full aspect-[4/3] object-cover"
                       loading="lazy"
                     />
-                    {next && (
-                      <img
-                        src={next.src}
-                        alt={next.alt}
-                        className="w-full aspect-[4/5] object-cover"
-                        loading="lazy"
-                      />
-                    )}
-                  </motion.div>
-                );
-              }
-              
-              // Skip index already rendered in pair
-              if (pattern === 2) return null;
-              
-              // 3-column
-              if (pattern === 4) {
-                return (
-                  <motion.div
-                    key={i}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, margin: "-50px" }}
-                    variants={fadeUp}
-                  >
                     <img
-                      src={img.src}
-                      alt={img.alt}
-                      className="w-full aspect-[3/2] object-cover"
+                      src={series.images[i + 1]?.src || img.src}
+                      alt={series.images[i + 1]?.alt || img.alt}
+                      className="w-full aspect-[4/3] object-cover"
                       loading="lazy"
                     />
                   </motion.div>
                 );
               }
-              
-              return null;
+
+              // Fallback single
+              return (
+                <motion.div
+                  key={i}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: "-50px" }}
+                  variants={fade}
+                >
+                  <img
+                    src={img.src}
+                    alt={img.alt}
+                    className="w-full aspect-[3/2] object-cover"
+                    loading="lazy"
+                  />
+                </motion.div>
+              );
             })}
           </div>
         </section>
 
-        {/* Background — essay style */}
-        <section className="px-6 md:px-12 lg:px-20 mb-20 md:mb-28 max-w-2xl">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-            <h2 className="font-serif text-xl md:text-2xl font-light text-foreground mb-6">Hintergrund</h2>
-            <p className="font-sans text-sm text-muted-foreground leading-relaxed mb-10">
+        {/* Background — essay */}
+        <section className="px-5 md:px-10 lg:px-16 mb-20 md:mb-28 max-w-2xl">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade}>
+            <h2 className="text-xl md:text-2xl font-medium text-foreground mb-6">Background</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed mb-10">
               {series.background}
             </p>
 
-            <h3 className="font-serif text-lg font-light text-foreground mb-4">Technischer Ansatz</h3>
-            <p className="font-sans text-sm text-muted-foreground leading-relaxed">
+            <h3 className="text-lg font-medium text-foreground mb-4">Technical Approach</h3>
+            <p className="text-sm text-muted-foreground leading-relaxed">
               {series.technical}
             </p>
           </motion.div>
@@ -161,24 +184,24 @@ const SeriesDetail = () => {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            variants={fadeUp}
-            className="px-6 md:px-12 lg:px-20 py-16 md:py-20 border-t border-border mb-20 md:mb-28"
+            variants={fade}
+            className="px-5 md:px-10 lg:px-16 py-14 border-t border-border mb-16 md:mb-24"
           >
-            <blockquote className="max-w-xl">
-              <p className="font-serif text-lg md:text-xl font-light italic text-muted-foreground leading-relaxed">
-                „{series.quote}"
+            <blockquote className="max-w-lg">
+              <p className="text-base text-muted-foreground italic leading-relaxed">
+                "{series.quote}"
               </p>
             </blockquote>
           </motion.section>
         )}
 
         {/* Back link */}
-        <section className="px-6 md:px-12 lg:px-20">
+        <section className="px-5 md:px-10 lg:px-16">
           <Link
             to="/portfolio"
-            className="text-xs tracking-widest uppercase font-sans text-muted-foreground hover:text-foreground transition-colors"
+            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
           >
-            ← Zurück zu allen Serien
+            ← Back to Work
           </Link>
         </section>
       </main>

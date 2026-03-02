@@ -3,8 +3,8 @@ import portraitImage from "@/assets/portrait.jpg";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 16 },
+const fade = {
+  hidden: { opacity: 0, y: 12 },
   visible: {
     opacity: 1,
     y: 0,
@@ -15,19 +15,19 @@ const fadeUp = {
 const About = () => (
   <>
     <Navbar />
-    <main className="pt-32 md:pt-40 pb-28 md:pb-36">
-      <section className="px-6 md:px-12 lg:px-20">
-        <div className="flex flex-col md:flex-row gap-16 md:gap-28 items-start">
+    <main className="pt-28 md:pt-36 pb-24 md:pb-32">
+      <section className="px-5 md:px-10 lg:px-16 max-w-[1240px]">
+        <div className="flex flex-col md:flex-row gap-12 md:gap-20 items-start">
           {/* Portrait */}
           <motion.div
             initial="hidden"
             animate="visible"
-            variants={fadeUp}
-            className="w-full md:w-2/5"
+            variants={fade}
+            className="w-full md:w-[45%]"
           >
             <img
               src={portraitImage}
-              alt="Portrait des Fotografen"
+              alt="Portrait of the photographer"
               className="w-full aspect-[3/4] object-cover"
               loading="eager"
             />
@@ -37,15 +37,15 @@ const About = () => (
           <motion.div
             initial="hidden"
             animate="visible"
-            variants={fadeUp}
-            transition={{ delay: 0.2 }}
-            className="w-full md:w-3/5 max-w-lg"
+            variants={fade}
+            transition={{ delay: 0.15 }}
+            className="w-full md:w-[55%] max-w-lg pt-0 md:pt-4"
           >
-            <h1 className="font-serif text-3xl md:text-4xl font-light text-foreground mb-8">
-              Über den Fotografen
+            <h1 className="text-[36px] md:text-[44px] font-medium text-foreground leading-[1.1] mb-8">
+              About
             </h1>
 
-            <div className="space-y-6 font-sans text-sm text-muted-foreground leading-relaxed">
+            <div className="space-y-5 text-muted-foreground leading-relaxed">
               <p>
                 Seit über zehn Jahren bewege ich mich an der Schnittstelle von dokumentarischer
                 und künstlerischer Fotografie. Meine Arbeit ist geprägt von langen
@@ -64,19 +64,18 @@ const About = () => (
               </p>
             </div>
 
-            <div className="mt-14 pt-8 border-t border-border">
-              <h2 className="font-serif text-lg font-light text-foreground mb-4">Künstlerisches Statement</h2>
-              <p className="font-sans text-sm text-muted-foreground leading-relaxed italic">
+            <div className="mt-12 pt-8 border-t border-border">
+              <h2 className="text-lg font-medium text-foreground mb-4">Statement</h2>
+              <p className="text-sm text-muted-foreground leading-relaxed italic">
                 „Fotografie ist für mich kein Festhalten von Momenten, sondern ein
                 Sichtbarmachen von Atmosphären. Ich suche nicht das spektakuläre Bild,
-                sondern das ehrliche – das Bild, das bleibt, nachdem der erste Eindruck
-                verblasst ist."
+                sondern das ehrliche."
               </p>
             </div>
 
-            <div className="mt-14 pt-8 border-t border-border">
-              <h2 className="font-serif text-lg font-light text-foreground mb-4">Ausstellungen & Vita</h2>
-              <ul className="font-sans text-sm text-muted-foreground space-y-2">
+            <div className="mt-12 pt-8 border-t border-border">
+              <h2 className="text-lg font-medium text-foreground mb-4">Exhibitions</h2>
+              <ul className="text-sm text-muted-foreground space-y-2">
                 <li>2024 — „Urban Silence" · Galerie Raum, Berlin</li>
                 <li>2023 — „Coastal Erosion" · Festival Images, Vevey</li>
                 <li>2023 — „Industrial Poetry" · Museum Folkwang, Essen</li>

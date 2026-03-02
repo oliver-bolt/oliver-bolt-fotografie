@@ -1,19 +1,16 @@
-import { Link } from "react-router-dom";
-
 const Footer = () => (
-  <footer className="border-t border-border px-6 md:px-12 lg:px-20 py-16">
-    <div className="flex flex-col md:flex-row justify-between items-start gap-8">
-      <div>
-        <p className="font-serif text-lg tracking-wider font-light text-foreground">Portfolio</p>
-        <p className="text-xs text-muted-foreground mt-2 font-sans">Curated Visual Series</p>
-      </div>
-      <div className="flex gap-10 text-xs tracking-widest uppercase font-sans text-muted-foreground">
-        <Link to="/portfolio" className="hover:text-foreground transition-colors">Serien</Link>
-        <Link to="/about" className="hover:text-foreground transition-colors">Über</Link>
-        <Link to="/contact" className="hover:text-foreground transition-colors">Kontakt</Link>
+  <footer className="px-5 md:px-10 lg:px-16 py-12 mt-8">
+    <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-sm text-muted-foreground">
+      <span className="font-medium text-foreground">Studio Name</span>
+      <div className="flex gap-6">
+        <a href="mailto:mail@photographer.com" className="hover:text-foreground transition-colors">
+          mail@photographer.com
+        </a>
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">
+          Instagram
+        </a>
       </div>
     </div>
-    <p className="text-xs text-muted-foreground mt-12 font-sans">© {new Date().getFullYear()} — Alle Rechte vorbehalten</p>
   </footer>
 );
 
