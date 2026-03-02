@@ -15,7 +15,7 @@ const Navbar = ({ invertColors = false, onCategoryChange }: NavbarProps) => {
   const location = useLocation();
 
   const textColor = invertColors ? "text-white" : "text-foreground";
-  const mutedColor = invertColors ? "text-white/70 hover:text-white" : "text-muted-foreground hover:text-foreground";
+  const linkColor = invertColors ? "text-white hover:text-white" : "text-foreground hover:text-foreground";
 
   const handleCategoryClick = (cat: string | null) => {
     setWorkOpen(false);
@@ -28,7 +28,7 @@ const Navbar = ({ invertColors = false, onCategoryChange }: NavbarProps) => {
   return (
     <header className={cn("fixed top-0 left-0 right-0 z-50", !invertColors && "bg-background/95 backdrop-blur-sm")}>
       <nav className="flex items-center justify-between px-5 md:px-10 lg:px-16 py-5">
-        <Link to="/" className={cn("text-[22px] md:text-[26px] tracking-tight", textColor)}>
+        <Link to="/" className={cn("text-[26px] md:text-[30px] font-medium tracking-tight", textColor)}>
           Oliver Bolt
         </Link>
 
@@ -42,7 +42,7 @@ const Navbar = ({ invertColors = false, onCategoryChange }: NavbarProps) => {
             <button
               className={cn(
                 "text-sm tracking-wide transition-colors duration-200 bg-transparent border-none cursor-pointer",
-                mutedColor
+                linkColor
               )}
               onClick={() => setWorkOpen(!workOpen)}
             >
@@ -52,24 +52,13 @@ const Navbar = ({ invertColors = false, onCategoryChange }: NavbarProps) => {
             {workOpen && (
               <div className="absolute top-full right-0 pt-2">
                 <ul className="flex flex-col gap-2 min-w-[160px] text-right">
-                  <li>
-                    <button
-                      onClick={() => handleCategoryClick(null)}
-                      className={cn(
-                        "text-sm transition-colors block py-1 hover:underline w-full text-right bg-transparent border-none cursor-pointer",
-                        invertColors ? "text-white/70 hover:text-white" : "text-muted-foreground hover:text-foreground"
-                      )}
-                    >
-                      All
-                    </button>
-                  </li>
                   {seriesCategories.map((cat) => (
                     <li key={cat}>
                       <button
                         onClick={() => handleCategoryClick(cat)}
                         className={cn(
                           "text-sm transition-colors block py-1 hover:underline w-full text-right bg-transparent border-none cursor-pointer",
-                          invertColors ? "text-white/70 hover:text-white" : "text-muted-foreground hover:text-foreground"
+                          invertColors ? "text-white hover:text-white" : "text-foreground hover:text-foreground"
                         )}
                       >
                         {cat}
@@ -84,10 +73,7 @@ const Navbar = ({ invertColors = false, onCategoryChange }: NavbarProps) => {
           <li>
             <Link
               to="/about"
-              className={cn(
-                "text-sm tracking-wide transition-colors duration-200",
-                location.pathname === "/about" ? textColor : mutedColor
-              )}
+              className={cn("text-sm tracking-wide transition-colors duration-200", linkColor)}
             >
               About
             </Link>
@@ -98,7 +84,7 @@ const Navbar = ({ invertColors = false, onCategoryChange }: NavbarProps) => {
               href="https://instagram.com/ollie.bolt"
               target="_blank"
               rel="noopener noreferrer"
-              className={cn("text-sm tracking-wide transition-colors duration-200", mutedColor)}
+              className={cn("text-sm tracking-wide transition-colors duration-200", linkColor)}
             >
               Instagram
             </a>
@@ -122,19 +108,11 @@ const Navbar = ({ invertColors = false, onCategoryChange }: NavbarProps) => {
             <li>
               <span className="text-sm tracking-wide text-foreground">Work</span>
               <ul className="mt-2 ml-4 flex flex-col gap-2">
-                <li>
-                  <button
-                    onClick={() => handleCategoryClick(null)}
-                    className="text-sm text-muted-foreground hover:text-foreground transition-colors bg-transparent border-none cursor-pointer text-left"
-                  >
-                    All
-                  </button>
-                </li>
                 {seriesCategories.map((cat) => (
                   <li key={cat}>
                     <button
                       onClick={() => handleCategoryClick(cat)}
-                      className="text-sm text-muted-foreground hover:text-foreground transition-colors bg-transparent border-none cursor-pointer text-left"
+                      className="text-sm text-foreground hover:underline transition-colors bg-transparent border-none cursor-pointer text-left"
                     >
                       {cat}
                     </button>
@@ -146,10 +124,7 @@ const Navbar = ({ invertColors = false, onCategoryChange }: NavbarProps) => {
               <Link
                 to="/about"
                 onClick={() => setMobileOpen(false)}
-                className={cn(
-                  "text-sm tracking-wide",
-                  location.pathname === "/about" ? "text-foreground" : "text-muted-foreground"
-                )}
+                className="text-sm tracking-wide text-foreground"
               >
                 About
               </Link>
@@ -159,7 +134,7 @@ const Navbar = ({ invertColors = false, onCategoryChange }: NavbarProps) => {
                 href="https://instagram.com/ollie.bolt"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm tracking-wide text-muted-foreground"
+                className="text-sm tracking-wide text-foreground"
               >
                 Instagram
               </a>
