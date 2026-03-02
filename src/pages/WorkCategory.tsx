@@ -1,15 +1,10 @@
 import { useParams, Navigate } from "react-router-dom";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import { seriesData, seriesCategories } from "@/data/series";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-
-const fade = {
-  hidden: { opacity: 0, y: 12 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" as const } },
-};
 
 const categoryMap: Record<string, string> = {
   action: "Action",
@@ -21,18 +16,22 @@ const WorkCategory = () => {
   const { category } = useParams<{ category: string }>();
   const [pastHero, setPastHero] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const heroRef = useRef<HTMLDivElement>(null);
 
   const categoryLabel = category ? categoryMap[category.toLowerCase()] : null;
 
   useEffect(() => {
     const onScroll = () => {
-      setPastHero(window.scrollY > window.innerHeight * 0.6);
+      if (heroRef.current) {
+        const rect = heroRef.current.getBoundingClientRect();
+        setPastHero(rect.bottom <= 64);
+      }
     };
     window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Aggregate all images from projects in this category
   const matchingProjects = seriesData.filter(
     (s) => s.category === categoryLabel
   );
@@ -40,7 +39,6 @@ const WorkCategory = () => {
     s.images.map((img) => ({ ...img, projectTitle: s.title }))
   );
 
-  // Hero image: first project's cover
   const heroImage = matchingProjects[0]?.cover;
 
   const openLightbox = (index: number) => setLightboxIndex(index);
@@ -81,55 +79,77 @@ const WorkCategory = () => {
     <>
       <Navbar invertColors={!pastHero} />
       <main>
-        {/* Hero with overlay */}
+        {/* Hero — fixed height, cover crop */}
         <motion.div
+          ref={heroRef}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.9 }}
-          className="relative w-full h-screen"
+          className="relative w-full"
+          style={{ height: "75vh" }}
         >
           <img
             src={heroImage}
             alt={`${categoryLabel} — Hero`}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover object-center"
             loading="eager"
           />
+          {/* Overlay — single flowing lorem ipsum text, same size as brand */}
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="w-full max-w-[1240px] px-5 md:px-10 lg:px-16">
-              <h1 className="text-[26px] md:text-[30px] text-white font-medium">
-                {categoryLabel}
-              </h1>
-              <p className="text-white text-sm mt-2 max-w-md opacity-80">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              <p className="text-[26px] md:text-[30px] font-medium text-white leading-relaxed max-w-[600px]">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
               </p>
             </div>
           </div>
         </motion.div>
 
-        {/* Image grid — no text, no titles */}
+        {/* Masonry 2-column image grid — no text, no titles */}
         <section className="px-5 md:px-10 lg:px-16 py-16 md:py-24">
-          <div className="max-w-[1240px] grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6">
-            {allImages.map((img, i) => (
-              <motion.div
-                key={i}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-30px" }}
-                variants={fade}
-              >
-                <button
-                  onClick={() => openLightbox(i)}
-                  className="block w-full bg-transparent border-none p-0 cursor-pointer"
+          <div
+            className="max-w-[1240px]"
+            style={{
+              columns: "1",
+              columnGap: "1.5rem",
+            }}
+          >
+            <style>{`
+              @media (min-width: 768px) {
+                .masonry-grid {
+                  columns: 2 !important;
+                }
+              }
+            `}</style>
+            <div
+              className="masonry-grid"
+              style={{
+                columns: "1",
+                columnGap: "1.5rem",
+              }}
+            >
+              {allImages.map((img, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-30px" }}
+                  transition={{ duration: 0.7, ease: "easeOut" }}
+                  style={{ breakInside: "avoid", marginBottom: "1.5rem" }}
                 >
-                  <img
-                    src={img.src}
-                    alt={img.alt}
-                    className="w-full aspect-[4/3] object-cover"
-                    loading="lazy"
-                  />
-                </button>
-              </motion.div>
-            ))}
+                  <button
+                    onClick={() => openLightbox(i)}
+                    className="block w-full bg-transparent border-none p-0 cursor-pointer"
+                  >
+                    <img
+                      src={img.src}
+                      alt={img.alt}
+                      className="w-full object-cover"
+                      loading="lazy"
+                    />
+                  </button>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </section>
       </main>
