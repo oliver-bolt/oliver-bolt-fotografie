@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { seriesData } from "@/data/series";
+import { seriesData, SeriesCategory } from "@/data/series";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -13,12 +14,24 @@ const fade = {
   },
 };
 
-const teasers = seriesData.slice(0, 5);
-
 const Index = () => {
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const navigate = useNavigate();
+
+  const handleCategoryChange = (cat: string | null) => {
+    setActiveCategory(cat);
+    // Scroll to projects section
+    const el = document.getElementById("projects");
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const filtered = activeCategory
+    ? seriesData.filter((s) => s.category === activeCategory)
+    : seriesData;
+
   return (
     <>
-      <Navbar />
+      <Navbar onCategoryChange={handleCategoryChange} />
       <main>
         {/* Hero — headline only */}
         <section className="px-5 md:px-10 lg:px-16 pt-36 md:pt-48 pb-28 md:pb-40">
@@ -29,129 +42,59 @@ const Index = () => {
           </motion.div>
         </section>
 
-        {/* Project Teasers */}
-        <section className="px-5 md:px-10 lg:px-16 pb-24 md:pb-32">
-          <div className="max-w-[1240px] space-y-28 md:space-y-40">
-            {teasers.map((series, i) => (
-              <TeaserBlock key={series.id} series={series} variant={i % 3} />
+        {/* Filter indicator */}
+        {activeCategory && (
+          <section className="px-5 md:px-10 lg:px-16 mb-10 max-w-[1240px]">
+            <p className="text-sm text-muted-foreground">
+              Filtered: <span className="text-foreground">{activeCategory}</span>
+              {" · "}
+              <button
+                onClick={() => setActiveCategory(null)}
+                className="hover:underline hover:text-foreground transition-colors bg-transparent border-none cursor-pointer text-muted-foreground text-sm"
+              >
+                Clear
+              </button>
+            </p>
+          </section>
+        )}
+
+        {/* Project grid */}
+        <section id="projects" className="px-5 md:px-10 lg:px-16 pb-24 md:pb-32">
+          <div className="max-w-[1240px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {filtered.map((series) => (
+              <motion.div
+                key={series.id}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-40px" }}
+                variants={fade}
+              >
+                <Link to={`/series/${series.id}`} className="block group">
+                  <img
+                    src={series.cover}
+                    alt={series.title}
+                    className="w-full aspect-[4/3] object-cover transition-transform duration-700 group-hover:scale-[1.01]"
+                    loading="lazy"
+                  />
+                </Link>
+                <div className="mt-5">
+                  <p className="text-[22px] md:text-[26px] text-muted-foreground leading-relaxed mb-4">
+                    {series.excerpt}
+                  </p>
+                  <Link
+                    to={`/series/${series.id}`}
+                    className="text-[22px] md:text-[26px] text-foreground hover:underline transition-colors"
+                  >
+                    View Project →
+                  </Link>
+                </div>
+              </motion.div>
             ))}
           </div>
         </section>
       </main>
       <Footer />
     </>
-  );
-};
-
-const TeaserBlock = ({
-  series,
-  variant,
-}: {
-  series: (typeof seriesData)[0];
-  variant: number;
-}) => {
-  if (variant === 0) {
-    // Two stacked images, text below
-    return (
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-60px" }}
-        variants={fade}
-      >
-        <div className="space-y-6">
-          <img
-            src={series.cover}
-            alt={series.title}
-            className="w-full aspect-[4/3] object-cover"
-            loading="lazy"
-          />
-          <img
-            src={series.images[1]?.src || series.cover}
-            alt={series.images[1]?.alt || series.title}
-            className="w-full aspect-[16/10] object-cover"
-            loading="lazy"
-          />
-        </div>
-        <div className="mt-8 max-w-xl">
-          <p className="text-sm text-muted-foreground leading-relaxed mb-5">
-            {series.excerpt}
-          </p>
-          <Link
-            to={`/series/${series.id}`}
-            className="text-sm text-foreground hover:underline transition-colors"
-          >
-            View Project →
-          </Link>
-        </div>
-      </motion.div>
-    );
-  }
-
-  if (variant === 1) {
-    // One large image, text below
-    return (
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-60px" }}
-        variants={fade}
-      >
-        <img
-          src={series.cover}
-          alt={series.title}
-          className="w-full aspect-[16/9] object-cover"
-          loading="lazy"
-        />
-        <div className="mt-8 max-w-xl">
-          <p className="text-sm text-muted-foreground leading-relaxed mb-5">
-            {series.excerpt}
-          </p>
-          <Link
-            to={`/series/${series.id}`}
-            className="text-sm text-foreground hover:underline transition-colors"
-          >
-            View Project →
-          </Link>
-        </div>
-      </motion.div>
-    );
-  }
-
-  // Two-column images, text below
-  return (
-    <motion.div
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-60px" }}
-      variants={fade}
-    >
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <img
-          src={series.cover}
-          alt={series.title}
-          className="w-full aspect-[3/4] object-cover"
-          loading="lazy"
-        />
-        <img
-          src={series.images[0]?.src || series.cover}
-          alt={series.images[0]?.alt || series.title}
-          className="w-full aspect-[3/4] object-cover"
-          loading="lazy"
-        />
-      </div>
-      <div className="mt-8 max-w-xl">
-        <p className="text-sm text-muted-foreground leading-relaxed mb-5">
-          {series.excerpt}
-        </p>
-        <Link
-          to={`/series/${series.id}`}
-          className="text-sm text-foreground hover:underline transition-colors"
-        >
-          View Project →
-        </Link>
-      </div>
-    </motion.div>
   );
 };
 

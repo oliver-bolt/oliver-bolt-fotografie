@@ -34,7 +34,7 @@ const SeriesDetail = () => {
     <>
       <Navbar invertColors={!pastHero} />
       <main>
-        {/* Full-width hero */}
+        {/* Full-width hero with centered overlay */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -47,10 +47,13 @@ const SeriesDetail = () => {
             className="w-full h-full object-cover"
             loading="eager"
           />
-          <div className="absolute bottom-0 left-0 right-0 p-5 md:p-10 lg:p-16">
-            <p className="text-sm text-white/80 max-w-lg leading-relaxed">
-              {series.excerpt}
-            </p>
+          {/* Centered container, left-aligned text, same size as brand */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="w-full max-w-[1240px] px-5 md:px-10 lg:px-16">
+              <h1 className="text-[22px] md:text-[26px] text-white font-normal">
+                {series.title}
+              </h1>
+            </div>
           </div>
         </motion.div>
 
@@ -60,9 +63,9 @@ const SeriesDetail = () => {
             <p className="text-xs tracking-widest uppercase text-muted-foreground mb-4">
               {series.year} · {series.location} · {series.category}
             </p>
-            <h1 className="text-[36px] md:text-[48px] font-semibold text-foreground leading-[1.1] mb-6">
+            <h2 className="text-[36px] md:text-[48px] font-semibold text-foreground leading-[1.1] mb-6">
               {series.title}
-            </h1>
+            </h2>
             <p className="text-muted-foreground leading-relaxed max-w-2xl">
               {series.description}
             </p>
@@ -154,7 +157,7 @@ const SeriesDetail = () => {
         {/* Back link */}
         <section className="px-5 md:px-10 lg:px-16 pb-16">
           <Link
-            to="/portfolio"
+            to="/"
             className="text-sm text-muted-foreground hover:text-foreground hover:underline transition-colors"
           >
             ← Back to Work
