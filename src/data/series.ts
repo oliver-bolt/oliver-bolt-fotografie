@@ -5,6 +5,8 @@ import seriesIndustrial from "@/assets/series-industrial.jpg";
 import seriesNorthern from "@/assets/series-northern.jpg";
 import seriesDocumentary from "@/assets/series-documentary.jpg";
 
+export type SeriesCategory = "Documentary" | "Street & Subculture" | "Motion / Action";
+
 export interface SeriesImage {
   src: string;
   alt: string;
@@ -16,7 +18,7 @@ export interface Series {
   title: string;
   year: string;
   location: string;
-  category: string;
+  category: SeriesCategory;
   cover: string;
   excerpt: string;
   description: string;
@@ -26,13 +28,19 @@ export interface Series {
   images: SeriesImage[];
 }
 
+export const seriesCategories: SeriesCategory[] = [
+  "Documentary",
+  "Street & Subculture",
+  "Motion / Action",
+];
+
 export const seriesData: Series[] = [
   {
     id: "urban-silence",
     title: "Urban Silence",
     year: "2024",
     location: "Berlin, DE",
-    category: "Architektur",
+    category: "Documentary",
     cover: seriesUrban,
     excerpt: "Geometrische Reduktion urbaner Strukturen auf ihr visuelles Minimum.",
     description:
@@ -56,7 +64,7 @@ export const seriesData: Series[] = [
     title: "Coastal Erosion",
     year: "2023",
     location: "Normandie, FR",
-    category: "Landschaft",
+    category: "Documentary",
     cover: seriesCoastal,
     excerpt: "Langzeitbelichtungen an der Grenze zwischen Land und Meer.",
     description:
@@ -79,7 +87,7 @@ export const seriesData: Series[] = [
     title: "Fleeting Moments",
     year: "2024",
     location: "Tokyo, JP",
-    category: "Street",
+    category: "Street & Subculture",
     cover: seriesStreet,
     excerpt: "Silhouetten und Lichtspiele im urbanen Dschungel.",
     description:
@@ -102,7 +110,7 @@ export const seriesData: Series[] = [
     title: "Industrial Poetry",
     year: "2023",
     location: "Ruhrgebiet, DE",
-    category: "Industrial",
+    category: "Documentary",
     cover: seriesIndustrial,
     excerpt: "Vergessene Räume industrieller Vergangenheit.",
     description:
@@ -125,7 +133,7 @@ export const seriesData: Series[] = [
     title: "Northern Light",
     year: "2022",
     location: "Lofoten, NO",
-    category: "Landschaft",
+    category: "Motion / Action",
     cover: seriesNorthern,
     excerpt: "Arktische Lichtstimmungen zwischen Tag und Nacht.",
     description:
@@ -148,7 +156,7 @@ export const seriesData: Series[] = [
     title: "Human Traces",
     year: "2024",
     location: "Verschiedene Orte",
-    category: "Documentary",
+    category: "Street & Subculture",
     cover: seriesDocumentary,
     excerpt: "Porträts von Handwerkern und ihren verschwindenden Berufen.",
     description:

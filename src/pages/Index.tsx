@@ -43,7 +43,7 @@ const Index = () => {
                 <a href="mailto:mail@photographer.com" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                   mail@photographer.com
                 </a>
-                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                <a href="https://instagram.com/ollie.bolt" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                   Instagram
                 </a>
               </div>
