@@ -42,7 +42,7 @@ const WorkGallery = ({ images }: WorkGalleryProps) => {
 
   return (
     <>
-      <section className="px-4 md:px-8 py-3 md:py-5">
+      <section className="px-4 md:px-10 pt-8 md:pt-12 pb-4 md:pb-6">
         <style>{`
           @media (min-width: 768px) {
             .work-masonry { columns: 2 !important; }
@@ -50,7 +50,7 @@ const WorkGallery = ({ images }: WorkGalleryProps) => {
         `}</style>
         <div
           className="work-masonry"
-          style={{ columns: "1", columnGap: "14px" }}
+          style={{ columns: "1", columnGap: "12px" }}
         >
           {images.map((img, i) => (
             <motion.div
@@ -59,7 +59,7 @@ const WorkGallery = ({ images }: WorkGalleryProps) => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-30px" }}
               transition={{ duration: 0.7, ease: "easeOut" }}
-              style={{ breakInside: "avoid", marginBottom: "14px" }}
+              style={{ breakInside: "avoid", marginBottom: "12px" }}
             >
               <button
                 onClick={() => openLightbox(i)}
