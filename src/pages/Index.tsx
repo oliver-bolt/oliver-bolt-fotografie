@@ -26,7 +26,7 @@ const Index = () => {
       <Navbar />
       <main>
         {/* Hero — headline only */}
-        <section className="px-4 md:px-8 lg:px-12 pt-36 md:pt-48 pb-10 md:pb-14">
+        <section className="max-w-[1600px] mx-auto px-4 md:px-10 pt-36 md:pt-48 pb-8 md:pb-12">
           <motion.div initial="hidden" animate="visible" variants={fade}>
             <h1 className="text-[46px] md:text-[58px] lg:text-[50px] font-medium text-foreground leading-[1.08] max-w-full md:max-w-[50%]">
               Documentary & street photographer capturing culture, travel & editorial stories — based in St. Gallen / Switzerland.
@@ -35,14 +35,24 @@ const Index = () => {
         </section>
 
         {/* Projects — Balboa 2-col image blocks + caption separator */}
-        <section id="projects" className="px-4 md:px-8 lg:px-12 pb-16 md:pb-24">
-          <div className="space-y-10 md:space-y-14">
+        <section id="projects" className="max-w-[1600px] mx-auto px-4 md:px-10 pb-16 md:pb-24">
+          <div className="space-y-10 md:space-y-12">
             {uniqueByCategory.map((series) => {
               const categorySlug = series.category.toLowerCase();
               const categoryImages = seriesData
                 .filter((s) => s.category === series.category)
                 .flatMap((s) => s.images)
                 .slice(0, 6);
+
+              // Assign organic aspect ratios for visual variety
+              const aspects = [
+                "aspect-[4/3]",
+                "aspect-[3/4]",
+                "aspect-[4/3]",
+                "aspect-[1/1]",
+                "aspect-[3/4]",
+                "aspect-[4/3]",
+              ];
 
               return (
                 <motion.div
@@ -52,15 +62,15 @@ const Index = () => {
                   viewport={{ once: true, margin: "-40px" }}
                   variants={fade}
                 >
-                  {/* 2-column image grid — both columns filled */}
+                  {/* 2-column organic image grid */}
                   <Link to={`/work/${categorySlug}`} className="block">
-                    <div className="grid grid-cols-2 gap-[10px] md:gap-[12px]">
+                    <div className="columns-1 md:columns-2 gap-3 md:gap-4">
                       {categoryImages.map((img, i) => (
-                        <div key={i}>
+                        <div key={i} className="mb-3 md:mb-4 break-inside-avoid">
                           <img
                             src={img.src}
                             alt={img.alt}
-                            className="w-full object-cover aspect-[4/3]"
+                            className={`w-full object-cover ${aspects[i] || "aspect-[4/3]"}`}
                             loading="lazy"
                           />
                         </div>
@@ -69,7 +79,7 @@ const Index = () => {
                   </Link>
 
                   {/* Caption separator — left column only */}
-                  <div className="grid grid-cols-2 gap-[10px] md:gap-[12px] mt-4 md:mt-5">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 mt-4 md:mt-5">
                     <div>
                       <p className="text-[15px] md:text-[17px] font-medium text-foreground leading-snug mb-2">
                         {series.excerpt}
@@ -81,8 +91,7 @@ const Index = () => {
                         View Work →
                       </Link>
                     </div>
-                    {/* Right column intentionally empty */}
-                    <div />
+                    <div className="hidden md:block" />
                   </div>
                 </motion.div>
               );
