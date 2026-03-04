@@ -26,6 +26,7 @@ const Index = () => {
   return (
     <>
       <Navbar />
+
       <main className="w-full">
         <div className={SHELL}>
           {/* Hero — headline only */}
@@ -38,17 +39,17 @@ const Index = () => {
             </motion.div>
           </section>
 
-          {/* Projects — Balboa 2-col image blocks + caption separator */}
+          {/* Projects */}
           <section id="projects" className="pb-16 md:pb-24">
             <div className="space-y-12 md:space-y-14">
               {uniqueByCategory.map((series) => {
                 const categorySlug = series.category.toLowerCase();
+
                 const categoryImages = seriesData
                   .filter((s) => s.category === series.category)
                   .flatMap((s) => s.images)
                   .slice(0, 6);
 
-                // Organic aspect ratios cycling pattern for Balboa feel
                 const aspects = [
                   "aspect-[4/3]",
                   "aspect-[3/4]",
@@ -66,28 +67,50 @@ const Index = () => {
                     viewport={{ once: true, margin: "-40px" }}
                     variants={fade}
                   >
-                    {/* 2-column grid — Balboa style with organic aspect ratios */}
+                    {/* IMAGE GRID */}
                     <Link to={`/work/${categorySlug}`} className="block">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-4 md:gap-x-5 md:gap-y-5">
-                        {categoryImages.map((img, i) => (
-                          <div key={i} className="overflow-hidden">
-                            <img
-                              src={img.src}
-                              alt={img.alt}
-                              className={`w-full object-cover ${aspects[i % aspects.length]}`}
-                              loading="lazy"
-                            />
-                          </div>
-                        ))}
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6">
+                        {/* LEFT COLUMN */}
+                        <div className="flex flex-col gap-4 md:gap-5">
+                          {categoryImages
+                            .filter((_, i) => i % 2 === 0)
+                            .map((img, i) => (
+                              <div key={`l-${i}`} className={`overflow-hidden ${aspects[i % aspects.length]}`}>
+                                <img
+                                  src={img.src}
+                                  alt={img.alt}
+                                  className="w-full h-full object-cover"
+                                  loading="lazy"
+                                />
+                              </div>
+                            ))}
+                        </div>
+
+                        {/* RIGHT COLUMN */}
+                        <div className="flex flex-col gap-4 md:gap-5">
+                          {categoryImages
+                            .filter((_, i) => i % 2 === 1)
+                            .map((img, i) => (
+                              <div key={`r-${i}`} className={`overflow-hidden ${aspects[i % aspects.length]}`}>
+                                <img
+                                  src={img.src}
+                                  alt={img.alt}
+                                  className="w-full h-full object-cover"
+                                  loading="lazy"
+                                />
+                              </div>
+                            ))}
+                        </div>
                       </div>
                     </Link>
 
-                    {/* Caption separator — left column only */}
+                    {/* CAPTION (left column only) */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 md:gap-x-5 mt-4 md:mt-5">
                       <div>
                         <p className="text-[15px] md:text-[17px] font-medium text-foreground leading-snug mb-2">
                           {series.excerpt}
                         </p>
+
                         <Link
                           to={`/work/${categorySlug}`}
                           className="text-[14px] md:text-[15px] font-medium text-foreground hover:underline transition-colors"
@@ -95,6 +118,7 @@ const Index = () => {
                           View Work →
                         </Link>
                       </div>
+
                       <div className="hidden md:block" />
                     </div>
                   </motion.div>
@@ -104,6 +128,7 @@ const Index = () => {
           </section>
         </div>
       </main>
+
       <Footer />
     </>
   );
