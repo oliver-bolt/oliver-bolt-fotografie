@@ -13,6 +13,8 @@ const fade = {
   },
 };
 
+const SHELL = "w-full max-w-[1400px] mx-auto px-6 md:px-10";
+
 const Index = () => {
   const seen = new Set<string>();
   const uniqueByCategory = seriesData.filter((s) => {
@@ -29,7 +31,8 @@ const Index = () => {
         <section className="pt-36 md:pt-48 mb-14 md:mb-20">
           <motion.div initial="hidden" animate="visible" variants={fade}>
             <h1 className="text-[46px] md:text-[58px] lg:text-[50px] font-medium text-foreground leading-[1.08] max-w-full md:max-w-[50%]">
-              Documentary & street photographer capturing culture, travel & editorial stories — based in St. Gallen / Switzerland.
+              Documentary & street photographer capturing culture, travel & editorial stories — based in St. Gallen /
+              Switzerland.
             </h1>
           </motion.div>
         </section>
