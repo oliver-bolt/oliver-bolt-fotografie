@@ -15,7 +15,7 @@ const categorySlugMap: Record<string, string> = {
   Projects: "projects",
 };
 
-// ✅ MUST MATCH Index.tsx SHELL exactly (max-w + px)
+// IMPORTANT: must match landing shell to ever get perfect left/right alignment
 const SHELL = "w-full max-w-[1400px] mx-auto px-6 md:px-10";
 
 const Navbar = ({ invertColors = false, onCategoryChange }: NavbarProps) => {
@@ -29,20 +29,26 @@ const Navbar = ({ invertColors = false, onCategoryChange }: NavbarProps) => {
   const lastYRef = useRef<number>(0);
   const tickingRef = useRef(false);
 
-  // ---------- Active states ----------
-  const isWorkActive = useMemo(() => {
-    return location.pathname === "/work" || location.pathname.startsWith("/work/");
+  // ---- Active route detection ----
+  const isWorkActive = useMemo(
+    () => location.pathname === "/work" || location.pathname.startsWith("/work/"),
+    [location.pathname],
+  );
+  const isAboutActive = useMemo(() => location.pathname === "/about", [location.pathname]);
+
+  const activeWorkSlug = useMemo(() => {
+    const m = location.pathname.match(/^\/work\/([^/]+)/);
+    return m?.[1] ?? null;
   }, [location.pathname]);
 
-  const isAboutActive = useMemo(() => {
-    return location.pathname === "/about";
-  }, [location.pathname]);
-
-  // ---------- Colors ----------
+  // ---- Colors ----
   const textColor = invertColors ? "text-white" : "text-foreground";
   const linkBase = invertColors ? "text-white" : "text-foreground";
+  const underlineClass = invertColors
+    ? "underline underline-offset-4 decoration-white"
+    : "underline underline-offset-4 decoration-foreground";
 
-  // ---------- Scroll-hide behavior ----------
+  // ---- Scroll hide/show ----
   useEffect(() => {
     lastYRef.current = window.scrollY;
 
@@ -52,22 +58,17 @@ const Navbar = ({ invertColors = false, onCategoryChange }: NavbarProps) => {
 
       window.requestAnimationFrame(() => {
         const y = window.scrollY;
-        const lastY = lastYRef.current;
-        const delta = y - lastY;
-
-        // small threshold to prevent jitter
+        const last = lastYRef.current;
+        const delta = y - last;
         const THRESH = 8;
 
-        // show near top always
         if (y < 20) {
           setHidden(false);
         } else if (delta > THRESH) {
-          // scrolling down => hide
           setHidden(true);
           setWorkOpen(false);
           setMobileOpen(false);
         } else if (delta < -THRESH) {
-          // scrolling up => show
           setHidden(false);
         }
 
@@ -80,7 +81,7 @@ const Navbar = ({ invertColors = false, onCategoryChange }: NavbarProps) => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // ---------- Navigation ----------
+  // ---- Navigation helper ----
   const handleCategoryClick = (cat: string) => {
     setWorkOpen(false);
     setMobileOpen(false);
@@ -90,26 +91,20 @@ const Navbar = ({ invertColors = false, onCategoryChange }: NavbarProps) => {
     navigate(`/work/${slug}`);
   };
 
-  // ---------- Underline style for active links ----------
-  const underlineClass = invertColors
-    ? "underline underline-offset-4 decoration-white"
-    : "underline underline-offset-4 decoration-foreground";
-
   return (
     <header
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-transform duration-300",
         hidden && "-translate-y-full",
-        // background only when NOT inverted (Balboa: hero pages have transparent nav)
         !invertColors && "bg-background/95 backdrop-blur-sm",
       )}
     >
       <nav className="w-full">
         <div className={cn(SHELL, "flex items-center justify-between py-5")}>
-          {/* Logo (≈10% bigger) */}
+          {/* Logo (bigger) */}
           <Link
             to="/"
-            className={cn("text-[30px] md:text-[35px] font-semibold tracking-tight", textColor)}
+            className={cn("text-[32px] md:text-[38px] font-semibold tracking-tight", textColor)}
             onClick={() => {
               setWorkOpen(false);
               setMobileOpen(false);
@@ -120,11 +115,17 @@ const Navbar = ({ invertColors = false, onCategoryChange }: NavbarProps) => {
 
           {/* Desktop */}
           <ul className="hidden md:flex items-center gap-8">
-            <li className="relative" onMouseEnter={() => setWorkOpen(true)} onMouseLeave={() => setWorkOpen(false)}>
+            {/* Work + dropdown */}
+            <li
+              // KEY: this makes dropdown align to the word "Work" (not page edge)
+              className="relative inline-flex flex-col items-end"
+              onMouseEnter={() => setWorkOpen(true)}
+              onMouseLeave={() => setWorkOpen(false)}
+            >
               <button
                 className={cn(
-                  // ≈10% bigger than text-sm
-                  "text-[15px] tracking-wide transition-colors duration-200 bg-transparent border-none cursor-pointer",
+                  // bigger than before (~10-15%)
+                  "text-[17px] tracking-wide transition-colors duration-200 bg-transparent border-none cursor-pointer",
                   linkBase,
                   isWorkActive && underlineClass,
                 )}
@@ -135,22 +136,34 @@ const Navbar = ({ invertColors = false, onCategoryChange }: NavbarProps) => {
 
               {workOpen && (
                 <div className="absolute top-full right-0 pt-2">
-                  {/* ✅ black dropdown background on hero pages */}
-                  <div className={cn("min-w-[180px] rounded-none", invertColors ? "bg-black/90" : "bg-transparent")}>
-                    <ul className="flex flex-col gap-2 p-3 text-right">
-                      {seriesCategories.map((cat) => (
-                        <li key={cat}>
-                          <button
-                            onClick={() => handleCategoryClick(cat)}
-                            className={cn(
-                              "text-[15px] transition-colors block py-1 hover:underline w-full text-right bg-transparent border-none cursor-pointer",
-                              invertColors ? "text-white hover:text-white" : "text-foreground hover:text-foreground",
-                            )}
-                          >
-                            {cat}
-                          </button>
-                        </li>
-                      ))}
+                  <div
+                    className={cn(
+                      // black background on hero pages
+                      invertColors ? "bg-black/90" : "bg-background/95 backdrop-blur-sm",
+                      "px-3 py-2",
+                    )}
+                  >
+                    {/* categories are right-aligned to WORK */}
+                    <ul className="flex flex-col items-end gap-[6px] min-w-[140px]">
+                      {seriesCategories.map((cat) => {
+                        const slug = categorySlugMap[cat] || cat.toLowerCase();
+                        const isActiveCat = activeWorkSlug === slug;
+
+                        return (
+                          <li key={cat} className="w-full">
+                            <button
+                              onClick={() => handleCategoryClick(cat)}
+                              className={cn(
+                                "text-[16px] leading-tight transition-colors block py-[2px] bg-transparent border-none cursor-pointer text-right w-full hover:underline",
+                                invertColors ? "text-white" : "text-foreground",
+                                isActiveCat && underlineClass,
+                              )}
+                            >
+                              {cat}
+                            </button>
+                          </li>
+                        );
+                      })}
                     </ul>
                   </div>
                 </div>
@@ -161,7 +174,7 @@ const Navbar = ({ invertColors = false, onCategoryChange }: NavbarProps) => {
               <Link
                 to="/about"
                 className={cn(
-                  "text-[15px] tracking-wide transition-colors duration-200",
+                  "text-[17px] tracking-wide transition-colors duration-200",
                   linkBase,
                   isAboutActive && underlineClass,
                 )}
@@ -179,7 +192,7 @@ const Navbar = ({ invertColors = false, onCategoryChange }: NavbarProps) => {
                 href="https://instagram.com/ollie.bolt"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={cn("text-[15px] tracking-wide transition-colors duration-200", linkBase)}
+                className={cn("text-[17px] tracking-wide transition-colors duration-200", linkBase)}
               >
                 Instagram
               </a>
@@ -202,21 +215,27 @@ const Navbar = ({ invertColors = false, onCategoryChange }: NavbarProps) => {
         <div className={cn("md:hidden px-5 pb-8", invertColors ? "bg-black" : "bg-background")}>
           <ul className={cn("flex flex-col gap-5", invertColors ? "text-white" : "text-foreground")}>
             <li>
-              <span className="text-[15px] tracking-wide">Work</span>
+              <span className="text-[16px] tracking-wide">Work</span>
               <ul className="mt-2 ml-4 flex flex-col gap-2">
-                {seriesCategories.map((cat) => (
-                  <li key={cat}>
-                    <button
-                      onClick={() => handleCategoryClick(cat)}
-                      className={cn(
-                        "text-[15px] hover:underline transition-colors bg-transparent border-none cursor-pointer text-left",
-                        invertColors ? "text-white" : "text-foreground",
-                      )}
-                    >
-                      {cat}
-                    </button>
-                  </li>
-                ))}
+                {seriesCategories.map((cat) => {
+                  const slug = categorySlugMap[cat] || cat.toLowerCase();
+                  const isActiveCat = activeWorkSlug === slug;
+
+                  return (
+                    <li key={cat}>
+                      <button
+                        onClick={() => handleCategoryClick(cat)}
+                        className={cn(
+                          "text-[16px] hover:underline transition-colors bg-transparent border-none cursor-pointer text-left",
+                          invertColors ? "text-white" : "text-foreground",
+                          isActiveCat && underlineClass,
+                        )}
+                      >
+                        {cat}
+                      </button>
+                    </li>
+                  );
+                })}
               </ul>
             </li>
 
@@ -225,7 +244,7 @@ const Navbar = ({ invertColors = false, onCategoryChange }: NavbarProps) => {
                 to="/about"
                 onClick={() => setMobileOpen(false)}
                 className={cn(
-                  "text-[15px] tracking-wide",
+                  "text-[16px] tracking-wide",
                   invertColors ? "text-white" : "text-foreground",
                   isAboutActive && underlineClass,
                 )}
@@ -239,7 +258,7 @@ const Navbar = ({ invertColors = false, onCategoryChange }: NavbarProps) => {
                 href="https://instagram.com/ollie.bolt"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={cn("text-[15px] tracking-wide", invertColors ? "text-white" : "text-foreground")}
+                className={cn("text-[16px] tracking-wide", invertColors ? "text-white" : "text-foreground")}
               >
                 Instagram
               </a>
