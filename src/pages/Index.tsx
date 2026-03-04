@@ -13,9 +13,11 @@ const fade = {
   },
 };
 
-const SHELL = "w-full max-w-[1600px] mx-auto px-10 md:px-14";
+// Balboa-like shell: linksbündig im Layout, rechts bündig zur Navbar-Kante durch identische Seiten-Padding
+const SHELL = "w-full max-w-[1600px] mx-auto px-6 md:px-10";
 
 const Index = () => {
+  // nur 1 Block pro Kategorie auf Landing
   const seen = new Set<string>();
   const uniqueByCategory = seriesData.filter((s) => {
     if (seen.has(s.category)) return false;
@@ -26,38 +28,36 @@ const Index = () => {
   return (
     <>
       <Navbar />
-
       <main className="w-full">
         <div className={SHELL}>
           {/* Hero — headline only */}
-          <section className="pt-36 md:pt-48 mb-14 md:mb-20">
+          <section className="pt-36 md:pt-48 mb-16 md:mb-24">
             <motion.div initial="hidden" animate="visible" variants={fade}>
-              <h1 className="text-[46px] md:text-[58px] lg:text-[50px] font-medium text-foreground leading-[1.08] max-w-full md:max-w-[50%]">
+              <h1 className="text-left text-[46px] md:text-[58px] lg:text-[50px] font-medium text-foreground leading-[1.08] max-w-full md:max-w-[55%]">
                 Documentary & street photographer capturing culture, travel & editorial stories — based in St. Gallen /
                 Switzerland.
               </h1>
             </motion.div>
           </section>
 
-          {/* Projects */}
+          {/* Projects — 2-col image blocks (PREVIEW FIX 4 BILDER) + caption separator */}
           <section id="projects" className="pb-16 md:pb-24">
-            <div className="space-y-12 md:space-y-14">
+            <div className="space-y-12 md:space-y-16">
               {uniqueByCategory.map((series) => {
                 const categorySlug = series.category.toLowerCase();
 
+                // Landing preview MUST be exactly 4 images
                 const categoryImages = seriesData
                   .filter((s) => s.category === series.category)
                   .flatMap((s) => s.images)
-                  .slice(0, 6);
+                  .slice(0, 4);
 
-                const aspects = [
-                  "aspect-[4/3]",
-                  "aspect-[3/4]",
-                  "aspect-[4/3]",
-                  "aspect-[1/1]",
-                  "aspect-[3/4]",
-                  "aspect-[4/3]",
-                ];
+                // Balboa-like: organische, aber stabile Rahmen (auf WRAPPER, nicht auf img)
+                // Reihenfolge: links oben (quer), rechts oben (hoch), links unten (hoch), rechts unten (quer)
+                const frameAspects = ["aspect-[4/3]", "aspect-[3/4]", "aspect-[3/4]", "aspect-[4/3]"];
+
+                const leftImages = categoryImages.filter((_, i) => i % 2 === 0);
+                const rightImages = categoryImages.filter((_, i) => i % 2 === 1);
 
                 return (
                   <motion.div
@@ -67,50 +67,53 @@ const Index = () => {
                     viewport={{ once: true, margin: "-40px" }}
                     variants={fade}
                   >
-                    {/* IMAGE GRID */}
+                    {/* Click anywhere on the image block */}
                     <Link to={`/work/${categorySlug}`} className="block">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 md:gap-x-5">
                         {/* LEFT COLUMN */}
-                        <div className="flex flex-col gap-4 md:gap-5">
-                          {categoryImages
-                            .filter((_, i) => i % 2 === 0)
-                            .map((img, i) => (
-                              <div key={`l-${i}`} className={`overflow-hidden ${aspects[i % aspects.length]}`}>
+                        <div className="flex flex-col gap-4 md:gap-5 items-stretch">
+                          {leftImages.map((img, colIndex) => {
+                            const originalIndex = colIndex * 2; // 0,2
+                            const aspect = frameAspects[originalIndex] ?? "aspect-[4/3]";
+                            return (
+                              <div key={img.src} className={`relative w-full overflow-hidden ${aspect}`}>
                                 <img
                                   src={img.src}
                                   alt={img.alt}
-                                  className="w-full h-full object-cover"
+                                  className="absolute inset-0 h-full w-full object-cover"
                                   loading="lazy"
                                 />
                               </div>
-                            ))}
+                            );
+                          })}
                         </div>
 
                         {/* RIGHT COLUMN */}
-                        <div className="flex flex-col gap-4 md:gap-5">
-                          {categoryImages
-                            .filter((_, i) => i % 2 === 1)
-                            .map((img, i) => (
-                              <div key={`r-${i}`} className={`overflow-hidden ${aspects[i % aspects.length]}`}>
+                        <div className="flex flex-col gap-4 md:gap-5 items-stretch">
+                          {rightImages.map((img, colIndex) => {
+                            const originalIndex = colIndex * 2 + 1; // 1,3
+                            const aspect = frameAspects[originalIndex] ?? "aspect-[3/4]";
+                            return (
+                              <div key={img.src} className={`relative w-full overflow-hidden ${aspect}`}>
                                 <img
                                   src={img.src}
                                   alt={img.alt}
-                                  className="w-full h-full object-cover"
+                                  className="absolute inset-0 h-full w-full object-cover"
                                   loading="lazy"
                                 />
                               </div>
-                            ))}
+                            );
+                          })}
                         </div>
                       </div>
                     </Link>
 
-                    {/* CAPTION (left column only) */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 md:gap-x-5 mt-4 md:mt-5">
-                      <div>
+                    {/* Caption separator — left column only */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 md:gap-x-5 mt-4 md:mt-6">
+                      <div className="text-left">
                         <p className="text-[15px] md:text-[17px] font-medium text-foreground leading-snug mb-2">
                           {series.excerpt}
                         </p>
-
                         <Link
                           to={`/work/${categorySlug}`}
                           className="text-[14px] md:text-[15px] font-medium text-foreground hover:underline transition-colors"
@@ -118,7 +121,6 @@ const Index = () => {
                           View Work →
                         </Link>
                       </div>
-
                       <div className="hidden md:block" />
                     </div>
                   </motion.div>
@@ -128,7 +130,6 @@ const Index = () => {
           </section>
         </div>
       </main>
-
       <Footer />
     </>
   );
