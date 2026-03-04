@@ -9,8 +9,8 @@ const fade = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, ease: "easeOut" as const },
-  },
+    transition: { duration: 0.7, ease: "easeOut" as const }
+  }
 };
 
 // IMPORTANT: keep shell identical to navbar inner padding so edges always flush
@@ -48,10 +48,10 @@ const Index = () => {
                 const categorySlug = series.category.toLowerCase();
 
                 // FIX: Preview must be exactly 4 images
-                const categoryImages = seriesData
-                  .filter((s) => s.category === series.category)
-                  .flatMap((s) => s.images)
-                  .slice(0, 4);
+                const categoryImages = seriesData.
+                filter((s) => s.category === series.category).
+                flatMap((s) => s.images).
+                slice(0, 4);
 
                 // Balboa feel: varied wrappers (wrapper defines box, image fills it)
                 const aspects = ["aspect-[4/3]", "aspect-[3/4]", "aspect-[3/4]", "aspect-[4/3]"];
@@ -65,43 +65,43 @@ const Index = () => {
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, margin: "-40px" }}
-                    variants={fade}
-                  >
+                    variants={fade}>
+                    
                     <Link to={`/work/${categorySlug}`} className="block">
                       {/* 2 columns, equal gutters (Balboa has small gutters) */}
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5 gap-y-5">
                         {/* LEFT COLUMN */}
                         <div className="flex flex-col gap-5">
-                          {left.map((img, i) => (
-                            <div
-                              key={img.src + i}
-                              className={`relative w-full overflow-hidden ${aspects[(i * 2) % aspects.length]}`}
-                            >
+                          {left.map((img, i) =>
+                          <div
+                            key={img.src + i}
+                            className={`relative w-full overflow-hidden ${aspects[i * 2 % aspects.length]}`}>
+                            
                               <img
-                                src={img.src}
-                                alt={img.alt}
-                                className="absolute inset-0 h-full w-full object-cover"
-                                loading="lazy"
-                              />
+                              src={img.src}
+                              alt={img.alt}
+                              className="absolute inset-0 h-full w-full object-cover border-0 rounded-none shadow-none"
+                              loading="lazy" />
+                            
                             </div>
-                          ))}
+                          )}
                         </div>
 
                         {/* RIGHT COLUMN */}
                         <div className="flex flex-col gap-5">
-                          {right.map((img, i) => (
-                            <div
-                              key={img.src + i}
-                              className={`relative w-full overflow-hidden ${aspects[(i * 2 + 1) % aspects.length]}`}
-                            >
+                          {right.map((img, i) =>
+                          <div
+                            key={img.src + i}
+                            className={`relative w-full overflow-hidden ${aspects[(i * 2 + 1) % aspects.length]}`}>
+                            
                               <img
-                                src={img.src}
-                                alt={img.alt}
-                                className="absolute inset-0 h-full w-full object-cover"
-                                loading="lazy"
-                              />
+                              src={img.src}
+                              alt={img.alt}
+                              className="absolute inset-0 h-full w-full object-cover"
+                              loading="lazy" />
+                            
                             </div>
-                          ))}
+                          )}
                         </div>
                       </div>
                     </Link>
@@ -114,15 +114,15 @@ const Index = () => {
                         </p>
                         <Link
                           to={`/work/${categorySlug}`}
-                          className="text-[17px] md:text-[18px] font-medium text-foreground hover:underline transition-colors"
-                        >
+                          className="text-[17px] md:text-[18px] font-medium text-foreground hover:underline transition-colors">
+                          
                           View Work →
                         </Link>
                       </div>
                       <div className="hidden md:block" />
                     </div>
-                  </motion.div>
-                );
+                  </motion.div>);
+
               })}
             </div>
           </section>
@@ -130,8 +130,8 @@ const Index = () => {
       </main>
 
       <Footer />
-    </>
-  );
+    </>);
+
 };
 
 export default Index;
