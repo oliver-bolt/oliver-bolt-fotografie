@@ -127,6 +127,7 @@ const Navbar = ({ invertColors = false, onCategoryChange }: NavbarProps) => {
         >
           {mobileOpen ? <X size={20} /> : <Menu size={20} />}
         </button>
+      </div>
       </nav>
 
       {/* Mobile menu */}
@@ -175,6 +176,5 @@ const Navbar = ({ invertColors = false, onCategoryChange }: NavbarProps) => {
     </header>
   );
 };
-</div>
-</nav>
+
 export default Navbar;
