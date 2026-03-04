@@ -14,13 +14,15 @@ const fade = {
 };
 
 /**
- * WICHTIG:
- * Muss exakt zum Navbar-Container passen, sonst fluchtet links/rechts nie sauber.
- * Dein Navbar nutzt: max-w-[1600px] + px-6 md:px-10
+ * IMPORTANT:
+ * - This SHELL must match Navbar's inner container (max-w + px)
+ *   otherwise Oliver/Lead won’t align with the image grid.
+ * - We'll mirror this in Navbar.tsx next.
  */
-const SHELL = "w-full max-w-[1600px] mx-auto px-6 md:px-10";
+const SHELL = "w-full max-w-[1400px] mx-auto px-6 md:px-10";
 
 const Index = () => {
+  // ensure 1 block per category (like your intention)
   const seen = new Set<string>();
   const uniqueByCategory = seriesData.filter((s) => {
     if (seen.has(s.category)) return false;
@@ -34,7 +36,7 @@ const Index = () => {
       <main className="w-full">
         <div className={SHELL}>
           {/* Hero — headline only */}
-          <section className="pt-36 md:pt-48 mb-16 md:mb-24">
+          <section className="pt-36 md:pt-48 mb-14 md:mb-20">
             <motion.div initial="hidden" animate="visible" variants={fade}>
               <h1 className="text-[46px] md:text-[58px] lg:text-[50px] font-medium text-foreground leading-[1.08] max-w-full md:max-w-[50%]">
                 Documentary & street photographer capturing culture, travel & editorial stories — based in St. Gallen /
@@ -43,27 +45,17 @@ const Index = () => {
             </motion.div>
           </section>
 
-          {/* Projects — 2-col masonry-light + caption separator */}
+          {/* Projects — Balboa style: 2-col Masonry + caption separator */}
           <section id="projects" className="pb-16 md:pb-24">
-            <div className="space-y-14 md:space-y-16">
+            <div className="space-y-12 md:space-y-14">
               {uniqueByCategory.map((series) => {
                 const categorySlug = series.category.toLowerCase();
 
-                // FIX: Vorschau enthält genau 4 Bilder
+                // ✅ FIX: exactly 4 images as preview (your requirement)
                 const categoryImages = seriesData
                   .filter((s) => s.category === series.category)
                   .flatMap((s) => s.images)
                   .slice(0, 4);
-
-                /**
-                 * Aspect-Pattern (Balboa-ish):
-                 * Wir steuern das NICHT über <img>-aspect, sondern über Wrapper,
-                 * damit Zuschnitt/Skalierung stabil ist.
-                 */
-                const wrappers = ["aspect-[4/3]", "aspect-[3/4]", "aspect-[3/4]", "aspect-[4/3]"];
-
-                const leftImages = categoryImages.filter((_, i) => i % 2 === 0);
-                const rightImages = categoryImages.filter((_, i) => i % 2 === 1);
 
                 return (
                   <motion.div
@@ -74,46 +66,23 @@ const Index = () => {
                     variants={fade}
                   >
                     <Link to={`/work/${categorySlug}`} className="block">
-                      {/* Outer grid must be full width to align left/right with SHELL */}
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5 md:gap-x-6">
-                        {/* LEFT COLUMN (stack) */}
-                        <div className="flex flex-col gap-5 md:gap-6">
-                          {leftImages.map((img, idx) => {
-                            const i = idx * 2; // original index approx for wrapper pattern
-                            return (
-                              <div key={img.src} className={`relative overflow-hidden ${wrappers[i]}`}>
-                                <img
-                                  src={img.src}
-                                  alt={img.alt}
-                                  className="absolute inset-0 h-full w-full object-cover"
-                                  loading="lazy"
-                                />
-                              </div>
-                            );
-                          })}
-                        </div>
-
-                        {/* RIGHT COLUMN (stack) */}
-                        <div className="flex flex-col gap-5 md:gap-6">
-                          {rightImages.map((img, idx) => {
-                            const i = idx * 2 + 1;
-                            return (
-                              <div key={img.src} className={`relative overflow-hidden ${wrappers[i]}`}>
-                                <img
-                                  src={img.src}
-                                  alt={img.alt}
-                                  className="absolute inset-0 h-full w-full object-cover"
-                                  loading="lazy"
-                                />
-                              </div>
-                            );
-                          })}
-                        </div>
+                      {/* ✅ Masonry (CSS Columns) — avoids Grid row “holes” */}
+                      <div className="columns-1 md:columns-2 gap-4 md:gap-5">
+                        {categoryImages.map((img, i) => (
+                          <div key={i} className="[break-inside:avoid] mb-4 md:mb-5 overflow-hidden">
+                            <img
+                              src={img.src}
+                              alt={img.alt}
+                              className="w-full h-auto object-cover block"
+                              loading="lazy"
+                            />
+                          </div>
+                        ))}
                       </div>
                     </Link>
 
-                    {/* Caption separator — left column only (rechte bleibt leer) */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5 md:gap-x-6 mt-4 md:mt-5">
+                    {/* Caption separator — left column only */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 md:gap-x-5 mt-4 md:mt-5">
                       <div>
                         <p className="text-[15px] md:text-[17px] font-medium text-foreground leading-snug mb-2">
                           {series.excerpt}
