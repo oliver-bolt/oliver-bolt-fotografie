@@ -44,16 +44,6 @@ const Index = () => {
                 .flatMap((s) => s.images)
                 .slice(0, 6);
 
-              // Assign organic aspect ratios for visual variety
-              const aspects = [
-                "aspect-[4/3]",
-                "aspect-[3/4]",
-                "aspect-[4/3]",
-                "aspect-[1/1]",
-                "aspect-[3/4]",
-                "aspect-[4/3]",
-              ];
-
               return (
                 <motion.div
                   key={series.id}
