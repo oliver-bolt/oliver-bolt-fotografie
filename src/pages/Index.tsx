@@ -27,10 +27,7 @@ const Index = () => {
     <>
       <Navbar />
       <main className="w-full">
-  <div className={SHELL}>
-    ...
-  </div>
-</main>
+        <div className={SHELL}>
         {/* Hero — headline only */}
         <section className="pt-36 md:pt-48 mb-14 md:mb-20">
           <motion.div initial="hidden" animate="visible" variants={fade}>
