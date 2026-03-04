@@ -62,15 +62,15 @@ const Index = () => {
                   viewport={{ once: true, margin: "-40px" }}
                   variants={fade}
                 >
-                  {/* 2-column organic image grid */}
+                  {/* 2-column fixed grid — Balboa style */}
                   <Link to={`/work/${categorySlug}`} className="block">
-                    <div className="columns-1 md:columns-2 gap-3 md:gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
                       {categoryImages.map((img, i) => (
-                        <div key={i} className="mb-3 md:mb-4 break-inside-avoid">
+                        <div key={i} className="overflow-hidden">
                           <img
                             src={img.src}
                             alt={img.alt}
-                            className={`w-full object-cover ${aspects[i] || "aspect-[4/3]"}`}
+                            className="w-full h-full object-cover aspect-[4/3]"
                             loading="lazy"
                           />
                         </div>
