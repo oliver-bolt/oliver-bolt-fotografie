@@ -13,16 +13,10 @@ const fade = {
   },
 };
 
-/**
- * IMPORTANT:
- * - This SHELL must match Navbar's inner container (max-w + px)
- *   otherwise Oliver/Lead won’t align with the image grid.
- * - We'll mirror this in Navbar.tsx next.
- */
-const SHELL = "w-full max-w-[1400px] mx-auto px-6 md:px-10";
+// IMPORTANT: must match Navbar inner container (max width + padding) so everything aligns
+const SHELL = "w-full max-w-[1600px] mx-auto px-6 md:px-10";
 
 const Index = () => {
-  // ensure 1 block per category (like your intention)
   const seen = new Set<string>();
   const uniqueByCategory = seriesData.filter((s) => {
     if (seen.has(s.category)) return false;
@@ -35,23 +29,23 @@ const Index = () => {
       <Navbar />
       <main className="w-full">
         <div className={SHELL}>
-          {/* Hero — headline only */}
+          {/* Hero */}
           <section className="pt-36 md:pt-48 mb-14 md:mb-20">
             <motion.div initial="hidden" animate="visible" variants={fade}>
-              <h1 className="text-[46px] md:text-[58px] lg:text-[50px] font-medium text-foreground leading-[1.08] max-w-full md:max-w-[50%]">
+              <h1 className="text-[46px] md:text-[58px] lg:text-[50px] font-medium text-foreground leading-[1.08] max-w-full md:max-w-[52%]">
                 Documentary & street photographer capturing culture, travel & editorial stories — based in St. Gallen /
                 Switzerland.
               </h1>
             </motion.div>
           </section>
 
-          {/* Projects — Balboa style: 2-col Masonry + caption separator */}
+          {/* Projects — TRUE Masonry (Balboa-feel), 2 columns, fixed 4 images, small gutters */}
           <section id="projects" className="pb-16 md:pb-24">
             <div className="space-y-12 md:space-y-14">
               {uniqueByCategory.map((series) => {
                 const categorySlug = series.category.toLowerCase();
 
-                // ✅ FIX: exactly 4 images as preview (your requirement)
+                // FIX: preview contains EXACTLY 4 images
                 const categoryImages = seriesData
                   .filter((s) => s.category === series.category)
                   .flatMap((s) => s.images)
@@ -65,11 +59,23 @@ const Index = () => {
                     viewport={{ once: true, margin: "-40px" }}
                     variants={fade}
                   >
+                    {/* Masonry container (columns) */}
                     <Link to={`/work/${categorySlug}`} className="block">
-                      {/* ✅ Masonry (CSS Columns) — avoids Grid row “holes” */}
-                      <div className="columns-1 md:columns-2 gap-4 md:gap-5">
+                      <div
+                        className="
+                          columns-1 md:columns-2
+                          gap-x-5 md:gap-x-6
+                        "
+                      >
                         {categoryImages.map((img, i) => (
-                          <div key={i} className="[break-inside:avoid] mb-4 md:mb-5 overflow-hidden">
+                          <div
+                            key={i}
+                            className="
+                              mb-5 md:mb-6
+                              break-inside-avoid
+                              overflow-hidden
+                            "
+                          >
                             <img
                               src={img.src}
                               alt={img.alt}
@@ -81,8 +87,8 @@ const Index = () => {
                       </div>
                     </Link>
 
-                    {/* Caption separator — left column only */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 md:gap-x-5 mt-4 md:mt-5">
+                    {/* Caption separator — left column only (like Balboa) */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 mt-2 md:mt-3">
                       <div>
                         <p className="text-[15px] md:text-[17px] font-medium text-foreground leading-snug mb-2">
                           {series.excerpt}
