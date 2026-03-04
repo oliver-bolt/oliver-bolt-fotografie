@@ -39,7 +39,9 @@ const Navbar = ({ invertColors = false, onCategoryChange }: NavbarProps) => {
         !invertColors && "bg-background/95 backdrop-blur-sm"
       )}
     >
-      <nav className="max-w-[1600px] w-full mx-auto flex items-center justify-between px-6 md:px-10 py-5">
+      <nav className="w-full">
+  <div className="max-w-[1600px] w-full mx-auto flex items-center justify-between px-6 md:px-10 py-5">
+    
         <Link
           to="/"
           className={cn(
@@ -173,5 +175,6 @@ const Navbar = ({ invertColors = false, onCategoryChange }: NavbarProps) => {
     </header>
   );
 };
-
+</div>
+</nav>
 export default Navbar;
