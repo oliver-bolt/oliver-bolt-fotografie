@@ -12,18 +12,8 @@ const fade = {
   },
 };
 
-/*
-IMPORTANT
-Container identical to Navbar container
-to guarantee perfect left/right alignment
-*/
 const SHELL = "max-w-[1600px] mx-auto px-10 md:px-14";
 
-/*
-Image slot component
-forces exact aspect ratio
-and crops image using object-cover
-*/
 function Slot({ src, alt, aspect, eager = false }: { src: string; alt: string; aspect: string; eager?: boolean }) {
   return (
     <div className={`${aspect} overflow-hidden relative`}>
@@ -61,14 +51,10 @@ const Index = () => {
               const imgs = series.images?.slice(0, 4);
               if (!imgs || imgs.length < 4) return null;
 
-              /*
-                Alternating Balboa rhythm
-              */
               const altLayout = index % 2 === 1;
 
               const leftTop = altLayout ? "aspect-[3/4]" : "aspect-[4/3]";
               const leftBottom = altLayout ? "aspect-[4/3]" : "aspect-[3/4]";
-
               const rightTop = altLayout ? "aspect-[4/3]" : "aspect-[3/4]";
               const rightBottom = altLayout ? "aspect-[3/4]" : "aspect-[4/3]";
 
@@ -82,13 +68,11 @@ const Index = () => {
                 >
                   {/* IMAGE GRID (NOT CLICKABLE) */}
                   <div className="grid grid-cols-2 gap-[18px]">
-                    {/* LEFT COLUMN */}
                     <div className="grid gap-[18px]">
                       <Slot src={imgs[0].src} alt={imgs[0].alt} aspect={leftTop} eager={index === 0} />
                       <Slot src={imgs[1].src} alt={imgs[1].alt} aspect={leftBottom} />
                     </div>
 
-                    {/* RIGHT COLUMN */}
                     <div className="grid gap-[18px]">
                       <Slot src={imgs[2].src} alt={imgs[2].alt} aspect={rightTop} eager={index === 0} />
                       <Slot src={imgs[3].src} alt={imgs[3].alt} aspect={rightBottom} />
@@ -97,18 +81,30 @@ const Index = () => {
 
                   {/* CAPTION BLOCK
                       Mobile: spans both columns
-                      Mobile text sizes: -20%
+                      Desktop: left column only
+                      Desktop: excerpt + link inline (same line)
                   */}
                   <div className="grid grid-cols-1 md:grid-cols-2 mt-6">
                     <div>
-                      <p className="text-[22px] md:text-[32px] font-medium leading-snug mb-3">{series.excerpt}</p>
+                      {/* Mobile smaller (-20%), Desktop stays 32 */}
+                      <div className="text-[22px] md:text-[32px] font-medium leading-snug">
+                        {/* Desktop: inline */}
+                        <span className="hidden md:inline">
+                          {series.excerpt}{" "}
+                          <a href={`/work/${series.category.toLowerCase()}`} className="underline underline-offset-4">
+                            View Work →
+                          </a>
+                        </span>
 
-                      <a
-                        href={`/work/${series.category.toLowerCase()}`}
-                        className="text-[22px] md:text-[32px] font-medium underline"
-                      >
-                        View Work →
-                      </a>
+                        {/* Mobile: excerpt then link on new line */}
+                        <span className="md:hidden">
+                          {series.excerpt}
+                          <br />
+                          <a href={`/work/${series.category.toLowerCase()}`} className="underline underline-offset-4">
+                            View Work →
+                          </a>
+                        </span>
+                      </div>
                     </div>
 
                     <div className="hidden md:block" />
