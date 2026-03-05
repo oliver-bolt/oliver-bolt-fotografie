@@ -12,10 +12,18 @@ const fade = {
   },
 };
 
+/**
+ * IMPORTANT
+ * Muss IDENTISCH sein zu Navbar Container, damit links/rechts wirklich fluchtet.
+ * (Du hast Navbar max-w-[1600px] + px-... -> wir matchen das hier.)
+ */
 const SHELL = "max-w-[1600px] mx-auto px-10 md:px-14";
 
-/* SLOT */
-
+/**
+ * Slot:
+ * - erzwingt Frame-Aspect
+ * - füllt IMMER den Frame via absolute + object-cover
+ */
 function Slot({ src, alt, aspect, eager = false }: { src: string; alt: string; aspect: string; eager?: boolean }) {
   return (
     <div className={`${aspect} relative overflow-hidden`}>
@@ -23,27 +31,10 @@ function Slot({ src, alt, aspect, eager = false }: { src: string; alt: string; a
         src={src}
         alt={alt}
         loading={eager ? "eager" : "lazy"}
-        className="absolute inset-0 w-full h-full object-cover"
+        className="absolute inset-0 h-full w-full object-cover"
       />
     </div>
   );
-}
-
-/* IMAGE ORIENTATION */
-
-function splitOrientation(images: any[]) {
-  const portrait: any[] = [];
-  const landscape: any[] = [];
-
-  images.forEach((img) => {
-    const image = new Image();
-    image.src = img.src;
-
-    if (image.height > image.width) portrait.push(img);
-    else landscape.push(img);
-  });
-
-  return { portrait, landscape };
 }
 
 const Index = () => {
@@ -53,33 +44,38 @@ const Index = () => {
 
       <main className="w-full">
         <div className={SHELL}>
-          {/* HERO */}
-
+          {/* HERO TEXT */}
           <section className="pt-36 md:pt-48 mb-24">
             <motion.div initial="hidden" animate="visible" variants={fade}>
-              <h1 className="text-[46px] md:text-[56px] font-medium leading-[1.08] max-w-[50%]">
+              <h1 className="text-[46px] md:text-[56px] font-medium leading-[1.08] max-w-full md:max-w-[50%]">
                 Documentary & street photographer capturing culture, travel & editorial stories — based in St. Gallen /
                 Switzerland.
               </h1>
             </motion.div>
           </section>
 
-          {/* PROJECT BLOCKS */}
-
-          <section className="space-y-24 pb-28">
+          {/* PROJECT BLOCKS (Preview = exakt 4 Bilder) */}
+          <section className="space-y-20 md:space-y-24 pb-28">
             {seriesData.map((series, index) => {
-              const imgs = series.images?.slice(0, 6);
-              if (!imgs || imgs.length === 0) return null;
+              // Preview: fix 4 Bilder, notfalls auffüllen (damit Layout nie bricht)
+              const base = (series.images ?? []).slice(0, 4);
+              if (base.length === 0) return null;
 
-              const { portrait, landscape } = splitOrientation(imgs);
+              const imgs = [...base];
+              while (imgs.length < 4) {
+                imgs.push(imgs[imgs.length - 1]); // dupliziere letztes Bild als Fallback
+              }
 
-              const p1 = portrait[0] || imgs[0];
-              const p2 = portrait[1] || imgs[1];
+              // Balboa-Rhythmus: jede zweite Sektion gespiegelt
+              const altLayout = index % 2 === 1;
 
-              const l1 = landscape[0] || imgs[2];
-              const l2 = landscape[1] || imgs[3];
+              const leftTop = altLayout ? "aspect-[3/4]" : "aspect-[4/3]";
+              const leftBottom = altLayout ? "aspect-[4/3]" : "aspect-[3/4]";
+              const rightTop = altLayout ? "aspect-[4/3]" : "aspect-[3/4]";
+              const rightBottom = altLayout ? "aspect-[3/4]" : "aspect-[4/3]";
 
-              const alt = index % 2 === 1;
+              // Gleichmäßiger Gutter (horizontal + vertical)
+              const G = "gap-[18px]";
 
               return (
                 <motion.div
@@ -89,57 +85,39 @@ const Index = () => {
                   viewport={{ once: true, margin: "-40px" }}
                   variants={fade}
                 >
-                  {/* GRID */}
-
-                  <div className="grid grid-cols-2 gap-[18px]">
-                    {/* LEFT */}
-
-                    <div className="grid gap-[18px]">
-                      {alt ? (
-                        <>
-                          <Slot src={p1.src} alt={p1.alt} aspect="aspect-[3/4]" eager={index === 0} />
-                          <Slot src={l1.src} alt={l1.alt} aspect="aspect-[4/3]" />
-                        </>
-                      ) : (
-                        <>
-                          <Slot src={l1.src} alt={l1.alt} aspect="aspect-[4/3]" eager={index === 0} />
-                          <Slot src={p1.src} alt={p1.alt} aspect="aspect-[3/4]" />
-                        </>
-                      )}
+                  {/* IMAGE GRID */}
+                  {/* WICHTIG: immer 2 Spalten, auch Mobile */}
+                  <div className={`grid grid-cols-2 ${G}`}>
+                    {/* LEFT COLUMN */}
+                    <div className={`grid ${G}`}>
+                      <Slot src={imgs[0].src} alt={imgs[0].alt} aspect={leftTop} eager={index === 0} />
+                      <Slot src={imgs[1].src} alt={imgs[1].alt} aspect={leftBottom} />
                     </div>
 
-                    {/* RIGHT */}
-
-                    <div className="grid gap-[18px]">
-                      {alt ? (
-                        <>
-                          <Slot src={l2.src} alt={l2.alt} aspect="aspect-[4/3]" eager={index === 0} />
-                          <Slot src={p2.src} alt={p2.alt} aspect="aspect-[3/4]" />
-                        </>
-                      ) : (
-                        <>
-                          <Slot src={p2.src} alt={p2.alt} aspect="aspect-[3/4]" eager={index === 0} />
-                          <Slot src={l2.src} alt={l2.alt} aspect="aspect-[4/3]" />
-                        </>
-                      )}
+                    {/* RIGHT COLUMN */}
+                    <div className={`grid ${G}`}>
+                      <Slot src={imgs[2].src} alt={imgs[2].alt} aspect={rightTop} eager={index === 0} />
+                      <Slot src={imgs[3].src} alt={imgs[3].alt} aspect={rightBottom} />
                     </div>
                   </div>
 
-                  {/* TEXT */}
-
-                  <div className="grid grid-cols-2 mt-6">
+                  {/* CAPTION BLOCK */}
+                  {/* Mobile: über beide Spalten (grid-cols-1) */}
+                  {/* Desktop: linke Spalte Text, rechte leer (wie Balboa) */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 mt-6">
                     <div>
+                      {/* Textgröße wie Navbar-Logo ("Oliver Bolt") */}
                       <p className="text-[28px] md:text-[32px] font-medium leading-snug mb-3">{series.excerpt}</p>
 
                       <a
                         href={`/work/${series.category.toLowerCase()}`}
-                        className="text-[28px] md:text-[32px] font-medium underline"
+                        className="text-[28px] md:text-[32px] font-medium underline underline-offset-4"
                       >
-                        View Work
+                        View Project →
                       </a>
                     </div>
 
-                    <div />
+                    <div className="hidden md:block" />
                   </div>
                 </motion.div>
               );
