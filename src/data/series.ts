@@ -19,12 +19,6 @@ import travelNz8 from "@/assets/travel-nz-8.jpg";
 import travelNz9 from "@/assets/travel-nz-9.jpg";
 import travelNz10 from "@/assets/travel-nz-10.jpg";
 
-import projects1 from "@/assets/projects-1.jpg";
-import projects2 from "@/assets/projects-2.jpg";
-import projects3 from "@/assets/projects-3.jpg";
-import projects4 from "@/assets/projects-4.jpg";
-import projects5 from "@/assets/projects-5.jpg";
-import projectsHero from "@/assets/projects-hero.jpg";
 
 import projectsYoo1 from "@/assets/projects-yoo-1.jpg";
 import projectsYoo2 from "@/assets/projects-yoo-2.jpg";
@@ -82,7 +76,7 @@ export const seriesCategories: SeriesCategory[] = [
 export const categoryHeroes: Record<SeriesCategory, string> = {
   Action: actionHero,
   Travel: travelHero,
-  Projects: projectsHero,
+  Projects: projectsYoo1,
 };
 
 export const seriesData: Series[] = [
@@ -134,28 +128,6 @@ export const seriesData: Series[] = [
       { src: travelNz4, alt: "New Zealand 4", layout: "half" },
       { src: travelNz10, alt: "New Zealand 10", layout: "half" },
       { src: travelNz7, alt: "New Zealand 7", layout: "full" },
-    ],
-  },
-  {
-    id: "projects",
-    title: "Projects",
-    year: "2024",
-    location: "Schweiz",
-    category: "Projects",
-    cover: projects1,
-    excerpt: "Geometrische Reduktion urbaner Strukturen auf ihr visuelles Minimum.",
-    description:
-      "Urban Silence ist eine fortlaufende Serie, die sich der architektonischen Abstraktion widmet.",
-    background:
-      "Die Serie entstand über einen Zeitraum von sechs Monaten.",
-    technical:
-      "Aufgenommen mit einer Mittelformatkamera bei ISO 100.",
-    images: [
-      { src: projects1, alt: "Project 1", layout: "full" },
-      { src: projects2, alt: "Project 2", layout: "half" },
-      { src: projects3, alt: "Project 3", layout: "half" },
-      { src: projects4, alt: "Project 4", layout: "full" },
-      { src: projects5, alt: "Project 5", layout: "half" },
     ],
   },
   {
