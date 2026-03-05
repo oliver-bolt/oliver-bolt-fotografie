@@ -63,7 +63,7 @@ const Index = () => {
 
           <section className="space-y-20 md:space-y-24 pb-28">
             {seriesData.map((series, index) => {
-              const imgs = series.preview?.slice(0, 4);
+              const imgs = series.images?.slice(0, 4);
 
               if (!imgs || imgs.length < 4) return null;
 
