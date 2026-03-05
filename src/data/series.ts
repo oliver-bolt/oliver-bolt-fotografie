@@ -6,11 +6,6 @@ import action5 from "@/assets/action-5.jpg";
 import action6 from "@/assets/action-6.jpg";
 import actionHero from "@/assets/action-hero.jpg";
 
-import travel1 from "@/assets/travel-1.jpg";
-import travel2 from "@/assets/travel-2.jpg";
-import travel3 from "@/assets/travel-3.jpg";
-import travel4 from "@/assets/travel-4.jpg";
-import travel5 from "@/assets/travel-5.jpg";
 import travelHero from "@/assets/travel-hero.jpg";
 
 import travelNz1 from "@/assets/travel-nz-1.jpg";
