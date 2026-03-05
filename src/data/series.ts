@@ -208,4 +208,27 @@ export const seriesData: Series[] = [
       { src: sternwarte6, alt: "Portrait in der Sternwarte", layout: "half" },
     ],
   },
+  {
+    id: "druegg-2025",
+    title: "DRÜEGG Streetart",
+    year: "2025",
+    location: "Uzwil",
+    category: "Projects",
+    cover: druegg4,
+    excerpt: "Farbenexplosion auf dem Schulhausplatz — Streetart-Projekt Drüegg Uzwil.",
+    description:
+      "Dokumentation des Streetart-Projekts DRÜEGG auf dem Schulhausplatz in Uzwil — ein farbgewaltiges Gesamtkunstwerk zwischen Architektur und urbanem Spielplatz.",
+    background:
+      "Entstanden während der Umsetzung des Wandgemäldes auf dem Pausenplatz des Schulhauses Drüegg in Uzwil.",
+    technical:
+      "Drohnenaufnahmen, Weitwinkel und Details bei natürlichem Tageslicht.",
+    images: [
+      { src: druegg1, alt: "DRÜEGG Skizze und Sneaker", layout: "half" },
+      { src: druegg2, alt: "DRÜEGG Basketballkorb", layout: "half" },
+      { src: druegg3, alt: "DRÜEGG Künstler bei der Arbeit", layout: "half" },
+      { src: druegg4, alt: "DRÜEGG Drohnenansicht Personen", layout: "half" },
+      { src: druegg5, alt: "DRÜEGG Drohne Gesamtansicht", layout: "full" },
+      { src: druegg6, alt: "DRÜEGG Detail Muster", layout: "full" },
+    ],
+  },
 ];
