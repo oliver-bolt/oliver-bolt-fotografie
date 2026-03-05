@@ -58,10 +58,10 @@ export const categoryHeroes: Record<SeriesCategory, string> = {
 
 export const seriesData: Series[] = [
   {
-    id: "fleeting-moments",
-    title: "Fleeting Moments",
+    id: "action",
+    title: "Action",
     year: "2024",
-    location: "Tokyo, JP",
+    location: "Schweiz",
     category: "Action",
     cover: action1,
     excerpt: "Silhouetten und Lichtspiele im urbanen Dschungel.",
@@ -72,37 +72,19 @@ export const seriesData: Series[] = [
     technical:
       "Leica M mit 35mm Festbrennweite. Hohe ISO-Werte (1600-6400) für schnelle Verschlusszeiten.",
     images: [
-      { src: action1, alt: "Action shot 1", layout: "full" },
-      { src: action2, alt: "Action shot 2", layout: "half" },
-      { src: action3, alt: "Action shot 3", layout: "half" },
+      { src: action1, alt: "Action 1", layout: "full" },
+      { src: action2, alt: "Action 2", layout: "half" },
+      { src: action3, alt: "Action 3", layout: "half" },
+      { src: action4, alt: "Action 4", layout: "full" },
+      { src: action5, alt: "Action 5", layout: "half" },
+      { src: action6, alt: "Action 6", layout: "half" },
     ],
   },
   {
-    id: "human-traces",
-    title: "Human Traces",
-    year: "2024",
-    location: "Verschiedene Orte",
-    category: "Action",
-    cover: action4,
-    excerpt: "Porträts von Handwerkern und ihren verschwindenden Berufen.",
-    description:
-      "Human Traces porträtiert Menschen, deren Handwerk vom Verschwinden bedroht ist.",
-    background:
-      "Über zwei Jahre besuchte ich Werkstätten in ganz Europa.",
-    technical:
-      "Natürliches Fensterlicht, keine künstliche Beleuchtung. 85mm Festbrennweite.",
-    quote: "Die schönsten Geschichten stehen in den Händen der Menschen.",
-    images: [
-      { src: action4, alt: "Handwerker bei der Arbeit", layout: "full" },
-      { src: action5, alt: "Hände am Werkstück", layout: "half" },
-      { src: action6, alt: "Werkstatt-Details", layout: "half" },
-    ],
-  },
-  {
-    id: "coastal-erosion",
-    title: "Coastal Erosion",
+    id: "travel",
+    title: "Travel",
     year: "2023",
-    location: "Normandie, FR",
+    location: "Verschiedene Orte",
     category: "Travel",
     cover: travel1,
     excerpt: "Langzeitbelichtungen an der Grenze zwischen Land und Meer.",
@@ -113,68 +95,33 @@ export const seriesData: Series[] = [
     technical:
       "ND-Filter (10-Stop) für Belichtungszeiten von 30 Sekunden bis 4 Minuten.",
     images: [
-      { src: travel1, alt: "Travel scene 1", layout: "full" },
-      { src: travel2, alt: "Travel scene 2", layout: "half" },
-      { src: travel3, alt: "Travel scene 3", layout: "half" },
+      { src: travel1, alt: "Travel 1", layout: "full" },
+      { src: travel2, alt: "Travel 2", layout: "half" },
+      { src: travel3, alt: "Travel 3", layout: "half" },
+      { src: travel4, alt: "Travel 4", layout: "full" },
+      { src: travel5, alt: "Travel 5", layout: "half" },
     ],
   },
   {
-    id: "northern-light",
-    title: "Northern Light",
-    year: "2022",
-    location: "Lofoten, NO",
-    category: "Travel",
-    cover: travel4,
-    excerpt: "Arktische Lichtstimmungen zwischen Tag und Nacht.",
-    description:
-      "Northern Light ist eine Serie über das besondere Licht des hohen Nordens.",
-    background:
-      "Zwei Winter auf den Lofoten, bei Temperaturen bis -25°C.",
-    technical:
-      "Weitwinkel (14mm) auf Vollformat. ISO 3200-6400 für Nordlichter.",
-    images: [
-      { src: travel4, alt: "Northern scene 1", layout: "full" },
-      { src: travel5, alt: "Northern scene 2", layout: "half" },
-    ],
-  },
-  {
-    id: "urban-silence",
-    title: "Urban Silence",
+    id: "projects",
+    title: "Projects",
     year: "2024",
-    location: "Berlin, DE",
+    location: "Schweiz",
     category: "Projects",
     cover: projects1,
     excerpt: "Geometrische Reduktion urbaner Strukturen auf ihr visuelles Minimum.",
     description:
       "Urban Silence ist eine fortlaufende Serie, die sich der architektonischen Abstraktion widmet.",
     background:
-      "Die Serie entstand über einen Zeitraum von sechs Monaten, vorwiegend in den Randgebieten Berlins.",
+      "Die Serie entstand über einen Zeitraum von sechs Monaten.",
     technical:
       "Aufgenommen mit einer Mittelformatkamera bei ISO 100.",
-    quote: "Architektur wird erst lesbar, wenn man die Menschen ausblendet.",
     images: [
-      { src: projects1, alt: "Making of 1", layout: "full" },
-      { src: projects2, alt: "Making of 2", layout: "half" },
-      { src: projects3, alt: "Making of 3", layout: "half" },
-    ],
-  },
-  {
-    id: "industrial-poetry",
-    title: "Industrial Poetry",
-    year: "2023",
-    location: "Ruhrgebiet, DE",
-    category: "Projects",
-    cover: projects4,
-    excerpt: "Vergessene Räume industrieller Vergangenheit.",
-    description:
-      "Industrial Poetry erkundet verlassene Industriebauten als Kathedralen einer vergangenen Epoche.",
-    background:
-      "Die Bilder entstanden in stillgelegten Zechen, Stahlwerken und Fabrikhallen des Ruhrgebiets.",
-    technical:
-      "Stativ-basiert mit HDR-Technik für den extremen Dynamikumfang.",
-    images: [
-      { src: projects4, alt: "Industrial scene 1", layout: "full" },
-      { src: projects5, alt: "Industrial scene 2", layout: "half" },
+      { src: projects1, alt: "Project 1", layout: "full" },
+      { src: projects2, alt: "Project 2", layout: "half" },
+      { src: projects3, alt: "Project 3", layout: "half" },
+      { src: projects4, alt: "Project 4", layout: "full" },
+      { src: projects5, alt: "Project 5", layout: "half" },
     ],
   },
 ];
