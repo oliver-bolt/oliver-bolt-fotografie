@@ -43,6 +43,13 @@ import sternwarte4 from "@/assets/projects-sternwarte-4.jpg";
 import sternwarte5 from "@/assets/projects-sternwarte-5.jpg";
 import sternwarte6 from "@/assets/projects-sternwarte-6.jpg";
 
+import druegg1 from "@/assets/projects-druegg-1.jpg";
+import druegg2 from "@/assets/projects-druegg-2.jpg";
+import druegg3 from "@/assets/projects-druegg-3.jpg";
+import druegg4 from "@/assets/projects-druegg-4.jpg";
+import druegg5 from "@/assets/projects-druegg-5.jpg";
+import druegg6 from "@/assets/projects-druegg-6.jpg";
+
 export type SeriesCategory = "Action" | "Travel" | "Projects";
 
 export interface SeriesImage {
