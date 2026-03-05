@@ -28,7 +28,7 @@ const About = () => (
             <img
               src={portraitImage}
               alt="Portrait of the photographer"
-              className="w-full aspect-[3/4] object-cover"
+              className="w-full aspect-[3/4] object-cover object-[center_20%]"
               loading="eager"
             />
           </motion.div>
