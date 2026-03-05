@@ -5,6 +5,12 @@ import { X, ChevronLeft, ChevronRight } from "lucide-react";
 interface GalleryImage {
   src: string;
   alt: string;
+
+  /**
+   * OPTIONAL (für bessere Crops später):
+   * CSS object-position, z.B. "50% 35%" oder "40% 50%"
+   */
+  focus?: string;
 }
 
 interface WorkGalleryProps {
@@ -20,16 +26,14 @@ const fadeUp = {
   },
 };
 
-// Optional: ein bisschen Balboa-Rhythmus in den Frames
-const ASPECTS = ["aspect-[4/3]", "aspect-[3/4]", "aspect-[4/3]", "aspect-[1/1]"];
-
-function Frame({ src, alt, aspect }: { src: string; alt: string; aspect: string }) {
-  return (
-    <div className={`${aspect} relative overflow-hidden`}>
-      <img src={src} alt={alt} className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
-    </div>
-  );
-}
+/**
+ * IMPORTANT
+ * - Masonry via CSS columns => keine Grid-row Whitespaces
+ * - 2 columns ALWAYS (mobile + desktop)
+ * - Gutter überall identisch
+ * - Keine forced aspect frames => weniger „falscher“ Crop
+ */
+const GUTTER = 18; // px – match Landing
 
 const WorkGallery = ({ images }: WorkGalleryProps) => {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
@@ -56,35 +60,57 @@ const WorkGallery = ({ images }: WorkGalleryProps) => {
     return () => window.removeEventListener("keydown", handleKey);
   }, [lightboxIndex, goNext, goPrev]);
 
-  /**
-   * Abstand zwischen Hero und ersten Bildern:
-   * - pt-... hier steuert es deterministisch.
-   */
   return (
     <>
-      <section className="px-4 md:px-10 pt-10 md:pt-14 pb-6">
-        <div className="grid grid-cols-2 gap-[18px]">
-          {images.map((img, i) => {
-            const aspect = ASPECTS[i % ASPECTS.length];
-
-            return (
+      {/* Abstand Hero -> erste Bilder: pt-... */}
+      <section className="pt-10 md:pt-14 pb-6">
+        {/* Container wie Site-Width, damit links/rechts sauber sitzt */}
+        <div className="max-w-[1600px] mx-auto px-4 md:px-10">
+          <div
+            style={{
+              columns: 2, // ALWAYS 2 columns (mobile + desktop)
+              columnGap: `${GUTTER}px`,
+            }}
+          >
+            {images.map((img, i) => (
               <motion.div
                 key={`${img.src}-${i}`}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-30px" }}
                 variants={fadeUp}
+                style={{
+                  breakInside: "avoid",
+                  marginBottom: `${GUTTER}px`,
+                }}
               >
                 <button
                   onClick={() => openLightbox(i)}
-                  className="block w-full bg-transparent border-none p-0 cursor-pointer text-left"
+                  className="block w-full bg-transparent border-none p-0 cursor-pointer"
                   aria-label={`Open image ${i + 1}`}
                 >
-                  <Frame src={img.src} alt={img.alt} aspect={aspect} />
+                  {/* 
+                    Keine Frame-Aspect-Zwänge -> Bild darf natürlich wirken.
+                    Trotzdem „Balboa clean“: overflow-hidden, object-fit cover.
+                    Default focus leicht nach oben (50% 42%), damit Köpfe/Action eher drin bleiben.
+                  */}
+                  <div className="relative overflow-hidden">
+                    <img
+                      src={img.src}
+                      alt={img.alt}
+                      loading="lazy"
+                      className="block w-full h-auto"
+                      style={{
+                        // Wenn du später focus pro Bild gibst, wirkt’s sofort besser.
+                        objectFit: "cover",
+                        objectPosition: img.focus ?? "50% 42%",
+                      }}
+                    />
+                  </div>
                 </button>
               </motion.div>
-            );
-          })}
+            ))}
+          </div>
         </div>
       </section>
 
