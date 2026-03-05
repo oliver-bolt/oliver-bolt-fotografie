@@ -13,8 +13,8 @@ const fade = {
   },
 };
 
-// IMPORTANT: must match Navbar inner padding to align perfectly
-// Navbar uses: max-w-[1600px] ... px-6 md:px-10
+// IMPORTANT: match Navbar horizontal padding so left/right edges align perfectly
+// Navbar uses px-6 md:px-10 -> we use the same here.
 const SHELL = "w-full max-w-[1600px] mx-auto px-6 md:px-10";
 
 const Index = () => {
@@ -40,17 +40,39 @@ const Index = () => {
             </motion.div>
           </section>
 
-          {/* Projects — Balboa-like masonry preview (4 images) + caption separator */}
+          {/* Projects — 2-col preview blocks (4 images) + caption separator */}
           <section id="projects" className="pb-16 md:pb-24">
             <div className="space-y-12 md:space-y-14">
               {uniqueByCategory.map((series) => {
                 const categorySlug = series.category.toLowerCase();
 
-                // FIX: preview must be exactly 4 images
+                // FIX: Landing preview must be exactly 4 images
                 const categoryImages = seriesData
                   .filter((s) => s.category === series.category)
                   .flatMap((s) => s.images)
                   .slice(0, 4);
+
+                // Symmetric layout to guarantee both columns align top+bottom:
+                // Left column: 4/3 + 3/4
+                // Right column: 3/4 + 4/3
+                // => total heights equal (balanced)
+                const slotAspects = ["aspect-[4/3]", "aspect-[3/4]", "aspect-[3/4]", "aspect-[4/3]"];
+
+                const Img = ({ i }: { i: number }) => {
+                  const img = categoryImages[i];
+                  if (!img) return null;
+
+                  return (
+                    <div className={`relative w-full overflow-hidden ${slotAspects[i]}`}>
+                      <img
+                        src={img.src}
+                        alt={img.alt}
+                        className="absolute inset-0 w-full h-full object-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                  );
+                };
 
                 return (
                   <motion.div
@@ -60,37 +82,32 @@ const Index = () => {
                     viewport={{ once: true, margin: "-40px" }}
                     variants={fade}
                   >
-                    {/* Masonry-like 2 columns (Balboa behavior) */}
                     <Link to={`/work/${categorySlug}`} className="block">
-                      <div
-                        className="
-                          columns-1 md:columns-2
-                          [column-gap:16px] md:[column-gap:20px]
-                        "
-                      >
-                        {categoryImages.map((img, i) => (
-                          <div key={i} className="mb-4 md:mb-5 break-inside-avoid overflow-hidden">
-                            <img
-                              src={img.src}
-                              alt={img.alt}
-                              className="w-full h-auto object-cover block"
-                              loading="lazy"
-                            />
-                          </div>
-                        ))}
+                      {/* FIX: true 2-col block, perfectly aligned left/right, equal gutters */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5 gap-y-5">
+                        {/* LEFT COLUMN (2 images) */}
+                        <div className="flex flex-col gap-5">
+                          <Img i={0} />
+                          <Img i={2} />
+                        </div>
+
+                        {/* RIGHT COLUMN (2 images) */}
+                        <div className="flex flex-col gap-5">
+                          <Img i={1} />
+                          <Img i={3} />
+                        </div>
                       </div>
                     </Link>
 
                     {/* Caption separator — left column only */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 mt-4 md:mt-5 [column-gap:16px] md:[column-gap:20px]">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5 mt-4 md:mt-5">
                       <div>
-                        {/* FIX: same size as "Oliver Bolt" */}
-                        <p className="text-[28px] md:text-[32px] font-semibold tracking-tight text-foreground leading-[1.15] mb-2">
+                        <p className="text-[15px] md:text-[17px] font-medium text-foreground leading-snug mb-2">
                           {series.excerpt}
                         </p>
                         <Link
                           to={`/work/${categorySlug}`}
-                          className="text-[28px] md:text-[32px] font-semibold tracking-tight text-foreground hover:underline transition-colors"
+                          className="text-[14px] md:text-[15px] font-medium text-foreground hover:underline transition-colors"
                         >
                           View Work →
                         </Link>
