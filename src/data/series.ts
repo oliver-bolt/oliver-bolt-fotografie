@@ -43,6 +43,13 @@ import sternwarte4 from "@/assets/projects-sternwarte-4.jpg";
 import sternwarte5 from "@/assets/projects-sternwarte-5.jpg";
 import sternwarte6 from "@/assets/projects-sternwarte-6.jpg";
 
+import druegg1 from "@/assets/projects-druegg-1.jpg";
+import druegg2 from "@/assets/projects-druegg-2.jpg";
+import druegg3 from "@/assets/projects-druegg-3.jpg";
+import druegg4 from "@/assets/projects-druegg-4.jpg";
+import druegg5 from "@/assets/projects-druegg-5.jpg";
+import druegg6 from "@/assets/projects-druegg-6.jpg";
+
 export type SeriesCategory = "Action" | "Travel" | "Projects";
 
 export interface SeriesImage {
@@ -199,6 +206,29 @@ export const seriesData: Series[] = [
       { src: sternwarte4, alt: "Teleskop Interior", layout: "full" },
       { src: sternwarte5, alt: "Mond Detailaufnahme", layout: "half" },
       { src: sternwarte6, alt: "Portrait in der Sternwarte", layout: "half" },
+    ],
+  },
+  {
+    id: "druegg-2025",
+    title: "DRÜEGG Streetart",
+    year: "2025",
+    location: "Uzwil",
+    category: "Projects",
+    cover: druegg4,
+    excerpt: "Farbenexplosion auf dem Schulhausplatz — Streetart-Projekt Drüegg Uzwil.",
+    description:
+      "Dokumentation des Streetart-Projekts DRÜEGG auf dem Schulhausplatz in Uzwil — ein farbgewaltiges Gesamtkunstwerk zwischen Architektur und urbanem Spielplatz.",
+    background:
+      "Entstanden während der Umsetzung des Wandgemäldes auf dem Pausenplatz des Schulhauses Drüegg in Uzwil.",
+    technical:
+      "Drohnenaufnahmen, Weitwinkel und Details bei natürlichem Tageslicht.",
+    images: [
+      { src: druegg1, alt: "DRÜEGG Skizze und Sneaker", layout: "half" },
+      { src: druegg2, alt: "DRÜEGG Basketballkorb", layout: "half" },
+      { src: druegg3, alt: "DRÜEGG Künstler bei der Arbeit", layout: "half" },
+      { src: druegg4, alt: "DRÜEGG Drohnenansicht Personen", layout: "half" },
+      { src: druegg5, alt: "DRÜEGG Drohne Gesamtansicht", layout: "full" },
+      { src: druegg6, alt: "DRÜEGG Detail Muster", layout: "full" },
     ],
   },
 ];
