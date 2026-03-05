@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -18,9 +18,13 @@ const Navbar = ({ invertColors = false }: NavbarProps) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [workOpen, setWorkOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const textColor = invertColors ? "text-white" : "text-foreground";
   const linkColor = invertColors ? "text-white hover:text-white" : "text-foreground hover:text-foreground";
+
+  const isAbout = location.pathname.startsWith("/about");
+  const isWork = location.pathname.startsWith("/work");
 
   const handleCategoryClick = (cat: string) => {
     setWorkOpen(false);
@@ -31,62 +35,82 @@ const Navbar = ({ invertColors = false }: NavbarProps) => {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 pointer-events-none">
-      {/* NAVBAR CONTAINER */}
-
       <nav className="w-full pointer-events-auto">
+        {/* Balboa-like vertical placement: pushed down */}
         <div className="max-w-[1600px] w-full mx-auto flex items-center justify-between px-6 md:px-10 pt-8 pb-4 md:pt-10 md:pb-5">
           {/* LOGO */}
-
           <Link to="/" className={cn("text-[25px] md:text-[29px] font-semibold tracking-tight", textColor)}>
             Oliver Bolt
           </Link>
 
-          {/* DESKTOP NAV */}
-
+          {/* DESKTOP */}
           <ul className="hidden md:flex items-center gap-7">
             {/* WORK */}
-
             <li className="relative" onMouseEnter={() => setWorkOpen(true)} onMouseLeave={() => setWorkOpen(false)}>
-              <button
-                className={cn(
-                  "text-[13px] tracking-wide transition-colors duration-200 bg-transparent border-none cursor-pointer",
-                  linkColor,
-                )}
-                onClick={() => setWorkOpen(!workOpen)}
-              >
-                Work
-              </button>
+              {/* IMPORTANT: anchor dropdown to the button's right edge */}
+              <div className="relative inline-block">
+                <button
+                  className={cn(
+                    "text-[13px] tracking-wide transition-colors duration-200 bg-transparent border-none cursor-pointer",
+                    linkColor,
+                    isWork && "underline underline-offset-4",
+                  )}
+                  onClick={() => setWorkOpen(!workOpen)}
+                >
+                  Work
+                </button>
 
-              {workOpen && (
-                <div className="absolute top-full right-0 pt-3">
-                  <div className="bg-black px-6 py-4">
-                    <ul className="flex flex-col gap-1 text-right">
-                      {seriesCategories.map((cat) => (
-                        <li key={cat}>
-                          <button
-                            onClick={() => handleCategoryClick(cat)}
-                            className="text-[13px] text-white hover:underline block bg-transparent border-none cursor-pointer"
-                          >
-                            {cat}
-                          </button>
-                        </li>
-                      ))}
-                    </ul>
+                {workOpen && (
+                  // Right edge of this dropdown is exactly the right edge of "Work"
+                  <div className="absolute top-full right-0 pt-3">
+                    {/* Panel: black on Work (invert) */}
+                    <div className={cn("relative", invertColors ? "bg-black" : "bg-transparent")}>
+                      {/* Optional overlap of black background to the right without moving text */}
+                      {invertColors && <div className="absolute top-0 bottom-0 -right-3 w-3 bg-black" />}
+
+                      <ul className="flex flex-col text-right px-6 py-4 gap-1 min-w-[180px]">
+                        {seriesCategories.map((cat) => {
+                          const slug = categorySlugMap[cat] || cat.toLowerCase();
+                          const active = location.pathname === `/work/${slug}`;
+
+                          return (
+                            <li key={cat}>
+                              <button
+                                onClick={() => handleCategoryClick(cat)}
+                                className={cn(
+                                  "text-[13px] block w-full text-right bg-transparent border-none cursor-pointer",
+                                  invertColors ? "text-white" : "text-foreground",
+                                  "hover:underline",
+                                  active && "underline underline-offset-4",
+                                )}
+                              >
+                                {cat}
+                              </button>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </div>
                   </div>
-                </div>
-              )}
+                )}
+              </div>
             </li>
 
             {/* ABOUT */}
-
             <li>
-              <Link to="/about" className={cn("text-[13px] tracking-wide transition-colors duration-200", linkColor)}>
+              <Link
+                to="/about"
+                className={cn(
+                  "text-[13px] tracking-wide transition-colors duration-200",
+                  linkColor,
+                  isAbout && "underline underline-offset-4",
+                )}
+              >
                 About
               </Link>
             </li>
 
             {/* INSTAGRAM */}
-
             <li>
               <a
                 href="https://instagram.com/ollie.bolt"
@@ -100,7 +124,6 @@ const Navbar = ({ invertColors = false }: NavbarProps) => {
           </ul>
 
           {/* MOBILE TOGGLE */}
-
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
             className={cn("md:hidden bg-transparent border-none", textColor)}
@@ -112,9 +135,8 @@ const Navbar = ({ invertColors = false }: NavbarProps) => {
       </nav>
 
       {/* MOBILE MENU */}
-
       {mobileOpen && (
-        <div className="md:hidden bg-background px-6 pb-8 pt-4">
+        <div className="md:hidden bg-background px-6 pb-8 pt-4 pointer-events-auto">
           <ul className="flex flex-col gap-4">
             <li className="text-[13px] tracking-wide text-foreground">
               Work
