@@ -1,11 +1,12 @@
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import { useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { seriesCategories } from "@/data/series";
 
 interface NavbarProps {
   invertColors?: boolean;
+  onCategoryChange?: (category: string | null) => void;
 }
 
 const categorySlugMap: Record<string, string> = {
@@ -14,146 +15,198 @@ const categorySlugMap: Record<string, string> = {
   Projects: "projects",
 };
 
-const Navbar = ({ invertColors = false }: NavbarProps) => {
+const Navbar = ({ invertColors = false, onCategoryChange }: NavbarProps) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [workOpen, setWorkOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
+  const navRef = useRef<HTMLElement | null>(null);
   const textColor = invertColors ? "text-white" : "text-foreground";
   const linkColor = invertColors ? "text-white hover:text-white" : "text-foreground hover:text-foreground";
 
-  const isAbout = location.pathname.startsWith("/about");
-  const isWork = location.pathname.startsWith("/work");
+  const isWorkRoute = location.pathname.startsWith("/work/");
+  const isAboutRoute = location.pathname === "/about";
 
   const handleCategoryClick = (cat: string) => {
     setWorkOpen(false);
     setMobileOpen(false);
+
     const slug = categorySlugMap[cat] || cat.toLowerCase();
+    onCategoryChange?.(cat);
+
     navigate(`/work/${slug}`);
   };
 
+  // close menus on route change
+  useEffect(() => {
+    setWorkOpen(false);
+    setMobileOpen(false);
+  }, [location.pathname]);
+
+  // close dropdown when clicking outside
+  useEffect(() => {
+    const onDocClick = (e: MouseEvent) => {
+      if (!workOpen) return;
+      const target = e.target as Node;
+      if (navRef.current && !navRef.current.contains(target)) setWorkOpen(false);
+    };
+    document.addEventListener("mousedown", onDocClick);
+    return () => document.removeEventListener("mousedown", onDocClick);
+  }, [workOpen]);
+
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 pointer-events-none">
-      <nav className="w-full pointer-events-auto">
-        {/* Balboa-like vertical placement */}
-        <div className="max-w-[1600px] w-full mx-auto flex items-center justify-between px-6 md:px-10 pt-8 pb-4 md:pt-10 md:pb-5">
-          {/* LOGO */}
-          <Link to="/" className={cn("text-[25px] md:text-[29px] font-semibold tracking-tight", textColor)}>
+    <header
+      className={cn("fixed top-0 left-0 right-0 z-50", !invertColors && "bg-background/95 backdrop-blur-sm")}
+      style={{
+        // "nach unten rücken wie bei balboa"
+        paddingTop: "18px",
+      }}
+    >
+      <nav ref={navRef} className="w-full">
+        {/* IMPORTANT: container must match Index SHELL */}
+        <div className="max-w-[1600px] w-full mx-auto flex items-center justify-between px-10 md:px-14 py-3">
+          {/* Logo */}
+          <Link
+            to="/"
+            className={cn(
+              // (Navbar +10% — was 28/32, jetzt 31/36)
+              "text-[31px] md:text-[36px] font-semibold tracking-tight",
+              textColor,
+            )}
+          >
             Oliver Bolt
           </Link>
 
-          {/* DESKTOP */}
-          <ul className="hidden md:flex items-center gap-7">
-            {/* WORK */}
+          {/* Desktop */}
+          <ul className="hidden md:flex items-center gap-10">
+            {/* Work + dropdown */}
             <li className="relative" onMouseEnter={() => setWorkOpen(true)} onMouseLeave={() => setWorkOpen(false)}>
-              {/* Anchor dropdown to the button’s RIGHT EDGE */}
-              <div className="relative inline-block">
-                <button
-                  className={cn(
-                    "text-[12px] tracking-wide transition-colors duration-200 bg-transparent border-none cursor-pointer",
-                    linkColor,
-                    isWork && "underline underline-offset-4",
-                  )}
-                  onClick={() => setWorkOpen(!workOpen)}
-                >
-                  Work
-                </button>
-
-                {workOpen && (
-                  <div className="absolute top-full right-0 pt-3">
-                    {/* PANEL */}
-                    <div className={cn("relative", invertColors ? "bg-black" : "bg-transparent")}>
-                      {/* allow black panel to overflow a bit to the right */}
-                      {invertColors && <div className="absolute top-0 bottom-0 -right-4 w-4 bg-black" />}
-
-                      {/* IMPORTANT:
-                          - RIGHT padding MUST be 0 so text can end exactly at Work-x
-                          - keep only LEFT padding for breathing room
-                       */}
-                      <ul className="flex flex-col text-right pl-6 pr-0 py-4 gap-1 min-w-[180px]">
-                        {seriesCategories.map((cat) => {
-                          const slug = categorySlugMap[cat] || cat.toLowerCase();
-                          const active = location.pathname === `/work/${slug}`;
-
-                          return (
-                            <li key={cat}>
-                              <button
-                                onClick={() => handleCategoryClick(cat)}
-                                className={cn(
-                                  "text-[12px] block w-full text-right bg-transparent border-none cursor-pointer pr-0",
-                                  invertColors ? "text-white" : "text-foreground",
-                                  "hover:underline",
-                                  active && "underline underline-offset-4",
-                                )}
-                              >
-                                {cat}
-                              </button>
-                            </li>
-                          );
-                        })}
-                      </ul>
-                    </div>
-                  </div>
+              <button
+                className={cn(
+                  // (Navbar links +10% — was 12px, jetzt 13px)
+                  "text-[13px] tracking-wide transition-colors duration-200 bg-transparent border-none cursor-pointer",
+                  linkColor,
+                  (isWorkRoute || workOpen) && "underline underline-offset-4",
                 )}
-              </div>
+                onClick={() => setWorkOpen((v) => !v)}
+                type="button"
+              >
+                Work
+              </button>
+
+              {workOpen && (
+                <div
+                  // Dropdown näher an Work: pt-1 (war pt-3)
+                  className="absolute top-full right-0 pt-1"
+                  style={{
+                    // Dropdown Box darf rechts leicht überlappen
+                    transform: "translateX(10px)",
+                  }}
+                >
+                  <div
+                    className={cn(
+                      "bg-black",
+                      // “Rahmen” = eher Box; Balboa-like simple
+                      "px-0",
+                    )}
+                  >
+                    <ul
+                      // dropdown items gleich gross wie navbar links: text-[13px]
+                      // weniger vertikaler Abstand: py-2 + gap-0.5
+                      className="flex flex-col text-right pl-6 pr-6 py-2 gap-0.5 min-w-[180px]"
+                    >
+                      {seriesCategories.map((cat) => {
+                        const slug = categorySlugMap[cat] || cat.toLowerCase();
+                        const activeCat = location.pathname === `/work/${slug}`;
+
+                        return (
+                          <li key={cat}>
+                            <button
+                              onClick={() => handleCategoryClick(cat)}
+                              className={cn(
+                                "text-[13px] transition-colors block py-0.5 hover:underline w-full text-right bg-transparent border-none cursor-pointer",
+                                "text-white hover:text-white",
+                                activeCat && "underline underline-offset-4",
+                              )}
+                              type="button"
+                            >
+                              {cat}
+                            </button>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                </div>
+              )}
             </li>
 
-            {/* ABOUT */}
+            {/* About */}
             <li>
               <Link
                 to="/about"
                 className={cn(
-                  "text-[12px] tracking-wide transition-colors duration-200",
+                  "text-[13px] tracking-wide transition-colors duration-200",
                   linkColor,
-                  isAbout && "underline underline-offset-4",
+                  isAboutRoute && "underline underline-offset-4",
                 )}
               >
                 About
               </Link>
             </li>
 
-            {/* INSTAGRAM */}
+            {/* Instagram */}
             <li>
               <a
                 href="https://instagram.com/ollie.bolt"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={cn("text-[12px] tracking-wide transition-colors duration-200", linkColor)}
+                className={cn("text-[13px] tracking-wide transition-colors duration-200", linkColor)}
               >
                 Instagram
               </a>
             </li>
           </ul>
 
-          {/* MOBILE TOGGLE */}
+          {/* Mobile toggle */}
           <button
-            onClick={() => setMobileOpen(!mobileOpen)}
+            onClick={() => setMobileOpen((v) => !v)}
             className={cn("md:hidden bg-transparent border-none", textColor)}
             aria-label="Menu"
+            type="button"
           >
-            {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
       </nav>
 
-      {/* MOBILE MENU */}
+      {/* Mobile menu */}
       {mobileOpen && (
-        <div className="md:hidden bg-background px-6 pb-8 pt-4 pointer-events-auto">
-          <ul className="flex flex-col gap-4">
-            <li className="text-[12px] tracking-wide text-foreground">
-              Work
-              <ul className="mt-2 ml-4 flex flex-col gap-1">
-                {seriesCategories.map((cat) => (
-                  <li key={cat}>
-                    <button
-                      onClick={() => handleCategoryClick(cat)}
-                      className="text-[12px] text-foreground hover:underline transition-colors bg-transparent border-none cursor-pointer text-left"
-                    >
-                      {cat}
-                    </button>
-                  </li>
-                ))}
+        <div className="md:hidden bg-background px-6 pb-8">
+          <ul className="flex flex-col gap-6">
+            <li>
+              <span className="text-[13px] tracking-wide text-foreground">Work</span>
+              <ul className="mt-2 ml-4 flex flex-col gap-2">
+                {seriesCategories.map((cat) => {
+                  const slug = categorySlugMap[cat] || cat.toLowerCase();
+                  const activeCat = location.pathname === `/work/${slug}`;
+
+                  return (
+                    <li key={cat}>
+                      <button
+                        onClick={() => handleCategoryClick(cat)}
+                        className={cn(
+                          "text-[13px] text-foreground hover:underline transition-colors bg-transparent border-none cursor-pointer text-left",
+                          activeCat && "underline underline-offset-4",
+                        )}
+                        type="button"
+                      >
+                        {cat}
+                      </button>
+                    </li>
+                  );
+                })}
               </ul>
             </li>
 
@@ -161,7 +214,10 @@ const Navbar = ({ invertColors = false }: NavbarProps) => {
               <Link
                 to="/about"
                 onClick={() => setMobileOpen(false)}
-                className="text-[12px] tracking-wide text-foreground"
+                className={cn(
+                  "text-[13px] tracking-wide text-foreground",
+                  isAboutRoute && "underline underline-offset-4",
+                )}
               >
                 About
               </Link>
@@ -172,7 +228,7 @@ const Navbar = ({ invertColors = false }: NavbarProps) => {
                 href="https://instagram.com/ollie.bolt"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[12px] tracking-wide text-foreground"
+                className="text-[13px] tracking-wide text-foreground"
               >
                 Instagram
               </a>
