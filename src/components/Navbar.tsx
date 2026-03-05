@@ -15,212 +15,184 @@ const categorySlugMap: Record<string, string> = {
   Projects: "projects",
 };
 
-const NAV_SHELL = "max-w-[1600px] w-full mx-auto px-10 md:px-14";
-
-const Navbar = ({ invertColors = false }: NavbarProps) => {
+const Navbar = ({ invertColors = false, onCategoryChange }: NavbarProps) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [workOpen, setWorkOpen] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
 
-  // ✅ NAV disappears “statisch” on scroll:
-  // Do NOT use position: fixed / sticky here. It stays in normal document flow.
-  // (So it scrolls away like the rest of the page.)
-  const headerBg = invertColors ? "" : "bg-background";
   const textColor = invertColors ? "text-white" : "text-foreground";
   const linkColor = invertColors ? "text-white hover:text-white" : "text-foreground hover:text-foreground";
 
   const isAboutActive = location.pathname === "/about";
-  const isWorkActive = location.pathname.startsWith("/work");
-
-  const activeUnderline = invertColors
-    ? "underline underline-offset-4 decoration-white"
-    : "underline underline-offset-4 decoration-foreground";
+  const isWorkActive = location.pathname.startsWith("/work/");
 
   const handleCategoryClick = (cat: string) => {
     setWorkOpen(false);
     setMobileOpen(false);
     const slug = categorySlugMap[cat] || cat.toLowerCase();
+    onCategoryChange?.(cat);
     navigate(`/work/${slug}`);
   };
 
-  const activeCategorySlug = location.pathname.startsWith("/work/")
-    ? location.pathname.split("/work/")[1]?.split("/")[0]
-    : null;
-
-  const isCatActive = (cat: string) => {
-    const slug = categorySlugMap[cat] || cat.toLowerCase();
-    return activeCategorySlug === slug;
-  };
-
   return (
-    <header className={cn("w-full z-50", headerBg)}>
-      <nav className="w-full">
-        <div className={cn(NAV_SHELL, "flex items-center justify-between pt-10 pb-8")}>
-          {/* Logo */}
-          <Link
-            to="/"
-            className={cn(
-              // ~10% bigger than before
-              "text-[32px] md:text-[36px] font-semibold tracking-tight",
-              textColor,
-            )}
-          >
+    <header
+      className={cn(
+        // Landing/About: normal in document flow -> scrolls away naturally
+        // Work/Hero pages: absolute overlay on top of hero -> also scrolls away naturally
+        invertColors ? "absolute top-0 left-0 right-0" : "relative",
+        "z-50 pointer-events-none",
+        !invertColors && "bg-background/95 backdrop-blur-sm",
+      )}
+    >
+      <nav className="w-full pointer-events-auto">
+        <div className="max-w-[1600px] w-full mx-auto flex items-center justify-between px-10 md:px-14 pt-8 pb-4 md:pt-10 md:pb-5">
+          <Link to="/" className={cn("text-[36px] md:text-[44px] font-semibold tracking-tight", textColor)}>
             Oliver Bolt
           </Link>
 
-          {/* Desktop */}
           <ul className="hidden md:flex items-center gap-10">
-            {/* Work */}
             <li className="relative" onMouseEnter={() => setWorkOpen(true)} onMouseLeave={() => setWorkOpen(false)}>
-              <button
-                className={cn(
-                  "text-[18px] tracking-wide transition-colors duration-150 bg-transparent border-none cursor-pointer",
-                  linkColor,
-                  isWorkActive && activeUnderline,
-                )}
-                onClick={() => setWorkOpen((v) => !v)}
-                aria-haspopup="menu"
-                aria-expanded={workOpen}
-              >
-                Work
-              </button>
+              <div className="relative inline-block">
+                <button
+                  type="button"
+                  className={cn(
+                    "text-[16px] tracking-wide transition-colors duration-200 bg-transparent border-none cursor-pointer",
+                    linkColor,
+                    (isWorkActive || workOpen) && "underline underline-offset-4",
+                    invertColors && (isWorkActive || workOpen) && "decoration-white",
+                  )}
+                  onClick={() => setWorkOpen((v) => !v)}
+                >
+                  Work
+                </button>
 
-              {workOpen && (
-                <div className="absolute top-full right-0 pt-3">
-                  {/* ✅ Panel background:
-                      - Landing/About: white
-                      - Work (invert): black
-                      ✅ Text inside RIGHT-aligned and FLUSH with Work’s right edge:
-                      - Use pr-0 on content + -mr-4 trick so padding doesn’t shift alignment
-                  */}
-                  <div
-                    className={cn("min-w-[180px]", invertColors ? "bg-black/95" : "bg-white")}
-                    style={{ boxShadow: invertColors ? "none" : "0 10px 30px rgba(0,0,0,0.08)" }}
-                  >
-                    <ul className="py-3 pl-6 pr-4 -mr-4 flex flex-col gap-1 text-right">
-                      {seriesCategories.map((cat) => (
-                        <li key={cat}>
-                          <button
-                            onClick={() => handleCategoryClick(cat)}
-                            className={cn(
-                              // ✅ dropdown font size = navbar font size
-                              "text-[18px] tracking-wide transition-colors block py-0.5 hover:underline w-full text-right bg-transparent border-none cursor-pointer",
-                              invertColors ? "text-white hover:text-white" : "text-black hover:text-black",
-                              isCatActive(cat) &&
-                                (invertColors
-                                  ? "underline underline-offset-4 decoration-white"
-                                  : "underline underline-offset-4 decoration-black"),
-                            )}
-                          >
-                            {cat}
-                          </button>
-                        </li>
-                      ))}
-                    </ul>
+                {workOpen && (
+                  <div className="absolute top-full right-0 pt-1">
+                    <div className="relative">
+                      {/* schwarzer Hintergrund darf rechts überlappen */}
+                      <div className="absolute inset-y-0 left-0 -right-6 bg-black" />
+
+                      {/* Text selbst bleibt exakt rechtsbündig unter WORK */}
+                      <div className="relative py-2 pl-6 pr-0">
+                        <ul className="flex flex-col gap-0.5 text-right min-w-[140px]">
+                          {seriesCategories.map((cat) => {
+                            const slug = categorySlugMap[cat] || cat.toLowerCase();
+                            const activeCat = location.pathname === `/work/${slug}`;
+
+                            return (
+                              <li key={cat} className="flex justify-end">
+                                <button
+                                  type="button"
+                                  onClick={() => handleCategoryClick(cat)}
+                                  className={cn(
+                                    "text-[16px] py-0.5 px-0 bg-transparent border-none cursor-pointer text-white hover:text-white hover:underline",
+                                    activeCat && "underline underline-offset-4",
+                                  )}
+                                >
+                                  {cat}
+                                </button>
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              )}
+                )}
+              </div>
             </li>
 
-            {/* About */}
             <li>
               <Link
                 to="/about"
                 className={cn(
-                  "text-[18px] tracking-wide transition-colors duration-150",
+                  "text-[16px] tracking-wide transition-colors duration-200",
                   linkColor,
-                  isAboutActive && activeUnderline,
+                  isAboutActive && "underline underline-offset-4",
+                  invertColors && isAboutActive && "decoration-white",
                 )}
               >
                 About
               </Link>
             </li>
 
-            {/* Instagram */}
             <li>
               <a
                 href="https://instagram.com/ollie.bolt"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={cn("text-[18px] tracking-wide transition-colors duration-150", linkColor)}
+                className={cn("text-[16px] tracking-wide transition-colors duration-200", linkColor)}
               >
                 Instagram
               </a>
             </li>
           </ul>
 
-          {/* Mobile toggle (we’ll redesign later like Balboa) */}
           <button
             onClick={() => setMobileOpen((v) => !v)}
-            className={cn("md:hidden bg-transparent border-none", textColor)}
+            className={cn("md:hidden bg-transparent border-none pointer-events-auto", textColor)}
             aria-label="Menu"
+            type="button"
           >
-            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+            {mobileOpen ? <X size={26} /> : <Menu size={26} />}
           </button>
         </div>
       </nav>
 
-      {/* Mobile menu (temporary) */}
       {mobileOpen && (
-        <div className={cn("md:hidden", invertColors ? "bg-black text-white" : "bg-background text-foreground")}>
-          <div className={cn(NAV_SHELL, "pb-10")}>
-            <ul className="flex flex-col gap-6 pt-2">
-              <li>
-                <span className={cn("text-[18px] tracking-wide", invertColors ? "text-white" : "text-foreground")}>
-                  Work
-                </span>
-                <ul className="mt-3 ml-4 flex flex-col gap-2">
-                  {seriesCategories.map((cat) => (
+        <div className="md:hidden bg-background px-10 pb-10 pointer-events-auto">
+          <ul className="flex flex-col gap-6 pt-2">
+            <li>
+              <span className="text-[16px] tracking-wide text-foreground">Work</span>
+              <ul className="mt-3 ml-4 flex flex-col gap-2">
+                {seriesCategories.map((cat) => {
+                  const slug = categorySlugMap[cat] || cat.toLowerCase();
+                  const activeCat = location.pathname === `/work/${slug}`;
+
+                  return (
                     <li key={cat}>
                       <button
+                        type="button"
                         onClick={() => handleCategoryClick(cat)}
                         className={cn(
-                          "text-[18px] tracking-wide hover:underline transition-colors bg-transparent border-none cursor-pointer text-left",
-                          invertColors ? "text-white" : "text-foreground",
-                          isCatActive(cat) &&
-                            (invertColors
-                              ? "underline underline-offset-4 decoration-white"
-                              : "underline underline-offset-4 decoration-foreground"),
+                          "text-[16px] text-foreground hover:underline transition-colors bg-transparent border-none cursor-pointer text-left",
+                          activeCat && "underline underline-offset-4",
                         )}
                       >
                         {cat}
                       </button>
                     </li>
-                  ))}
-                </ul>
-              </li>
+                  );
+                })}
+              </ul>
+            </li>
 
-              <li>
-                <Link
-                  to="/about"
-                  onClick={() => setMobileOpen(false)}
-                  className={cn(
-                    "text-[18px] tracking-wide",
-                    invertColors ? "text-white" : "text-foreground",
-                    isAboutActive &&
-                      (invertColors
-                        ? "underline underline-offset-4 decoration-white"
-                        : "underline underline-offset-4 decoration-foreground"),
-                  )}
-                >
-                  About
-                </Link>
-              </li>
+            <li>
+              <Link
+                to="/about"
+                onClick={() => setMobileOpen(false)}
+                className={cn(
+                  "text-[16px] tracking-wide text-foreground",
+                  isAboutActive && "underline underline-offset-4",
+                )}
+              >
+                About
+              </Link>
+            </li>
 
-              <li>
-                <a
-                  href="https://instagram.com/ollie.bolt"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={cn("text-[18px] tracking-wide", invertColors ? "text-white" : "text-foreground")}
-                >
-                  Instagram
-                </a>
-              </li>
-            </ul>
-          </div>
+            <li>
+              <a
+                href="https://instagram.com/ollie.bolt"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[16px] tracking-wide text-foreground"
+              >
+                Instagram
+              </a>
+            </li>
+          </ul>
         </div>
       )}
     </header>
