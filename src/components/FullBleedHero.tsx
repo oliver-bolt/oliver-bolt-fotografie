@@ -7,21 +7,23 @@ interface FullBleedHeroProps {
   onPastHero?: (past: boolean) => void;
 }
 
-const NAV_H = 84; // must match your navbar height
+const NAV_H = 84;
 
 const FullBleedHero = ({ image, categoryLabel, onPastHero }: FullBleedHeroProps) => {
   const heroRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!onPastHero) return;
+
     const onScroll = () => {
       if (!heroRef.current) return;
       const rect = heroRef.current.getBoundingClientRect();
-      // "past hero" once the hero bottom has crossed the navbar height
       onPastHero(rect.bottom <= NAV_H);
     };
+
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
+
     return () => window.removeEventListener("scroll", onScroll);
   }, [onPastHero]);
 
@@ -32,15 +34,15 @@ const FullBleedHero = ({ image, categoryLabel, onPastHero }: FullBleedHeroProps)
       animate={{ opacity: 1 }}
       transition={{ duration: 0.9 }}
       className="relative w-full"
-      // Full-bleed: break out of any max-width parent
       style={{
         width: "100vw",
         marginLeft: "calc(50% - 50vw)",
         marginRight: "calc(50% - 50vw)",
       }}
     >
-      {/* Pull hero up so it sits UNDER the navbar (navbar overlays hero like Balboa) */}
+      {/* Hero container */}
       <div className="relative w-full -mt-[84px] h-[360px] md:h-[560px] overflow-hidden">
+        {/* Image */}
         <img
           src={image}
           alt={`${categoryLabel} — Hero`}
@@ -50,24 +52,27 @@ const FullBleedHero = ({ image, categoryLabel, onPastHero }: FullBleedHeroProps)
           fetchPriority="high"
         />
 
-        {/* Readability overlay */}
+        {/* readability overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/55 via-black/20 to-transparent" />
 
-        {/* Overlay text: left aligned, but pushed toward mid of the hero.
-            Add top padding so text isn't hidden under navbar. */}
+        {/* TEXT OVERLAY */}
         <div className="absolute inset-0 flex items-center pt-[84px]">
           <div className="w-full px-6 md:px-10">
-            <div className="ml-[8vw] md:ml-[18vw] max-w-[520px]">
+            {/* text block pushed slightly toward center */}
+            <div className="ml-[8vw] md:ml-[18vw] max-w-[720px]">
               <p
                 className="text-white font-semibold tracking-tight"
                 style={{
-                  fontSize: "clamp(28px, 2.2vw, 34px)", // ~Oliver Bolt size
-                  lineHeight: 1.18,
+                  fontSize: "clamp(28px, 2.2vw, 34px)",
+                  lineHeight: 1.2,
                   textShadow: "0 1px 10px rgba(0,0,0,0.45)",
                 }}
               >
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua.
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                deserunt mollit anim id est laborum.
               </p>
             </div>
           </div>
