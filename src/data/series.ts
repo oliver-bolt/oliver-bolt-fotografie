@@ -39,6 +39,14 @@ import projectsYoo5 from "@/assets/projects-yoo-5.jpg";
 import projectsYoo6 from "@/assets/projects-yoo-6.jpg";
 import projectsYoo7 from "@/assets/projects-yoo-7.jpg";
 
+import frauenstreik1 from "@/assets/projects-frauenstreik-1.jpg";
+import frauenstreik2 from "@/assets/projects-frauenstreik-2.jpg";
+import frauenstreik3 from "@/assets/projects-frauenstreik-3.jpg";
+import frauenstreik4 from "@/assets/projects-frauenstreik-4.jpg";
+import frauenstreik5 from "@/assets/projects-frauenstreik-5.jpg";
+import frauenstreik6 from "@/assets/projects-frauenstreik-6.jpg";
+import frauenstreik7 from "@/assets/projects-frauenstreik-7.jpg";
+
 export type SeriesCategory = "Action" | "Travel" | "Projects";
 
 export interface SeriesImage {
@@ -170,6 +178,30 @@ export const seriesData: Series[] = [
       { src: projectsYoo5, alt: "YOO Beanies 5", layout: "full" },
       { src: projectsYoo6, alt: "YOO Beanies 6", layout: "half" },
       { src: projectsYoo7, alt: "YOO Beanies 7", layout: "half" },
+    ],
+  },
+  {
+    id: "frauenstreik-2025",
+    title: "Frauenstreik 2025",
+    year: "2025",
+    location: "St. Gallen",
+    category: "Projects",
+    cover: frauenstreik1,
+    excerpt: "Dokumentation des Frauenstreiks 2025 in St. Gallen.",
+    description:
+      "Emotionale Momentaufnahmen vom Frauenstreik 2025 — Protest, Solidarität und Energie auf den Strassen von St. Gallen.",
+    background:
+      "Reportage-Dokumentation des feministischen Streiktags in St. Gallen.",
+    technical:
+      "Schnelle Reportage-Fotografie mit natürlichem Licht.",
+    images: [
+      { src: frauenstreik1, alt: "Frauenstreik 1", layout: "full" },
+      { src: frauenstreik2, alt: "Frauenstreik 2", layout: "half" },
+      { src: frauenstreik3, alt: "Frauenstreik 3", layout: "half" },
+      { src: frauenstreik4, alt: "Frauenstreik 4", layout: "full" },
+      { src: frauenstreik5, alt: "Frauenstreik 5", layout: "half" },
+      { src: frauenstreik6, alt: "Frauenstreik 6", layout: "half" },
+      { src: frauenstreik7, alt: "Frauenstreik 7", layout: "full" },
     ],
   },
 ];
