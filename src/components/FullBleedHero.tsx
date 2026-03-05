@@ -13,10 +13,10 @@ const FullBleedHero = ({ image, categoryLabel, onPastHero }: FullBleedHeroProps)
   useEffect(() => {
     if (!onPastHero) return;
     const onScroll = () => {
-      if (heroRef.current) {
-        const rect = heroRef.current.getBoundingClientRect();
-        onPastHero(rect.bottom <= 64);
-      }
+      if (!heroRef.current) return;
+      const rect = heroRef.current.getBoundingClientRect();
+      // past hero once bottom has crossed nav height
+      onPastHero(rect.bottom <= 84);
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
@@ -24,41 +24,58 @@ const FullBleedHero = ({ image, categoryLabel, onPastHero }: FullBleedHeroProps)
   }, [onPastHero]);
 
   return (
-    <motion.div
+    <motion.section
       ref={heroRef}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.9 }}
-      className="relative"
+      className="relative w-full"
+      // Full-bleed: break out of any max-width parent
       style={{
         width: "100vw",
         marginLeft: "calc(50% - 50vw)",
         marginRight: "calc(50% - 50vw)",
-        height: "clamp(320px, 45vh, 480px)",
       }}
     >
-      <style>{`
-        @media (min-width: 768px) {
-          .hero-full-bleed { height: clamp(420px, 55vh, 620px) !important; }
-        }
-      `}</style>
-      <div className="hero-full-bleed absolute inset-0" style={{ height: "inherit" }}>
+      {/* Height locked like Balboa (no variable length by image) */}
+      <div className="relative w-full h-[360px] md:h-[560px] overflow-hidden">
         <img
           src={image}
           alt={`${categoryLabel} — Hero`}
           className="absolute inset-0 w-full h-full object-cover object-center"
           loading="eager"
+          decoding="async"
+          fetchPriority="high"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/25 to-transparent" />
+
+        {/* subtle readability overlay (Balboa-like) */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/55 via-black/20 to-transparent" />
+
+        {/* Overlay text: left aligned block, but placed more towards center */}
         <div className="absolute inset-0 flex items-center">
-          <div style={{ paddingLeft: "8vw", paddingRight: "5vw" }} className="md:!pl-[20vw]">
-            <p className="text-[15px] md:text-[18px] font-medium text-white max-w-[300px] md:max-w-[480px]" style={{ lineHeight: "1.45", textShadow: "0 1px 8px rgba(0,0,0,0.4)" }}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
+          {/* 
+            Left aligned text, but pushed to the right a bit (mid-ish).
+            On desktop: start around 18–22vw.
+          */}
+          <div className="w-full px-6 md:px-10">
+            <div className="ml-[8vw] md:ml-[18vw] max-w-[520px]">
+              <p
+                className="text-white font-semibold tracking-tight"
+                // Same size as Oliver Bolt (approx)
+                style={{
+                  fontSize: "clamp(28px, 2.2vw, 34px)",
+                  lineHeight: 1.18,
+                  textShadow: "0 1px 10px rgba(0,0,0,0.45)",
+                }}
+              >
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua.
+              </p>
+            </div>
           </div>
         </div>
       </div>
-    </motion.div>
+    </motion.section>
   );
 };
 
