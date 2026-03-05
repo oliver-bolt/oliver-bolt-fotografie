@@ -75,9 +75,6 @@ export const seriesData: Series[] = [
       { src: action1, alt: "Action shot 1", layout: "full" },
       { src: action2, alt: "Action shot 2", layout: "half" },
       { src: action3, alt: "Action shot 3", layout: "half" },
-      { src: action4, alt: "Action shot 4", layout: "full" },
-      { src: action5, alt: "Action shot 5", layout: "half" },
-      { src: action6, alt: "Action shot 6", layout: "half" },
     ],
   },
   {
@@ -86,7 +83,7 @@ export const seriesData: Series[] = [
     year: "2024",
     location: "Verschiedene Orte",
     category: "Action",
-    cover: action3,
+    cover: action4,
     excerpt: "Porträts von Handwerkern und ihren verschwindenden Berufen.",
     description:
       "Human Traces porträtiert Menschen, deren Handwerk vom Verschwinden bedroht ist.",
@@ -116,11 +113,9 @@ export const seriesData: Series[] = [
     technical:
       "ND-Filter (10-Stop) für Belichtungszeiten von 30 Sekunden bis 4 Minuten.",
     images: [
-      { src: travel1, alt: "Street scene 1", layout: "full" },
-      { src: travel2, alt: "Street scene 2", layout: "half" },
-      { src: travel3, alt: "Street scene 3", layout: "half" },
-      { src: travel4, alt: "Street scene 4", layout: "full" },
-      { src: travel5, alt: "Street scene 5", layout: "half" },
+      { src: travel1, alt: "Travel scene 1", layout: "full" },
+      { src: travel2, alt: "Travel scene 2", layout: "half" },
+      { src: travel3, alt: "Travel scene 3", layout: "half" },
     ],
   },
   {
@@ -129,7 +124,7 @@ export const seriesData: Series[] = [
     year: "2022",
     location: "Lofoten, NO",
     category: "Travel",
-    cover: travel3,
+    cover: travel4,
     excerpt: "Arktische Lichtstimmungen zwischen Tag und Nacht.",
     description:
       "Northern Light ist eine Serie über das besondere Licht des hohen Nordens.",
@@ -140,7 +135,6 @@ export const seriesData: Series[] = [
     images: [
       { src: travel4, alt: "Northern scene 1", layout: "full" },
       { src: travel5, alt: "Northern scene 2", layout: "half" },
-      { src: travel1, alt: "Northern scene 3", layout: "half" },
     ],
   },
   {
@@ -162,8 +156,6 @@ export const seriesData: Series[] = [
       { src: projects1, alt: "Making of 1", layout: "full" },
       { src: projects2, alt: "Making of 2", layout: "half" },
       { src: projects3, alt: "Making of 3", layout: "half" },
-      { src: projects4, alt: "Making of 4", layout: "full" },
-      { src: projects5, alt: "Making of 5", layout: "half" },
     ],
   },
   {
@@ -172,7 +164,7 @@ export const seriesData: Series[] = [
     year: "2023",
     location: "Ruhrgebiet, DE",
     category: "Projects",
-    cover: projects3,
+    cover: projects4,
     excerpt: "Vergessene Räume industrieller Vergangenheit.",
     description:
       "Industrial Poetry erkundet verlassene Industriebauten als Kathedralen einer vergangenen Epoche.",
@@ -183,7 +175,6 @@ export const seriesData: Series[] = [
     images: [
       { src: projects4, alt: "Industrial scene 1", layout: "full" },
       { src: projects5, alt: "Industrial scene 2", layout: "half" },
-      { src: projects1, alt: "Industrial scene 3", layout: "half" },
     ],
   },
 ];
