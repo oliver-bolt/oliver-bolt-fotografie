@@ -40,9 +40,8 @@ const FullBleedHero = ({ image, categoryLabel, onPastHero }: FullBleedHeroProps)
         marginRight: "calc(50% - 50vw)",
       }}
     >
-      {/* Hero container */}
       <div className="relative w-full -mt-[84px] h-[360px] md:h-[560px] overflow-hidden">
-        {/* Image */}
+        {/* HERO IMAGE */}
         <img
           src={image}
           alt={`${categoryLabel} — Hero`}
@@ -52,14 +51,13 @@ const FullBleedHero = ({ image, categoryLabel, onPastHero }: FullBleedHeroProps)
           fetchPriority="high"
         />
 
-        {/* readability overlay */}
+        {/* subtle overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/55 via-black/20 to-transparent" />
 
-        {/* TEXT OVERLAY */}
+        {/* TEXT */}
         <div className="absolute inset-0 flex items-center pt-[84px]">
           <div className="w-full px-6 md:px-10">
-            {/* text block pushed slightly toward center */}
-            <div className="ml-[8vw] md:ml-[18vw] max-w-[720px]">
+            <div className="ml-[8vw] md:ml-[18vw] max-w-[820px]">
               <p
                 className="text-white font-semibold tracking-tight"
                 style={{
@@ -69,10 +67,9 @@ const FullBleedHero = ({ image, categoryLabel, onPastHero }: FullBleedHeroProps)
                 }}
               >
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip
                 ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                deserunt mollit anim id est laborum.
+                fugiat nulla pariatur.
               </p>
             </div>
           </div>
