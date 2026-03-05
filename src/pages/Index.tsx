@@ -12,26 +12,26 @@ const fade = {
   },
 };
 
-/**
- * IMPORTANT
- * Muss IDENTISCH sein zu Navbar Container, damit links/rechts wirklich fluchtet.
- * (Du hast Navbar max-w-[1600px] + px-... -> wir matchen das hier.)
- */
+/*
+IMPORTANT
+Container identical to Navbar container
+to guarantee perfect left/right alignment
+*/
 const SHELL = "max-w-[1600px] mx-auto px-10 md:px-14";
 
-/**
- * Slot:
- * - erzwingt Frame-Aspect
- * - füllt IMMER den Frame via absolute + object-cover
- */
+/*
+Image slot component
+forces exact aspect ratio
+and crops image using object-cover
+*/
 function Slot({ src, alt, aspect, eager = false }: { src: string; alt: string; aspect: string; eager?: boolean }) {
   return (
-    <div className={`${aspect} relative overflow-hidden`}>
+    <div className={`${aspect} overflow-hidden relative`}>
       <img
         src={src}
         alt={alt}
         loading={eager ? "eager" : "lazy"}
-        className="absolute inset-0 h-full w-full object-cover"
+        className="absolute inset-0 w-full h-full object-cover"
       />
     </div>
   );
@@ -47,35 +47,30 @@ const Index = () => {
           {/* HERO TEXT */}
           <section className="pt-36 md:pt-48 mb-24">
             <motion.div initial="hidden" animate="visible" variants={fade}>
-              <h1 className="text-[46px] md:text-[56px] font-medium leading-[1.08] max-w-full md:max-w-[50%]">
+              {/* Mobile: -20% */}
+              <h1 className="text-[36px] md:text-[56px] font-medium leading-[1.08] max-w-full md:max-w-[50%]">
                 Documentary & street photographer capturing culture, travel & editorial stories — based in St. Gallen /
                 Switzerland.
               </h1>
             </motion.div>
           </section>
 
-          {/* PROJECT BLOCKS (Preview = exakt 4 Bilder) */}
+          {/* PROJECT BLOCKS */}
           <section className="space-y-20 md:space-y-24 pb-28">
             {seriesData.map((series, index) => {
-              // Preview: fix 4 Bilder, notfalls auffüllen (damit Layout nie bricht)
-              const base = (series.images ?? []).slice(0, 4);
-              if (base.length === 0) return null;
+              const imgs = series.images?.slice(0, 4);
+              if (!imgs || imgs.length < 4) return null;
 
-              const imgs = [...base];
-              while (imgs.length < 4) {
-                imgs.push(imgs[imgs.length - 1]); // dupliziere letztes Bild als Fallback
-              }
-
-              // Balboa-Rhythmus: jede zweite Sektion gespiegelt
+              /*
+                Alternating Balboa rhythm
+              */
               const altLayout = index % 2 === 1;
 
               const leftTop = altLayout ? "aspect-[3/4]" : "aspect-[4/3]";
               const leftBottom = altLayout ? "aspect-[4/3]" : "aspect-[3/4]";
+
               const rightTop = altLayout ? "aspect-[4/3]" : "aspect-[3/4]";
               const rightBottom = altLayout ? "aspect-[3/4]" : "aspect-[4/3]";
-
-              // Gleichmäßiger Gutter (horizontal + vertical)
-              const G = "gap-[18px]";
 
               return (
                 <motion.div
@@ -85,35 +80,34 @@ const Index = () => {
                   viewport={{ once: true, margin: "-40px" }}
                   variants={fade}
                 >
-                  {/* IMAGE GRID */}
-                  {/* WICHTIG: immer 2 Spalten, auch Mobile */}
-                  <div className={`grid grid-cols-2 ${G}`}>
+                  {/* IMAGE GRID (NOT CLICKABLE) */}
+                  <div className="grid grid-cols-2 gap-[18px]">
                     {/* LEFT COLUMN */}
-                    <div className={`grid ${G}`}>
+                    <div className="grid gap-[18px]">
                       <Slot src={imgs[0].src} alt={imgs[0].alt} aspect={leftTop} eager={index === 0} />
                       <Slot src={imgs[1].src} alt={imgs[1].alt} aspect={leftBottom} />
                     </div>
 
                     {/* RIGHT COLUMN */}
-                    <div className={`grid ${G}`}>
+                    <div className="grid gap-[18px]">
                       <Slot src={imgs[2].src} alt={imgs[2].alt} aspect={rightTop} eager={index === 0} />
                       <Slot src={imgs[3].src} alt={imgs[3].alt} aspect={rightBottom} />
                     </div>
                   </div>
 
-                  {/* CAPTION BLOCK */}
-                  {/* Mobile: über beide Spalten (grid-cols-1) */}
-                  {/* Desktop: linke Spalte Text, rechte leer (wie Balboa) */}
+                  {/* CAPTION BLOCK
+                      Mobile: spans both columns
+                      Mobile text sizes: -20%
+                  */}
                   <div className="grid grid-cols-1 md:grid-cols-2 mt-6">
                     <div>
-                      {/* Textgröße wie Navbar-Logo ("Oliver Bolt") */}
-                      <p className="text-[28px] md:text-[32px] font-medium leading-snug mb-3">{series.excerpt}</p>
+                      <p className="text-[22px] md:text-[32px] font-medium leading-snug mb-3">{series.excerpt}</p>
 
                       <a
                         href={`/work/${series.category.toLowerCase()}`}
-                        className="text-[28px] md:text-[32px] font-medium underline underline-offset-4"
+                        className="text-[22px] md:text-[32px] font-medium underline"
                       >
-                        View Project →
+                        View Work →
                       </a>
                     </div>
 
