@@ -12,25 +12,13 @@ const fade = {
   },
 };
 
-/*
-IMPORTANT
-
-Container identical to Navbar container
-to guarantee perfect left/right alignment
-*/
-
 const SHELL = "max-w-[1600px] mx-auto px-10 md:px-14";
 
-/*
-Image slot component
-
-forces exact aspect ratio
-and crops image using object-cover
-*/
+/* SLOT */
 
 function Slot({ src, alt, aspect, eager = false }: { src: string; alt: string; aspect: string; eager?: boolean }) {
   return (
-    <div className={`${aspect} overflow-hidden relative`}>
+    <div className={`${aspect} relative overflow-hidden`}>
       <img
         src={src}
         alt={alt}
@@ -41,6 +29,23 @@ function Slot({ src, alt, aspect, eager = false }: { src: string; alt: string; a
   );
 }
 
+/* IMAGE ORIENTATION */
+
+function splitOrientation(images: any[]) {
+  const portrait: any[] = [];
+  const landscape: any[] = [];
+
+  images.forEach((img) => {
+    const image = new Image();
+    image.src = img.src;
+
+    if (image.height > image.width) portrait.push(img);
+    else landscape.push(img);
+  });
+
+  return { portrait, landscape };
+}
+
 const Index = () => {
   return (
     <>
@@ -48,7 +53,7 @@ const Index = () => {
 
       <main className="w-full">
         <div className={SHELL}>
-          {/* HERO TEXT */}
+          {/* HERO */}
 
           <section className="pt-36 md:pt-48 mb-24">
             <motion.div initial="hidden" animate="visible" variants={fade}>
@@ -61,23 +66,20 @@ const Index = () => {
 
           {/* PROJECT BLOCKS */}
 
-          <section className="space-y-20 md:space-y-24 pb-28">
+          <section className="space-y-24 pb-28">
             {seriesData.map((series, index) => {
-              const imgs = series.images?.slice(0, 4);
+              const imgs = series.images?.slice(0, 6);
+              if (!imgs || imgs.length === 0) return null;
 
-              if (!imgs || imgs.length < 4) return null;
+              const { portrait, landscape } = splitOrientation(imgs);
 
-              /*
-              Alternating Balboa rhythm
-              */
+              const p1 = portrait[0] || imgs[0];
+              const p2 = portrait[1] || imgs[1];
 
-              const altLayout = index % 2 === 1;
+              const l1 = landscape[0] || imgs[2];
+              const l2 = landscape[1] || imgs[3];
 
-              const leftTop = altLayout ? "aspect-[3/4]" : "aspect-[4/3]";
-              const leftBottom = altLayout ? "aspect-[4/3]" : "aspect-[3/4]";
-
-              const rightTop = altLayout ? "aspect-[4/3]" : "aspect-[3/4]";
-              const rightBottom = altLayout ? "aspect-[3/4]" : "aspect-[4/3]";
+              const alt = index % 2 === 1;
 
               return (
                 <motion.div
@@ -87,32 +89,46 @@ const Index = () => {
                   viewport={{ once: true, margin: "-40px" }}
                   variants={fade}
                 >
-                  {/* IMAGE GRID */}
+                  {/* GRID */}
 
                   <div className="grid grid-cols-2 gap-[18px]">
-                    {/* LEFT COLUMN */}
+                    {/* LEFT */}
 
                     <div className="grid gap-[18px]">
-                      <Slot src={imgs[0].src} alt={imgs[0].alt} aspect={leftTop} eager={index === 0} />
-
-                      <Slot src={imgs[1].src} alt={imgs[1].alt} aspect={leftBottom} />
+                      {alt ? (
+                        <>
+                          <Slot src={p1.src} alt={p1.alt} aspect="aspect-[3/4]" eager={index === 0} />
+                          <Slot src={l1.src} alt={l1.alt} aspect="aspect-[4/3]" />
+                        </>
+                      ) : (
+                        <>
+                          <Slot src={l1.src} alt={l1.alt} aspect="aspect-[4/3]" eager={index === 0} />
+                          <Slot src={p1.src} alt={p1.alt} aspect="aspect-[3/4]" />
+                        </>
+                      )}
                     </div>
 
-                    {/* RIGHT COLUMN */}
+                    {/* RIGHT */}
 
                     <div className="grid gap-[18px]">
-                      <Slot src={imgs[2].src} alt={imgs[2].alt} aspect={rightTop} eager={index === 0} />
-
-                      <Slot src={imgs[3].src} alt={imgs[3].alt} aspect={rightBottom} />
+                      {alt ? (
+                        <>
+                          <Slot src={l2.src} alt={l2.alt} aspect="aspect-[4/3]" eager={index === 0} />
+                          <Slot src={p2.src} alt={p2.alt} aspect="aspect-[3/4]" />
+                        </>
+                      ) : (
+                        <>
+                          <Slot src={p2.src} alt={p2.alt} aspect="aspect-[3/4]" eager={index === 0} />
+                          <Slot src={l2.src} alt={l2.alt} aspect="aspect-[4/3]" />
+                        </>
+                      )}
                     </div>
                   </div>
 
-                  {/* CAPTION BLOCK */}
+                  {/* TEXT */}
 
                   <div className="grid grid-cols-2 mt-6">
                     <div>
-                      {/* TEXT SIZE identical to navbar logo */}
-
                       <p className="text-[28px] md:text-[32px] font-medium leading-snug mb-3">{series.excerpt}</p>
 
                       <a
