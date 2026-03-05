@@ -3,6 +3,7 @@ import action2 from "@/assets/action-2.jpg";
 import action3 from "@/assets/action-3.jpg";
 import action4 from "@/assets/action-4.jpg";
 import action5 from "@/assets/action-5.jpg";
+import action6 from "@/assets/action-6.jpg";
 import actionHero from "@/assets/action-hero.jpg";
 
 import travel1 from "@/assets/travel-1.jpg";
@@ -76,6 +77,7 @@ export const seriesData: Series[] = [
       { src: action3, alt: "Action shot 3", layout: "half" },
       { src: action4, alt: "Action shot 4", layout: "full" },
       { src: action5, alt: "Action shot 5", layout: "half" },
+      { src: action6, alt: "Action shot 6", layout: "half" },
     ],
   },
   {
@@ -96,7 +98,7 @@ export const seriesData: Series[] = [
     images: [
       { src: action4, alt: "Handwerker bei der Arbeit", layout: "full" },
       { src: action5, alt: "Hände am Werkstück", layout: "half" },
-      { src: action1, alt: "Werkstatt-Details", layout: "half" },
+      { src: action6, alt: "Werkstatt-Details", layout: "half" },
     ],
   },
   {
