@@ -12,19 +12,17 @@ const fade = {
   },
 };
 
+// MUST match Navbar container for perfect left/right alignment
+const SHELL = "max-w-[1600px] mx-auto px-10 md:px-14";
+
 const About = () => (
   <>
     <Navbar />
     <main className="pt-28 md:pt-36 pb-24 md:pb-32">
-      <section className="px-5 md:px-10 lg:px-16 max-w-[1240px]">
+      <section className={SHELL}>
         <div className="flex flex-col md:flex-row gap-12 md:gap-20 items-start">
           {/* Portrait */}
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={fade}
-            className="w-full md:w-[45%]"
-          >
+          <motion.div initial="hidden" animate="visible" variants={fade} className="w-full md:w-[45%]">
             <img
               src={portraitImage}
               alt="Portrait of the photographer"
@@ -39,37 +37,32 @@ const About = () => (
             animate="visible"
             variants={fade}
             transition={{ delay: 0.15 }}
-            className="w-full md:w-[55%] max-w-lg pt-0 md:pt-4"
+            className="w-full md:w-[55%] max-w-lg"
           >
-            <h1 className="text-[36px] md:text-[44px] font-medium text-foreground leading-[1.1] mb-8">
-              About
-            </h1>
+            <h1 className="text-[36px] md:text-[44px] font-medium text-foreground leading-[1.1] mb-8">About</h1>
 
             <div className="space-y-5 text-foreground leading-relaxed">
               <p>
-                Seit über zehn Jahren bewege ich mich an der Schnittstelle von dokumentarischer
-                und künstlerischer Fotografie. Meine Arbeit ist geprägt von langen
-                Beobachtungsphasen, bewusster Reduktion und dem Anspruch, in jeder Serie eine
-                eigenständige visuelle Sprache zu entwickeln.
+                Seit über zehn Jahren bewege ich mich an der Schnittstelle von dokumentarischer und künstlerischer
+                Fotografie. Meine Arbeit ist geprägt von langen Beobachtungsphasen, bewusster Reduktion und dem
+                Anspruch, in jeder Serie eine eigenständige visuelle Sprache zu entwickeln.
               </p>
               <p>
-                Ich glaube an die Kraft des einzelnen Bildes – aber noch mehr an die Kraft
-                einer kuratierten Sequenz. Eine Serie ist mehr als eine Sammlung von Fotos.
-                Sie ist ein Narrativ, ein Rhythmus, eine Haltung.
+                Ich glaube an die Kraft des einzelnen Bildes – aber noch mehr an die Kraft einer kuratierten Sequenz.
+                Eine Serie ist mehr als eine Sammlung von Fotos. Sie ist ein Narrativ, ein Rhythmus, eine Haltung.
               </p>
               <p>
-                Meine Themen kreisen um Vergänglichkeit, Stille und die Spuren menschlicher
-                Existenz in gebauten und natürlichen Räumen. Ich arbeite bevorzugt mit
-                natürlichem Licht und nehme mir für jedes Projekt die Zeit, die es braucht.
+                Meine Themen kreisen um Vergänglichkeit, Stille und die Spuren menschlicher Existenz in gebauten und
+                natürlichen Räumen. Ich arbeite bevorzugt mit natürlichem Licht und nehme mir für jedes Projekt die
+                Zeit, die es braucht.
               </p>
             </div>
 
             <div className="mt-12 pt-8 border-t border-border">
               <h2 className="text-lg font-medium text-foreground mb-4">Statement</h2>
               <p className="text-sm text-foreground leading-relaxed italic">
-                „Fotografie ist für mich kein Festhalten von Momenten, sondern ein
-                Sichtbarmachen von Atmosphären. Ich suche nicht das spektakuläre Bild,
-                sondern das ehrliche."
+                „Fotografie ist für mich kein Festhalten von Momenten, sondern ein Sichtbarmachen von Atmosphären. Ich
+                suche nicht das spektakuläre Bild, sondern das ehrliche."
               </p>
             </div>
 
