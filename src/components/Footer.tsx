@@ -31,8 +31,15 @@ const Footer = () => {
             <p className="text-[32px] font-medium leading-[1.1]">Oliver Bolt</p>
           </div>
 
-          {/* CONTACT BLOCK (moved into column 2) */}
-          <div className="ml-8 lg:ml-16 xl:ml-24">
+          {/* CONTACT (pulled left, stable) */}
+          <div
+            className="justify-self-start"
+            style={{
+              // zieht den Block deutlich nach links (Balboa feel),
+              // aber bleibt responsiv stabil
+              marginLeft: "clamp(-160px, -9vw, -80px)",
+            }}
+          >
             <div className="text-[18px] font-light leading-[1.4]">
               <p>oliver.bolt@gmail.com</p>
               <p>
@@ -49,7 +56,7 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* EMPTY COLUMN */}
+          {/* EMPTY */}
           <div />
         </div>
       </div>
