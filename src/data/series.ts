@@ -13,6 +13,17 @@ import travel4 from "@/assets/travel-4.jpg";
 import travel5 from "@/assets/travel-5.jpg";
 import travelHero from "@/assets/travel-hero.jpg";
 
+import travelNz1 from "@/assets/travel-nz-1.jpg";
+import travelNz2 from "@/assets/travel-nz-2.jpg";
+import travelNz3 from "@/assets/travel-nz-3.jpg";
+import travelNz4 from "@/assets/travel-nz-4.jpg";
+import travelNz5 from "@/assets/travel-nz-5.jpg";
+import travelNz6 from "@/assets/travel-nz-6.jpg";
+import travelNz7 from "@/assets/travel-nz-7.jpg";
+import travelNz8 from "@/assets/travel-nz-8.jpg";
+import travelNz9 from "@/assets/travel-nz-9.jpg";
+import travelNz10 from "@/assets/travel-nz-10.jpg";
+
 import projects1 from "@/assets/projects-1.jpg";
 import projects2 from "@/assets/projects-2.jpg";
 import projects3 from "@/assets/projects-3.jpg";
@@ -90,24 +101,29 @@ export const seriesData: Series[] = [
   },
   {
     id: "travel",
-    title: "Travel",
-    year: "2023",
-    location: "Verschiedene Orte",
+    title: "New Zealand",
+    year: "2024",
+    location: "Neuseeland",
     category: "Travel",
-    cover: travel1,
-    excerpt: "Langzeitbelichtungen an der Grenze zwischen Land und Meer.",
+    cover: travelNz1,
+    excerpt: "Zwischen Fjorden, Gletschern und endlosen Küsten.",
     description:
-      "Coastal Erosion dokumentiert die langsame Transformation der Küstenlinie.",
+      "Eine visuelle Reise durch die kontrastreichen Landschaften Neuseelands – von den Südalpen bis zur rauen Westküste.",
     background:
-      "Drei Wochen allein an der normannischen Küste, oft bei Sturm und Regen.",
+      "Vier Wochen Roadtrip durch beide Inseln, eingefangen in atmosphärischen Lichtstimmungen.",
     technical:
-      "ND-Filter (10-Stop) für Belichtungszeiten von 30 Sekunden bis 4 Minuten.",
+      "Fokus auf natürliche Texturen und die massive Skala der Landschaft.",
     images: [
-      { src: travel1, alt: "Travel 1", layout: "full" },
-      { src: travel2, alt: "Travel 2", layout: "half" },
-      { src: travel3, alt: "Travel 3", layout: "half" },
-      { src: travel4, alt: "Travel 4", layout: "full" },
-      { src: travel5, alt: "Travel 5", layout: "half" },
+      { src: travelNz1, alt: "New Zealand 1", layout: "full" },
+      { src: travelNz5, alt: "New Zealand 5", layout: "half" },
+      { src: travelNz6, alt: "New Zealand 6", layout: "half" },
+      { src: travelNz2, alt: "New Zealand 2", layout: "full" },
+      { src: travelNz3, alt: "New Zealand 3", layout: "half" },
+      { src: travelNz8, alt: "New Zealand 8", layout: "half" },
+      { src: travelNz9, alt: "New Zealand 9", layout: "full" },
+      { src: travelNz4, alt: "New Zealand 4", layout: "half" },
+      { src: travelNz10, alt: "New Zealand 10", layout: "half" },
+      { src: travelNz7, alt: "New Zealand 7", layout: "full" },
     ],
   },
   {
