@@ -71,8 +71,8 @@ const Navbar = ({ invertColors = false, onCategoryChange }: NavbarProps) => {
           <Link
             to="/"
             className={cn(
-              // +10% again (was 31/36)
-              "text-[34px] md:text-[40px] font-semibold tracking-tight",
+              // bigger like Balboa
+              "text-[36px] md:text-[44px] font-semibold tracking-tight",
               textColor,
             )}
           >
@@ -85,8 +85,8 @@ const Navbar = ({ invertColors = false, onCategoryChange }: NavbarProps) => {
             <li className="relative" onMouseEnter={() => setWorkOpen(true)} onMouseLeave={() => setWorkOpen(false)}>
               <button
                 className={cn(
-                  // +10% again (was 13px)
-                  "text-[14px] tracking-wide transition-colors duration-200 bg-transparent border-none cursor-pointer",
+                  // bigger like Balboa
+                  "text-[16px] tracking-wide transition-colors duration-200 bg-transparent border-none cursor-pointer",
                   linkColor,
                   (isWorkRoute || workOpen) && "underline underline-offset-4",
                 )}
@@ -97,23 +97,21 @@ const Navbar = ({ invertColors = false, onCategoryChange }: NavbarProps) => {
               </button>
 
               {workOpen && (
-                <div
-                  // closer to Work
-                  className="absolute top-full right-0 pt-1"
-                  style={{
-                    // keep box slightly overhanging to the right (NOT the text)
-                    transform: "translateX(10px)",
-                  }}
-                >
-                  {/* ✅ FIX for "rechtsbündig problem":
-                      - The menu TEXT is right-aligned (text-right)
-                      - We also align the RIGHT EDGE of the TEXT BLOCK exactly
-                        under the right edge of the Work button by:
-                        1) wrapping items in an inline-block
-                        2) using right:0 + text-right + w-max
-                      */}
-                  <div className="bg-black">
-                    <div className="pr-6 pl-6 py-2">
+                <div className="absolute top-full right-0 pt-1">
+                  {/*
+                    ✅ Fix 1: dropdown text MUST be right-aligned to WORK:
+                    - anchor the dropdown to right:0
+                    - content layer is NOT shifted, so its right edge lines up with the Work button’s right edge
+
+                    ✅ Fix 2: black background may overlap to the right:
+                    - background layer is shifted right, content stays put
+                  */}
+                  <div className="relative">
+                    {/* background layer (overhang to the right) */}
+                    <div className="absolute inset-0 bg-black" style={{ transform: "translateX(14px)" }} />
+
+                    {/* content layer (aligned to Work) */}
+                    <div className="relative pr-5 pl-6 py-2">
                       <ul className="flex flex-col gap-0.5 text-right">
                         {seriesCategories.map((cat) => {
                           const slug = categorySlugMap[cat] || cat.toLowerCase();
@@ -121,12 +119,11 @@ const Navbar = ({ invertColors = false, onCategoryChange }: NavbarProps) => {
 
                           return (
                             <li key={cat} className="flex justify-end">
-                              {/* inline-block makes the right edge deterministic */}
                               <button
                                 onClick={() => handleCategoryClick(cat)}
                                 className={cn(
-                                  // same size as navbar links
-                                  "inline-block text-[14px] transition-colors py-0.5 hover:underline bg-transparent border-none cursor-pointer",
+                                  // SAME size as navbar links
+                                  "text-[16px] transition-colors py-0.5 hover:underline bg-transparent border-none cursor-pointer",
                                   "text-white hover:text-white",
                                   activeCat && "underline underline-offset-4",
                                 )}
@@ -149,7 +146,7 @@ const Navbar = ({ invertColors = false, onCategoryChange }: NavbarProps) => {
               <Link
                 to="/about"
                 className={cn(
-                  "text-[14px] tracking-wide transition-colors duration-200",
+                  "text-[16px] tracking-wide transition-colors duration-200",
                   linkColor,
                   isAboutRoute && "underline underline-offset-4",
                 )}
@@ -164,7 +161,7 @@ const Navbar = ({ invertColors = false, onCategoryChange }: NavbarProps) => {
                 href="https://instagram.com/ollie.bolt"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={cn("text-[14px] tracking-wide transition-colors duration-200", linkColor)}
+                className={cn("text-[16px] tracking-wide transition-colors duration-200", linkColor)}
               >
                 Instagram
               </a>
@@ -178,7 +175,7 @@ const Navbar = ({ invertColors = false, onCategoryChange }: NavbarProps) => {
             aria-label="Menu"
             type="button"
           >
-            {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+            {mobileOpen ? <X size={26} /> : <Menu size={26} />}
           </button>
         </div>
       </nav>
@@ -188,7 +185,7 @@ const Navbar = ({ invertColors = false, onCategoryChange }: NavbarProps) => {
         <div className="md:hidden bg-background px-6 pb-8">
           <ul className="flex flex-col gap-6">
             <li>
-              <span className="text-[14px] tracking-wide text-foreground">Work</span>
+              <span className="text-[16px] tracking-wide text-foreground">Work</span>
               <ul className="mt-2 ml-4 flex flex-col gap-2">
                 {seriesCategories.map((cat) => {
                   const slug = categorySlugMap[cat] || cat.toLowerCase();
@@ -199,7 +196,7 @@ const Navbar = ({ invertColors = false, onCategoryChange }: NavbarProps) => {
                       <button
                         onClick={() => handleCategoryClick(cat)}
                         className={cn(
-                          "text-[14px] text-foreground hover:underline transition-colors bg-transparent border-none cursor-pointer text-left",
+                          "text-[16px] text-foreground hover:underline transition-colors bg-transparent border-none cursor-pointer text-left",
                           activeCat && "underline underline-offset-4",
                         )}
                         type="button"
@@ -217,7 +214,7 @@ const Navbar = ({ invertColors = false, onCategoryChange }: NavbarProps) => {
                 to="/about"
                 onClick={() => setMobileOpen(false)}
                 className={cn(
-                  "text-[14px] tracking-wide text-foreground",
+                  "text-[16px] tracking-wide text-foreground",
                   isAboutRoute && "underline underline-offset-4",
                 )}
               >
@@ -230,7 +227,7 @@ const Navbar = ({ invertColors = false, onCategoryChange }: NavbarProps) => {
                 href="https://instagram.com/ollie.bolt"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[14px] tracking-wide text-foreground"
+                className="text-[16px] tracking-wide text-foreground"
               >
                 Instagram
               </a>
