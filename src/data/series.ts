@@ -47,6 +47,13 @@ import frauenstreik5 from "@/assets/projects-frauenstreik-5.jpg";
 import frauenstreik6 from "@/assets/projects-frauenstreik-6.jpg";
 import frauenstreik7 from "@/assets/projects-frauenstreik-7.jpg";
 
+import sternwarte1 from "@/assets/projects-sternwarte-1.jpg";
+import sternwarte2 from "@/assets/projects-sternwarte-2.jpg";
+import sternwarte3 from "@/assets/projects-sternwarte-3.jpg";
+import sternwarte4 from "@/assets/projects-sternwarte-4.jpg";
+import sternwarte5 from "@/assets/projects-sternwarte-5.jpg";
+import sternwarte6 from "@/assets/projects-sternwarte-6.jpg";
+
 export type SeriesCategory = "Action" | "Travel" | "Projects";
 
 export interface SeriesImage {
@@ -202,6 +209,29 @@ export const seriesData: Series[] = [
       { src: frauenstreik5, alt: "Frauenstreik 5", layout: "half" },
       { src: frauenstreik6, alt: "Frauenstreik 6", layout: "half" },
       { src: frauenstreik7, alt: "Frauenstreik 7", layout: "full" },
+    ],
+  },
+  {
+    id: "sternwarte-2025",
+    title: "Tagblatt Sommerserie",
+    year: "2025",
+    location: "St. Gallen",
+    category: "Projects",
+    cover: sternwarte1,
+    excerpt: "Ein Blick in die Sterne — Sternwarte Kantonsschule am Burggraben.",
+    description:
+      "Für die Tagblatt Sommerserie 2025 entstand diese Reportage in der historischen Sternwarte der Kantonsschule am Burggraben.",
+    background:
+      "Entstanden als Teil einer redaktionellen Serie über besondere Orte in St. Gallen.",
+    technical:
+      "Available Light und Langzeitbelichtungen in der Dämmerung und Nacht.",
+    images: [
+      { src: sternwarte1, alt: "Sternwarte Aussenansicht", layout: "full" },
+      { src: sternwarte2, alt: "Sternwarte bei Nacht", layout: "half" },
+      { src: sternwarte3, alt: "Sternwarte Kuppel", layout: "half" },
+      { src: sternwarte4, alt: "Teleskop Interior", layout: "full" },
+      { src: sternwarte5, alt: "Mond Detailaufnahme", layout: "half" },
+      { src: sternwarte6, alt: "Portrait in der Sternwarte", layout: "half" },
     ],
   },
 ];
