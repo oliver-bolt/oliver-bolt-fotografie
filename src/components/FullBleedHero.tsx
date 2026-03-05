@@ -40,8 +40,14 @@ const FullBleedHero = ({ image, categoryLabel, onPastHero }: FullBleedHeroProps)
         marginRight: "calc(50% - 50vw)",
       }}
     >
-      <div className="relative w-full -mt-[84px] h-[360px] md:h-[560px] overflow-hidden">
-        {/* HERO IMAGE */}
+      {/* Hero sits under navbar (navbar overlays hero) */}
+      <div
+        className="
+          relative w-full -mt-[84px] overflow-hidden
+          h-[440px] md:h-[680px]
+        "
+      >
+        {/* Image */}
         <img
           src={image}
           alt={`${categoryLabel} — Hero`}
@@ -51,18 +57,19 @@ const FullBleedHero = ({ image, categoryLabel, onPastHero }: FullBleedHeroProps)
           fetchPriority="high"
         />
 
-        {/* subtle overlay */}
+        {/* Readability overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/55 via-black/20 to-transparent" />
 
-        {/* TEXT */}
+        {/* Text overlay: left-aligned, but positioned more towards center.
+            Padding-top ensures it doesn't sit under navbar. */}
         <div className="absolute inset-0 flex items-center pt-[84px]">
           <div className="w-full px-6 md:px-10">
-            <div className="ml-[8vw] md:ml-[18vw] max-w-[820px]">
+            <div className="ml-[8vw] md:ml-[18vw] max-w-[980px]">
               <p
                 className="text-white font-semibold tracking-tight"
                 style={{
-                  fontSize: "clamp(28px, 2.2vw, 34px)",
-                  lineHeight: 1.2,
+                  fontSize: "clamp(28px, 2.2vw, 34px)", // ~Oliver Bolt size
+                  lineHeight: 1.18,
                   textShadow: "0 1px 10px rgba(0,0,0,0.45)",
                 }}
               >
