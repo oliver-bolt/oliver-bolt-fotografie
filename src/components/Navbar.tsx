@@ -15,7 +15,7 @@ const categorySlugMap: Record<string, string> = {
   Projects: "projects",
 };
 
-const Navbar = ({ invertColors = false }: NavbarProps) => {
+const Navbar = ({ invertColors = false, onCategoryChange }: NavbarProps) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [workOpen, setWorkOpen] = useState(false);
 
@@ -32,80 +32,76 @@ const Navbar = ({ invertColors = false }: NavbarProps) => {
     setWorkOpen(false);
     setMobileOpen(false);
     const slug = categorySlugMap[cat] || cat.toLowerCase();
+    onCategoryChange?.(cat);
     navigate(`/work/${slug}`);
   };
 
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50",
-        // Landing/About: no black bar — keep clean light bg
+        // Landing/About: normal in document flow -> scrolls away naturally
+        // Work/Hero pages: absolute overlay on top of hero -> also scrolls away naturally
+        invertColors ? "absolute top-0 left-0 right-0" : "relative",
+        "z-50 pointer-events-none",
         !invertColors && "bg-background/95 backdrop-blur-sm",
-        // Work (hero): transparent overlay (text is white via invertColors)
-        invertColors && "bg-transparent",
       )}
     >
-      <nav className="w-full">
-        {/* IMPORTANT: This container must match your page SHELL container */}
-        <div className="max-w-[1600px] w-full mx-auto flex items-center justify-between px-10 md:px-14 py-7">
-          {/* Logo */}
-          <Link to="/" className={cn("text-[30px] md:text-[34px] font-semibold tracking-tight", textColor)}>
+      <nav className="w-full pointer-events-auto">
+        <div className="max-w-[1600px] w-full mx-auto flex items-center justify-between px-10 md:px-14 pt-8 pb-4 md:pt-10 md:pb-5">
+          <Link to="/" className={cn("text-[36px] md:text-[44px] font-semibold tracking-tight", textColor)}>
             Oliver Bolt
           </Link>
 
-          {/* Desktop */}
           <ul className="hidden md:flex items-center gap-10">
-            {/* Work + dropdown */}
             <li className="relative" onMouseEnter={() => setWorkOpen(true)} onMouseLeave={() => setWorkOpen(false)}>
-              <button
-                type="button"
-                className={cn(
-                  "text-[16px] tracking-wide transition-colors duration-200 bg-transparent border-none cursor-pointer",
-                  linkColor,
-                  isWorkActive && "underline underline-offset-4",
-                  invertColors && isWorkActive && "decoration-white",
-                )}
-                onClick={() => setWorkOpen((v) => !v)}
-              >
-                Work
-              </button>
+              <div className="relative inline-block">
+                <button
+                  type="button"
+                  className={cn(
+                    "text-[16px] tracking-wide transition-colors duration-200 bg-transparent border-none cursor-pointer",
+                    linkColor,
+                    (isWorkActive || workOpen) && "underline underline-offset-4",
+                    invertColors && (isWorkActive || workOpen) && "decoration-white",
+                  )}
+                  onClick={() => setWorkOpen((v) => !v)}
+                >
+                  Work
+                </button>
 
-              {workOpen && (
-                <div className="absolute top-full right-0 pt-1">
-                  <div className="relative">
-                    {/* Black background ALWAYS (also on landing) */}
-                    {/* Overhang to the RIGHT allowed without shifting text */}
-                    <div className="absolute inset-y-0 left-0 -right-6 bg-black" />
+                {workOpen && (
+                  <div className="absolute top-full right-0 pt-1">
+                    <div className="relative">
+                      {/* schwarzer Hintergrund darf rechts überlappen */}
+                      <div className="absolute inset-y-0 left-0 -right-6 bg-black" />
 
-                    {/* Content: NO right padding -> right text edge aligns with Work */}
-                    <div className="relative py-2 pl-6 pr-0">
-                      <ul className="flex flex-col gap-0.5 text-right min-w-[140px]">
-                        {seriesCategories.map((cat) => {
-                          const slug = categorySlugMap[cat] || cat.toLowerCase();
-                          const activeCat = location.pathname === `/work/${slug}`;
+                      {/* Text selbst bleibt exakt rechtsbündig unter WORK */}
+                      <div className="relative py-2 pl-6 pr-0">
+                        <ul className="flex flex-col gap-0.5 text-right min-w-[140px]">
+                          {seriesCategories.map((cat) => {
+                            const slug = categorySlugMap[cat] || cat.toLowerCase();
+                            const activeCat = location.pathname === `/work/${slug}`;
 
-                          return (
-                            <li key={cat} className="flex justify-end">
-                              <button
-                                type="button"
-                                onClick={() => handleCategoryClick(cat)}
-                                className={cn(
-                                  "text-[16px] text-white hover:text-white hover:underline",
-                                  "bg-transparent border-none cursor-pointer",
-                                  "py-0.5 px-0", // IMPORTANT: no horizontal padding
-                                  activeCat && "underline underline-offset-4",
-                                )}
-                              >
-                                {cat}
-                              </button>
-                            </li>
-                          );
-                        })}
-                      </ul>
+                            return (
+                              <li key={cat} className="flex justify-end">
+                                <button
+                                  type="button"
+                                  onClick={() => handleCategoryClick(cat)}
+                                  className={cn(
+                                    "text-[16px] py-0.5 px-0 bg-transparent border-none cursor-pointer text-white hover:text-white hover:underline",
+                                    activeCat && "underline underline-offset-4",
+                                  )}
+                                >
+                                  {cat}
+                                </button>
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      </div>
                     </div>
                   </div>
-                </div>
-              )}
+                )}
+              </div>
             </li>
 
             <li>
@@ -134,36 +130,42 @@ const Navbar = ({ invertColors = false }: NavbarProps) => {
             </li>
           </ul>
 
-          {/* Mobile toggle */}
           <button
             onClick={() => setMobileOpen((v) => !v)}
-            className={cn("md:hidden bg-transparent border-none", textColor)}
+            className={cn("md:hidden bg-transparent border-none pointer-events-auto", textColor)}
             aria-label="Menu"
             type="button"
           >
-            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+            {mobileOpen ? <X size={26} /> : <Menu size={26} />}
           </button>
         </div>
       </nav>
 
-      {/* Mobile menu */}
       {mobileOpen && (
-        <div className="md:hidden bg-background px-10 pb-10">
+        <div className="md:hidden bg-background px-10 pb-10 pointer-events-auto">
           <ul className="flex flex-col gap-6 pt-2">
             <li>
               <span className="text-[16px] tracking-wide text-foreground">Work</span>
               <ul className="mt-3 ml-4 flex flex-col gap-2">
-                {seriesCategories.map((cat) => (
-                  <li key={cat}>
-                    <button
-                      type="button"
-                      onClick={() => handleCategoryClick(cat)}
-                      className="text-[16px] text-foreground hover:underline transition-colors bg-transparent border-none cursor-pointer text-left"
-                    >
-                      {cat}
-                    </button>
-                  </li>
-                ))}
+                {seriesCategories.map((cat) => {
+                  const slug = categorySlugMap[cat] || cat.toLowerCase();
+                  const activeCat = location.pathname === `/work/${slug}`;
+
+                  return (
+                    <li key={cat}>
+                      <button
+                        type="button"
+                        onClick={() => handleCategoryClick(cat)}
+                        className={cn(
+                          "text-[16px] text-foreground hover:underline transition-colors bg-transparent border-none cursor-pointer text-left",
+                          activeCat && "underline underline-offset-4",
+                        )}
+                      >
+                        {cat}
+                      </button>
+                    </li>
+                  );
+                })}
               </ul>
             </li>
 
