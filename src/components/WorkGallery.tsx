@@ -1,15 +1,11 @@
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import ProgressiveImage from "@/components/ProgressiveImage";
 
 interface GalleryImage {
   src: string;
   alt: string;
-
-  /**
-   * OPTIONAL (für bessere Crops später):
-   * CSS object-position, z.B. "50% 35%" oder "40% 50%"
-   */
   focus?: string;
 }
 
@@ -26,14 +22,7 @@ const fadeUp = {
   },
 };
 
-/**
- * IMPORTANT
- * - Masonry via CSS columns => keine Grid-row Whitespaces
- * - 2 columns ALWAYS (mobile + desktop)
- * - Gutter überall identisch
- * - Keine forced aspect frames => weniger „falscher“ Crop
- */
-const GUTTER = 18; // px – match Landing
+const GUTTER = 18;
 
 const WorkGallery = ({ images }: WorkGalleryProps) => {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
@@ -62,13 +51,11 @@ const WorkGallery = ({ images }: WorkGalleryProps) => {
 
   return (
     <>
-      {/* Abstand Hero -> erste Bilder: pt-... */}
       <section className="pt-10 md:pt-14 pb-6">
-        {/* Container wie Site-Width, damit links/rechts sauber sitzt */}
         <div className="max-w-[1600px] mx-auto px-4 md:px-10">
           <div
             style={{
-              columns: 2, // ALWAYS 2 columns (mobile + desktop)
+              columns: 2,
               columnGap: `${GUTTER}px`,
             }}
           >
@@ -89,22 +76,17 @@ const WorkGallery = ({ images }: WorkGalleryProps) => {
                   className="block w-full bg-transparent border-none p-0 cursor-pointer"
                   aria-label={`Open image ${i + 1}`}
                 >
-                  {/* 
-                    Keine Frame-Aspect-Zwänge -> Bild darf natürlich wirken.
-                    Trotzdem „Balboa clean“: overflow-hidden, object-fit cover.
-                    Default focus leicht nach oben (50% 42%), damit Köpfe/Action eher drin bleiben.
-                  */}
                   <div className="relative overflow-hidden">
-                    <img
+                    <ProgressiveImage
                       src={img.src}
                       alt={img.alt}
-                      loading="lazy"
-                      className="block w-full h-auto"
+                      className="w-full"
                       style={{
-                        // Wenn du später focus pro Bild gibst, wirkt’s sofort besser.
-                        objectFit: "cover",
+                        position: "relative",
+                        aspectRatio: "auto",
                         objectPosition: img.focus ?? "50% 42%",
                       }}
+                      loading={i < 4 ? "eager" : "lazy"}
                     />
                   </div>
                 </button>
