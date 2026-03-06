@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
-import ProgressiveImage from "@/components/ProgressiveImage";
 
 interface GalleryImage {
   src: string;
@@ -12,15 +11,6 @@ interface GalleryImage {
 interface WorkGalleryProps {
   images: GalleryImage[];
 }
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 12 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, ease: "easeOut" as const },
-  },
-};
 
 const GUTTER = 18;
 
@@ -60,12 +50,8 @@ const WorkGallery = ({ images }: WorkGalleryProps) => {
             }}
           >
             {images.map((img, i) => (
-              <motion.div
+              <div
                 key={`${img.src}-${i}`}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-30px" }}
-                variants={fadeUp}
                 style={{
                   breakInside: "avoid",
                   marginBottom: `${GUTTER}px`,
@@ -77,20 +63,21 @@ const WorkGallery = ({ images }: WorkGalleryProps) => {
                   aria-label={`Open image ${i + 1}`}
                 >
                   <div className="relative overflow-hidden">
-                    <ProgressiveImage
+                    <img
                       src={img.src}
                       alt={img.alt}
-                      className="w-full"
+                      loading={i < 6 ? "eager" : "lazy"}
+                      decoding={i < 6 ? "sync" : "async"}
+                      {...(i < 2 ? { fetchPriority: "high" as const } : {})}
+                      className="block w-full h-auto"
                       style={{
-                        position: "relative",
-                        aspectRatio: "auto",
+                        objectFit: "cover",
                         objectPosition: img.focus ?? "50% 42%",
                       }}
-                      loading={i < 4 ? "eager" : "lazy"}
                     />
                   </div>
                 </button>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
