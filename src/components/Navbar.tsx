@@ -1,6 +1,6 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronRight, ChevronLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { seriesCategories } from "@/data/series";
 
@@ -19,6 +19,9 @@ const Navbar = ({ invertColors = false, onCategoryChange }: NavbarProps) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [workOpen, setWorkOpen] = useState(false);
 
+  // ✅ ONLY for the new Balboa mobile nav:
+  const [mobileView, setMobileView] = useState<"root" | "work">("root");
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -31,9 +34,16 @@ const Navbar = ({ invertColors = false, onCategoryChange }: NavbarProps) => {
   const handleCategoryClick = (cat: string) => {
     setWorkOpen(false);
     setMobileOpen(false);
+    setMobileView("root"); // ✅ reset view
     const slug = categorySlugMap[cat] || cat.toLowerCase();
     onCategoryChange?.(cat);
     navigate(`/work/${slug}`);
+  };
+
+  // ✅ helper for mobile close
+  const closeMobile = () => {
+    setMobileOpen(false);
+    setMobileView("root");
   };
 
   return (
@@ -131,7 +141,10 @@ const Navbar = ({ invertColors = false, onCategoryChange }: NavbarProps) => {
           </ul>
 
           <button
-            onClick={() => setMobileOpen((v) => !v)}
+            onClick={() => {
+              setMobileOpen((v) => !v);
+              setMobileView("root");
+            }}
             className={cn("md:hidden bg-transparent border-none pointer-events-auto", textColor)}
             aria-label="Menu"
             type="button"
@@ -141,58 +154,98 @@ const Navbar = ({ invertColors = false, onCategoryChange }: NavbarProps) => {
         </div>
       </nav>
 
+      {/* ✅ REPLACED: Mobile menu => Balboa fullscreen overlay
+          ✅ IMPORTANT: ALWAYS white background + black text on ALL pages */}
       {mobileOpen && (
-        <div className="md:hidden bg-background px-10 pb-10 pointer-events-auto">
-          <ul className="flex flex-col gap-6 pt-2">
-            <li>
-              <span className="text-[16px] tracking-wide text-foreground">Work</span>
-              <ul className="mt-3 ml-4 flex flex-col gap-2">
-                {seriesCategories.map((cat) => {
-                  const slug = categorySlugMap[cat] || cat.toLowerCase();
-                  const activeCat = location.pathname === `/work/${slug}`;
+        <div className="md:hidden fixed inset-0 z-[999] bg-white text-black pointer-events-auto">
+          {/* Top bar */}
+          <div className="max-w-[1600px] mx-auto px-10 pt-8 flex items-start justify-between">
+            <Link to="/" onClick={closeMobile} className="text-[36px] font-semibold tracking-tight text-black">
+              Oliver Bolt
+            </Link>
 
-                  return (
-                    <li key={cat}>
+            <button
+              onClick={closeMobile}
+              className="bg-transparent border border-black w-12 h-12 flex items-center justify-center"
+              aria-label="Close menu"
+              type="button"
+            >
+              <X size={22} />
+            </button>
+          </div>
+
+          {/* Center content */}
+          <div className="h-[calc(100vh-110px)] flex items-center justify-center">
+            {mobileView === "root" ? (
+              <div className="flex flex-col items-center justify-center gap-6">
+                <button
+                  onClick={() => setMobileView("work")}
+                  className={cn(
+                    "bg-transparent border-none cursor-pointer flex items-center gap-3 text-black",
+                    "text-[52px] leading-none font-medium tracking-tight",
+                    isWorkActive && "underline underline-offset-8",
+                  )}
+                  type="button"
+                >
+                  Work <ChevronRight size={34} />
+                </button>
+
+                <Link
+                  to="/about"
+                  onClick={closeMobile}
+                  className={cn(
+                    "text-[52px] leading-none font-medium tracking-tight text-black",
+                    isAboutActive && "underline underline-offset-8",
+                  )}
+                >
+                  About
+                </Link>
+
+                <a
+                  href="https://instagram.com/ollie.bolt"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={closeMobile}
+                  className="text-[52px] leading-none font-medium tracking-tight text-black"
+                >
+                  Instagram
+                </a>
+              </div>
+            ) : (
+              <div className="flex flex-col items-center justify-center gap-6 w-full px-10">
+                <button
+                  onClick={() => setMobileView("root")}
+                  className="bg-transparent border border-black px-6 py-3 flex items-center gap-3 text-black text-[34px] font-medium"
+                  type="button"
+                >
+                  <ChevronLeft size={26} />
+                  Back
+                </button>
+
+                <div className="flex flex-col items-center gap-5">
+                  {seriesCategories.map((cat) => {
+                    const slug = categorySlugMap[cat] || cat.toLowerCase();
+                    const activeCat = location.pathname === `/work/${slug}`;
+
+                    return (
                       <button
-                        type="button"
+                        key={cat}
                         onClick={() => handleCategoryClick(cat)}
                         className={cn(
-                          "text-[16px] text-foreground hover:underline transition-colors bg-transparent border-none cursor-pointer text-left",
-                          activeCat && "underline underline-offset-4",
+                          "bg-transparent border-none cursor-pointer text-black",
+                          "text-[52px] leading-none font-medium tracking-tight",
+                          activeCat && "underline underline-offset-8",
                         )}
+                        type="button"
                       >
                         {cat}
                       </button>
-                    </li>
-                  );
-                })}
-              </ul>
-            </li>
-
-            <li>
-              <Link
-                to="/about"
-                onClick={() => setMobileOpen(false)}
-                className={cn(
-                  "text-[16px] tracking-wide text-foreground",
-                  isAboutActive && "underline underline-offset-4",
-                )}
-              >
-                About
-              </Link>
-            </li>
-
-            <li>
-              <a
-                href="https://instagram.com/ollie.bolt"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[16px] tracking-wide text-foreground"
-              >
-                Instagram
-              </a>
-            </li>
-          </ul>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       )}
     </header>
