@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { seriesData } from "@/data/series";
+import ProgressiveImage from "@/components/ProgressiveImage";
 
 const fade = {
   hidden: { opacity: 0, y: 14 },
@@ -14,19 +15,6 @@ const fade = {
 
 const SHELL = "max-w-[1600px] mx-auto px-10 md:px-14";
 
-function Slot({ src, alt, aspect, eager = false }: { src: string; alt: string; aspect: string; eager?: boolean }) {
-  return (
-    <div className={`${aspect} overflow-hidden relative`}>
-      <img
-        src={src}
-        alt={alt}
-        loading={eager ? "eager" : "lazy"}
-        className="absolute inset-0 w-full h-full object-cover"
-      />
-    </div>
-  );
-}
-
 const Index = () => {
   return (
     <>
@@ -37,7 +25,6 @@ const Index = () => {
           {/* HERO TEXT */}
           <section className="pt-36 md:pt-48 mb-24">
             <motion.div initial="hidden" animate="visible" variants={fade}>
-              {/* Mobile: -20% */}
               <h1 className="text-[36px] md:text-[56px] font-medium leading-[1.08] max-w-full md:max-w-[50%]">
                 Documentary & street photographer capturing culture, travel & editorial stories — based in St. Gallen /
                 Switzerland.
@@ -66,29 +53,41 @@ const Index = () => {
                   viewport={{ once: true, margin: "-40px" }}
                   variants={fade}
                 >
-                  {/* IMAGE GRID (NOT CLICKABLE) */}
+                  {/* IMAGE GRID */}
                   <div className="grid grid-cols-2 gap-[18px]">
                     <div className="grid gap-[18px]">
-                      <Slot src={imgs[0].src} alt={imgs[0].alt} aspect={leftTop} eager={index === 0} />
-                      <Slot src={imgs[1].src} alt={imgs[1].alt} aspect={leftBottom} />
+                      <ProgressiveImage
+                        src={imgs[0].src}
+                        alt={imgs[0].alt}
+                        className={leftTop}
+                        loading={index === 0 ? "eager" : "lazy"}
+                      />
+                      <ProgressiveImage
+                        src={imgs[1].src}
+                        alt={imgs[1].alt}
+                        className={leftBottom}
+                      />
                     </div>
 
                     <div className="grid gap-[18px]">
-                      <Slot src={imgs[2].src} alt={imgs[2].alt} aspect={rightTop} eager={index === 0} />
-                      <Slot src={imgs[3].src} alt={imgs[3].alt} aspect={rightBottom} />
+                      <ProgressiveImage
+                        src={imgs[2].src}
+                        alt={imgs[2].alt}
+                        className={rightTop}
+                        loading={index === 0 ? "eager" : "lazy"}
+                      />
+                      <ProgressiveImage
+                        src={imgs[3].src}
+                        alt={imgs[3].alt}
+                        className={rightBottom}
+                      />
                     </div>
                   </div>
 
-                  {/* CAPTION BLOCK
-                      Mobile: spans both columns
-                      Desktop: left column only
-                      Desktop: excerpt + link inline (same line)
-                  */}
+                  {/* CAPTION BLOCK */}
                   <div className="grid grid-cols-1 md:grid-cols-2 mt-6">
                     <div>
-                      {/* Mobile smaller (-20%), Desktop stays 32 */}
                       <div className="text-[22px] md:text-[32px] font-medium leading-snug">
-                        {/* Desktop: inline */}
                         <span className="hidden md:inline">
                           {series.excerpt}{" "}
                           <a href={`/work/${series.category.toLowerCase()}`} className="underline underline-offset-4">
@@ -96,7 +95,6 @@ const Index = () => {
                           </a>
                         </span>
 
-                        {/* Mobile: excerpt then link on new line */}
                         <span className="md:hidden">
                           {series.excerpt}
                           <br />
