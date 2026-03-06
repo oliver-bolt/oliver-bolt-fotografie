@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { seriesData } from "@/data/series";
-import ProgressiveImage from "@/components/ProgressiveImage";
 
 const fade = {
   hidden: { opacity: 0, y: 14 },
@@ -14,6 +13,21 @@ const fade = {
 };
 
 const SHELL = "max-w-[1600px] mx-auto px-10 md:px-14";
+
+function Slot({ src, alt, aspect, eager = false }: { src: string; alt: string; aspect: string; eager?: boolean }) {
+  return (
+    <div className={`${aspect} overflow-hidden relative`}>
+      <img
+        src={src}
+        alt={alt}
+        loading={eager ? "eager" : "lazy"}
+        decoding={eager ? "sync" : "async"}
+        {...(eager ? { fetchPriority: "high" as const } : {})}
+        className="absolute inset-0 w-full h-full object-cover"
+      />
+    </div>
+  );
+}
 
 const Index = () => {
   return (
@@ -56,31 +70,13 @@ const Index = () => {
                   {/* IMAGE GRID */}
                   <div className="grid grid-cols-2 gap-[18px]">
                     <div className="grid gap-[18px]">
-                      <ProgressiveImage
-                        src={imgs[0].src}
-                        alt={imgs[0].alt}
-                        className={leftTop}
-                        loading={index === 0 ? "eager" : "lazy"}
-                      />
-                      <ProgressiveImage
-                        src={imgs[1].src}
-                        alt={imgs[1].alt}
-                        className={leftBottom}
-                      />
+                      <Slot src={imgs[0].src} alt={imgs[0].alt} aspect={leftTop} eager={index === 0} />
+                      <Slot src={imgs[1].src} alt={imgs[1].alt} aspect={leftBottom} />
                     </div>
 
                     <div className="grid gap-[18px]">
-                      <ProgressiveImage
-                        src={imgs[2].src}
-                        alt={imgs[2].alt}
-                        className={rightTop}
-                        loading={index === 0 ? "eager" : "lazy"}
-                      />
-                      <ProgressiveImage
-                        src={imgs[3].src}
-                        alt={imgs[3].alt}
-                        className={rightBottom}
-                      />
+                      <Slot src={imgs[2].src} alt={imgs[2].alt} aspect={rightTop} eager={index === 0} />
+                      <Slot src={imgs[3].src} alt={imgs[3].alt} aspect={rightBottom} />
                     </div>
                   </div>
 
