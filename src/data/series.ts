@@ -4,6 +4,15 @@ import action3 from "@/assets/action-3.jpg";
 import action4 from "@/assets/action-4.jpg";
 import action5 from "@/assets/action-5.jpg";
 import action6 from "@/assets/action-6.jpg";
+import action7 from "@/assets/action-7.jpg";
+import action8 from "@/assets/action-8.jpg";
+import action9 from "@/assets/action-9.jpg";
+import action10 from "@/assets/action-10.jpg";
+import action11 from "@/assets/action-11.jpg";
+import action12 from "@/assets/action-12.jpg";
+import action13 from "@/assets/action-13.jpg";
+import action14 from "@/assets/action-14.jpg";
+import action15 from "@/assets/action-15.jpg";
 import actionHero from "@/assets/action-hero.jpg";
 
 import travelHero from "@/assets/travel-hero.jpg";
@@ -93,19 +102,29 @@ export const seriesData: Series[] = [
     year: "2024",
     location: "Schweiz",
     category: "Commissions",
-    cover: action1,
+    cover: action8,
     excerpt: "Snowboard photography for Amplid — shot across Vorarlberg during the 2024/25 season.",
     description:
       "Action and rider photography for Amplid, the snowboard brand founded by Peter Bauer. Shot with rider Benny Deeg across locations in Vorarlberg and Bregenzerwald, Austria, during the 2024/25 season — featuring the Ohana Vibes and Cab Driver boards.",
     background: "",
     technical: "",
     images: [
-      { src: action1, alt: "Snowboarder riding powder in Vorarlberg — Amplid shooting", layout: "full" },
-      { src: action2, alt: "Rider Benny Deeg on Amplid board in Bregenzerwald, Austria", layout: "half" },
-      { src: action3, alt: "Snowboard action in deep snow — Amplid season 2024/25", layout: "half" },
-      { src: action4, alt: "Snowboarding in the Austrian Alps — Amplid Ohana Vibes", layout: "full" },
-      { src: action5, alt: "Rider portrait in winter landscape — Amplid commission", layout: "half" },
-      { src: action6, alt: "Snowboard turn in fresh powder — Vorarlberg, Austria", layout: "half" },
+      { src: action8, alt: "Backflip off a cliff — Amplid Ohana Vibes, Vorarlberg", layout: "full" },
+      { src: action10, alt: "Rider on summit rock holding Amplid board overhead, Bregenzerwald", layout: "half" },
+      { src: action11, alt: "Benny Deeg jumping with Amplid Ohana Vibes board, backcountry Austria", layout: "half" },
+      { src: action12, alt: "Rider overlooking alpine panorama with Amplid board, Bregenzerwald", layout: "full" },
+      { src: action7, alt: "Powder turn in deep snow shadow — Amplid shooting Vorarlberg", layout: "full" },
+      { src: actionHero, alt: "Big air over kicker — Amplid Cab Driver, Austrian Alps", layout: "full" },
+      { src: action1, alt: "Benny Deeg with Amplid board at mountain gas station, Vorarlberg", layout: "half" },
+      { src: action2, alt: "Rider portrait with Amplid Cab Driver at fuel pump, Bregenzerwald", layout: "half" },
+      { src: action14, alt: "Cliff drop on Amplid Ohana Vibes — backcountry Vorarlberg", layout: "full" },
+      { src: action9, alt: "Benny Deeg portrait with snowboard on alpine slope, Amplid", layout: "half" },
+      { src: action15, alt: "Amplid Ohana Vibes snowboard leaning against alpine pine tree", layout: "half" },
+      { src: action3, alt: "Amplid Cab Driver board in snow with piste machines, Vorarlberg", layout: "full" },
+      { src: action4, alt: "Amplid Cab Driver top sheet detail with bindings", layout: "half" },
+      { src: action13, alt: "Snowboard tail imprint in fresh powder — Ohana Vibes detail", layout: "half" },
+      { src: action6, alt: "Rail trick motion blur — Amplid Cab Driver, snowpark", layout: "full" },
+      { src: action5, alt: "Benny Deeg hiking through forest with Amplid board, Bregenzerwald", layout: "half" },
     ],
   },
   {
