@@ -9,6 +9,7 @@ const Footer = () => {
           <p className="text-[28px] font-medium leading-[1.1] mb-6">Oliver Bolt</p>
 
           <div className="text-[18px] font-light leading-[1.4]">
+            <p className="mb-2">© 2026 Oliver Bolt</p>
             <p>oliver.bolt@gmail.com</p>
             <p>
               Follow on{" "}
@@ -41,6 +42,7 @@ const Footer = () => {
             }}
           >
             <div className="text-[18px] font-light leading-[1.4]">
+              <p className="mb-2">© 2026 Oliver Bolt</p>
               <p>oliver.bolt@gmail.com</p>
               <p>
                 Follow on{" "}

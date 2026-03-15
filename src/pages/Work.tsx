@@ -1,11 +1,9 @@
-import { useState, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import FullBleedHero from "@/components/FullBleedHero";
 import { seriesData, seriesCategories } from "@/data/series";
-import travelHero from "@/assets/travel-hero.jpg";
 
 const fade = {
   hidden: { opacity: 0, y: 14 },
@@ -20,11 +18,8 @@ const SHELL = "max-w-[1600px] mx-auto px-10 md:px-14";
 
 const Work = () => {
   const [activeFilter, setActiveFilter] = useState<string>("Alle");
-  const [pastHero, setPastHero] = useState(false);
-
-  const handlePastHero = useCallback((past: boolean) => {
-    setPastHero(past);
-  }, []);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const filters = ["Alle", ...seriesCategories];
 
@@ -33,43 +28,62 @@ const Work = () => {
       ? seriesData
       : seriesData.filter((s) => s.category === activeFilter);
 
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handleClick = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setDropdownOpen(false);
+      }
+    };
+    if (dropdownOpen) {
+      document.addEventListener("mousedown", handleClick);
+    }
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, [dropdownOpen]);
+
   return (
     <div className="min-h-screen">
-      <Navbar invertColors={!pastHero} />
+      <Navbar />
 
       <main className="w-full">
-        <FullBleedHero
-          image={travelHero}
-          categoryLabel="Work"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-          onPastHero={handlePastHero}
-        />
-
         <div className={SHELL}>
-          {/* Filter buttons */}
+          {/* Filter dropdown */}
           <motion.div
             initial="hidden"
             animate="visible"
             variants={fade}
-            className="flex items-center gap-6 pt-12 pb-10"
+            className="flex justify-end pt-36 md:pt-48 pb-10"
           >
-            {filters.map((filter) => (
+            <div ref={dropdownRef} className="relative">
               <button
-                key={filter}
                 type="button"
-                onClick={() => setActiveFilter(filter)}
-                className={`text-[16px] tracking-wide bg-transparent border-none cursor-pointer text-foreground transition-colors duration-200 ${
-                  activeFilter === filter
-                    ? "underline underline-offset-4"
-                    : ""
-                }`}
+                onClick={() => setDropdownOpen(!dropdownOpen)}
+                className="text-[16px] tracking-wide bg-transparent border-none cursor-pointer text-foreground"
               >
-                {filter}
+                {activeFilter}
               </button>
-            ))}
+
+              {dropdownOpen && (
+                <div className="absolute right-0 top-full mt-2 bg-black z-50 min-w-[140px]">
+                  {filters.map((filter) => (
+                    <button
+                      key={filter}
+                      type="button"
+                      onClick={() => {
+                        setActiveFilter(filter);
+                        setDropdownOpen(false);
+                      }}
+                      className="block w-full text-left text-white text-[14px] tracking-wide bg-transparent border-none cursor-pointer px-4 py-2 hover:bg-white/10 transition-colors duration-150"
+                    >
+                      {filter}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
           </motion.div>
 
-          {/* Series grid */}
+          {/* Series grid — masonry */}
           <section className="pb-28">
             <AnimatePresence mode="wait">
               <motion.div
@@ -78,7 +92,8 @@ const Work = () => {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
-                className="grid grid-cols-1 md:grid-cols-2 gap-[18px]"
+                style={{ columns: "1", columnGap: "18px" }}
+                className="md:[column-count:2]"
               >
                 {filteredSeries.map((series) => (
                   <motion.div
@@ -87,15 +102,16 @@ const Work = () => {
                     whileInView="visible"
                     viewport={{ once: true, margin: "-40px" }}
                     variants={fade}
+                    style={{ breakInside: "avoid", marginBottom: "18px" }}
                   >
                     <Link to={`/work/${series.id}`} className="block group">
-                      <div className="aspect-[4/3] overflow-hidden relative">
+                      <div className="overflow-hidden relative">
                         <img
                           src={series.cover}
                           alt={series.title}
                           loading="lazy"
                           decoding="async"
-                          className="absolute inset-0 w-full h-full object-cover"
+                          className="block w-full h-auto"
                         />
                       </div>
                       <div className="mt-3">
