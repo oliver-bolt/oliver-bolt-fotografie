@@ -25,7 +25,7 @@ const About = () => (
           <motion.div initial="hidden" animate="visible" variants={fade} className="w-full md:w-[45%]">
             <img
               src={portraitImage}
-              alt="Portrait of the photographer"
+              alt="Oliver Bolt — photographer and creative producer, St. Gallen Switzerland"
               className="w-full aspect-[3/4] object-cover object-[center_20%]"
               loading="eager"
             />
@@ -43,37 +43,41 @@ const About = () => (
 
             <div className="space-y-5 text-foreground leading-relaxed">
               <p>
-                Seit über zehn Jahren bewege ich mich an der Schnittstelle von dokumentarischer und künstlerischer
-                Fotografie. Meine Arbeit ist geprägt von langen Beobachtungsphasen, bewusster Reduktion und dem
-                Anspruch, in jeder Serie eine eigenständige visuelle Sprache zu entwickeln.
+                I'm a photographer and creative producer based in St.&nbsp;Gallen, Switzerland.
+                My work sits between documentary, editorial and personal projects — from
+                street-level documentation to commissioned brand and product photography.
               </p>
               <p>
-                Ich glaube an die Kraft des einzelnen Bildes – aber noch mehr an die Kraft einer kuratierten Sequenz.
-                Eine Serie ist mehr als eine Sammlung von Fotos. Sie ist ein Narrativ, ein Rhythmus, eine Haltung.
+                Before picking up the camera full-time, I spent nine years in media production.
+                I studied Multimedia Production at HTW Chur (now FHGR), graduating with a
+                Bachelor's degree in 2013, with a focus on TV and video. From there I moved
+                into film — working on short films, features and episodic productions before
+                joining SRF, Switzerland's public broadcaster, where I eventually led production
+                for their scenic in-house formats.
               </p>
               <p>
-                Meine Themen kreisen um Vergänglichkeit, Stille und die Spuren menschlicher Existenz in gebauten und
-                natürlichen Räumen. Ich arbeite bevorzugt mit natürlichem Licht und nehme mir für jedes Projekt die
-                Zeit, die es braucht.
+                That background shaped how I see and plan visual work: the documentary eye, the
+                structured approach, the instinct for when to stay and when to move on. It also
+                means I'm comfortable working across formats — stills, moving image, editorial,
+                commercial.
+              </p>
+              <p>
+                Today I focus on photography. I work with brands, editorial clients and on
+                personal long-term projects. Most of my work is rooted in Switzerland, but it
+                regularly takes me elsewhere — recently to New Zealand, Austria and southern Germany.
               </p>
             </div>
 
             <div className="mt-12 pt-8 border-t border-border">
-              <h2 className="text-lg font-medium text-foreground mb-4">Statement</h2>
-              <p className="text-sm text-foreground leading-relaxed italic">
-                „Fotografie ist für mich kein Festhalten von Momenten, sondern ein Sichtbarmachen von Atmosphären. Ich
-                suche nicht das spektakuläre Bild, sondern das ehrliche."
+              <p className="text-foreground leading-relaxed">
+                If you'd like to work together or just say hello:{" "}
+                <a
+                  href="mailto:oliver.bolt@gmail.com"
+                  className="underline underline-offset-4 hover:text-foreground/70 transition-colors"
+                >
+                  oliver.bolt@gmail.com
+                </a>
               </p>
-            </div>
-
-            <div className="mt-12 pt-8 border-t border-border">
-              <h2 className="text-lg font-medium text-foreground mb-4">Exhibitions</h2>
-              <ul className="text-sm text-foreground space-y-2">
-                <li>2024 — „Urban Silence" · Galerie Raum, Berlin</li>
-                <li>2023 — „Coastal Erosion" · Festival Images, Vevey</li>
-                <li>2023 — „Industrial Poetry" · Museum Folkwang, Essen</li>
-                <li>2022 — „Northern Light" · Fotografiska, Stockholm</li>
-              </ul>
             </div>
           </motion.div>
         </div>
