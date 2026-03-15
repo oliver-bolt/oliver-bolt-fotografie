@@ -27,6 +27,18 @@ import travelNz7 from "@/assets/travel-nz-7.jpg";
 import travelNz8 from "@/assets/travel-nz-8.jpg";
 import travelNz9 from "@/assets/travel-nz-9.jpg";
 import travelNz10 from "@/assets/travel-nz-10.jpg";
+import tansania1 from "@/assets/tansania-1.jpg";
+import tansania2 from "@/assets/tansania-2.jpg";
+import tansania3 from "@/assets/tansania-3.jpg";
+import tansania4 from "@/assets/tansania-4.jpg";
+import tansania5 from "@/assets/tansania-5.jpg";
+import tansania6 from "@/assets/tansania-6.jpg";
+import tansania7 from "@/assets/tansania-7.jpg";
+import tansania8 from "@/assets/tansania-8.jpg";
+import tansania9 from "@/assets/tansania-9.jpg";
+import tansania10 from "@/assets/tansania-10.jpg";
+import tansania11 from "@/assets/tansania-11.jpg";
+
 
 
 import projectsYoo1 from "@/assets/projects-yoo-1.jpg";
@@ -150,6 +162,32 @@ export const seriesData: Series[] = [
       { src: travelNz4, alt: "Forest and mist, New Zealand landscape", layout: "half" },
       { src: travelNz10, alt: "Sunset over ocean, New Zealand coast", layout: "half" },
       { src: travelNz7, alt: "Open road, New Zealand campervan trip 2024", layout: "full" },
+    ],
+  },
+  {
+    id: "tansania",
+    title: "Tansania",
+    year: "2023",
+    location: "Tansania",
+    category: "Personal",
+    cover: tansania4,
+    excerpt: "First time Africa — from the Serengeti to the summit of Kilimanjaro. One lens to travel.",
+    description:
+      "A journey through Tanzania in 2023 — from Arusha through the Serengeti on safari to a seven-day climb up Mount Kilimanjaro. Wildlife, wide landscapes and the people along the way. Shot on a single lens.",
+    background: "",
+    technical: "",
+    images: [
+      { src: tansania4, alt: "Giraffe feeding on acacia tree, Serengeti National Park Tanzania", layout: "half" },
+      { src: tansania6, alt: "Zebras at dusk in the Serengeti savanna, Tanzania", layout: "half" },
+      { src: tansania2, alt: "Maasai group walking across open plains near Arusha, Tanzania", layout: "half" },
+      { src: tansania10, alt: "Moss-covered tree canopy in Kilimanjaro rainforest zone", layout: "half" },
+      { src: tansania7, alt: "Maasai man in red shuka sitting alone in dry landscape, Tanzania", layout: "full" },
+      { src: tansania3, alt: "Lioness resting in tall grass, Serengeti National Park", layout: "full" },
+      { src: tansania11, alt: "Bird of prey over corrugated roof — Kilimanjaro basecamp", layout: "half" },
+      { src: tansania9, alt: "Figure in fog on wooden platform, Kilimanjaro mountain hut", layout: "half" },
+      { src: tansania8, alt: "Porters loading supplies at Kilimanjaro trailhead, rainforest zone", layout: "full" },
+      { src: tansania5, alt: "Ikoma refreshment and curio shop near Serengeti entrance, Tanzania", layout: "half" },
+      { src: tansania1, alt: "Three men on motorcycle, rural road near Arusha Tanzania", layout: "half" },
     ],
   },
   {
