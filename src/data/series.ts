@@ -50,7 +50,7 @@ import druegg4 from "@/assets/projects-druegg-4.jpg";
 import druegg5 from "@/assets/projects-druegg-5.jpg";
 import druegg6 from "@/assets/projects-druegg-6.jpg";
 
-export type SeriesCategory = "Action" | "Travel" | "Projects";
+export type SeriesCategory = "Stories" | "Commissions" | "Personal";
 
 export interface SeriesImage {
   src: string;
@@ -75,24 +75,24 @@ export interface Series {
 }
 
 export const seriesCategories: SeriesCategory[] = [
-  "Action",
-  "Travel",
-  "Projects",
+  "Stories",
+  "Commissions",
+  "Personal",
 ];
 
 export const categoryHeroes: Record<SeriesCategory, string> = {
-  Action: actionHero,
-  Travel: travelHero,
-  Projects: projectsYoo1,
+  Stories: projectsYoo1,
+  Commissions: actionHero,
+  Personal: travelHero,
 };
 
 export const seriesData: Series[] = [
   {
-    id: "action",
-    title: "Action",
+    id: "amplid",
+    title: "Amplid",
     year: "2024",
     location: "Schweiz",
-    category: "Action",
+    category: "Commissions",
     cover: action1,
     excerpt: "Silhouetten und Lichtspiele im urbanen Dschungel.",
     description:
@@ -111,11 +111,11 @@ export const seriesData: Series[] = [
     ],
   },
   {
-    id: "travel",
+    id: "new-zealand",
     title: "New Zealand",
     year: "2024",
     location: "Neuseeland",
-    category: "Travel",
+    category: "Personal",
     cover: travelNz1,
     excerpt: "Zwischen Fjorden, Gletschern und endlosen Küsten.",
     description:
@@ -142,7 +142,7 @@ export const seriesData: Series[] = [
     title: "YOO Beanies",
     year: "2025",
     location: "Schweiz",
-    category: "Projects",
+    category: "Commissions",
     cover: projectsYoo1,
     excerpt: "Farbstarkes Beanie-Shooting für YOO — Portrait trifft Produkt.",
     description:
@@ -166,7 +166,7 @@ export const seriesData: Series[] = [
     title: "Frauenstreik 2025",
     year: "2025",
     location: "St. Gallen",
-    category: "Projects",
+    category: "Stories",
     cover: frauenstreik1,
     excerpt: "Dokumentation des Frauenstreiks 2025 in St. Gallen.",
     description:
@@ -190,7 +190,7 @@ export const seriesData: Series[] = [
     title: "Tagblatt Sommerserie",
     year: "2025",
     location: "St. Gallen",
-    category: "Projects",
+    category: "Stories",
     cover: sternwarte1,
     excerpt: "Ein Blick in die Sterne — Sternwarte Kantonsschule am Burggraben.",
     description:
@@ -213,7 +213,7 @@ export const seriesData: Series[] = [
     title: "DRÜEGG Streetart",
     year: "2025",
     location: "Uzwil",
-    category: "Projects",
+    category: "Stories",
     cover: druegg4,
     excerpt: "Farbenexplosion auf dem Schulhausplatz — Streetart-Projekt Drüegg Uzwil.",
     description:

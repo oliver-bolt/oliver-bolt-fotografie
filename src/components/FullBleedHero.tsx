@@ -4,10 +4,11 @@ import { motion } from "framer-motion";
 interface FullBleedHeroProps {
   image: string;
   categoryLabel: string;
+  description?: string;
   onPastHero?: (past: boolean) => void;
 }
 
-const FullBleedHero = ({ image, categoryLabel, onPastHero }: FullBleedHeroProps) => {
+const FullBleedHero = ({ image, categoryLabel, description, onPastHero }: FullBleedHeroProps) => {
   const heroRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -65,10 +66,7 @@ const FullBleedHero = ({ image, categoryLabel, onPastHero }: FullBleedHeroProps)
                     textShadow: "0 1px 10px rgba(0,0,0,0.45)",
                   }}
                 >
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et
-                  dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                  aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur.
+                  {description || "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."}
                 </p>
               </div>
             </div>

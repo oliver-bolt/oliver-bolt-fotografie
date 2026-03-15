@@ -86,7 +86,7 @@ const Index = () => {
                       <div className="text-[22px] md:text-[32px] font-medium leading-snug">
                         <span className="hidden md:inline">
                           {series.excerpt}{" "}
-                          <a href={`/work/${series.category.toLowerCase()}`} className="underline underline-offset-4">
+                          <a href={`/work/${series.id}`} className="underline underline-offset-4">
                             View Work →
                           </a>
                         </span>
@@ -94,7 +94,7 @@ const Index = () => {
                         <span className="md:hidden">
                           {series.excerpt}
                           <br />
-                          <a href={`/work/${series.category.toLowerCase()}`} className="underline underline-offset-4">
+                          <a href={`/work/${series.id}`} className="underline underline-offset-4">
                             View Work →
                           </a>
                         </span>

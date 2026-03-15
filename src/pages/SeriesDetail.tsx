@@ -157,7 +157,7 @@ const SeriesDetail = () => {
         {/* Back link */}
         <section className="px-5 md:px-10 lg:px-16 pb-16">
           <Link
-            to="/"
+            to="/work"
             className="text-sm text-foreground hover:underline transition-colors"
           >
             ← Back to Work
