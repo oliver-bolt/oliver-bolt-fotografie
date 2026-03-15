@@ -81,6 +81,14 @@ import riethuesli8 from "@/assets/riethuesli-8.jpg";
 import riethuesli9 from "@/assets/riethuesli-9.jpg";
 import riethuesli10 from "@/assets/riethuesli-10.jpg";
 import riethuesli11 from "@/assets/riethuesli-11.jpg";
+import riethuesli12 from "@/assets/riethuesli-12.jpg";
+import riethuesli13 from "@/assets/riethuesli-13.jpg";
+import riethuesli14 from "@/assets/riethuesli-14.jpg";
+import riethuesli15 from "@/assets/riethuesli-15.jpg";
+import riethuesli16 from "@/assets/riethuesli-16.jpg";
+import riethuesli17 from "@/assets/riethuesli-17.jpg";
+import riethuesli18 from "@/assets/riethuesli-18.jpg";
+import riethuesli19 from "@/assets/riethuesli-19.jpg";
 
 export type SeriesCategory = "Stories" | "Commissions" | "Personal";
 
@@ -311,6 +319,14 @@ export const seriesData: Series[] = [
       { src: riethuesli7, alt: "Photorealistic mural — hands holding jar with toys, two artists on roof at dusk, Riethüsli", layout: "full" },
       { src: riethuesli2, alt: "Female artist painting black and white graphic panels on school fence, Riethüsli St. Gallen", layout: "half" },
       { src: riethuesli3, alt: "Artist crouching beside large black-and-white line mural with paint buckets, Schulhaus Riethüsli", layout: "half" },
+      { src: riethuesli12, alt: "Artists on cherry picker painting large-scale hands-and-jar mural in progress, Schulhaus Riethüsli", layout: "full" },
+      { src: riethuesli13, alt: "Artist high on ladder painting mural on narrow school wall, afternoon shadow — Riethüsli St. Gallen", layout: "half" },
+      { src: riethuesli14, alt: "Two artists on ladder painting flower-and-portrait mural with daisies, Kunst Schul Haus", layout: "half" },
+      { src: riethuesli15, alt: "Spray paint cans from above — pink, green and black Montana and Hardcore cans on gravel, Riethüsli", layout: "full" },
+      { src: riethuesli16, alt: "Artist on ladder beside bold abstract typography mural in red and teal, Kunst Schul Haus", layout: "half" },
+      { src: riethuesli17, alt: "Two artists with long-handled rollers painting pixel-style mural on school facade, Riethüsli", layout: "half" },
+      { src: riethuesli18, alt: "Artist painting from cherry picker high above school rooftop, paint drips on wall — Riethüsli", layout: "full" },
+      { src: riethuesli19, alt: "Two artists working on large green-and-teal graffiti lettering wall with tree in foreground, Schulhaus Riethüsli", layout: "full" },
     ],
   },
 ];
