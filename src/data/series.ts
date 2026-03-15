@@ -94,7 +94,7 @@ export const seriesData: Series[] = [
     location: "Schweiz",
     category: "Commissions",
     cover: action1,
-    excerpt: "Snowboard photography for Amplid — shot across Vorarlberg during the 2024/25 season.",
+    excerpt: "Snowboard photography for Amplid — shot across Vorarlberg during the 2024/25 season.",
     description:
       "Action and rider photography for Amplid, the snowboard brand founded by Peter Bauer. Shot with rider Benny Deeg across locations in Vorarlberg and Bregenzerwald, Austria, during the 2024/25 season — featuring the Ohana Vibes and Cab Driver boards.",
     background: "",
@@ -140,9 +140,9 @@ export const seriesData: Series[] = [
     location: "Schweiz",
     category: "Commissions",
     cover: projectsYoo1,
-    excerpt: "Product and portrait photography for YOO — a handmade beanie label from southern Germany.",
+    excerpt: "Product and portrait photography for YOO — a label for handmade beanies from southern Germany.",
     description:
-      "Product and portrait photography for YOO, a beanie label from the Allgäu. Every piece is handmade from repurposed garments — old jackets, reclaimed materials. Shot across different locations in Bregenz, Austria.",
+      "Product and portrait photography for YOO, a label for handmade beanies from the Allgäu. Every piece is made from repurposed garments — old jackets, reclaimed materials. Shot across different locations in Bregenz, Austria.",
     background: "",
     technical: "",
     images: [
@@ -162,9 +162,9 @@ export const seriesData: Series[] = [
     location: "St. Gallen",
     category: "Stories",
     cover: frauenstreik1,
-    excerpt: "Documentary work from the feminist strike on 14 June 2025 in St. Gallen.",
+    excerpt: "Documentary work from the feminist strike on the 14th of June 2025 in St. Gallen.",
     description:
-      "Documentary photography from the feminist strike day on 14 June 2025 in St. Gallen. Protest, solidarity and energy on the streets.",
+      "Documentary photography from the feminist strike day on the 14th of June 2025 in St. Gallen. Protest, solidarity and energy on the streets.",
     background: "",
     technical: "",
     images: [
@@ -184,9 +184,9 @@ export const seriesData: Series[] = [
     location: "St. Gallen",
     category: "Stories",
     cover: sternwarte1,
-    excerpt: "The observatory at Kantonsschule am Burggraben, St. Gallen — editorial work for the St. Galler Tagblatt.",
+    excerpt: "The observatory at Kantonsschule am Burggraben, St. Gallen — editorial work for the newspaper St. Galler Tagblatt.",
     description:
-      "Editorial photography for the St. Galler Tagblatt summer series 2025 — a look inside the observatory at Kantonsschule am Burggraben, St. Gallen.",
+      "Editorial photography for the newspaper St. Galler Tagblatt, summer series 2025 — a look inside the observatory at Kantonsschule am Burggraben, St. Gallen.",
     background: "",
     technical: "",
     images: [
