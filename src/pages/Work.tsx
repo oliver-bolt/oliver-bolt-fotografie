@@ -1,9 +1,9 @@
-import { useState, useEffect, useRef } from "react";
+import { useSearchParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { seriesData, seriesCategories } from "@/data/series";
+import { seriesData } from "@/data/series";
 
 const fade = {
   hidden: { opacity: 0, y: 14 },
@@ -17,29 +17,13 @@ const fade = {
 const SHELL = "max-w-[1600px] mx-auto px-10 md:px-14";
 
 const Work = () => {
-  const [activeFilter, setActiveFilter] = useState<string>("Alle");
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-
-  const filters = ["Alle", ...seriesCategories];
+  const [searchParams] = useSearchParams();
+  const activeFilter = searchParams.get("filter") || "Alle";
 
   const filteredSeries =
     activeFilter === "Alle"
       ? seriesData
       : seriesData.filter((s) => s.category === activeFilter);
-
-  // Close dropdown on outside click
-  useEffect(() => {
-    const handleClick = (e: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-        setDropdownOpen(false);
-      }
-    };
-    if (dropdownOpen) {
-      document.addEventListener("mousedown", handleClick);
-    }
-    return () => document.removeEventListener("mousedown", handleClick);
-  }, [dropdownOpen]);
 
   return (
     <div className="min-h-screen">
@@ -47,44 +31,8 @@ const Work = () => {
 
       <main className="w-full">
         <div className={SHELL}>
-          {/* Filter dropdown */}
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={fade}
-            className="flex justify-end pt-36 md:pt-48 pb-10"
-          >
-            <div ref={dropdownRef} className="relative">
-              <button
-                type="button"
-                onClick={() => setDropdownOpen(!dropdownOpen)}
-                className="text-[16px] tracking-wide bg-transparent border-none cursor-pointer text-foreground"
-              >
-                {activeFilter}
-              </button>
-
-              {dropdownOpen && (
-                <div className="absolute right-0 top-full mt-2 bg-black z-50 min-w-[140px]">
-                  {filters.map((filter) => (
-                    <button
-                      key={filter}
-                      type="button"
-                      onClick={() => {
-                        setActiveFilter(filter);
-                        setDropdownOpen(false);
-                      }}
-                      className="block w-full text-left text-white text-[14px] tracking-wide bg-transparent border-none cursor-pointer px-4 py-2 hover:bg-white/10 transition-colors duration-150"
-                    >
-                      {filter}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-          </motion.div>
-
-          {/* Series grid — masonry */}
-          <section className="pb-28">
+          {/* Series grid — uniform 3-col */}
+          <section className="pt-36 md:pt-48 pb-28">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeFilter}
@@ -92,8 +40,7 @@ const Work = () => {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
-                style={{ columns: "1", columnGap: "18px" }}
-                className="md:[column-count:2]"
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[18px]"
               >
                 {filteredSeries.map((series) => (
                   <motion.div
@@ -102,20 +49,19 @@ const Work = () => {
                     whileInView="visible"
                     viewport={{ once: true, margin: "-40px" }}
                     variants={fade}
-                    style={{ breakInside: "avoid", marginBottom: "18px" }}
                   >
                     <Link to={`/work/${series.id}`} className="block group">
-                      <div className="overflow-hidden relative">
+                      <div className="overflow-hidden relative aspect-[4/3]">
                         <img
                           src={series.cover}
                           alt={series.title}
                           loading="lazy"
                           decoding="async"
-                          className="block w-full h-auto"
+                          className="absolute inset-0 w-full h-full object-cover"
                         />
                       </div>
                       <div className="mt-3">
-                        <h3 className="text-[18px] font-medium text-foreground leading-snug">
+                        <h3 className="text-[16px] md:text-[18px] font-medium text-foreground leading-snug">
                           {series.title}
                         </h3>
                         <p className="text-[14px] text-foreground/60 mt-1">

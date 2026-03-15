@@ -29,10 +29,10 @@ const SeriesDetail = () => {
     <>
       <Navbar />
       <main>
-        {/* Text header */}
+        {/* Text header — same sizing as Landing headline, ~50% width */}
         <section className={SHELL}>
-          <motion.div initial="hidden" animate="visible" variants={fade} className="pt-36 md:pt-48">
-            <h1 className="text-[22px] md:text-[32px] font-medium text-foreground leading-snug mb-4">
+          <motion.div initial="hidden" animate="visible" variants={fade} className="pt-36 md:pt-48 max-w-full md:max-w-[50%]">
+            <h1 className="text-[36px] md:text-[56px] font-medium text-foreground leading-[1.08] mb-6">
               {series.title}
             </h1>
             <p className="text-[22px] md:text-[32px] font-light text-foreground leading-snug mb-16 md:mb-20">

@@ -1,16 +1,24 @@
-import { Link, useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState, useRef } from "react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { seriesCategories } from "@/data/series";
 
 interface NavbarProps {
   invertColors?: boolean;
 }
 
+const workFilters = ["Alle", ...seriesCategories];
+
 const Navbar = ({ invertColors = false }: NavbarProps) => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [workSubOpen, setWorkSubOpen] = useState(false);
+  const [desktopDropdownOpen, setDesktopDropdownOpen] = useState(false);
+  const dropdownTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const location = useLocation();
+  const navigate = useNavigate();
 
   const textColor = invertColors ? "text-white" : "text-foreground";
   const linkColor = invertColors ? "text-white hover:text-white" : "text-foreground hover:text-foreground";
@@ -21,10 +29,21 @@ const Navbar = ({ invertColors = false }: NavbarProps) => {
 
   const closeMobile = () => {
     setMobileOpen(false);
+    setWorkSubOpen(false);
   };
 
   const openMobile = () => {
     setMobileOpen(true);
+  };
+
+  /* Desktop dropdown hover helpers */
+  const showDropdown = () => {
+    if (dropdownTimeout.current) clearTimeout(dropdownTimeout.current);
+    setDesktopDropdownOpen(true);
+  };
+
+  const hideDropdown = () => {
+    dropdownTimeout.current = setTimeout(() => setDesktopDropdownOpen(false), 150);
   };
 
   // Lock body scroll when mobile menu is open
@@ -54,18 +73,61 @@ const Navbar = ({ invertColors = false }: NavbarProps) => {
 
             {/* Desktop */}
             <ul className="hidden md:flex items-center gap-10">
+              {/* Work with hover dropdown */}
               <li>
-                <Link
-                  to="/work"
-                  className={cn(
-                    "text-[16px] tracking-wide transition-colors duration-200",
-                    linkColor,
-                    isWorkActive && "underline underline-offset-4",
-                    invertColors && isWorkActive && "decoration-white",
-                  )}
+                <div
+                  ref={dropdownRef}
+                  className="relative"
+                  onMouseEnter={showDropdown}
+                  onMouseLeave={hideDropdown}
                 >
-                  Work
-                </Link>
+                  <Link
+                    to="/work"
+                    className={cn(
+                      "text-[16px] tracking-wide transition-colors duration-200",
+                      linkColor,
+                      isWorkActive && "underline underline-offset-4",
+                      invertColors && isWorkActive && "decoration-white",
+                    )}
+                  >
+                    Work
+                  </Link>
+
+                  {/* Dropdown */}
+                  {desktopDropdownOpen && (
+                    <div
+                      className={cn(
+                        "absolute top-full right-0 mt-3 min-w-[160px] py-2 z-50",
+                        invertColors
+                          ? "bg-black/90 backdrop-blur-sm"
+                          : "bg-white shadow-[0_4px_20px_rgba(0,0,0,0.08)]",
+                      )}
+                    >
+                      {workFilters.map((filter) => (
+                        <button
+                          key={filter}
+                          type="button"
+                          onClick={() => {
+                            setDesktopDropdownOpen(false);
+                            if (filter === "Alle") {
+                              navigate("/work");
+                            } else {
+                              navigate(`/work?filter=${filter}`);
+                            }
+                          }}
+                          className={cn(
+                            "block w-full text-right px-5 py-[6px] bg-transparent border-none cursor-pointer text-[14px] tracking-wide transition-colors duration-150",
+                            invertColors
+                              ? "text-white/80 hover:text-white"
+                              : "text-foreground/70 hover:text-foreground",
+                          )}
+                        >
+                          {filter}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </li>
 
               <li>
@@ -144,16 +206,41 @@ const Navbar = ({ invertColors = false }: NavbarProps) => {
           <div className="max-w-[1600px] w-full mx-auto px-8">
             <div className="min-h-[70vh] flex items-center justify-center">
               <div className="flex flex-col items-center text-center gap-6">
-                <Link
-                  to="/work"
-                  onClick={closeMobile}
-                  className={cn(
-                    "text-[44px] leading-[1.05] font-medium",
-                    isWorkActive && "underline underline-offset-8",
+                {/* Work (expandable) */}
+                <div className="flex flex-col items-center">
+                  <button
+                    type="button"
+                    onClick={() => setWorkSubOpen(!workSubOpen)}
+                    className={cn(
+                      "text-[44px] leading-[1.05] font-medium bg-transparent border-none cursor-pointer flex items-center gap-3",
+                      isWorkActive && "underline underline-offset-8",
+                    )}
+                  >
+                    Work
+                    <ChevronDown
+                      size={24}
+                      className={cn(
+                        "transition-transform duration-200 mt-1",
+                        workSubOpen && "rotate-180",
+                      )}
+                    />
+                  </button>
+
+                  {workSubOpen && (
+                    <div className="flex flex-col items-center gap-3 mt-4">
+                      {workFilters.map((filter) => (
+                        <Link
+                          key={filter}
+                          to={filter === "Alle" ? "/work" : `/work?filter=${filter}`}
+                          onClick={closeMobile}
+                          className="text-[24px] leading-[1.2] font-light text-black/70"
+                        >
+                          {filter}
+                        </Link>
+                      ))}
+                    </div>
                   )}
-                >
-                  Work
-                </Link>
+                </div>
 
                 <Link
                   to="/film"

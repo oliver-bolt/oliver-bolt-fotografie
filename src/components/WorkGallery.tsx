@@ -42,7 +42,7 @@ const WorkGallery = ({ images }: WorkGalleryProps) => {
   return (
     <>
       <section className="pt-10 md:pt-14 pb-6">
-        <div className="max-w-[1600px] mx-auto px-4 md:px-10">
+        <div className="max-w-[1600px] mx-auto px-10 md:px-14">
           <div
             style={{
               columns: 2,
