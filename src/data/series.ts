@@ -70,6 +70,17 @@ import druegg3 from "@/assets/projects-druegg-3.jpg";
 import druegg4 from "@/assets/projects-druegg-4.jpg";
 import druegg5 from "@/assets/projects-druegg-5.jpg";
 import druegg6 from "@/assets/projects-druegg-6.jpg";
+import riethuesli1 from "@/assets/riethuesli-1.jpg";
+import riethuesli2 from "@/assets/riethuesli-2.jpg";
+import riethuesli3 from "@/assets/riethuesli-3.jpg";
+import riethuesli4 from "@/assets/riethuesli-4.jpg";
+import riethuesli5 from "@/assets/riethuesli-5.jpg";
+import riethuesli6 from "@/assets/riethuesli-6.jpg";
+import riethuesli7 from "@/assets/riethuesli-7.jpg";
+import riethuesli8 from "@/assets/riethuesli-8.jpg";
+import riethuesli9 from "@/assets/riethuesli-9.jpg";
+import riethuesli10 from "@/assets/riethuesli-10.jpg";
+import riethuesli11 from "@/assets/riethuesli-11.jpg";
 
 export type SeriesCategory = "Stories" | "Commissions" | "Personal";
 
@@ -274,6 +285,32 @@ export const seriesData: Series[] = [
       { src: druegg4, alt: "Aerial view of mural in progress — Drüegg schoolyard Uzwil", layout: "half" },
       { src: druegg5, alt: "Drone shot of completed Drüegg mural, Primarschule Uzwil", layout: "full" },
       { src: druegg6, alt: "Detail of colourful mural pattern — Drüegg street art Uzwil", layout: "full" },
+    ],
+  },
+  {
+    id: "riethuesli-2025",
+    title: "Kunst Schul Haus",
+    year: "2025",
+    location: "St. Gallen",
+    category: "Stories",
+    cover: riethuesli5,
+    excerpt: "Over 25 artists turned a condemned schoolhouse into a street art canvas — one weekend before demolition.",
+    description:
+      "Documentation of Kunst Schul Haus, a street art project at the old Primarschulhaus Riethüsli in St. Gallen. Over 25 artists transformed the building into a collective canvas across one weekend in September 2025 — organized by Somewhere Lab before the school's demolition in 2026.",
+    background: "",
+    technical: "",
+    images: [
+      { src: riethuesli5, alt: "Tattooed hand holding phone and spray can against colorful mural wall, Kunst Schul Haus Riethüsli", layout: "full" },
+      { src: riethuesli11, alt: "Artist painting giant realistic eye mural through concrete pillars, Schulhaus Riethüsli St. Gallen", layout: "full" },
+      { src: riethuesli8, alt: "Artist on ladder painting flower-and-figure mural on school corner, Kunst Schul Haus", layout: "half" },
+      { src: riethuesli10, alt: "Artist on ladder spraying colorful lettering wall, Riethüsli street art project", layout: "half" },
+      { src: riethuesli6, alt: "Artist with gas mask painting portrait mural, low angle — Kunst Schul Haus St. Gallen", layout: "full" },
+      { src: riethuesli4, alt: "Two artists painting St. Gallen train station mural with graffiti lettering, Schulhaus Riethüsli", layout: "full" },
+      { src: riethuesli1, alt: "Artist on Stutz ladder spraying large character on school wall, lens flare — Riethüsli", layout: "half" },
+      { src: riethuesli9, alt: "Two artists from above discussing colorful mural, Kunst Schul Haus Riethüsli", layout: "half" },
+      { src: riethuesli7, alt: "Photorealistic mural — hands holding jar with toys, two artists on roof at dusk, Riethüsli", layout: "full" },
+      { src: riethuesli2, alt: "Female artist painting black and white graphic panels on school fence, Riethüsli St. Gallen", layout: "half" },
+      { src: riethuesli3, alt: "Artist crouching beside large black-and-white line mural with paint buckets, Schulhaus Riethüsli", layout: "half" },
     ],
   },
 ];
