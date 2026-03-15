@@ -11,6 +11,7 @@ import Index from "./pages/Index";
 // Lazy: alle anderen Seiten
 const Work = lazy(() => import("./pages/Work"));
 const SeriesDetail = lazy(() => import("./pages/SeriesDetail"));
+const Film = lazy(() => import("./pages/Film"));
 const About = lazy(() => import("./pages/About"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
@@ -22,11 +23,6 @@ const PageLoader = () => (
   </div>
 );
 
-const FilmComingSoon = () => (
-  <div className="min-h-screen flex items-center justify-center bg-background">
-    <p className="text-[24px] font-medium text-foreground">Coming Soon</p>
-  </div>
-);
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -39,7 +35,7 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/work" element={<Work />} />
             <Route path="/work/:id" element={<SeriesDetail />} />
-            <Route path="/film" element={<FilmComingSoon />} />
+            <Route path="/film" element={<Film />} />
             <Route path="/about" element={<About />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
