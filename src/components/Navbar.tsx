@@ -1,4 +1,4 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -19,6 +19,8 @@ const Navbar = ({ invertColors = false }: NavbarProps) => {
 
   const location = useLocation();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const activeWorkFilter = searchParams.get("filter") || "Alle";
 
   const textColor = invertColors ? "text-white" : "text-foreground";
   const linkColor = invertColors ? "text-white hover:text-white" : "text-foreground hover:text-foreground";
@@ -93,38 +95,37 @@ const Navbar = ({ invertColors = false }: NavbarProps) => {
                     Work
                   </Link>
 
-                  {/* Dropdown */}
+                  {/* Dropdown — Balboa-style: no frame, same font as nav, right-aligned text */}
                   {desktopDropdownOpen && (
-                    <div
-                      className={cn(
-                        "absolute top-full right-0 mt-3 min-w-[160px] py-2 z-50",
-                        invertColors
-                          ? "bg-black/90 backdrop-blur-sm"
-                          : "bg-white shadow-[0_4px_20px_rgba(0,0,0,0.08)]",
-                      )}
-                    >
-                      {workFilters.map((filter) => (
-                        <button
-                          key={filter}
-                          type="button"
-                          onClick={() => {
-                            setDesktopDropdownOpen(false);
-                            if (filter === "Alle") {
-                              navigate("/work");
-                            } else {
-                              navigate(`/work?filter=${filter}`);
-                            }
-                          }}
-                          className={cn(
-                            "block w-full text-right px-5 py-[6px] bg-transparent border-none cursor-pointer text-[14px] tracking-wide transition-colors duration-150",
-                            invertColors
-                              ? "text-white/80 hover:text-white"
-                              : "text-foreground/70 hover:text-foreground",
-                          )}
-                        >
-                          {filter}
-                        </button>
-                      ))}
+                    <div className="absolute top-full right-0 mt-3 z-50 flex flex-col items-end gap-[6px]">
+                      {workFilters.map((filter) => {
+                        const isActive =
+                          isWorkActive &&
+                          (filter === activeWorkFilter ||
+                            (filter === "Alle" && activeWorkFilter === "Alle"));
+                        return (
+                          <button
+                            key={filter}
+                            type="button"
+                            onClick={() => {
+                              setDesktopDropdownOpen(false);
+                              if (filter === "Alle") {
+                                navigate("/work");
+                              } else {
+                                navigate(`/work?filter=${filter}`);
+                              }
+                            }}
+                            className={cn(
+                              "bg-transparent border-none cursor-pointer text-[16px] tracking-wide transition-colors duration-150 leading-normal",
+                              invertColors ? "text-white" : "text-foreground",
+                              isActive && "underline underline-offset-4",
+                              invertColors && isActive && "decoration-white",
+                            )}
+                          >
+                            {filter}
+                          </button>
+                        );
+                      })}
                     </div>
                   )}
                 </div>
