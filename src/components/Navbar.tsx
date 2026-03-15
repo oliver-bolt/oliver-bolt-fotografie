@@ -159,16 +159,6 @@ const Navbar = ({ invertColors = false }: NavbarProps) => {
                 </Link>
               </li>
 
-              <li>
-                <a
-                  href="https://instagram.com/ollie.bolt"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={cn("text-[16px] tracking-wide transition-colors duration-200", linkColor)}
-                >
-                  Instagram
-                </a>
-              </li>
             </ul>
 
             {/* Mobile toggle */}
@@ -265,15 +255,6 @@ const Navbar = ({ invertColors = false }: NavbarProps) => {
                   About
                 </Link>
 
-                <a
-                  href="https://instagram.com/ollie.bolt"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={closeMobile}
-                  className="text-[44px] leading-[1.05] font-medium"
-                >
-                  Instagram
-                </a>
               </div>
             </div>
           </div>
