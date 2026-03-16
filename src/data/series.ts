@@ -38,6 +38,9 @@ import tansania8 from "@/assets/tansania-8.jpg";
 import tansania9 from "@/assets/tansania-9.jpg";
 import tansania10 from "@/assets/tansania-10.jpg";
 import tansania11 from "@/assets/tansania-11.jpg";
+import tansania12 from "@/assets/tansania-12.jpg";
+import tansania13 from "@/assets/tansania-13.jpg";
+import tansania14 from "@/assets/tansania-14.jpg";
 
 
 
@@ -207,6 +210,9 @@ export const seriesData: Series[] = [
       { src: tansania8, alt: "Porters loading supplies at Kilimanjaro trailhead, rainforest zone", layout: "full" },
       { src: tansania5, alt: "Ikoma refreshment and curio shop near Serengeti entrance, Tanzania", layout: "half" },
       { src: tansania1, alt: "Three men on motorcycle, rural road near Arusha Tanzania", layout: "half" },
+      { src: tansania12, alt: "Woman hanging laundry on corrugated rooftop, Arusha Tanzania", layout: "full" },
+      { src: tansania13, alt: "Impala standing under lone acacia tree in dry savanna, Tanzania", layout: "half" },
+      { src: tansania14, alt: "Three Maasai children walking along roadside in open plains, Tanzania", layout: "half" },
     ],
   },
   {
