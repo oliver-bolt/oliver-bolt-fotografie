@@ -48,12 +48,12 @@ const About = () => (
                 street-level documentation to commissioned brand and product photography.
               </p>
               <p>
-                Before picking up the camera full-time, I spent nine years in media production.
-                I studied Multimedia Production at HTW Chur (now FHGR), graduating with a
-                Bachelor's degree in 2013, with a focus on TV and video. From there I moved
-                into film — working on short films, features and episodic productions before
-                joining SRF, Switzerland's public broadcaster, where I eventually led production
-                for their scenic in-house formats.
+                Photography isn't all I do. Before picking up the camera, I spent nine years
+                in media production. I studied at HTW Chur (now FHGR), graduating with a
+                Bachelor's degree in Media Engineering in 2013, with a focus on TV and video.
+                From there I moved into film — working on short films, features and episodic
+                productions before joining SRF, Switzerland's public broadcaster, where I
+                eventually led production for their scenic in-house formats.
               </p>
               <p>
                 That background shaped how I see and plan visual work: the documentary eye, the
@@ -62,8 +62,8 @@ const About = () => (
                 commercial.
               </p>
               <p>
-                Today I focus on photography. I work with brands, editorial clients and on
-                personal long-term projects. Most of my work is rooted in Switzerland, but it
+                Today, photography is my main focus. I work with brands, editorial clients and
+                on personal long-term projects. Most of my work is rooted in Switzerland, but it
                 regularly takes me elsewhere — recently to New Zealand, Austria and southern Germany.
               </p>
             </div>
