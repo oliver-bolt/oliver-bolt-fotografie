@@ -92,6 +92,19 @@ import riethuesli16 from "@/assets/riethuesli-16.jpg";
 import riethuesli17 from "@/assets/riethuesli-17.jpg";
 import riethuesli18 from "@/assets/riethuesli-18.jpg";
 import riethuesli19 from "@/assets/riethuesli-19.jpg";
+import balkan1 from "@/assets/balkan-1.jpg";
+import balkan2 from "@/assets/balkan-2.jpg";
+import balkan3 from "@/assets/balkan-3.jpg";
+import balkan4 from "@/assets/balkan-4.jpg";
+import balkan5 from "@/assets/balkan-5.jpg";
+import balkan6 from "@/assets/balkan-6.jpg";
+import balkan7 from "@/assets/balkan-7.jpg";
+import balkan8 from "@/assets/balkan-8.jpg";
+import balkan9 from "@/assets/balkan-9.jpg";
+import balkan10 from "@/assets/balkan-10.jpg";
+import balkan11 from "@/assets/balkan-11.jpg";
+import balkan12 from "@/assets/balkan-12.jpg";
+import balkan13 from "@/assets/balkan-13.jpg";
 
 export type SeriesCategory = "Stories" | "Commissions" | "Personal";
 
@@ -333,6 +346,34 @@ export const seriesData: Series[] = [
       { src: riethuesli17, alt: "Two artists with long-handled rollers painting pixel-style mural on school facade, Riethüsli", layout: "half" },
       { src: riethuesli18, alt: "Artist painting from cherry picker high above school rooftop, paint drips on wall — Riethüsli", layout: "full" },
       { src: riethuesli19, alt: "Two artists working on large green-and-teal graffiti lettering wall with tree in foreground, Schulhaus Riethüsli", layout: "full" },
+    ],
+  },
+  {
+    id: "balkan-roadtrip",
+    title: "Roadtrip to Balkan",
+    year: "2022",
+    location: "Balkans",
+    category: "Personal",
+    cover: balkan8,
+    excerpt: "Four weeks through the Balkans with a rooftop tent — no fixed plans, stopped where it felt right.",
+    description:
+      "A four-week road trip through Croatia, Montenegro, Albania, North Macedonia, Serbia, Bosnia and Herzegovina and Slovenia in 2022. Traveling with a rooftop tent, no fixed itinerary — brutalist architecture, roadside encounters and the everyday life between the cities.",
+    background: "",
+    technical: "",
+    images: [
+      { src: balkan8, alt: "Fisherman holding his catch at a reservoir, straw hat — Albania", layout: "full" },
+      { src: balkan11, alt: "Brutalist concrete facade and glass building, low angle — Skopje North Macedonia", layout: "half" },
+      { src: balkan12, alt: "Glass curtain wall reflecting brutalist crown sculptures — Skopje", layout: "half" },
+      { src: balkan7, alt: "Street scene with apartment blocks, mural and yellow taxis — Tirana Albania", layout: "full" },
+      { src: balkan10, alt: "Metal dome stage at Gjirokastër Castle with clock tower and mountains — Albania", layout: "full" },
+      { src: balkan9, alt: "Shepherd with flock of sheep at reservoir dam, rural Albania", layout: "half" },
+      { src: balkan5, alt: "Brutalist hotel facade against mountain — Kotor, Montenegro", layout: "half" },
+      { src: balkan3, alt: "Man fishing from concrete quay, blue water — Balkans", layout: "full" },
+      { src: balkan1, alt: "Brutalist concrete and glass architecture, upward perspective — Skopje", layout: "half" },
+      { src: balkan4, alt: "Modernist building with seagull on roof rail, neon sign — Balkans", layout: "half" },
+      { src: balkan6, alt: "Conifer forest with mossy floor and fallen logs — Slovenia or Bosnia", layout: "full" },
+      { src: balkan2, alt: "Sneakers hanging on iron fence, street vendor display — Albania", layout: "half" },
+      { src: balkan13, alt: "Old man pushing cargo tricycle with table through street — Albania", layout: "half" },
     ],
   },
 ];
