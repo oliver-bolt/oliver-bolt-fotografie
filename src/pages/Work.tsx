@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -30,12 +29,10 @@ const Work = () => {
   const [searchParams] = useSearchParams();
   const paramFilter = searchParams.get("filter");
 
-  // Derive initial filter from URL param for backward compat, then use local state
-  const initialFilter: FilterOption =
+  const activeFilter: FilterOption =
     paramFilter && seriesCategories.includes(paramFilter as any)
       ? (paramFilter as FilterOption)
       : "ALL";
-  const [activeFilter, setActiveFilter] = useState<FilterOption>(initialFilter);
 
   const filteredSeries = filterSeries(seriesData, activeFilter);
 
@@ -46,24 +43,6 @@ const Work = () => {
       <main className="w-full">
         <div className={SHELL}>
           <section className="pt-36 md:pt-48 pb-28">
-            {/* Category filter tabs — matching Film page style exactly */}
-            <div className="mb-10 md:mb-14 flex flex-wrap items-center gap-6 md:gap-8">
-              {FILTER_OPTIONS.map((option) => (
-                <button
-                  key={option}
-                  type="button"
-                  onClick={() => setActiveFilter(option)}
-                  className={`bg-transparent border-none cursor-pointer text-[14px] md:text-[16px] tracking-wide transition-colors duration-150 leading-normal ${
-                    activeFilter === option
-                      ? "text-foreground underline underline-offset-4"
-                      : "text-foreground/50 hover:text-foreground"
-                  }`}
-                >
-                  {option}
-                </button>
-              ))}
-            </div>
-
             {/* Series grid — uniform 3-col */}
             <AnimatePresence mode="wait">
               <motion.div

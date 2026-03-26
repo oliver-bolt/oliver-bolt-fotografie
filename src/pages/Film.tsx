@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -18,11 +17,8 @@ const fade = {
 
 const SHELL = "max-w-[1600px] mx-auto px-10 md:px-14";
 
-const FILTER_OPTIONS = ["ALL", "IN PRODUCTION", "TV", "CINEMA"] as const;
-type FilterOption = (typeof FILTER_OPTIONS)[number];
-
-function filterFilms(films: Film[], filter: FilterOption): Film[] {
-  if (filter === "ALL") return films;
+function filterFilms(films: Film[], filter: string): Film[] {
+  if (!filter || filter === "Alle") return films;
   if (filter === "IN PRODUCTION") return films.filter((f) => f.status === "in-production");
   return films.filter((f) => f.tags.includes(filter));
 }
@@ -72,7 +68,8 @@ function FilmCard({ film }: { film: Film }) {
 }
 
 const FilmPage = () => {
-  const [activeFilter, setActiveFilter] = useState<FilterOption>("ALL");
+  const [searchParams] = useSearchParams();
+  const activeFilter = searchParams.get("filter") || "Alle";
   const filtered = filterFilms(filmsData, activeFilter);
 
   return (
@@ -82,25 +79,7 @@ const FilmPage = () => {
       <main className="w-full">
         <div className={SHELL}>
           <section className="pt-36 md:pt-48 pb-28">
-            {/* Category filter tabs — matching Photography page style */}
-            <div className="mb-10 md:mb-14 flex flex-wrap items-center gap-6 md:gap-8">
-              {FILTER_OPTIONS.map((option) => (
-                <button
-                  key={option}
-                  type="button"
-                  onClick={() => setActiveFilter(option)}
-                  className={`bg-transparent border-none cursor-pointer text-[14px] md:text-[16px] tracking-wide transition-colors duration-150 leading-normal ${
-                    activeFilter === option
-                      ? "text-foreground underline underline-offset-4"
-                      : "text-foreground/50 hover:text-foreground"
-                  }`}
-                >
-                  {option}
-                </button>
-              ))}
-            </div>
-
-            {/* Film grid — 2-col desktop (matching photography), 1-col mobile */}
+            {/* Film grid */}
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeFilter}
