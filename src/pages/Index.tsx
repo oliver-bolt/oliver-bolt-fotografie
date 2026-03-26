@@ -213,7 +213,7 @@ const Index = () => {
               // Insert Halifax teaser after YOO (index 3)
               if (index === 3) {
                 const film3 = filmsData.find((f) => f.id === "sr111-halifax");
-                const stills3 = film3 ? [0, 2, 3, 4].map((i) => ({
+                const stills3 = film3 ? [3, 0, 4, 5].map((i) => ({
                   src: resolveFilmAsset(film3.stills[i].src) ?? "",
                   alt: film3.stills[i].alt,
                 })) : [];
@@ -229,11 +229,11 @@ const Index = () => {
                     <div className="grid grid-cols-2 gap-[18px]">
                       <div className="grid gap-[18px]">
                         <Slot src={stills3[0].src} alt={stills3[0].alt} aspect="aspect-[3/4]" />
-                        <Slot src={stills3[1].src} alt={stills3[1].alt} aspect="aspect-[4/3]" />
+                        <Slot src={stills3[2].src} alt={stills3[2].alt} aspect="aspect-[4/3]" />
                       </div>
                       <div className="grid gap-[18px]">
-                        <Slot src={stills3[2].src} alt={stills3[2].alt} aspect="aspect-[4/3]" />
-                        <Slot src={stills3[3].src} alt={stills3[3].alt} aspect="aspect-[3/4]" />
+                        <Slot src={stills3[3].src} alt={stills3[3].alt} aspect="aspect-[4/3]" />
+                        <Slot src={stills3[1].src} alt={stills3[1].alt} aspect="aspect-[3/4]" />
                       </div>
                     </div>
 
@@ -241,17 +241,13 @@ const Index = () => {
                       <div>
                         <div className="text-[22px] md:text-[32px] font-medium leading-snug">
                           <span className="hidden md:inline">
-                            SR111 – Absturz über Halifax — SRF docudrama series
-                            <br />
-                            ES GESCHAH AM…{" "}
+                            SR111 – Absturz über Halifax — SRF docudrama series ES GESCHAH AM…{" "}
                             <a href={`/film/${film3.id}`} className="underline underline-offset-4 whitespace-nowrap">
                               View Work →
                             </a>
                           </span>
                           <span className="md:hidden">
-                            SR111 – Absturz über Halifax — SRF docudrama series
-                            <br />
-                            ES GESCHAH AM…{" "}
+                            SR111 – Absturz über Halifax — SRF docudrama series ES GESCHAH AM…{" "}
                             <a href={`/film/${film3.id}`} className="underline underline-offset-4 whitespace-nowrap">
                               View Work →
                             </a>
