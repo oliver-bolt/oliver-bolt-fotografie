@@ -144,8 +144,7 @@ const Index = () => {
                           <span className="md:hidden">
                             Der Tsunami von 2004 — SRF docudrama series
                             <br />
-                            ES GESCHAH AM…
-                            <br />
+                            ES GESCHAH AM…{" "}
                             <a href={`/film/${film.id}`} className="underline underline-offset-4">
                               View Film →
                             </a>
