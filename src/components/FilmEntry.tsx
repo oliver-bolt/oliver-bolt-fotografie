@@ -96,11 +96,9 @@ const FilmEntry = ({
       )}
 
       {/* 3. Lead text — larger, matching photography excerpt style */}
-      <div className="max-w-full md:max-w-[50%]">
-        <p className="text-[22px] md:text-[32px] font-light text-foreground leading-snug mb-10 md:mb-14">
-          {lead}
-        </p>
-      </div>
+      <p className="text-[22px] md:text-[32px] font-light text-foreground leading-snug mb-10 md:mb-14">
+        {lead}
+      </p>
 
       {/* 4. Body text — ~10% larger than previous 16/18px, so ~18/20px */}
       {body.length > 0 && (
