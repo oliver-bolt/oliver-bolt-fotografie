@@ -361,7 +361,12 @@ The tight budget of the pilot required a deliberately lean production setup and 
     tags: ["CINEMA"],
     coverStillIndex: 0,
     stills: [
-      { src: "film-peripherie-1.png", alt: "Peripherie — Title" },
+      { src: "film-peripherie-1.png", alt: "Peripherie — Titelbild" },
+      { src: "film-peripherie-2.png", alt: "Peripherie — Junge Frau mit Kopfhörern" },
+      { src: "film-peripherie-3.png", alt: "Peripherie — Mann in Verzweiflung" },
+      { src: "film-peripherie-4.png", alt: "Peripherie — Eddie raucht" },
+      { src: "film-peripherie-5.png", alt: "Peripherie — Mädchen im Auto" },
+      { src: "film-peripherie-6.png", alt: "Peripherie — Feuerwerk" },
     ],
     description: "Episodic feature film directed by Wendy Pillonel, produced at ZHdK.",
     metaLine: "Cinema · ZHdK · Episodic feature film · 2016",
