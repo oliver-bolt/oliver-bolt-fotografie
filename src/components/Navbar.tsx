@@ -8,8 +8,8 @@ interface NavbarProps {
   invertColors?: boolean;
 }
 
-const photographyFilters = ["Alle", ...seriesCategories];
-const filmFilters = ["Alle", "IN PRODUCTION", "TV", "CINEMA"];
+const photographyFilters = ["All", ...seriesCategories];
+const filmFilters = ["All", "In Production", "Television", "Cinema"];
 
 const Navbar = ({ invertColors = false }: NavbarProps) => {
   const [mobileOpen, setMobileOpen] = useState(false);
