@@ -105,12 +105,13 @@ const Index = () => {
               // Insert film teaser after the first series block (position 2)
               if (index === 0) {
                 const film = filmsData.find((f) => f.id === "tsunami-2004");
-                const stills = film?.stills.slice(0, 4).map((s) => ({
-                  src: resolveFilmAsset(s.src) ?? "",
-                  alt: s.alt,
-                }));
+                const pickIndices = [0, 1, 2, 4]; // stills 1,2,3,5
+                const stills = film ? pickIndices.map((i) => ({
+                  src: resolveFilmAsset(film.stills[i].src) ?? "",
+                  alt: film.stills[i].alt,
+                })) : [];
 
-                const filmBlock = film && stills && stills.length >= 4 ? (
+                const filmBlock = film && stills.length >= 4 ? (
                   <motion.div
                     key="film-tsunami"
                     initial="hidden"
@@ -120,12 +121,12 @@ const Index = () => {
                   >
                     <div className="grid grid-cols-2 gap-[18px]">
                       <div className="grid gap-[18px]">
-                        <Slot src={stills[0].src} alt={stills[0].alt} aspect="aspect-[3/4]" />
-                        <Slot src={stills[1].src} alt={stills[1].alt} aspect="aspect-[4/3]" />
+                        <Slot src={stills[1].src} alt={stills[1].alt} aspect="aspect-[3/4]" />
+                        <Slot src={stills[0].src} alt={stills[0].alt} aspect="aspect-[4/3]" />
                       </div>
                       <div className="grid gap-[18px]">
-                        <Slot src={stills[2].src} alt={stills[2].alt} aspect="aspect-[4/3]" />
-                        <Slot src={stills[3].src} alt={stills[3].alt} aspect="aspect-[3/4]" />
+                        <Slot src={stills[3].src} alt={stills[3].alt} aspect="aspect-[4/3]" />
+                        <Slot src={stills[2].src} alt={stills[2].alt} aspect="aspect-[3/4]" />
                       </div>
                     </div>
 
@@ -133,13 +134,17 @@ const Index = () => {
                       <div>
                         <div className="text-[22px] md:text-[32px] font-medium leading-snug">
                           <span className="hidden md:inline">
-                            Der Tsunami von 2004 — SRF docudrama series ES GESCHAH AM…{" "}
+                            Der Tsunami von 2004 — SRF docudrama series
+                            <br />
+                            ES GESCHAH AM…{" "}
                             <a href={`/film/${film.id}`} className="underline underline-offset-4">
                               View Film →
                             </a>
                           </span>
                           <span className="md:hidden">
-                            Der Tsunami von 2004 — SRF docudrama series ES GESCHAH AM…
+                            Der Tsunami von 2004 — SRF docudrama series
+                            <br />
+                            ES GESCHAH AM…
                             <br />
                             <a href={`/film/${film.id}`} className="underline underline-offset-4">
                               View Film →
