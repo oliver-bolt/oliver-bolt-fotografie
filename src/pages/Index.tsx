@@ -160,6 +160,63 @@ const Index = () => {
                 return <>{seriesBlock}{filmBlock}</>;
               }
 
+              // Insert Postraub teaser after New Zealand (index 1)
+              if (index === 1) {
+                const film2 = filmsData.find((f) => f.id === "postraub");
+                const stills2 = film2 ? [0, 1, 2, 3].map((i) => ({
+                  src: resolveFilmAsset(film2.stills[i].src) ?? "",
+                  alt: film2.stills[i].alt,
+                })) : [];
+
+                const filmBlock2 = film2 && stills2.length >= 4 ? (
+                  <motion.div
+                    key="film-postraub"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-40px" }}
+                    variants={fade}
+                  >
+                    <div className="grid grid-cols-2 gap-[18px]">
+                      <div className="grid gap-[18px]">
+                        <Slot src={stills2[0].src} alt={stills2[0].alt} aspect="aspect-[4/3]" />
+                        <Slot src={stills2[1].src} alt={stills2[1].alt} aspect="aspect-[3/4]" />
+                      </div>
+                      <div className="grid gap-[18px]">
+                        <Slot src={stills2[2].src} alt={stills2[2].alt} aspect="aspect-[3/4]" />
+                        <Slot src={stills2[3].src} alt={stills2[3].alt} aspect="aspect-[4/3]" />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 mt-6">
+                      <div>
+                        <div className="text-[22px] md:text-[32px] font-medium leading-snug">
+                          <span className="hidden md:inline">
+                            Der Postraub des Jahrhunderts — SRF docudrama series
+                            <br />
+                            ES GESCHAH AM…{" "}
+                            <a href={`/film/${film2.id}`} className="underline underline-offset-4">
+                              View Film →
+                            </a>
+                          </span>
+                          <span className="md:hidden">
+                            Der Postraub des Jahrhunderts — SRF docudrama series
+                            <br />
+                            ES GESCHAH AM…
+                            <br />
+                            <a href={`/film/${film2.id}`} className="underline underline-offset-4">
+                              View Film →
+                            </a>
+                          </span>
+                        </div>
+                      </div>
+                      <div className="hidden md:block" />
+                    </div>
+                  </motion.div>
+                ) : null;
+
+                return <>{seriesBlock}{filmBlock2}</>;
+              }
+
               return seriesBlock;
             })}
           </section>
