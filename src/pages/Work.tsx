@@ -57,7 +57,7 @@ const Work = () => {
                           alt={series.title}
                           loading="lazy"
                           decoding="async"
-                          className="absolute inset-0 w-full h-full object-cover"
+                          className="absolute inset-0 w-full h-full object-cover object-[center_30%]"
                         />
                       </div>
                       <div className="mt-3">

@@ -28,7 +28,8 @@ function filterFilms(films: Film[], filter: FilterOption): Film[] {
 }
 
 function FilmCard({ film }: { film: Film }) {
-  const firstStill = film.stills.length > 0 ? resolveFilmAsset(film.stills[0].src) : undefined;
+  const stillIndex = film.coverStillIndex ?? 0;
+  const coverStill = film.stills.length > 0 ? resolveFilmAsset(film.stills[stillIndex]?.src ?? film.stills[0].src) : undefined;
 
   return (
     <motion.article
@@ -38,11 +39,11 @@ function FilmCard({ film }: { film: Film }) {
       variants={fade}
     >
       <Link to={`/film/${film.id}`} className="block group">
-        {/* Thumbnail — first still, no play icon, aspect-[4/3] like photography */}
-        <div className="relative w-full aspect-[4/3] bg-neutral-200 overflow-hidden">
-          {firstStill ? (
+        {/* Thumbnail — selected still, 16:9 */}
+        <div className="relative w-full aspect-[16/9] bg-neutral-200 overflow-hidden">
+          {coverStill ? (
             <img
-              src={firstStill}
+              src={coverStill}
               alt={film.title}
               loading="lazy"
               decoding="async"

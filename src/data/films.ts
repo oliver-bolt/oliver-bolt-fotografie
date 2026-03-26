@@ -23,6 +23,7 @@ export interface Film {
   description: string;
   metaLine: string;
   status: "released" | "in-production";
+  coverStillIndex?: number;
 }
 
 export const filmsData: Film[] = [
@@ -44,6 +45,7 @@ export const filmsData: Film[] = [
       { label: "Executive Producer", value: "Rolf Elsener" },
     ],
     tags: ["TV"],
+    coverStillIndex: 4,
     stills: [
       { src: "film-tsunami-1.png", alt: "Der Tsunami von 2004 — Still 1" },
       { src: "film-tsunami-2.png", alt: "Der Tsunami von 2004 — Still 2" },
@@ -82,6 +84,7 @@ For the work on site, a local line producer was brought in to coordinate permits
       { label: "Executive Producer", value: "Rolf Elsener" },
     ],
     tags: ["TV"],
+    coverStillIndex: 4,
     stills: [
       { src: "film-buehrle-1.jpg", alt: "Der Bührle-Kunstraub — Still 1" },
       { src: "film-buehrle-2.jpg", alt: "Der Bührle-Kunstraub — Still 2" },
@@ -118,6 +121,7 @@ Although the story had international dimensions, most of the scenes were shot in
       { label: "Executive Producer", value: "Rolf Elsener" },
     ],
     tags: ["TV"],
+    coverStillIndex: 4,
     stills: [
       { src: "film-sr111-1.jpg", alt: "Swissair 111 – Absturz über Halifax — Still 1" },
       { src: "film-sr111-2.jpg", alt: "Swissair 111 – Absturz über Halifax — Still 2" },
@@ -154,6 +158,7 @@ For the cockpit scenes, Lufthansa's training simulators were not available becau
       { label: "Executive Producer", value: "Rolf Elsener" },
     ],
     tags: ["TV"],
+    coverStillIndex: 2,
     stills: [
       { src: "film-attentat-zug-1.jpg", alt: "Das Attentat von Zug — Still 1" },
       { src: "film-attentat-zug-2.jpg", alt: "Das Attentat von Zug — Still 2" },
@@ -188,6 +193,7 @@ For reasons of piety and sensitivity, the key scene of entering the government b
       { label: "Executive Producer", value: "Rolf Elsener" },
     ],
     tags: ["TV"],
+    coverStillIndex: 3,
     stills: [
       { src: "film-bisdassdertod-1.jpg", alt: "Bis dass der Tod uns scheidet — Still 1" },
       { src: "film-bisdassdertod-2.jpg", alt: "Bis dass der Tod uns scheidet — Still 2" },
@@ -224,6 +230,7 @@ The sinking was deliberately realized as a practical stunt. To this end, a suita
       { label: "Executive Producer", value: "Rolf Elsener" },
     ],
     tags: ["TV"],
+    coverStillIndex: 3,
     stills: [
       { src: "film-postraub-1.png", alt: "Der Postraub des Jahrhunderts — Still 1" },
       { src: "film-postraub-2.png", alt: "Der Postraub des Jahrhunderts — Still 2" },
@@ -260,6 +267,7 @@ Because several scenes were staged with replica firearms, appropriate safety con
       { label: "Executive Producer", value: "Rolf Elsener" },
     ],
     tags: ["TV"],
+    coverStillIndex: 1,
     stills: [
       { src: "film-geisterzug-1.png", alt: "Der Geisterzug von Spiez — Still 1" },
       { src: "film-geisterzug-2.png", alt: "Der Geisterzug von Spiez — Still 2" },

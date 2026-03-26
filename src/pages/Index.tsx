@@ -23,7 +23,7 @@ function Slot({ src, alt, aspect, eager = false }: { src: string; alt: string; a
         loading={eager ? "eager" : "lazy"}
         decoding={eager ? "sync" : "async"}
         {...(eager ? { fetchPriority: "high" as const } : {})}
-        className="absolute inset-0 w-full h-full object-cover"
+        className="absolute inset-0 w-full h-full object-cover object-[center_30%]"
       />
     </div>
   );
