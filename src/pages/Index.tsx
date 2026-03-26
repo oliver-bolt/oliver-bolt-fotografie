@@ -60,7 +60,7 @@ const Index = () => {
               const rightTop = altLayout ? "aspect-[4/3]" : "aspect-[3/4]";
               const rightBottom = altLayout ? "aspect-[3/4]" : "aspect-[4/3]";
 
-              return (
+              const seriesBlock = (
                 <motion.div
                   key={series.id}
                   initial="hidden"
@@ -68,20 +68,17 @@ const Index = () => {
                   viewport={{ once: true, margin: "-40px" }}
                   variants={fade}
                 >
-                  {/* IMAGE GRID */}
                   <div className="grid grid-cols-2 gap-[18px]">
                     <div className="grid gap-[18px]">
                       <Slot src={imgs[0].src} alt={imgs[0].alt} aspect={leftTop} eager={index === 0} />
                       <Slot src={imgs[1].src} alt={imgs[1].alt} aspect={leftBottom} />
                     </div>
-
                     <div className="grid gap-[18px]">
                       <Slot src={imgs[2].src} alt={imgs[2].alt} aspect={rightTop} eager={index === 0} />
                       <Slot src={imgs[3].src} alt={imgs[3].alt} aspect={rightBottom} />
                     </div>
                   </div>
 
-                  {/* CAPTION BLOCK */}
                   <div className="grid grid-cols-1 md:grid-cols-2 mt-6">
                     <div>
                       <div className="text-[22px] md:text-[32px] font-medium leading-snug">
@@ -91,7 +88,6 @@ const Index = () => {
                             View Work →
                           </a>
                         </span>
-
                         <span className="md:hidden">
                           {series.excerpt}
                           <br />
@@ -101,63 +97,66 @@ const Index = () => {
                         </span>
                       </div>
                     </div>
-
                     <div className="hidden md:block" />
                   </div>
                 </motion.div>
               );
-            })}
-            {/* FILM TEASER — Tsunami */}
-            {(() => {
-              const film = filmsData.find((f) => f.id === "tsunami-2004");
-              if (!film) return null;
-              const stills = film.stills.slice(0, 4).map((s) => ({
-                src: resolveFilmAsset(s.src) ?? "",
-                alt: s.alt,
-              }));
-              if (stills.length < 4) return null;
 
-              return (
-                <motion.div
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, margin: "-40px" }}
-                  variants={fade}
-                >
-                  <div className="grid grid-cols-2 gap-[18px]">
-                    <div className="grid gap-[18px]">
-                      <Slot src={stills[0].src} alt={stills[0].alt} aspect="aspect-[4/3]" />
-                      <Slot src={stills[1].src} alt={stills[1].alt} aspect="aspect-[3/4]" />
-                    </div>
-                    <div className="grid gap-[18px]">
-                      <Slot src={stills[2].src} alt={stills[2].alt} aspect="aspect-[3/4]" />
-                      <Slot src={stills[3].src} alt={stills[3].alt} aspect="aspect-[4/3]" />
-                    </div>
-                  </div>
+              // Insert film teaser after the first series block (position 2)
+              if (index === 0) {
+                const film = filmsData.find((f) => f.id === "tsunami-2004");
+                const stills = film?.stills.slice(0, 4).map((s) => ({
+                  src: resolveFilmAsset(s.src) ?? "",
+                  alt: s.alt,
+                }));
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 mt-6">
-                    <div>
-                      <div className="text-[22px] md:text-[32px] font-medium leading-snug">
-                        <span className="hidden md:inline">
-                          {film.title} — {film.format}{" "}
-                          <a href={`/film/${film.id}`} className="underline underline-offset-4">
-                            View Film →
-                          </a>
-                        </span>
-                        <span className="md:hidden">
-                          {film.title} — {film.format}
-                          <br />
-                          <a href={`/film/${film.id}`} className="underline underline-offset-4">
-                            View Film →
-                          </a>
-                        </span>
+                const filmBlock = film && stills && stills.length >= 4 ? (
+                  <motion.div
+                    key="film-tsunami"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-40px" }}
+                    variants={fade}
+                  >
+                    <div className="grid grid-cols-2 gap-[18px]">
+                      <div className="grid gap-[18px]">
+                        <Slot src={stills[0].src} alt={stills[0].alt} aspect="aspect-[3/4]" />
+                        <Slot src={stills[1].src} alt={stills[1].alt} aspect="aspect-[4/3]" />
+                      </div>
+                      <div className="grid gap-[18px]">
+                        <Slot src={stills[2].src} alt={stills[2].alt} aspect="aspect-[4/3]" />
+                        <Slot src={stills[3].src} alt={stills[3].alt} aspect="aspect-[3/4]" />
                       </div>
                     </div>
-                    <div className="hidden md:block" />
-                  </div>
-                </motion.div>
-              );
-            })()}
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 mt-6">
+                      <div>
+                        <div className="text-[22px] md:text-[32px] font-medium leading-snug">
+                          <span className="hidden md:inline">
+                            Der Tsunami von 2004 — SRF docudrama series ES GESCHAH AM…{" "}
+                            <a href={`/film/${film.id}`} className="underline underline-offset-4">
+                              View Film →
+                            </a>
+                          </span>
+                          <span className="md:hidden">
+                            Der Tsunami von 2004 — SRF docudrama series ES GESCHAH AM…
+                            <br />
+                            <a href={`/film/${film.id}`} className="underline underline-offset-4">
+                              View Film →
+                            </a>
+                          </span>
+                        </div>
+                      </div>
+                      <div className="hidden md:block" />
+                    </div>
+                  </motion.div>
+                ) : null;
+
+                return <>{seriesBlock}{filmBlock}</>;
+              }
+
+              return seriesBlock;
+            })}
           </section>
         </div>
       </main>
