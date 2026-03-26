@@ -1,9 +1,11 @@
+import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { seriesData } from "@/data/series";
+import { seriesData, seriesCategories } from "@/data/series";
+import type { Series } from "@/data/series";
 
 const fade = {
   hidden: { opacity: 0, y: 14 },
@@ -16,14 +18,26 @@ const fade = {
 
 const SHELL = "max-w-[1600px] mx-auto px-10 md:px-14";
 
+const FILTER_OPTIONS = ["ALL", ...seriesCategories] as const;
+type FilterOption = (typeof FILTER_OPTIONS)[number];
+
+function filterSeries(series: Series[], filter: FilterOption): Series[] {
+  if (filter === "ALL") return series;
+  return series.filter((s) => s.category === filter);
+}
+
 const Work = () => {
   const [searchParams] = useSearchParams();
-  const activeFilter = searchParams.get("filter") || "Alle";
+  const paramFilter = searchParams.get("filter");
 
-  const filteredSeries =
-    activeFilter === "Alle"
-      ? seriesData
-      : seriesData.filter((s) => s.category === activeFilter);
+  // Derive initial filter from URL param for backward compat, then use local state
+  const initialFilter: FilterOption =
+    paramFilter && seriesCategories.includes(paramFilter as any)
+      ? (paramFilter as FilterOption)
+      : "ALL";
+  const [activeFilter, setActiveFilter] = useState<FilterOption>(initialFilter);
+
+  const filteredSeries = filterSeries(seriesData, activeFilter);
 
   return (
     <div className="min-h-screen">
@@ -31,8 +45,26 @@ const Work = () => {
 
       <main className="w-full">
         <div className={SHELL}>
-          {/* Series grid — uniform 3-col */}
           <section className="pt-36 md:pt-48 pb-28">
+            {/* Category filter tabs — matching Film page style exactly */}
+            <div className="mb-10 md:mb-14 flex flex-wrap items-center gap-6 md:gap-8">
+              {FILTER_OPTIONS.map((option) => (
+                <button
+                  key={option}
+                  type="button"
+                  onClick={() => setActiveFilter(option)}
+                  className={`bg-transparent border-none cursor-pointer text-[14px] md:text-[16px] tracking-wide transition-colors duration-150 leading-normal ${
+                    activeFilter === option
+                      ? "text-foreground underline underline-offset-4"
+                      : "text-foreground/50 hover:text-foreground"
+                  }`}
+                >
+                  {option}
+                </button>
+              ))}
+            </div>
+
+            {/* Series grid — uniform 3-col */}
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeFilter}
@@ -71,6 +103,11 @@ const Work = () => {
                     </Link>
                   </motion.div>
                 ))}
+                {filteredSeries.length === 0 && (
+                  <p className="text-foreground/50 text-[14px] col-span-full">
+                    No series in this category yet.
+                  </p>
+                )}
               </motion.div>
             </AnimatePresence>
           </section>

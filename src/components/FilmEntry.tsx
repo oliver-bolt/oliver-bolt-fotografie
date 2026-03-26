@@ -109,9 +109,9 @@ const FilmEntry = ({
         </div>
       )}
 
-      {/* 5. Stills grid — 2 columns desktop (2×3), 1 column mobile, 16:9 */}
+      {/* 5. Stills grid — 2 columns at all breakpoints (2×3), 16:9 */}
       {stills.length > 0 && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-[18px] mb-10 md:mb-14">
+        <div className="grid grid-cols-2 gap-[18px] mb-10 md:mb-14">
           {stills.map((still, i) => (
             <StillImage key={i} src={still.src} alt={still.alt} />
           ))}
