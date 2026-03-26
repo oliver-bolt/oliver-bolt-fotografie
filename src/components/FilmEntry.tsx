@@ -29,7 +29,7 @@ function StillImage({ src, alt }: { src: string; alt: string }) {
 
   if (!resolvedSrc || failed) {
     return (
-      <div className="w-full aspect-video bg-neutral-200 flex items-center justify-center">
+      <div className="w-full aspect-[4/3] bg-neutral-200 flex items-center justify-center">
         <span className="text-neutral-400 text-xs select-none">{alt}</span>
       </div>
     );
@@ -42,9 +42,25 @@ function StillImage({ src, alt }: { src: string; alt: string }) {
       loading="lazy"
       decoding="async"
       onError={() => setFailed(true)}
-      className="w-full aspect-video object-cover"
+      className="w-full aspect-[4/3] object-cover"
     />
   );
+}
+
+/**
+ * Build the inline credits string.
+ * Pattern: My role Production manager · Director Wendy Pillonel · …
+ * NOTE: "My role" has NO colon after it.
+ */
+function buildCreditsLine(credits: FilmCredit[]): string {
+  return credits
+    .map((c) => {
+      if (c.label.toLowerCase() === "my role") {
+        return `My role ${c.value}`;
+      }
+      return `${c.label} ${c.value}`;
+    })
+    .join(" · ");
 }
 
 const FilmEntry = ({
@@ -56,13 +72,7 @@ const FilmEntry = ({
   videoType,
   credits,
 }: FilmEntryProps) => {
-  // Find the "My role" credit
-  const roleCredit = credits.find(
-    (c) => c.label.toLowerCase() === "my role"
-  );
-  const otherCredits = credits.filter(
-    (c) => c.label.toLowerCase() !== "my role"
-  );
+  const creditsLine = buildCreditsLine(credits);
 
   return (
     <motion.article
@@ -71,24 +81,31 @@ const FilmEntry = ({
       variants={fade}
       className="w-full"
     >
-      {/* Title */}
+      {/* 1. Title */}
       <h1 className="text-[36px] md:text-[56px] font-medium text-foreground leading-[1.08] mb-3">
         {title}
       </h1>
 
-      {/* Meta line */}
-      <p className="text-[14px] md:text-[16px] text-foreground/50 mb-8 md:mb-10">
+      {/* 2. Meta line */}
+      <p className="text-[14px] md:text-[16px] text-foreground/50 mb-2">
         {meta}
       </p>
 
-      {/* Description text */}
-      <div className="space-y-5 text-foreground leading-relaxed mb-10 md:mb-14 max-w-prose">
+      {/* 3. Credits block — inline with · separators, same style as meta */}
+      {credits.length > 0 && (
+        <p className="text-[14px] md:text-[16px] text-foreground/50 mb-8 md:mb-10">
+          {creditsLine}
+        </p>
+      )}
+
+      {/* 4. Body text — full content width, matching photography detail typography */}
+      <div className="space-y-5 text-foreground text-[16px] md:text-[18px] leading-relaxed mb-10 md:mb-14">
         {text.split("\n\n").map((paragraph, i) => (
           <p key={i}>{paragraph}</p>
         ))}
       </div>
 
-      {/* Stills grid — 2 columns desktop, 1 column mobile */}
+      {/* 5. Stills grid — 2 columns desktop (2×3), 1 column mobile, stacked full-width */}
       {stills.length > 0 && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-[18px] mb-10 md:mb-14">
           {stills.map((still, i) => (
@@ -97,8 +114,8 @@ const FilmEntry = ({
         </div>
       )}
 
-      {/* Video player — 16:9 iframe */}
-      <div className="relative w-full aspect-video bg-black/5 overflow-hidden mb-10 md:mb-14">
+      {/* 6. Video player — 16:9, same width as stills grid */}
+      <div className="relative w-full aspect-video bg-black/5 overflow-hidden">
         <iframe
           src={videoUrl}
           title={title}
@@ -111,27 +128,6 @@ const FilmEntry = ({
           allowFullScreen
           loading="lazy"
         />
-      </div>
-
-      {/* Credits block */}
-      <div className="space-y-1">
-        {roleCredit && (
-          <p className="text-[14px] text-foreground leading-relaxed">
-            <span className="text-foreground/50">My role:</span>{" "}
-            <span className="text-foreground/80">{roleCredit.value}</span>
-          </p>
-        )}
-        <dl className="space-y-[2px]">
-          {otherCredits.map((credit) => (
-            <div
-              key={credit.label}
-              className="flex gap-2 text-[13px] leading-relaxed"
-            >
-              <dt className="text-foreground/50 shrink-0">{credit.label}</dt>
-              <dd className="text-foreground/80">{credit.value}</dd>
-            </div>
-          ))}
-        </dl>
       </div>
     </motion.article>
   );

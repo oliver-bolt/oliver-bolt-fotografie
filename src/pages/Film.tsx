@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { filmsData } from "@/data/films";
+import { resolveFilmAsset } from "@/data/filmAssets";
 import type { Film } from "@/data/films";
 
 const fade = {
@@ -27,6 +28,8 @@ function filterFilms(films: Film[], filter: FilterOption): Film[] {
 }
 
 function FilmCard({ film }: { film: Film }) {
+  const firstStill = film.stills.length > 0 ? resolveFilmAsset(film.stills[0].src) : undefined;
+
   return (
     <motion.article
       initial="hidden"
@@ -35,25 +38,30 @@ function FilmCard({ film }: { film: Film }) {
       variants={fade}
     >
       <Link to={`/film/${film.id}`} className="block group">
-        {/* Video embed */}
-        <div className="relative w-full aspect-video bg-black/5 overflow-hidden">
-          <iframe
-            src={film.embedUrl}
-            title={film.title}
-            className="absolute inset-0 w-full h-full border-none pointer-events-none"
-            allow="autoplay; fullscreen; picture-in-picture"
-            allowFullScreen
-            loading="lazy"
-          />
+        {/* Thumbnail — first still, no play icon, aspect-[4/3] like photography */}
+        <div className="relative w-full aspect-[4/3] bg-neutral-200 overflow-hidden">
+          {firstStill ? (
+            <img
+              src={firstStill}
+              alt={film.title}
+              loading="lazy"
+              decoding="async"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+          ) : (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="text-neutral-400 text-xs select-none">{film.title}</span>
+            </div>
+          )}
         </div>
 
         {/* Info */}
-        <div className="mt-4">
-          <h2 className="text-[18px] md:text-[22px] font-medium text-foreground leading-snug group-hover:underline underline-offset-4">
+        <div className="mt-3">
+          <h2 className="text-[16px] md:text-[18px] font-medium text-foreground leading-snug group-hover:underline underline-offset-4">
             {film.title}
           </h2>
 
-          <p className="text-[14px] text-foreground/60 mt-1 leading-relaxed">
+          <p className="text-[14px] text-foreground/60 mt-1">
             {film.metaLine}
           </p>
         </div>
@@ -73,27 +81,25 @@ const FilmPage = () => {
       <main className="w-full">
         <div className={SHELL}>
           <section className="pt-36 md:pt-48 pb-28">
-            {/* Dropdown filter */}
-            <div className="mb-10 md:mb-14 flex items-center gap-3">
-              <select
-                value={activeFilter}
-                onChange={(e) => setActiveFilter(e.target.value as FilterOption)}
-                className="bg-transparent border border-foreground/20 text-foreground text-[14px] px-3 py-2 pr-8 rounded-none appearance-none cursor-pointer focus:outline-none focus:border-foreground/50 transition-colors"
-                style={{
-                  backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E")`,
-                  backgroundRepeat: "no-repeat",
-                  backgroundPosition: "right 8px center",
-                }}
-              >
-                {FILTER_OPTIONS.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
+            {/* Category filter tabs — matching Photography page style */}
+            <div className="mb-10 md:mb-14 flex flex-wrap items-center gap-6 md:gap-8">
+              {FILTER_OPTIONS.map((option) => (
+                <button
+                  key={option}
+                  type="button"
+                  onClick={() => setActiveFilter(option)}
+                  className={`bg-transparent border-none cursor-pointer text-[14px] md:text-[16px] tracking-wide transition-colors duration-150 leading-normal ${
+                    activeFilter === option
+                      ? "text-foreground underline underline-offset-4"
+                      : "text-foreground/50 hover:text-foreground"
+                  }`}
+                >
+                  {option}
+                </button>
+              ))}
             </div>
 
-            {/* Film grid — 2-col desktop, 1-col mobile */}
+            {/* Film grid — 2-col desktop (matching photography), 1-col mobile */}
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeFilter}
@@ -101,7 +107,7 @@ const FilmPage = () => {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
-                className="grid grid-cols-1 md:grid-cols-2 gap-x-[18px] gap-y-16 md:gap-y-20"
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[18px]"
               >
                 {filtered.map((film) => (
                   <FilmCard key={film.id} film={film} />

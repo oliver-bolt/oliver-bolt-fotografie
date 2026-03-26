@@ -40,7 +40,7 @@ const Index = () => {
           <section className="pt-36 md:pt-48 mb-24">
             <motion.div initial="hidden" animate="visible" variants={fade}>
               <h1 className="text-[36px] md:text-[56px] font-medium leading-[1.08] max-w-full md:max-w-[50%]">
-                Photographer & Creative Producer — documentary, editorial and personal work from St. Gallen, Switzerland.
+                Creative Producer & Photographer — documentary, editorial and film work from St. Gallen, Switzerland.
               </h1>
             </motion.div>
           </section>
