@@ -9,18 +9,23 @@ interface NavbarProps {
 }
 
 const photographyFilters = ["Alle", ...seriesCategories];
+const filmFilters = ["Alle", "IN PRODUCTION", "TV", "CINEMA"];
 
 const Navbar = ({ invertColors = false }: NavbarProps) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [photographySubOpen, setPhotographySubOpen] = useState(false);
-  const [desktopDropdownOpen, setDesktopDropdownOpen] = useState(false);
-  const dropdownTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const [filmSubOpen, setFilmSubOpen] = useState(false);
+
+  // Desktop dropdowns
+  const [photoDropdownOpen, setPhotoDropdownOpen] = useState(false);
+  const [filmDropdownOpen, setFilmDropdownOpen] = useState(false);
+  const photoTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const filmTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const location = useLocation();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const activePhotographyFilter = searchParams.get("filter") || "Alle";
+  const activeFilter = searchParams.get("filter") || "Alle";
 
   const textColor = invertColors ? "text-white" : "text-foreground";
   const linkColor = invertColors ? "text-white hover:text-white" : "text-foreground hover:text-foreground";
@@ -32,20 +37,25 @@ const Navbar = ({ invertColors = false }: NavbarProps) => {
   const closeMobile = () => {
     setMobileOpen(false);
     setPhotographySubOpen(false);
+    setFilmSubOpen(false);
   };
 
-  const openMobile = () => {
-    setMobileOpen(true);
-  };
+  const openMobile = () => setMobileOpen(true);
 
   /* Desktop dropdown hover helpers */
-  const showDropdown = () => {
-    if (dropdownTimeout.current) clearTimeout(dropdownTimeout.current);
-    setDesktopDropdownOpen(true);
+  const showPhotoDropdown = () => {
+    if (photoTimeout.current) clearTimeout(photoTimeout.current);
+    setPhotoDropdownOpen(true);
   };
-
-  const hideDropdown = () => {
-    dropdownTimeout.current = setTimeout(() => setDesktopDropdownOpen(false), 150);
+  const hidePhotoDropdown = () => {
+    photoTimeout.current = setTimeout(() => setPhotoDropdownOpen(false), 150);
+  };
+  const showFilmDropdown = () => {
+    if (filmTimeout.current) clearTimeout(filmTimeout.current);
+    setFilmDropdownOpen(true);
+  };
+  const hideFilmDropdown = () => {
+    filmTimeout.current = setTimeout(() => setFilmDropdownOpen(false), 150);
   };
 
   // Lock body scroll when mobile menu is open
@@ -78,10 +88,9 @@ const Navbar = ({ invertColors = false }: NavbarProps) => {
               {/* Photography with hover dropdown */}
               <li>
                 <div
-                  ref={dropdownRef}
                   className="relative"
-                  onMouseEnter={showDropdown}
-                  onMouseLeave={hideDropdown}
+                  onMouseEnter={showPhotoDropdown}
+                  onMouseLeave={hidePhotoDropdown}
                 >
                   <Link
                     to="/photography"
@@ -95,20 +104,19 @@ const Navbar = ({ invertColors = false }: NavbarProps) => {
                     Photography
                   </Link>
 
-                  {/* Dropdown — Balboa-style: no frame, same font as nav, right-aligned text */}
-                  {desktopDropdownOpen && (
+                  {photoDropdownOpen && (
                     <div className="absolute top-full right-0 mt-3 z-50 flex flex-col items-end gap-[6px]">
                       {photographyFilters.map((filter) => {
                         const isActive =
                           isPhotographyActive &&
-                          (filter === activePhotographyFilter ||
-                            (filter === "Alle" && activePhotographyFilter === "Alle"));
+                          (filter === activeFilter ||
+                            (filter === "Alle" && activeFilter === "Alle"));
                         return (
                           <button
                             key={filter}
                             type="button"
                             onClick={() => {
-                              setDesktopDropdownOpen(false);
+                              setPhotoDropdownOpen(false);
                               if (filter === "Alle") {
                                 navigate("/photography");
                               } else {
@@ -131,18 +139,58 @@ const Navbar = ({ invertColors = false }: NavbarProps) => {
                 </div>
               </li>
 
+              {/* Film with hover dropdown */}
               <li>
-                <Link
-                  to="/film"
-                  className={cn(
-                    "text-[16px] tracking-wide transition-colors duration-200",
-                    linkColor,
-                    isFilmActive && "underline underline-offset-4",
-                    invertColors && isFilmActive && "decoration-white",
-                  )}
+                <div
+                  className="relative"
+                  onMouseEnter={showFilmDropdown}
+                  onMouseLeave={hideFilmDropdown}
                 >
-                  Film
-                </Link>
+                  <Link
+                    to="/film"
+                    className={cn(
+                      "text-[16px] tracking-wide transition-colors duration-200",
+                      linkColor,
+                      isFilmActive && "underline underline-offset-4",
+                      invertColors && isFilmActive && "decoration-white",
+                    )}
+                  >
+                    Film
+                  </Link>
+
+                  {filmDropdownOpen && (
+                    <div className="absolute top-full right-0 mt-3 z-50 flex flex-col items-end gap-[6px]">
+                      {filmFilters.map((filter) => {
+                        const isActive =
+                          isFilmActive &&
+                          (filter === activeFilter ||
+                            (filter === "Alle" && activeFilter === "Alle"));
+                        return (
+                          <button
+                            key={filter}
+                            type="button"
+                            onClick={() => {
+                              setFilmDropdownOpen(false);
+                              if (filter === "Alle") {
+                                navigate("/film");
+                              } else {
+                                navigate(`/film?filter=${filter}`);
+                              }
+                            }}
+                            className={cn(
+                              "bg-transparent border-none cursor-pointer text-[16px] tracking-wide transition-colors duration-150 leading-normal",
+                              invertColors ? "text-white" : "text-foreground",
+                              isActive && "underline underline-offset-4",
+                              invertColors && isActive && "decoration-white",
+                            )}
+                          >
+                            {filter}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
               </li>
 
               <li>
@@ -158,7 +206,6 @@ const Navbar = ({ invertColors = false }: NavbarProps) => {
                   About
                 </Link>
               </li>
-
             </ul>
 
             {/* Mobile toggle */}
@@ -233,16 +280,41 @@ const Navbar = ({ invertColors = false }: NavbarProps) => {
                   )}
                 </div>
 
-                <Link
-                  to="/film"
-                  onClick={closeMobile}
-                  className={cn(
-                    "text-[44px] leading-[1.05] font-medium",
-                    isFilmActive && "underline underline-offset-8",
+                {/* Film (expandable) */}
+                <div className="flex flex-col items-center">
+                  <button
+                    type="button"
+                    onClick={() => setFilmSubOpen(!filmSubOpen)}
+                    className={cn(
+                      "text-[44px] leading-[1.05] font-medium bg-transparent border-none cursor-pointer flex items-center gap-3",
+                      isFilmActive && "underline underline-offset-8",
+                    )}
+                  >
+                    Film
+                    <ChevronDown
+                      size={24}
+                      className={cn(
+                        "transition-transform duration-200 mt-1",
+                        filmSubOpen && "rotate-180",
+                      )}
+                    />
+                  </button>
+
+                  {filmSubOpen && (
+                    <div className="flex flex-col items-center gap-3 mt-4">
+                      {filmFilters.map((filter) => (
+                        <Link
+                          key={filter}
+                          to={filter === "Alle" ? "/film" : `/film?filter=${filter}`}
+                          onClick={closeMobile}
+                          className="text-[24px] leading-[1.2] font-light text-black/70"
+                        >
+                          {filter}
+                        </Link>
+                      ))}
+                    </div>
                   )}
-                >
-                  Film
-                </Link>
+                </div>
 
                 <Link
                   to="/about"
@@ -254,7 +326,6 @@ const Navbar = ({ invertColors = false }: NavbarProps) => {
                 >
                   About
                 </Link>
-
               </div>
             </div>
           </div>
