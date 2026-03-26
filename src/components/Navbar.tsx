@@ -25,7 +25,7 @@ const Navbar = ({ invertColors = false }: NavbarProps) => {
   const location = useLocation();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const activeFilter = searchParams.get("filter") || "Alle";
+  const activeFilter = searchParams.get("filter") || "All";
 
   const textColor = invertColors ? "text-white" : "text-foreground";
   const linkColor = invertColors ? "text-white hover:text-white" : "text-foreground hover:text-foreground";
@@ -110,14 +110,14 @@ const Navbar = ({ invertColors = false }: NavbarProps) => {
                         const isActive =
                           isPhotographyActive &&
                           (filter === activeFilter ||
-                            (filter === "Alle" && activeFilter === "Alle"));
+                            (filter === "All" && activeFilter === "All"));
                         return (
                           <button
                             key={filter}
                             type="button"
                             onClick={() => {
                               setPhotoDropdownOpen(false);
-                              if (filter === "Alle") {
+                              if (filter === "All") {
                                 navigate("/photography");
                               } else {
                                 navigate(`/photography?filter=${filter}`);
@@ -164,14 +164,14 @@ const Navbar = ({ invertColors = false }: NavbarProps) => {
                         const isActive =
                           isFilmActive &&
                           (filter === activeFilter ||
-                            (filter === "Alle" && activeFilter === "Alle"));
+                            (filter === "All" && activeFilter === "All"));
                         return (
                           <button
                             key={filter}
                             type="button"
                             onClick={() => {
                               setFilmDropdownOpen(false);
-                              if (filter === "Alle") {
+                              if (filter === "All") {
                                 navigate("/film");
                               } else {
                                 navigate(`/film?filter=${filter}`);
@@ -269,7 +269,7 @@ const Navbar = ({ invertColors = false }: NavbarProps) => {
                       {photographyFilters.map((filter) => (
                         <Link
                           key={filter}
-                          to={filter === "Alle" ? "/photography" : `/photography?filter=${filter}`}
+                          to={filter === "All" ? "/photography" : `/photography?filter=${filter}`}
                           onClick={closeMobile}
                           className="text-[24px] leading-[1.2] font-light text-black/70"
                         >
@@ -305,7 +305,7 @@ const Navbar = ({ invertColors = false }: NavbarProps) => {
                       {filmFilters.map((filter) => (
                         <Link
                           key={filter}
-                          to={filter === "Alle" ? "/film" : `/film?filter=${filter}`}
+                          to={filter === "All" ? "/film" : `/film?filter=${filter}`}
                           onClick={closeMobile}
                           className="text-[24px] leading-[1.2] font-light text-black/70"
                         >

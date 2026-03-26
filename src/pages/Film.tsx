@@ -18,9 +18,11 @@ const fade = {
 const SHELL = "max-w-[1600px] mx-auto px-10 md:px-14";
 
 function filterFilms(films: Film[], filter: string): Film[] {
-  if (!filter || filter === "Alle") return films;
-  if (filter === "IN PRODUCTION") return films.filter((f) => f.status === "in-production");
-  return films.filter((f) => f.tags.includes(filter));
+  if (!filter || filter === "All") return films;
+  if (filter === "In Production") return films.filter((f) => f.status === "in-production");
+  if (filter === "Television") return films.filter((f) => f.tags.includes("TV"));
+  if (filter === "Cinema") return films.filter((f) => f.tags.includes("CINEMA"));
+  return films;
 }
 
 function FilmCard({ film }: { film: Film }) {
