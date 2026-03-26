@@ -43,28 +43,20 @@ const About = () => (
 
             <div className="space-y-5 text-foreground leading-relaxed">
               <p>
-                I'm a photographer and creative producer based in St.&nbsp;Gallen, Switzerland.
-                My work sits between documentary, editorial and personal projects — from
-                street-level documentation to commissioned brand and product photography.
+                I am a creative producer and photographer based in St.&nbsp;Gallen, Switzerland.
+                I studied Media Engineering (BSc) with a focus on TV and video at FHGR in Chur,
+                including an Erasmus semester at Hochschule der Medien in Stuttgart, and spent more
+                than nine years in production roles at Swiss public broadcaster SRF. There I worked
+                on documentary and docudrama formats, coordinating teams, schedules and resources
+                while keeping editorial and visual goals aligned.
               </p>
               <p>
-                Photography isn't all I do. Before picking up the camera, I spent nine years
-                in media production. I studied at HTW Chur (now FHGR), graduating with a
-                Bachelor's degree in Media Engineering in 2013, with a focus on TV and video.
-                From there I moved into film — working on short films, features and episodic
-                productions before joining SRF, Switzerland's public broadcaster, where I
-                eventually led production for their scenic in-house formats.
-              </p>
-              <p>
-                That background shaped how I see and plan visual work: the documentary eye, the
-                structured approach, the instinct for when to stay and when to move on. It also
-                means I'm comfortable working across formats — stills, moving image, editorial,
-                commercial.
-              </p>
-              <p>
-                Today, photography is my main focus. I work with brands, editorial clients and
-                on personal long-term projects. Most of my work is rooted in Switzerland, but it
-                regularly takes me elsewhere — recently to New Zealand, Austria and southern Germany.
+                Photography runs alongside this as a semi-professional second field, with a focus on
+                documentary and editorial work that stays close to people, places and lived realities.
+                Further training in cultural funding and cultural policy (CAS ZHAW) and my current CAS
+                in AI in media production at FHGR shape how I approach stories: as carefully planned
+                processes where content, craft and technology are calculated and orchestrated from first
+                idea to final image.
               </p>
             </div>
 

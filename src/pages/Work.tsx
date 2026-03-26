@@ -50,7 +50,7 @@ const Work = () => {
                     viewport={{ once: true, margin: "-40px" }}
                     variants={fade}
                   >
-                    <Link to={`/work/${series.id}`} className="block group">
+                    <Link to={`/photography/${series.id}`} className="block group">
                       <div className="overflow-hidden relative aspect-[4/3]">
                         <img
                           src={series.cover}

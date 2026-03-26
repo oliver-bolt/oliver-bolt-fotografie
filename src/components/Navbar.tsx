@@ -8,11 +8,11 @@ interface NavbarProps {
   invertColors?: boolean;
 }
 
-const workFilters = ["Alle", ...seriesCategories];
+const photographyFilters = ["Alle", ...seriesCategories];
 
 const Navbar = ({ invertColors = false }: NavbarProps) => {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [workSubOpen, setWorkSubOpen] = useState(false);
+  const [photographySubOpen, setPhotographySubOpen] = useState(false);
   const [desktopDropdownOpen, setDesktopDropdownOpen] = useState(false);
   const dropdownTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -20,18 +20,18 @@ const Navbar = ({ invertColors = false }: NavbarProps) => {
   const location = useLocation();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const activeWorkFilter = searchParams.get("filter") || "Alle";
+  const activePhotographyFilter = searchParams.get("filter") || "Alle";
 
   const textColor = invertColors ? "text-white" : "text-foreground";
   const linkColor = invertColors ? "text-white hover:text-white" : "text-foreground hover:text-foreground";
 
-  const isWorkActive = location.pathname.startsWith("/work");
+  const isPhotographyActive = location.pathname.startsWith("/photography");
   const isFilmActive = location.pathname.startsWith("/film");
   const isAboutActive = location.pathname === "/about";
 
   const closeMobile = () => {
     setMobileOpen(false);
-    setWorkSubOpen(false);
+    setPhotographySubOpen(false);
   };
 
   const openMobile = () => {
@@ -75,7 +75,7 @@ const Navbar = ({ invertColors = false }: NavbarProps) => {
 
             {/* Desktop */}
             <ul className="hidden md:flex items-center gap-10">
-              {/* Work with hover dropdown */}
+              {/* Photography with hover dropdown */}
               <li>
                 <div
                   ref={dropdownRef}
@@ -84,25 +84,25 @@ const Navbar = ({ invertColors = false }: NavbarProps) => {
                   onMouseLeave={hideDropdown}
                 >
                   <Link
-                    to="/work"
+                    to="/photography"
                     className={cn(
                       "text-[16px] tracking-wide transition-colors duration-200",
                       linkColor,
-                      isWorkActive && "underline underline-offset-4",
-                      invertColors && isWorkActive && "decoration-white",
+                      isPhotographyActive && "underline underline-offset-4",
+                      invertColors && isPhotographyActive && "decoration-white",
                     )}
                   >
-                    Work
+                    Photography
                   </Link>
 
                   {/* Dropdown — Balboa-style: no frame, same font as nav, right-aligned text */}
                   {desktopDropdownOpen && (
                     <div className="absolute top-full right-0 mt-3 z-50 flex flex-col items-end gap-[6px]">
-                      {workFilters.map((filter) => {
+                      {photographyFilters.map((filter) => {
                         const isActive =
-                          isWorkActive &&
-                          (filter === activeWorkFilter ||
-                            (filter === "Alle" && activeWorkFilter === "Alle"));
+                          isPhotographyActive &&
+                          (filter === activePhotographyFilter ||
+                            (filter === "Alle" && activePhotographyFilter === "Alle"));
                         return (
                           <button
                             key={filter}
@@ -110,9 +110,9 @@ const Navbar = ({ invertColors = false }: NavbarProps) => {
                             onClick={() => {
                               setDesktopDropdownOpen(false);
                               if (filter === "Alle") {
-                                navigate("/work");
+                                navigate("/photography");
                               } else {
-                                navigate(`/work?filter=${filter}`);
+                                navigate(`/photography?filter=${filter}`);
                               }
                             }}
                             className={cn(
@@ -197,32 +197,32 @@ const Navbar = ({ invertColors = false }: NavbarProps) => {
           <div className="max-w-[1600px] w-full mx-auto px-8">
             <div className="min-h-[70vh] flex items-center justify-center">
               <div className="flex flex-col items-center text-center gap-6">
-                {/* Work (expandable) */}
+                {/* Photography (expandable) */}
                 <div className="flex flex-col items-center">
                   <button
                     type="button"
-                    onClick={() => setWorkSubOpen(!workSubOpen)}
+                    onClick={() => setPhotographySubOpen(!photographySubOpen)}
                     className={cn(
                       "text-[44px] leading-[1.05] font-medium bg-transparent border-none cursor-pointer flex items-center gap-3",
-                      isWorkActive && "underline underline-offset-8",
+                      isPhotographyActive && "underline underline-offset-8",
                     )}
                   >
-                    Work
+                    Photography
                     <ChevronDown
                       size={24}
                       className={cn(
                         "transition-transform duration-200 mt-1",
-                        workSubOpen && "rotate-180",
+                        photographySubOpen && "rotate-180",
                       )}
                     />
                   </button>
 
-                  {workSubOpen && (
+                  {photographySubOpen && (
                     <div className="flex flex-col items-center gap-3 mt-4">
-                      {workFilters.map((filter) => (
+                      {photographyFilters.map((filter) => (
                         <Link
                           key={filter}
-                          to={filter === "Alle" ? "/work" : `/work?filter=${filter}`}
+                          to={filter === "Alle" ? "/photography" : `/photography?filter=${filter}`}
                           onClick={closeMobile}
                           className="text-[24px] leading-[1.2] font-light text-black/70"
                         >

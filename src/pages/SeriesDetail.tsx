@@ -47,10 +47,10 @@ const SeriesDetail = () => {
         {/* Back link */}
         <section className={`${SHELL} pb-16 pt-10`}>
           <Link
-            to="/work"
+            to="/photography"
             className="text-sm text-foreground hover:underline transition-colors"
           >
-            ← Back to Work
+            ← Back to Photography
           </Link>
         </section>
       </main>
