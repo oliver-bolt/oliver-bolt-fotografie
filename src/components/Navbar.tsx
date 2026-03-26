@@ -124,7 +124,7 @@ const Navbar = ({ invertColors = false }: NavbarProps) => {
                               }
                             }}
                             className={cn(
-                              "bg-transparent border-none cursor-pointer text-[16px] tracking-wide transition-colors duration-150 leading-normal",
+                              "bg-transparent border-none cursor-pointer text-[16px] tracking-wide transition-colors duration-150 leading-normal whitespace-nowrap",
                               invertColors ? "text-white" : "text-foreground",
                               isActive && "underline underline-offset-4",
                               invertColors && isActive && "decoration-white",
@@ -178,7 +178,7 @@ const Navbar = ({ invertColors = false }: NavbarProps) => {
                               }
                             }}
                             className={cn(
-                              "bg-transparent border-none cursor-pointer text-[16px] tracking-wide transition-colors duration-150 leading-normal",
+                              "bg-transparent border-none cursor-pointer text-[16px] tracking-wide transition-colors duration-150 leading-normal whitespace-nowrap",
                               invertColors ? "text-white" : "text-foreground",
                               isActive && "underline underline-offset-4",
                               invertColors && isActive && "decoration-white",
