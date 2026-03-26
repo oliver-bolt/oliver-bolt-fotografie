@@ -83,7 +83,8 @@ const Index = () => {
                     <div>
                       <div className="text-[22px] md:text-[32px] font-medium leading-snug">
                         <span className="hidden md:inline">
-                          {series.excerpt}{" "}
+                          {series.excerpt}
+                          <br />
                           <a href={`/photography/${series.id}`} className="underline underline-offset-4">
                             View Work →
                           </a>
@@ -138,7 +139,7 @@ const Index = () => {
                             <br />
                             ES GESCHAH AM…{" "}
                             <a href={`/film/${film.id}`} className="underline underline-offset-4">
-                              View Film →
+                              View Work →
                             </a>
                           </span>
                           <span className="md:hidden">
@@ -146,7 +147,7 @@ const Index = () => {
                             <br />
                             ES GESCHAH AM…{" "}
                             <a href={`/film/${film.id}`} className="underline underline-offset-4">
-                              View Film →
+                              View Work →
                             </a>
                           </span>
                         </div>
@@ -190,19 +191,15 @@ const Index = () => {
                       <div>
                         <div className="text-[22px] md:text-[32px] font-medium leading-snug">
                           <span className="hidden md:inline">
-                            Der Postraub des Jahrhunderts — SRF docudrama series
-                            <br />
-                            ES GESCHAH AM…{" "}
+                            Der Postraub des Jahrhunderts — SRF docudrama series ES GESCHAH AM…{" "}
                             <a href={`/film/${film2.id}`} className="underline underline-offset-4">
-                              View Film →
+                              View Work →
                             </a>
                           </span>
                           <span className="md:hidden">
-                            Der Postraub des Jahrhunderts — SRF docudrama series
-                            <br />
-                            ES GESCHAH AM…{" "}
+                            Der Postraub des Jahrhunderts — SRF docudrama series ES GESCHAH AM…{" "}
                             <a href={`/film/${film2.id}`} className="underline underline-offset-4">
-                              View Film →
+                              View Work →
                             </a>
                           </span>
                         </div>
