@@ -2,6 +2,8 @@ import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { seriesData } from "@/data/series";
+import { filmsData } from "@/data/films";
+import { resolveFilmAsset } from "@/data/filmAssets";
 
 const fade = {
   hidden: { opacity: 0, y: 14 },
@@ -105,6 +107,57 @@ const Index = () => {
                 </motion.div>
               );
             })}
+            {/* FILM TEASER — Tsunami */}
+            {(() => {
+              const film = filmsData.find((f) => f.id === "tsunami-2004");
+              if (!film) return null;
+              const stills = film.stills.slice(0, 4).map((s) => ({
+                src: resolveFilmAsset(s.src) ?? "",
+                alt: s.alt,
+              }));
+              if (stills.length < 4) return null;
+
+              return (
+                <motion.div
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: "-40px" }}
+                  variants={fade}
+                >
+                  <div className="grid grid-cols-2 gap-[18px]">
+                    <div className="grid gap-[18px]">
+                      <Slot src={stills[0].src} alt={stills[0].alt} aspect="aspect-[4/3]" />
+                      <Slot src={stills[1].src} alt={stills[1].alt} aspect="aspect-[3/4]" />
+                    </div>
+                    <div className="grid gap-[18px]">
+                      <Slot src={stills[2].src} alt={stills[2].alt} aspect="aspect-[3/4]" />
+                      <Slot src={stills[3].src} alt={stills[3].alt} aspect="aspect-[4/3]" />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 mt-6">
+                    <div>
+                      <div className="text-[22px] md:text-[32px] font-medium leading-snug">
+                        <span className="hidden md:inline">
+                          {film.title} — {film.format}{" "}
+                          <a href={`/film/${film.id}`} className="underline underline-offset-4">
+                            View Film →
+                          </a>
+                        </span>
+                        <span className="md:hidden">
+                          {film.title} — {film.format}
+                          <br />
+                          <a href={`/film/${film.id}`} className="underline underline-offset-4">
+                            View Film →
+                          </a>
+                        </span>
+                      </div>
+                    </div>
+                    <div className="hidden md:block" />
+                  </div>
+                </motion.div>
+              );
+            })()}
           </section>
         </div>
       </main>
