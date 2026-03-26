@@ -304,7 +304,12 @@ The tight budget of the pilot required a deliberately lean production setup and 
     tags: ["CINEMA"],
     coverStillIndex: 0,
     stills: [
-      { src: "film-der-unschuldige-1.png", alt: "Der Unschuldige — Title" },
+      { src: "film-der-unschuldige-1.png", alt: "Der Unschuldige — Titelbild" },
+      { src: "film-der-unschuldige-2.png", alt: "Der Unschuldige — Ruth vor Publikum" },
+      { src: "film-der-unschuldige-3.png", alt: "Der Unschuldige — Familie am Esstisch" },
+      { src: "film-der-unschuldige-4.png", alt: "Der Unschuldige — Ruth allein im Saal" },
+      { src: "film-der-unschuldige-5.png", alt: "Der Unschuldige — Nachtszene in Blau" },
+      { src: "film-der-unschuldige-6.png", alt: "Der Unschuldige — Konfrontation" },
     ],
     description: "Feature film directed by Simon Jaquemet, produced by 8horses and Augenschein.",
     metaLine: "Cinema · 8horses · Augenschein · Feature film · 2018",
