@@ -335,7 +335,12 @@ The tight budget of the pilot required a deliberately lean production setup and 
     tags: ["CINEMA"],
     coverStillIndex: 0,
     stills: [
-      { src: "film-zwischenstopp-1.png", alt: "Zwischenstopp — Title" },
+      { src: "film-zwischenstopp-1.png", alt: "Zwischenstopp — Titelbild" },
+      { src: "film-zwischenstopp-2.png", alt: "Zwischenstopp — Fahrerin im Spiegel" },
+      { src: "film-zwischenstopp-3.png", alt: "Zwischenstopp — Passagiere im Bus" },
+      { src: "film-zwischenstopp-4.png", alt: "Zwischenstopp — Junger Mann am Bus" },
+      { src: "film-zwischenstopp-5.png", alt: "Zwischenstopp — Busbahnhof" },
+      { src: "film-zwischenstopp-6.png", alt: "Zwischenstopp — Gespräch im Bus" },
     ],
     description: "Short film directed by Cosima Frei, produced by 2:1 Film.",
     metaLine: "Cinema · 2:1 Film · Short film · 2017",
