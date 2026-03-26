@@ -83,15 +83,13 @@ const Index = () => {
                     <div>
                       <div className="text-[22px] md:text-[32px] font-medium leading-snug">
                         <span className="hidden md:inline">
-                          {series.excerpt}
-                          <br />
+                          {series.excerpt}{" "}
                           <a href={`/photography/${series.id}`} className="underline underline-offset-4">
                             View Work →
                           </a>
                         </span>
                         <span className="md:hidden">
-                          {series.excerpt}
-                          <br />
+                          {series.excerpt}{" "}
                           <a href={`/photography/${series.id}`} className="underline underline-offset-4">
                             View Work →
                           </a>
