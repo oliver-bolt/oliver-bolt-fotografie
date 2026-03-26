@@ -191,19 +191,15 @@ const Index = () => {
                       <div>
                         <div className="text-[22px] md:text-[32px] font-medium leading-snug">
                           <span className="hidden md:inline">
-                            Der Postraub des Jahrhunderts — SRF docudrama series
-                            <br />
-                            ES GESCHAH AM…{" "}
+                            Der Postraub des Jahrhunderts — SRF docudrama series{" "}
                             <a href={`/film/${film2.id}`} className="underline underline-offset-4">
-                              View Film →
+                              ES GESCHAH AM… View Film →
                             </a>
                           </span>
                           <span className="md:hidden">
-                            Der Postraub des Jahrhunderts — SRF docudrama series
-                            <br />
-                            ES GESCHAH AM…{" "}
+                            Der Postraub des Jahrhunderts — SRF docudrama series{" "}
                             <a href={`/film/${film2.id}`} className="underline underline-offset-4">
-                              View Film →
+                              ES GESCHAH AM… View Film →
                             </a>
                           </span>
                         </div>
