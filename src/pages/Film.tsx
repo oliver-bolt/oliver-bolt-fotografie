@@ -87,7 +87,7 @@ const FilmPage = () => {
               variants={fade}
               className="text-[22px] md:text-[32px] font-light text-foreground leading-snug mb-16 md:mb-20 max-w-full md:max-w-[50%]"
             >
-              Selected work in documentary and docudrama production.
+              Selected work across production, television and cinema.
             </motion.p>
 
             {/* Film grid */}
