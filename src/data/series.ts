@@ -181,9 +181,9 @@ export const seriesData: Series[] = [
     location: "Neuseeland",
     category: "Personal",
     cover: travelNz1,
-    excerpt: "Landscapes and light from a four-week road trip through New Zealand's South and North Island.",
+    excerpt: "Landscapes, weather and long road days from a four-week trip across New Zealand's South Island.",
     description:
-      "Four weeks in a campervan, starting from Wellington and crossing to the South Island by ferry. Fjords, glaciers, coast and open road — photographed during a road trip through New Zealand in 2024.",
+      "A photographic series from a four-week road trip through New Zealand in 2024. Travelling by campervan, the journey began in Wellington, crossed by ferry to the South Island and ended in Christchurch — moving through fjords, glaciers, coastline and open road.",
     background: "",
     technical: "",
     images: [
@@ -206,9 +206,9 @@ export const seriesData: Series[] = [
     location: "Tansania",
     category: "Personal",
     cover: tansania4,
-    excerpt: "First time Africa — from the Serengeti to the summit of Kilimanjaro. One lens to travel.",
+    excerpt: "From safari to summit — a travel series from Tanzania, shot on one lens.",
     description:
-      "A journey through Tanzania in 2023 — from Arusha through the Serengeti on safari to a seven-day climb up Mount Kilimanjaro. Wildlife, wide landscapes and the people along the way. Shot on a single lens.",
+      "Photographed in Tanzania in 2023, from Arusha through the Serengeti and on to a five-day climb up Mount Kilimanjaro. The series focuses on wildlife, landscape and people along the way — shot on a single lens.",
     background: "",
     technical: "",
     images: [
@@ -300,9 +300,9 @@ export const seriesData: Series[] = [
     location: "Uzwil",
     category: "Stories",
     cover: druegg4,
-    excerpt: "Documenting artist Dominik Rüegg's mural project at a primary school in Uzwil.",
+    excerpt: "Documenting Dominik Rüegg's ground painting project as part of the redesign of a school playground in Uzwil.",
     description:
-      "Documentation of a large-scale mural by artist Dominik Rüegg (Drüegg) at Primarschule Uzwil. A cultural project in collaboration with Kulturagent:innen — colour, architecture and process on the schoolyard.",
+      "Documentation of an intervention by artist Dominik Rüegg (Drü Egg) created on the school playground as part of its redesign at Schule Uzwil. Developed as a collaborative project with Kulturagent.innen Schweiz, the work connects art, participation and the visual transformation of the school environment.",
     background: "",
     technical: "",
     images: [
@@ -321,9 +321,9 @@ export const seriesData: Series[] = [
     location: "St. Gallen",
     category: "Stories",
     cover: riethuesli5,
-    excerpt: "Over 25 artists turned a condemned schoolhouse into a street art canvas — one weekend before demolition.",
+    excerpt: "Over 25 artists turned the old Riethüsli schoolhouse into a temporary artwork before its demolition.",
     description:
-      "Documentation of Kunst Schul Haus, a street art project at the old Primarschulhaus Riethüsli in St. Gallen. Over 25 artists transformed the building into a collective canvas across one weekend in September 2025 — organized by Somewhere Lab before the school's demolition in 2026.",
+      "Documentation of Kunst Schul Haus, a street art project at the former Primarschulhaus Riethüsli in St. Gallen. On 20 and 21 September 2025, more than 25 artists transformed the building into a collective artwork before its demolition in 2026. Initiated by Somewhere Lab and Martin Tiziani, and supported by the City of St. Gallen.",
     background: "",
     technical: "",
     images: [
@@ -355,9 +355,9 @@ export const seriesData: Series[] = [
     location: "Balkans",
     category: "Personal",
     cover: balkan8,
-    excerpt: "Four weeks through the Balkans with a rooftop tent — no fixed plans, stopped where it felt right.",
+    excerpt: "Four weeks through the Balkans with a rooftop tent — no fixed plans, just road and direction.",
     description:
-      "A four-week road trip through Croatia, Montenegro, Albania, North Macedonia, Serbia, Bosnia and Herzegovina and Slovenia in 2022. Traveling with a rooftop tent, no fixed itinerary — brutalist architecture, roadside encounters and the everyday life between the cities.",
+      "A photographic series from a four-week road trip through Croatia, Montenegro, Albania, North Macedonia, Serbia, Bosnia and Herzegovina, and Slovenia in 2022. Travelling with a rooftop tent and no fixed itinerary, the work moves between architecture, roadside encounters and everyday life.",
     background: "",
     technical: "",
     images: [
