@@ -142,6 +142,7 @@ const Index = () => {
               if (stills.length < 4) return null;
 
               const captionLines = block.caption.split("\n");
+              const posMap = FILM_SLOT_POSITIONS[block.filmId];
 
               return (
                 <motion.div
