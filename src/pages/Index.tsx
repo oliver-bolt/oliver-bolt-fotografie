@@ -58,6 +58,11 @@ const FILM_STILL_PICKS: Record<string, number[]> = {
   "sr111-halifax": [3, 0, 4, 5],
 };
 
+// Per-film, per-grid-slot object-position overrides (keyed by filmId, slot index 0-3)
+const FILM_SLOT_POSITIONS: Record<string, Record<number, string>> = {
+  "sr111-halifax": { 3: "center top" }, // slot 3 = top-right: crop from bottom only
+};
+
 const Index = () => {
   return (
     <>
