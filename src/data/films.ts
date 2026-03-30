@@ -285,7 +285,7 @@ Working with limited resources, the focus was on efficient structures and high a
       "https://player.vimeo.com/video/289874675?h=c0006d5fb9&title=0&byline=0&portrait=0",
     embedType: "vimeo",
     credits: [
-      { label: "My role", value: "Focal Stage Production Manager" },
+      { label: "Role", value: "Focal Stage Production Manager" },
       { label: "Director", value: "Simon Jaquemet" },
       { label: "Camera", value: "Gabriel Sandru" },
       { label: "Editing", value: "Christof Schertenleib" },
@@ -316,7 +316,7 @@ Working with limited resources, the focus was on efficient structures and high a
       "https://player.vimeo.com/video/219877427?h=04c073922e&title=0&byline=0&portrait=0",
     embedType: "vimeo",
     credits: [
-      { label: "My role", value: "Production Manager" },
+      { label: "Role", value: "Production Manager" },
       { label: "Director", value: "Cosima Frei" },
       { label: "Camera", value: "Valentino Vigniti" },
       { label: "Editing", value: "Mirjam Zimmermann" },
@@ -347,7 +347,7 @@ Working with limited resources, the focus was on efficient structures and high a
       "https://player.vimeo.com/video/181904697?h=7bb682a7c7&title=0&byline=0&portrait=0",
     embedType: "vimeo",
     credits: [
-      { label: "My role", value: "Floor Manager Episode «Eddie»" },
+      { label: "Role", value: "Floor Manager Episode «Eddie»" },
       { label: "Director", value: "Wendy Pillonel" },
       { label: "Camera", value: "Lukas Graf" },
       { label: "Editing", value: "Fleur Matson" },
