@@ -55,10 +55,6 @@ const FILM_STILL_PICKS: Record<string, number[]> = {
   "postraub": [1, 3, 2, 5],
   "sr111-halifax": [3, 0, 4, 5],
 };
-  "tsunami-2004": [0, 1, 2, 4],
-  "postraub": [1, 3, 2, 5],
-  "sr111-halifax": [3, 0, 4, 5],
-};
 
 const Index = () => {
   return (
