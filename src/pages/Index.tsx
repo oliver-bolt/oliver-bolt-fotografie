@@ -46,7 +46,15 @@ const LANDING_SEQUENCE: Block[] = [
   { type: "photo", seriesId: "amplid" },
 ];
 
+const PHOTO_IMAGE_PICKS: Record<string, number[]> = {
+  "riethuesli-2025": [17, 3, 0, 1],
+};
+
 const FILM_STILL_PICKS: Record<string, number[]> = {
+  "tsunami-2004": [0, 1, 2, 4],
+  "postraub": [1, 3, 2, 5],
+  "sr111-halifax": [3, 0, 4, 5],
+};
   "tsunami-2004": [0, 1, 2, 4],
   "postraub": [1, 3, 2, 5],
   "sr111-halifax": [3, 0, 4, 5],
