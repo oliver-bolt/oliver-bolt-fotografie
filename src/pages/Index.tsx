@@ -46,6 +46,10 @@ const LANDING_SEQUENCE: Block[] = [
   { type: "photo", seriesId: "amplid" },
 ];
 
+const PHOTO_IMAGE_PICKS: Record<string, number[]> = {
+  "riethuesli-2025": [17, 3, 0, 1],
+};
+
 const FILM_STILL_PICKS: Record<string, number[]> = {
   "tsunami-2004": [0, 1, 2, 4],
   "postraub": [1, 3, 2, 5],
@@ -80,7 +84,10 @@ const Index = () => {
               if (block.type === "photo") {
                 const series = seriesData.find((s) => s.id === block.seriesId);
                 if (!series) return null;
-                const imgs = series.images?.slice(0, 4);
+                const picks = PHOTO_IMAGE_PICKS[block.seriesId];
+                const imgs = picks
+                  ? picks.map((i) => series.images[i])
+                  : series.images?.slice(0, 4);
                 if (!imgs || imgs.length < 4) return null;
 
                 return (
