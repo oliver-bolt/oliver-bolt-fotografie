@@ -90,6 +90,8 @@ const FilmPage = () => {
             >
               {activeFilter === "In Production"
                 ? "Current and upcoming projects in development or production."
+                : activeFilter === "Television"
+                ? "Selected work for television, mainly across documentary and docudrama formats."
                 : "Selected work across production, television and cinema."}
             </motion.p>
 
