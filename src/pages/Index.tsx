@@ -16,7 +16,7 @@ const fade = {
 
 const SHELL = "max-w-[1600px] mx-auto px-10 md:px-14";
 
-function Slot({ src, alt, aspect, eager = false }: { src: string; alt: string; aspect: string; eager?: boolean }) {
+function Slot({ src, alt, aspect, eager = false, objectPosition }: { src: string; alt: string; aspect: string; eager?: boolean; objectPosition?: string }) {
   return (
     <div className={`${aspect} overflow-hidden relative`}>
       <img
@@ -25,7 +25,8 @@ function Slot({ src, alt, aspect, eager = false }: { src: string; alt: string; a
         loading={eager ? "eager" : "lazy"}
         decoding={eager ? "sync" : "async"}
         {...(eager ? { fetchPriority: "high" as const } : {})}
-        className="absolute inset-0 w-full h-full object-cover object-[center_30%]"
+        className="absolute inset-0 w-full h-full object-cover"
+        style={{ objectPosition: objectPosition ?? "center 30%" }}
       />
     </div>
   );
@@ -54,7 +55,12 @@ const PHOTO_IMAGE_PICKS: Record<string, number[]> = {
 const FILM_STILL_PICKS: Record<string, number[]> = {
   "tsunami-2004": [1, 2, 0, 4],
   "postraub": [1, 3, 2, 5],
-  "sr111-halifax": [3, 1, 4, 0],
+  "sr111-halifax": [3, 0, 4, 5],
+};
+
+// Per-film, per-grid-slot object-position overrides (keyed by filmId, slot index 0-3)
+const FILM_SLOT_POSITIONS: Record<string, Record<number, string>> = {
+  "sr111-halifax": { 3: "center top" }, // slot 3 = top-right: crop from bottom only
 };
 
 const Index = () => {
@@ -136,6 +142,7 @@ const Index = () => {
               if (stills.length < 4) return null;
 
               const captionLines = block.caption.split("\n");
+              const posMap = FILM_SLOT_POSITIONS[block.filmId];
 
               return (
                 <motion.div
@@ -147,12 +154,12 @@ const Index = () => {
                 >
                   <div className="grid grid-cols-2 gap-[18px]">
                     <div className="grid gap-[18px]">
-                      <Slot src={stills[0].src} alt={stills[0].alt} aspect={leftTop} />
-                      <Slot src={stills[2].src} alt={stills[2].alt} aspect={leftBottom} />
+                      <Slot src={stills[0].src} alt={stills[0].alt} aspect={leftTop} objectPosition={posMap?.[0]} />
+                      <Slot src={stills[2].src} alt={stills[2].alt} aspect={leftBottom} objectPosition={posMap?.[2]} />
                     </div>
                     <div className="grid gap-[18px]">
-                      <Slot src={stills[3].src} alt={stills[3].alt} aspect={rightTop} />
-                      <Slot src={stills[1].src} alt={stills[1].alt} aspect={rightBottom} />
+                      <Slot src={stills[3].src} alt={stills[3].alt} aspect={rightTop} objectPosition={posMap?.[3]} />
+                      <Slot src={stills[1].src} alt={stills[1].alt} aspect={rightBottom} objectPosition={posMap?.[1]} />
                     </div>
                   </div>
 
