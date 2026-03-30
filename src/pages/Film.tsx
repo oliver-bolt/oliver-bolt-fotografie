@@ -81,6 +81,15 @@ const FilmPage = () => {
       <main className="w-full">
         <div className={SHELL}>
           <section className="pt-36 md:pt-48 pb-28">
+            <motion.p
+              initial="hidden"
+              animate="visible"
+              variants={fade}
+              className="text-[22px] md:text-[32px] font-light text-foreground leading-snug mb-16 md:mb-20 max-w-full md:max-w-[50%]"
+            >
+              Selected work in documentary and docudrama production.
+            </motion.p>
+
             {/* Film grid */}
             <AnimatePresence mode="wait">
               <motion.div
