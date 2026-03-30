@@ -101,7 +101,7 @@ const Navbar = ({ invertColors = false }: NavbarProps) => {
                       invertColors && isFilmActive && "decoration-white",
                     )}
                   >
-                    Film / Production
+                    Film
                   </Link>
 
                   {filmDropdownOpen && (
@@ -254,7 +254,7 @@ const Navbar = ({ invertColors = false }: NavbarProps) => {
                       isFilmActive && "underline underline-offset-8",
                     )}
                   >
-                     Film / Production
+                     Film
                     <ChevronDown
                       size={24}
                       className={cn(
