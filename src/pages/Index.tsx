@@ -64,7 +64,7 @@ const FILM_SLOT_POSITIONS: Record<string, Record<number, string>> = {
 };
 
 const PHOTO_SLOT_POSITIONS: Record<string, Record<number, string>> = {
-  "frauenstreik-2025": { 3: "left center" },
+  "frauenstreik-2025": { 1: "left center", 3: "left center" },
 };
 
 const Index = () => {
