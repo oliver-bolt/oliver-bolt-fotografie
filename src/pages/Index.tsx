@@ -51,7 +51,7 @@ const PHOTO_IMAGE_PICKS: Record<string, number[]> = {
 };
 
 const FILM_STILL_PICKS: Record<string, number[]> = {
-  "tsunami-2004": [0, 1, 2, 3],
+  "tsunami-2004": [1, 2, 0, 4],
   "postraub": [1, 3, 2, 5],
   "sr111-halifax": [3, 0, 4, 5],
 };
