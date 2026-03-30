@@ -150,9 +150,9 @@ export const seriesData: Series[] = [
     location: "Schweiz",
     category: "Commissions",
     cover: action8,
-    excerpt: "Snowboard photography for Amplid — shot across Vorarlberg during the 2024/25 season.",
+    excerpt: "Snowboard photography for Amplid — shot with rider Benny Deeg across Vorarlberg during the 2024/25 season.",
     description:
-      "Action and rider photography for Amplid, the snowboard brand founded by Peter Bauer. Shot with rider Benny Deeg across locations in Vorarlberg and Bregenzerwald, Austria, during the 2024/25 season — featuring the Ohana Vibes and Cab Driver boards.",
+      "Action and rider photography for Amplid, the snowboard brand founded by Peter Bauer. Shot with rider Benny Deeg across locations in Vorarlberg and the Bregenzerwald during the 2024/25 season, featuring the Ohana Vibes and Cab Driver boards.",
     background: "",
     technical: "",
     images: [
@@ -237,7 +237,7 @@ export const seriesData: Series[] = [
     cover: projectsYoo1,
     excerpt: "Product and portrait photography for YOO — a label for handmade beanies from southern Germany.",
     description:
-      "Product and portrait photography for YOO, a label for handmade beanies from the Allgäu. Every piece is made from repurposed garments — old jackets, reclaimed materials. Shot across different locations in Bregenz, Austria.",
+      "Product and portrait photography for YOO, a label from the Allgäu producing handmade beanies from repurposed garments and reclaimed materials. Shot across different locations in Bregenz, Austria.",
     background: "",
     technical: "",
     images: [
