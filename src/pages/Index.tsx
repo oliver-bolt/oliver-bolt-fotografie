@@ -16,7 +16,7 @@ const fade = {
 
 const SHELL = "max-w-[1600px] mx-auto px-10 md:px-14";
 
-function Slot({ src, alt, aspect, eager = false }: { src: string; alt: string; aspect: string; eager?: boolean }) {
+function Slot({ src, alt, aspect, eager = false, objectPosition }: { src: string; alt: string; aspect: string; eager?: boolean; objectPosition?: string }) {
   return (
     <div className={`${aspect} overflow-hidden relative`}>
       <img
@@ -25,7 +25,8 @@ function Slot({ src, alt, aspect, eager = false }: { src: string; alt: string; a
         loading={eager ? "eager" : "lazy"}
         decoding={eager ? "sync" : "async"}
         {...(eager ? { fetchPriority: "high" as const } : {})}
-        className="absolute inset-0 w-full h-full object-cover object-[center_30%]"
+        className="absolute inset-0 w-full h-full object-cover"
+        style={{ objectPosition: objectPosition ?? "center 30%" }}
       />
     </div>
   );
