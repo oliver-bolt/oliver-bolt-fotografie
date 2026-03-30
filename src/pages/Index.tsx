@@ -153,12 +153,12 @@ const Index = () => {
                 >
                   <div className="grid grid-cols-2 gap-[18px]">
                     <div className="grid gap-[18px]">
-                      <Slot src={stills[0].src} alt={stills[0].alt} aspect={leftTop} />
-                      <Slot src={stills[2].src} alt={stills[2].alt} aspect={leftBottom} />
+                      <Slot src={stills[0].src} alt={stills[0].alt} aspect={leftTop} objectPosition={posMap?.[0]} />
+                      <Slot src={stills[2].src} alt={stills[2].alt} aspect={leftBottom} objectPosition={posMap?.[2]} />
                     </div>
                     <div className="grid gap-[18px]">
-                      <Slot src={stills[3].src} alt={stills[3].alt} aspect={rightTop} />
-                      <Slot src={stills[1].src} alt={stills[1].alt} aspect={rightBottom} />
+                      <Slot src={stills[3].src} alt={stills[3].alt} aspect={rightTop} objectPosition={posMap?.[3]} />
+                      <Slot src={stills[1].src} alt={stills[1].alt} aspect={rightBottom} objectPosition={posMap?.[1]} />
                     </div>
                   </div>
 
