@@ -63,6 +63,10 @@ const FILM_SLOT_POSITIONS: Record<string, Record<number, string>> = {
   "sr111-halifax": { 3: "center top" }, // slot 3 = top-right: crop from bottom only
 };
 
+const PHOTO_SLOT_POSITIONS: Record<string, Record<number, string>> = {
+  "frauenstreik-2025": { 3: "left center" },
+};
+
 const Index = () => {
   return (
     <>
@@ -96,6 +100,7 @@ const Index = () => {
                   ? picks.map((i) => series.images[i])
                   : series.images?.slice(0, 4);
                 if (!imgs || imgs.length < 4) return null;
+                const photoPosMap = PHOTO_SLOT_POSITIONS[block.seriesId];
 
                 return (
                   <motion.div
@@ -107,12 +112,12 @@ const Index = () => {
                   >
                     <div className="grid grid-cols-2 gap-[18px]">
                       <div className="grid gap-[18px]">
-                        <Slot src={imgs[0].src} alt={imgs[0].alt} aspect={leftTop} eager={index === 0} />
-                        <Slot src={imgs[1].src} alt={imgs[1].alt} aspect={leftBottom} />
+                        <Slot src={imgs[0].src} alt={imgs[0].alt} aspect={leftTop} eager={index === 0} objectPosition={photoPosMap?.[0]} />
+                        <Slot src={imgs[1].src} alt={imgs[1].alt} aspect={leftBottom} objectPosition={photoPosMap?.[1]} />
                       </div>
                       <div className="grid gap-[18px]">
-                        <Slot src={imgs[2].src} alt={imgs[2].alt} aspect={rightTop} eager={index === 0} />
-                        <Slot src={imgs[3].src} alt={imgs[3].alt} aspect={rightBottom} />
+                        <Slot src={imgs[2].src} alt={imgs[2].alt} aspect={rightTop} eager={index === 0} objectPosition={photoPosMap?.[2]} />
+                        <Slot src={imgs[3].src} alt={imgs[3].alt} aspect={rightBottom} objectPosition={photoPosMap?.[3]} />
                       </div>
                     </div>
 
