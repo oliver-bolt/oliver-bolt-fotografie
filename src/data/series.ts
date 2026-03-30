@@ -287,7 +287,6 @@ export const seriesData: Series[] = [
     images: [
       { src: sternwarte1, alt: "Observatory exterior, Kantonsschule am Burggraben St. Gallen", layout: "full" },
       { src: sternwarte2, alt: "Observatory at night, St. Gallen — Tagblatt editorial", layout: "half" },
-      { src: sternwarte3, alt: "Observatory dome, Kantonsschule am Burggraben", layout: "half" },
       { src: sternwarte4, alt: "Telescope interior, observatory St. Gallen", layout: "full" },
       { src: sternwarte5, alt: "Moon detail through telescope, St. Gallen observatory", layout: "half" },
       { src: sternwarte6, alt: "Portrait inside the observatory — Tagblatt summer series 2025", layout: "half" },
