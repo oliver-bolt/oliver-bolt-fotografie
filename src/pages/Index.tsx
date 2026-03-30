@@ -31,6 +31,27 @@ function Slot({ src, alt, aspect, eager = false }: { src: string; alt: string; a
   );
 }
 
+type Block =
+  | { type: "photo"; seriesId: string }
+  | { type: "film"; filmId: string; caption: string };
+
+const LANDING_SEQUENCE: Block[] = [
+  { type: "photo", seriesId: "riethuesli-2025" },
+  { type: "film", filmId: "tsunami-2004", caption: "Der Tsunami von 2004 — SRF docudrama series\nES GESCHAH AM…" },
+  { type: "photo", seriesId: "sternwarte-2025" },
+  { type: "film", filmId: "postraub", caption: "Der Postraub des Jahrhunderts — SRF docudrama series ES GESCHAH AM…" },
+  { type: "photo", seriesId: "new-zealand" },
+  { type: "film", filmId: "sr111-halifax", caption: "SR111 – Absturz über Halifax — SRF docudrama series ES GESCHAH AM…" },
+  { type: "photo", seriesId: "frauenstreik-2025" },
+  { type: "photo", seriesId: "amplid" },
+];
+
+const FILM_STILL_PICKS: Record<string, number[]> = {
+  "tsunami-2004": [0, 1, 2, 4],
+  "postraub": [1, 3, 2, 5],
+  "sr111-halifax": [3, 0, 4, 5],
+};
+
 const Index = () => {
   return (
     <>
@@ -49,20 +70,68 @@ const Index = () => {
 
           {/* PROJECT BLOCKS */}
           <section className="space-y-20 md:space-y-24 pb-28">
-            {seriesData.map((series, index) => {
-              const imgs = series.images?.slice(0, 4);
-              if (!imgs || imgs.length < 4) return null;
-
+            {LANDING_SEQUENCE.map((block, index) => {
               const altLayout = index % 2 === 1;
-
               const leftTop = altLayout ? "aspect-[3/4]" : "aspect-[4/3]";
               const leftBottom = altLayout ? "aspect-[4/3]" : "aspect-[3/4]";
               const rightTop = altLayout ? "aspect-[4/3]" : "aspect-[3/4]";
               const rightBottom = altLayout ? "aspect-[3/4]" : "aspect-[4/3]";
 
-              const seriesBlock = (
+              if (block.type === "photo") {
+                const series = seriesData.find((s) => s.id === block.seriesId);
+                if (!series) return null;
+                const imgs = series.images?.slice(0, 4);
+                if (!imgs || imgs.length < 4) return null;
+
+                return (
+                  <motion.div
+                    key={series.id}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-40px" }}
+                    variants={fade}
+                  >
+                    <div className="grid grid-cols-2 gap-[18px]">
+                      <div className="grid gap-[18px]">
+                        <Slot src={imgs[0].src} alt={imgs[0].alt} aspect={leftTop} eager={index === 0} />
+                        <Slot src={imgs[1].src} alt={imgs[1].alt} aspect={leftBottom} />
+                      </div>
+                      <div className="grid gap-[18px]">
+                        <Slot src={imgs[2].src} alt={imgs[2].alt} aspect={rightTop} eager={index === 0} />
+                        <Slot src={imgs[3].src} alt={imgs[3].alt} aspect={rightBottom} />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 mt-6">
+                      <div>
+                        <div className="text-[22px] md:text-[32px] font-medium leading-snug">
+                          {series.excerpt}{" "}
+                          <a href={`/photography/${series.id}`} className="underline underline-offset-4 whitespace-nowrap">
+                            View Work →
+                          </a>
+                        </div>
+                      </div>
+                      <div className="hidden md:block" />
+                    </div>
+                  </motion.div>
+                );
+              }
+
+              // Film block
+              const film = filmsData.find((f) => f.id === block.filmId);
+              if (!film) return null;
+              const picks = FILM_STILL_PICKS[block.filmId] ?? [0, 1, 2, 3];
+              const stills = picks.map((i) => ({
+                src: resolveFilmAsset(film.stills[i].src) ?? "",
+                alt: film.stills[i].alt,
+              }));
+              if (stills.length < 4) return null;
+
+              const captionLines = block.caption.split("\n");
+
+              return (
                 <motion.div
-                  key={series.id}
+                  key={`film-${block.filmId}`}
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: true, margin: "-40px" }}
@@ -70,199 +139,36 @@ const Index = () => {
                 >
                   <div className="grid grid-cols-2 gap-[18px]">
                     <div className="grid gap-[18px]">
-                      <Slot src={imgs[0].src} alt={imgs[0].alt} aspect={leftTop} eager={index === 0} />
-                      <Slot src={imgs[1].src} alt={imgs[1].alt} aspect={leftBottom} />
+                      <Slot src={stills[0].src} alt={stills[0].alt} aspect={leftTop} />
+                      <Slot src={stills[2].src} alt={stills[2].alt} aspect={leftBottom} />
                     </div>
                     <div className="grid gap-[18px]">
-                      <Slot src={imgs[2].src} alt={imgs[2].alt} aspect={rightTop} eager={index === 0} />
-                      <Slot src={imgs[3].src} alt={imgs[3].alt} aspect={rightBottom} />
+                      <Slot src={stills[3].src} alt={stills[3].alt} aspect={rightTop} />
+                      <Slot src={stills[1].src} alt={stills[1].alt} aspect={rightBottom} />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 mt-6">
                     <div>
                       <div className="text-[22px] md:text-[32px] font-medium leading-snug">
-                        <span className="hidden md:inline">
-                          {series.excerpt}{" "}
-                          <a href={`/photography/${series.id}`} className="underline underline-offset-4 whitespace-nowrap">
-                            View Work →
-                          </a>
-                        </span>
-                        <span className="md:hidden">
-                          {series.excerpt}{" "}
-                          <a href={`/photography/${series.id}`} className="underline underline-offset-4 whitespace-nowrap">
-                            View Work →
-                          </a>
-                        </span>
+                        {captionLines.length > 1 ? (
+                          <>
+                            {captionLines[0]}
+                            <br />
+                            {captionLines[1]}{" "}
+                          </>
+                        ) : (
+                          <>{captionLines[0]}{" "}</>
+                        )}
+                        <a href={`/film/${film.id}`} className="underline underline-offset-4 whitespace-nowrap">
+                          View Work →
+                        </a>
                       </div>
                     </div>
                     <div className="hidden md:block" />
                   </div>
                 </motion.div>
               );
-
-              // Insert film teaser after the first series block (position 2)
-              if (index === 0) {
-                const film = filmsData.find((f) => f.id === "tsunami-2004");
-                const pickIndices = [0, 1, 2, 4]; // stills 1,2,3,5
-                const stills = film ? pickIndices.map((i) => ({
-                  src: resolveFilmAsset(film.stills[i].src) ?? "",
-                  alt: film.stills[i].alt,
-                })) : [];
-
-                const filmBlock = film && stills.length >= 4 ? (
-                  <motion.div
-                    key="film-tsunami"
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, margin: "-40px" }}
-                    variants={fade}
-                  >
-                    <div className="grid grid-cols-2 gap-[18px]">
-                      <div className="grid gap-[18px]">
-                        <Slot src={stills[1].src} alt={stills[1].alt} aspect="aspect-[3/4]" />
-                        <Slot src={stills[0].src} alt={stills[0].alt} aspect="aspect-[4/3]" />
-                      </div>
-                      <div className="grid gap-[18px]">
-                        <Slot src={stills[3].src} alt={stills[3].alt} aspect="aspect-[4/3]" />
-                        <Slot src={stills[2].src} alt={stills[2].alt} aspect="aspect-[3/4]" />
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 mt-6">
-                      <div>
-                        <div className="text-[22px] md:text-[32px] font-medium leading-snug">
-                          <span className="hidden md:inline">
-                            Der Tsunami von 2004 — SRF docudrama series
-                            <br />
-                            ES GESCHAH AM…{" "}
-                            <a href={`/film/${film.id}`} className="underline underline-offset-4">
-                              View Work →
-                            </a>
-                          </span>
-                          <span className="md:hidden">
-                            Der Tsunami von 2004 — SRF docudrama series
-                            <br />
-                            ES GESCHAH AM…{" "}
-                            <a href={`/film/${film.id}`} className="underline underline-offset-4">
-                              View Work →
-                            </a>
-                          </span>
-                        </div>
-                      </div>
-                      <div className="hidden md:block" />
-                    </div>
-                  </motion.div>
-                ) : null;
-
-                return <>{seriesBlock}{filmBlock}</>;
-              }
-
-              // Insert Postraub teaser after New Zealand (index 1)
-              if (index === 1) {
-                const film2 = filmsData.find((f) => f.id === "postraub");
-                const stills2 = film2 ? [1, 3, 2, 5].map((i) => ({
-                  src: resolveFilmAsset(film2.stills[i].src) ?? "",
-                  alt: film2.stills[i].alt,
-                })) : [];
-
-                const filmBlock2 = film2 && stills2.length >= 4 ? (
-                  <motion.div
-                    key="film-postraub"
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, margin: "-40px" }}
-                    variants={fade}
-                  >
-                    <div className="grid grid-cols-2 gap-[18px]">
-                      <div className="grid gap-[18px]">
-                        <Slot src={stills2[0].src} alt={stills2[0].alt} aspect="aspect-[3/4]" />
-                        <Slot src={stills2[2].src} alt={stills2[2].alt} aspect="aspect-[4/3]" />
-                      </div>
-                      <div className="grid gap-[18px]">
-                        <Slot src={stills2[3].src} alt={stills2[3].alt} aspect="aspect-[4/3]" />
-                        <Slot src={stills2[1].src} alt={stills2[1].alt} aspect="aspect-[3/4]" />
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 mt-6">
-                      <div>
-                        <div className="text-[22px] md:text-[32px] font-medium leading-snug">
-                          <span className="hidden md:inline">
-                            Der Postraub des Jahrhunderts — SRF docudrama series ES GESCHAH AM…{" "}
-                            <a href={`/film/${film2.id}`} className="underline underline-offset-4">
-                              View Work →
-                            </a>
-                          </span>
-                          <span className="md:hidden">
-                            Der Postraub des Jahrhunderts — SRF docudrama series ES GESCHAH AM…{" "}
-                            <a href={`/film/${film2.id}`} className="underline underline-offset-4">
-                              View Work →
-                            </a>
-                          </span>
-                        </div>
-                      </div>
-                      <div className="hidden md:block" />
-                    </div>
-                  </motion.div>
-                ) : null;
-
-              return <>{seriesBlock}{filmBlock2}</>;
-              }
-
-              // Insert Halifax teaser after YOO (index 3)
-              if (index === 3) {
-                const film3 = filmsData.find((f) => f.id === "sr111-halifax");
-                const stills3 = film3 ? [3, 0, 4, 5].map((i) => ({
-                  src: resolveFilmAsset(film3.stills[i].src) ?? "",
-                  alt: film3.stills[i].alt,
-                })) : [];
-
-                const filmBlock3 = film3 && stills3.length >= 4 ? (
-                  <motion.div
-                    key="film-halifax"
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, margin: "-40px" }}
-                    variants={fade}
-                  >
-                    <div className="grid grid-cols-2 gap-[18px]">
-                      <div className="grid gap-[18px]">
-                        <Slot src={stills3[0].src} alt={stills3[0].alt} aspect="aspect-[3/4]" />
-                        <Slot src={stills3[2].src} alt={stills3[2].alt} aspect="aspect-[4/3]" />
-                      </div>
-                      <div className="grid gap-[18px]">
-                        <Slot src={stills3[3].src} alt={stills3[3].alt} aspect="aspect-[4/3]" />
-                        <Slot src={stills3[1].src} alt={stills3[1].alt} aspect="aspect-[3/4]" />
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 mt-6">
-                      <div>
-                        <div className="text-[22px] md:text-[32px] font-medium leading-snug">
-                          <span className="hidden md:inline">
-                            SR111 – Absturz über Halifax — SRF docudrama series ES GESCHAH AM…{" "}
-                            <a href={`/film/${film3.id}`} className="underline underline-offset-4 whitespace-nowrap">
-                              View Work →
-                            </a>
-                          </span>
-                          <span className="md:hidden">
-                            SR111 – Absturz über Halifax — SRF docudrama series ES GESCHAH AM…{" "}
-                            <a href={`/film/${film3.id}`} className="underline underline-offset-4 whitespace-nowrap">
-                              View Work →
-                            </a>
-                          </span>
-                        </div>
-                      </div>
-                      <div className="hidden md:block" />
-                    </div>
-                  </motion.div>
-                ) : null;
-
-                return <>{seriesBlock}{filmBlock3}</>;
-              }
-
-              return seriesBlock;
             })}
           </section>
         </div>
