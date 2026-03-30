@@ -84,7 +84,10 @@ const Index = () => {
               if (block.type === "photo") {
                 const series = seriesData.find((s) => s.id === block.seriesId);
                 if (!series) return null;
-                const imgs = series.images?.slice(0, 4);
+                const picks = PHOTO_IMAGE_PICKS[block.seriesId];
+                const imgs = picks
+                  ? picks.map((i) => series.images[i])
+                  : series.images?.slice(0, 4);
                 if (!imgs || imgs.length < 4) return null;
 
                 return (
