@@ -257,9 +257,9 @@ export const seriesData: Series[] = [
     location: "St. Gallen",
     category: "Stories",
     cover: frauenstreik1,
-    excerpt: "Documentary work from the feminist strike on the 14th of June 2025 in St. Gallen.",
+    excerpt: "Documentary photography from the feminist strike on 14 June 2025 in St. Gallen.",
     description:
-      "Documentary photography from the feminist strike day on the 14th of June 2025 in St. Gallen. Protest, solidarity and energy on the streets.",
+      "Documentary photography from the feminist strike day on 14 June 2025 in St. Gallen. The series focuses on protest culture, visibility and collective presence in public space — from signs and gestures to moments of solidarity, resistance and gathering.",
     background: "",
     technical: "",
     images: [
@@ -279,9 +279,9 @@ export const seriesData: Series[] = [
     location: "St. Gallen",
     category: "Stories",
     cover: sternwarte1,
-    excerpt: "The observatory at Kantonsschule am Burggraben, St. Gallen — editorial work for the newspaper St. Galler Tagblatt.",
+    excerpt: "Editorial photography for the St. Galler Tagblatt series Lieblingshütten — inside the observatory at Kantonsschule am Burggraben.",
     description:
-      "Editorial photography for the newspaper St. Galler Tagblatt, summer series 2025 — a look inside the observatory at Kantonsschule am Burggraben, St. Gallen.",
+      "Editorial photography for the St. Galler Tagblatt series Lieblingshütten, featuring the observatory at Kantonsschule am Burggraben in St. Gallen. The story looks at the Sternwarte as a quiet place of observation and teaching, shaped by elevation, precision and distance from the everyday below.",
     background: "",
     technical: "",
     images: [
