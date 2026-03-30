@@ -82,12 +82,15 @@ const FilmPage = () => {
         <div className={SHELL}>
           <section className="pt-36 md:pt-48 pb-28">
             <motion.p
+              key={activeFilter}
               initial="hidden"
               animate="visible"
               variants={fade}
               className="text-[22px] md:text-[32px] font-light text-foreground leading-snug mb-16 md:mb-20 max-w-full md:max-w-[50%]"
             >
-              Selected work across production, television and cinema.
+              {activeFilter === "In Production"
+                ? "Current and upcoming projects in development or production."
+                : "Selected work across production, television and cinema."}
             </motion.p>
 
             {/* Film grid */}
