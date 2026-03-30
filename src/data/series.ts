@@ -235,7 +235,7 @@ export const seriesData: Series[] = [
     location: "Schweiz",
     category: "Commissions",
     cover: projectsYoo1,
-    excerpt: "Product and portrait photography for YOO — a label for handmade beanies from southern Germany.",
+    excerpt: "Product and portrait photography for YOO — handmade beanies built from reclaimed garments.",
     description:
       "Product and portrait photography for YOO, a label from the Allgäu producing handmade beanies from repurposed garments and reclaimed materials. Shot across different locations in Bregenz, Austria.",
     background: "",
