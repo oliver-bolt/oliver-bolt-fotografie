@@ -85,60 +85,6 @@ const Navbar = ({ invertColors = false }: NavbarProps) => {
 
             {/* Desktop */}
             <ul className="hidden md:flex items-center gap-10">
-              {/* Photography with hover dropdown */}
-              <li>
-                <div
-                  className="relative"
-                  onMouseEnter={showPhotoDropdown}
-                  onMouseLeave={hidePhotoDropdown}
-                >
-                  <Link
-                    to="/photography"
-                    className={cn(
-                      "text-[16px] tracking-wide transition-colors duration-200",
-                      linkColor,
-                      isPhotographyActive && "underline underline-offset-4",
-                      invertColors && isPhotographyActive && "decoration-white",
-                    )}
-                  >
-                    Photography
-                  </Link>
-
-                  {photoDropdownOpen && (
-                    <div className="absolute top-full right-0 mt-3 z-50 flex flex-col items-end gap-[6px]">
-                      {photographyFilters.map((filter) => {
-                        const isActive =
-                          isPhotographyActive &&
-                          (filter === activeFilter ||
-                            (filter === "All" && activeFilter === "All"));
-                        return (
-                          <button
-                            key={filter}
-                            type="button"
-                            onClick={() => {
-                              setPhotoDropdownOpen(false);
-                              if (filter === "All") {
-                                navigate("/photography");
-                              } else {
-                                navigate(`/photography?filter=${filter}`);
-                              }
-                            }}
-                            className={cn(
-                              "bg-transparent border-none cursor-pointer text-[16px] tracking-wide transition-colors duration-150 leading-normal whitespace-nowrap",
-                              invertColors ? "text-white" : "text-foreground",
-                              isActive && "underline underline-offset-4",
-                              invertColors && isActive && "decoration-white",
-                            )}
-                          >
-                            {filter}
-                          </button>
-                        );
-                      })}
-                    </div>
-                  )}
-                </div>
-              </li>
-
               {/* Film with hover dropdown */}
               <li>
                 <div
@@ -175,6 +121,60 @@ const Navbar = ({ invertColors = false }: NavbarProps) => {
                                 navigate("/film");
                               } else {
                                 navigate(`/film?filter=${filter}`);
+                              }
+                            }}
+                            className={cn(
+                              "bg-transparent border-none cursor-pointer text-[16px] tracking-wide transition-colors duration-150 leading-normal whitespace-nowrap",
+                              invertColors ? "text-white" : "text-foreground",
+                              isActive && "underline underline-offset-4",
+                              invertColors && isActive && "decoration-white",
+                            )}
+                          >
+                            {filter}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+              </li>
+
+              {/* Photography with hover dropdown */}
+              <li>
+                <div
+                  className="relative"
+                  onMouseEnter={showPhotoDropdown}
+                  onMouseLeave={hidePhotoDropdown}
+                >
+                  <Link
+                    to="/photography"
+                    className={cn(
+                      "text-[16px] tracking-wide transition-colors duration-200",
+                      linkColor,
+                      isPhotographyActive && "underline underline-offset-4",
+                      invertColors && isPhotographyActive && "decoration-white",
+                    )}
+                  >
+                    Photography
+                  </Link>
+
+                  {photoDropdownOpen && (
+                    <div className="absolute top-full right-0 mt-3 z-50 flex flex-col items-end gap-[6px]">
+                      {photographyFilters.map((filter) => {
+                        const isActive =
+                          isPhotographyActive &&
+                          (filter === activeFilter ||
+                            (filter === "All" && activeFilter === "All"));
+                        return (
+                          <button
+                            key={filter}
+                            type="button"
+                            onClick={() => {
+                              setPhotoDropdownOpen(false);
+                              if (filter === "All") {
+                                navigate("/photography");
+                              } else {
+                                navigate(`/photography?filter=${filter}`);
                               }
                             }}
                             className={cn(
@@ -244,42 +244,6 @@ const Navbar = ({ invertColors = false }: NavbarProps) => {
           <div className="max-w-[1600px] w-full mx-auto px-8">
             <div className="min-h-[70vh] flex items-center justify-center">
               <div className="flex flex-col items-center text-center gap-6">
-                {/* Photography (expandable) */}
-                <div className="flex flex-col items-center">
-                  <button
-                    type="button"
-                    onClick={() => setPhotographySubOpen(!photographySubOpen)}
-                    className={cn(
-                      "text-[44px] leading-[1.05] font-medium bg-transparent border-none cursor-pointer flex items-center gap-3",
-                      isPhotographyActive && "underline underline-offset-8",
-                    )}
-                  >
-                    Photography
-                    <ChevronDown
-                      size={24}
-                      className={cn(
-                        "transition-transform duration-200 mt-1",
-                        photographySubOpen && "rotate-180",
-                      )}
-                    />
-                  </button>
-
-                  {photographySubOpen && (
-                    <div className="flex flex-col items-center gap-3 mt-4">
-                      {photographyFilters.map((filter) => (
-                        <Link
-                          key={filter}
-                          to={filter === "All" ? "/photography" : `/photography?filter=${filter}`}
-                          onClick={closeMobile}
-                          className="text-[24px] leading-[1.2] font-light text-black/70"
-                        >
-                          {filter}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </div>
-
                 {/* Film (expandable) */}
                 <div className="flex flex-col items-center">
                   <button
@@ -306,6 +270,42 @@ const Navbar = ({ invertColors = false }: NavbarProps) => {
                         <Link
                           key={filter}
                           to={filter === "All" ? "/film" : `/film?filter=${filter}`}
+                          onClick={closeMobile}
+                          className="text-[24px] leading-[1.2] font-light text-black/70"
+                        >
+                          {filter}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* Photography (expandable) */}
+                <div className="flex flex-col items-center">
+                  <button
+                    type="button"
+                    onClick={() => setPhotographySubOpen(!photographySubOpen)}
+                    className={cn(
+                      "text-[44px] leading-[1.05] font-medium bg-transparent border-none cursor-pointer flex items-center gap-3",
+                      isPhotographyActive && "underline underline-offset-8",
+                    )}
+                  >
+                    Photography
+                    <ChevronDown
+                      size={24}
+                      className={cn(
+                        "transition-transform duration-200 mt-1",
+                        photographySubOpen && "rotate-180",
+                      )}
+                    />
+                  </button>
+
+                  {photographySubOpen && (
+                    <div className="flex flex-col items-center gap-3 mt-4">
+                      {photographyFilters.map((filter) => (
+                        <Link
+                          key={filter}
+                          to={filter === "All" ? "/photography" : `/photography?filter=${filter}`}
                           onClick={closeMobile}
                           className="text-[24px] leading-[1.2] font-light text-black/70"
                         >
