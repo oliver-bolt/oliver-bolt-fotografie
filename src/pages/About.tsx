@@ -43,20 +43,30 @@ const About = () => (
 
             <div className="space-y-5 text-foreground leading-relaxed">
               <p>
-                I am a creative producer and photographer based in St.&nbsp;Gallen, Switzerland.
-                I studied Media Engineering (BSc) with a focus on TV and video at FHGR in Chur,
-                including an Erasmus semester at Hochschule der Medien in Stuttgart, and spent more
-                than nine years in production roles at Swiss public broadcaster SRF. There I worked
-                on documentary and docudrama formats, coordinating teams, schedules and resources
-                while keeping editorial and visual goals aligned.
+                I'm a creative producer based in St.&nbsp;Gallen, Switzerland, with a background
+                in media engineering and more than nine years in moving-image production at Swiss
+                public broadcaster SRF.
               </p>
               <p>
-                Photography runs alongside this as a semi-professional second field, with a focus on
-                documentary and editorial work that stays close to people, places and lived realities.
-                Further training in cultural funding and cultural policy (CAS ZHAW) and my current CAS
-                in AI in media production at FHGR shape how I approach stories: as carefully planned
-                processes where content, craft and technology are calculated and orchestrated from first
-                idea to final image.
+                I studied Media Engineering at FHGR in Chur, focused on TV and video, with an
+                Erasmus semester at Hochschule der Medien in Stuttgart. After that came years of
+                documentary and docudrama production&nbsp;— the kind of work where storytelling,
+                budgets, schedules, logistics and reality are in constant negotiation.
+              </p>
+              <p>
+                That background still shapes how I work. I like strong ideas, clear structures and
+                productions that survive contact with the real world. Editorially ambitious, visually
+                precise, but never detached from the practical side of getting things made.
+              </p>
+              <p>
+                Photography runs alongside this as a parallel practice. Important, yes&nbsp;— but not
+                the main headline. More a way of staying close to images, atmosphere and the small
+                details that usually decide whether something works or not.
+              </p>
+              <p>
+                Further studies in cultural funding and cultural policy at ZHAW, and my current CAS
+                in AI in Media Production at FHGR, continue to expand that perspective&nbsp;— across
+                storytelling, systems and the tools that keep changing, whether we like it or not.
               </p>
             </div>
 
