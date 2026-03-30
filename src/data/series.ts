@@ -277,7 +277,7 @@ export const seriesData: Series[] = [
     title: "Tagblatt Sommerserie",
     year: "2025",
     location: "St. Gallen",
-    category: "Stories",
+    category: "Commissions",
     cover: sternwarte1,
     excerpt: "Editorial photography for the St. Galler Tagblatt series Lieblingshütten — inside the observatory at Kantonsschule am Burggraben.",
     description:

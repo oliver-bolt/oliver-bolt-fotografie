@@ -49,7 +49,13 @@ const Work = () => {
               variants={fade}
               className="text-[22px] md:text-[32px] font-light text-foreground leading-snug mb-16 md:mb-20 max-w-full md:max-w-[50%]"
             >
-              A parallel photographic practice across documentary, editorial and commissioned work.
+              {activeFilter === "Stories"
+                ? "Documentary and editorial work — driven by events, people and places."
+                : activeFilter === "Commissions"
+                ? "Photography for brands, labels and publications — commissioned projects across product, portrait and action."
+                : activeFilter === "Personal"
+                ? "Self-initiated work from the road — travel, landscape and observation."
+                : "A parallel photographic practice across documentary, editorial and commissioned work."}
             </motion.p>
 
             {/* Series grid — uniform 3-col */}
