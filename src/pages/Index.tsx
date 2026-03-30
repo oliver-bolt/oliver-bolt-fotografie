@@ -63,6 +63,10 @@ const FILM_SLOT_POSITIONS: Record<string, Record<number, string>> = {
   "sr111-halifax": { 3: "center top" }, // slot 3 = top-right: crop from bottom only
 };
 
+const PHOTO_SLOT_POSITIONS: Record<string, Record<number, string>> = {
+  "frauenstreik-2025": { 3: "left center" },
+};
+
 const Index = () => {
   return (
     <>
