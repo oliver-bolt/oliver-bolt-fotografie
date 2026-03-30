@@ -50,6 +50,7 @@ const LANDING_SEQUENCE: Block[] = [
 const PHOTO_IMAGE_PICKS: Record<string, number[]> = {
   "riethuesli-2025": [17, 3, 0, 1],
   "sternwarte-2025": [2, 0, 4, 1],
+  "amplid": [2, 3, 0, 1],
 };
 
 const FILM_STILL_PICKS: Record<string, number[]> = {
