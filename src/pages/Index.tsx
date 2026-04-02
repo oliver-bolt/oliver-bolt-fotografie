@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -126,9 +127,9 @@ const Index = () => {
                       <div>
                         <div className="text-[22px] md:text-[32px] font-medium leading-snug">
                           {series.excerpt}{" "}
-                          <a href={`/photography/${series.id}`} className="underline underline-offset-4 whitespace-nowrap">
+                          <Link to={`/photography/${series.id}`} className="underline underline-offset-4 whitespace-nowrap">
                             View Work →
-                          </a>
+                          </Link>
                         </div>
                       </div>
                       <div className="hidden md:block" />
@@ -181,9 +182,9 @@ const Index = () => {
                         ) : (
                           <>{captionLines[0]}{" "}</>
                         )}
-                        <a href={`/film/${film.id}`} className="underline underline-offset-4 whitespace-nowrap">
+                        <Link to={`/film/${film.id}`} className="underline underline-offset-4 whitespace-nowrap">
                           View Work →
-                        </a>
+                        </Link>
                       </div>
                     </div>
                     <div className="hidden md:block" />
