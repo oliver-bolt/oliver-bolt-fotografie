@@ -29,7 +29,7 @@ export interface Film {
 export const filmsData: Film[] = [
   {
     id: "in-between",
-    title: "In Between",
+    title: "IN BETWEEN",
     year: 2025,
     format: "Short film",
     broadcaster: "Freeride Film Kollektiv",
@@ -40,16 +40,16 @@ export const filmsData: Film[] = [
     tags: ["CINEMA"],
     coverStillIndex: 0,
     stills: [
-      { src: "film-inbetween-4.jpg", alt: "In Between — Still 1" },
-      { src: "film-inbetween-1.jpg", alt: "In Between — Still 2" },
-      { src: "film-inbetween-title.jpg", alt: "In Between — Still 3" },
-      { src: "film-inbetween-2.jpg", alt: "In Between — Still 4" },
-      { src: "film-inbetween-3.jpg", alt: "In Between — Still 5" },
-      { src: "film-inbetween-5.jpg", alt: "In Between — Still 6" },
+      { src: "film-inbetween-4.jpg", alt: "IN BETWEEN — Still 1" },
+      { src: "film-inbetween-1.jpg", alt: "IN BETWEEN — Still 2" },
+      { src: "film-inbetween-title.jpg", alt: "IN BETWEEN — Still 3" },
+      { src: "film-inbetween-2.jpg", alt: "IN BETWEEN — Still 4" },
+      { src: "film-inbetween-3.jpg", alt: "IN BETWEEN — Still 5" },
+      { src: "film-inbetween-5.jpg", alt: "IN BETWEEN — Still 6" },
     ],
     description: `A cinematic freeride film about what happens between the lines, between movement and stillness, speed and silence, presence and perception.
 
-In between follows freerider and photographer Phil Bucher through the alpine landscape of Valais. Not as a hero, but as an observer, moving through snow, light and texture.
+IN BETWEEN follows freerider and photographer Phil Bucher through the alpine landscape of Valais. Not as a hero, but as an observer, moving through snow, light and texture.
 
 There is no competition, no performance narrative. The film focuses on what remains: shared moments, quiet intensity, and the physical experience of being in the mountains.
 
