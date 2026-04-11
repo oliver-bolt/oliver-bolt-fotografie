@@ -50,11 +50,11 @@ const Work = () => {
               className="text-[22px] md:text-[32px] font-light text-foreground leading-snug mb-16 md:mb-20 max-w-full md:max-w-[50%]"
             >
               {activeFilter === "Stories"
-                ? "Documentary and editorial work — driven by events, people and places."
+                ? "Documentary and editorial work driven by events, people and places."
                 : activeFilter === "Commissions"
-                ? "Photography for brands, labels and publications — commissioned projects across product, portrait and action."
+                ? "Photography for brands, labels and publications: commissioned projects across product, portrait and action."
                 : activeFilter === "Personal"
-                ? "Self-initiated work from the road — travel, landscape and observation."
+                ? "Self-initiated work from the road: travel, landscape and observation."
                 : "A parallel photographic practice across documentary, editorial and commissioned work."}
             </motion.p>
 

@@ -40,12 +40,12 @@ export const filmsData: Film[] = [
     tags: ["CINEMA"],
     coverStillIndex: 0,
     stills: [
-      { src: "film-inbetween-4.jpg", alt: "IN BETWEEN — Still 1" },
-      { src: "film-inbetween-1.jpg", alt: "IN BETWEEN — Still 2" },
-      { src: "film-inbetween-title.jpg", alt: "IN BETWEEN — Still 3" },
-      { src: "film-inbetween-2.jpg", alt: "IN BETWEEN — Still 4" },
-      { src: "film-inbetween-3.jpg", alt: "IN BETWEEN — Still 5" },
-      { src: "film-inbetween-5.jpg", alt: "IN BETWEEN — Still 6" },
+      { src: "film-inbetween-4.jpg", alt: "IN BETWEEN, Still 1" },
+      { src: "film-inbetween-1.jpg", alt: "IN BETWEEN, Still 2" },
+      { src: "film-inbetween-title.jpg", alt: "IN BETWEEN, Still 3" },
+      { src: "film-inbetween-2.jpg", alt: "IN BETWEEN, Still 4" },
+      { src: "film-inbetween-3.jpg", alt: "IN BETWEEN, Still 5" },
+      { src: "film-inbetween-5.jpg", alt: "IN BETWEEN, Still 6" },
     ],
     description: `A cinematic freeride film about what happens between the lines, between movement and stillness, speed and silence, presence and perception.
 
@@ -79,20 +79,20 @@ A project by Freeride Film Kollektiv, an independent collective for auteur-drive
     tags: ["TV"],
     coverStillIndex: 4,
     stills: [
-      { src: "film-tsunami-1.png", alt: "Der Tsunami von 2004 — Still 1" },
-      { src: "film-tsunami-2.png", alt: "Der Tsunami von 2004 — Still 2" },
-      { src: "film-tsunami-3.png", alt: "Der Tsunami von 2004 — Still 3" },
-      { src: "film-tsunami-4.png", alt: "Der Tsunami von 2004 — Still 4" },
-      { src: "film-tsunami-5.png", alt: "Der Tsunami von 2004 — Still 5" },
-      { src: "film-tsunami-6.png", alt: "Der Tsunami von 2004 — Still 6" },
+      { src: "film-tsunami-1.png", alt: "Der Tsunami von 2004, Still 1" },
+      { src: "film-tsunami-2.png", alt: "Der Tsunami von 2004, Still 2" },
+      { src: "film-tsunami-3.png", alt: "Der Tsunami von 2004, Still 3" },
+      { src: "film-tsunami-4.png", alt: "Der Tsunami von 2004, Still 4" },
+      { src: "film-tsunami-5.png", alt: "Der Tsunami von 2004, Still 5" },
+      { src: "film-tsunami-6.png", alt: "Der Tsunami von 2004, Still 6" },
     ],
-    description: `A father searches for his wife and daughter after the 2004 tsunami — a story about loss, survival and the long way back to hope.
+    description: `A father searches for his wife and daughter after the 2004 tsunami. A story about loss, survival and the long way back to hope.
 
 This SRF docudrama follows the Brefin family, torn apart by the tsunami in Southeast Asia on 26 December 2004.
 
 As line producer, the core challenge was translating a story with international scale into a production design that was both visually convincing and financially realistic. Interior environments were built and staged in Zurich, while selected exterior sequences were shot on location in Thailand.
 
-The production combined studio work, international coordination and targeted location shooting — balancing impact, realism and budget constraints.`,
+The production combined studio work, international coordination and targeted location shooting: Balancing impact, realism and budget constraints.`,
     metaLine: "TV · SRF · Docudrama · 2024 · 92 min",
     status: "released",
   },
@@ -116,12 +116,12 @@ The production combined studio work, international coordination and targeted loc
     tags: ["TV"],
     coverStillIndex: 4,
     stills: [
-      { src: "film-buehrle-1.jpg", alt: "Der Bührle-Kunstraub — Still 1" },
-      { src: "film-buehrle-2.jpg", alt: "Der Bührle-Kunstraub — Still 2" },
-      { src: "film-buehrle-3.jpg", alt: "Der Bührle-Kunstraub — Still 3" },
-      { src: "film-buehrle-4.jpg", alt: "Der Bührle-Kunstraub — Still 4" },
-      { src: "film-buehrle-5.jpg", alt: "Der Bührle-Kunstraub — Still 5" },
-      { src: "film-buehrle-6.jpg", alt: "Der Bührle-Kunstraub — Still 6" },
+      { src: "film-buehrle-1.jpg", alt: "Der Bührle-Kunstraub, Still 1" },
+      { src: "film-buehrle-2.jpg", alt: "Der Bührle-Kunstraub, Still 2" },
+      { src: "film-buehrle-3.jpg", alt: "Der Bührle-Kunstraub, Still 3" },
+      { src: "film-buehrle-4.jpg", alt: "Der Bührle-Kunstraub, Still 4" },
+      { src: "film-buehrle-5.jpg", alt: "Der Bührle-Kunstraub, Still 5" },
+      { src: "film-buehrle-6.jpg", alt: "Der Bührle-Kunstraub, Still 6" },
     ],
     description: `A major art heist, an international investigation and the recovery of stolen masterpieces.
 
@@ -151,12 +151,12 @@ A central task was establishing trust with key stakeholders, including the Bühr
     tags: ["TV"],
     coverStillIndex: 4,
     stills: [
-      { src: "film-sr111-1.jpg", alt: "Swissair 111 – Absturz über Halifax — Still 1" },
-      { src: "film-sr111-2.jpg", alt: "Swissair 111 – Absturz über Halifax — Still 2" },
-      { src: "film-sr111-3.jpg", alt: "Swissair 111 – Absturz über Halifax — Still 3" },
-      { src: "film-sr111-4.jpg", alt: "Swissair 111 – Absturz über Halifax — Still 4" },
-      { src: "film-sr111-5.jpg", alt: "Swissair 111 – Absturz über Halifax — Still 5" },
-      { src: "film-sr111-6.jpg", alt: "Swissair 111 – Absturz über Halifax — Still 6" },
+      { src: "film-sr111-1.jpg", alt: "Absturz über Halifax, Still 1" },
+      { src: "film-sr111-2.jpg", alt: "Absturz über Halifax, Still 2" },
+      { src: "film-sr111-3.jpg", alt: "Absturz über Halifax, Still 3" },
+      { src: "film-sr111-4.jpg", alt: "Absturz über Halifax, Still 4" },
+      { src: "film-sr111-5.jpg", alt: "Absturz über Halifax, Still 5" },
+      { src: "film-sr111-6.jpg", alt: "Absturz über Halifax, Still 6" },
     ],
     description: `Swissair flight SR111 crashes off the coast of Halifax. 229 people die.
 
@@ -186,12 +186,12 @@ The main production challenge was recreating aircraft environments without acces
     tags: ["TV"],
     coverStillIndex: 2,
     stills: [
-      { src: "film-attentat-zug-1.jpg", alt: "Das Attentat von Zug — Still 1" },
-      { src: "film-attentat-zug-2.jpg", alt: "Das Attentat von Zug — Still 2" },
-      { src: "film-attentat-zug-3.jpg", alt: "Das Attentat von Zug — Still 3" },
-      { src: "film-attentat-zug-4.jpg", alt: "Das Attentat von Zug — Still 4" },
-      { src: "film-attentat-zug-5.jpg", alt: "Das Attentat von Zug — Still 5" },
-      { src: "film-attentat-zug-6.jpg", alt: "Das Attentat von Zug — Still 6" },
+      { src: "film-attentat-zug-1.jpg", alt: "Das Attentat von Zug, Still 1" },
+      { src: "film-attentat-zug-2.jpg", alt: "Das Attentat von Zug, Still 2" },
+      { src: "film-attentat-zug-3.jpg", alt: "Das Attentat von Zug, Still 3" },
+      { src: "film-attentat-zug-4.jpg", alt: "Das Attentat von Zug, Still 4" },
+      { src: "film-attentat-zug-5.jpg", alt: "Das Attentat von Zug, Still 5" },
+      { src: "film-attentat-zug-6.jpg", alt: "Das Attentat von Zug, Still 6" },
     ],
     description: `An attack on the Zug cantonal parliament that changed Switzerland.
 
@@ -221,12 +221,12 @@ The production deliberately avoided an action-driven depiction, focusing instead
     tags: ["TV"],
     coverStillIndex: 3,
     stills: [
-      { src: "film-bisdassdertod-1.jpg", alt: "Bis dass der Tod uns scheidet — Still 1" },
-      { src: "film-bisdassdertod-2.jpg", alt: "Bis dass der Tod uns scheidet — Still 2" },
-      { src: "film-bisdassdertod-3.jpg", alt: "Bis dass der Tod uns scheidet — Still 3" },
-      { src: "film-bisdassdertod-4.jpg", alt: "Bis dass der Tod uns scheidet — Still 4" },
-      { src: "film-bisdassdertod-5.jpg", alt: "Bis dass der Tod uns scheidet — Still 5" },
-      { src: "film-bisdassdertod-6.jpg", alt: "Bis dass der Tod uns scheidet — Still 6" },
+      { src: "film-bisdassdertod-1.jpg", alt: "Bis dass der Tod uns scheidet, Still 1" },
+      { src: "film-bisdassdertod-2.jpg", alt: "Bis dass der Tod uns scheidet, Still 2" },
+      { src: "film-bisdassdertod-3.jpg", alt: "Bis dass der Tod uns scheidet, Still 3" },
+      { src: "film-bisdassdertod-4.jpg", alt: "Bis dass der Tod uns scheidet, Still 4" },
+      { src: "film-bisdassdertod-5.jpg", alt: "Bis dass der Tod uns scheidet, Still 5" },
+      { src: "film-bisdassdertod-6.jpg", alt: "Bis dass der Tod uns scheidet, Still 6" },
     ],
     description: `A wedding celebration on Lake Lucerne ends in catastrophe.
 
@@ -256,14 +256,14 @@ The shipwreck sequence was realised as a practical stunt under complex condition
     tags: ["TV"],
     coverStillIndex: 3,
     stills: [
-      { src: "film-postraub-1.png", alt: "Der Postraub des Jahrhunderts — Still 1" },
-      { src: "film-postraub-2.png", alt: "Der Postraub des Jahrhunderts — Still 2" },
-      { src: "film-postraub-3.png", alt: "Der Postraub des Jahrhunderts — Still 3" },
-      { src: "film-postraub-4.png", alt: "Der Postraub des Jahrhunderts — Still 4" },
-      { src: "film-postraub-5.png", alt: "Der Postraub des Jahrhunderts — Still 5" },
-      { src: "film-postraub-6.png", alt: "Der Postraub des Jahrhunderts — Still 6" },
+      { src: "film-postraub-1.png", alt: "Der Postraub des Jahrhunderts, Still 1" },
+      { src: "film-postraub-2.png", alt: "Der Postraub des Jahrhunderts, Still 2" },
+      { src: "film-postraub-3.png", alt: "Der Postraub des Jahrhunderts, Still 3" },
+      { src: "film-postraub-4.png", alt: "Der Postraub des Jahrhunderts, Still 4" },
+      { src: "film-postraub-5.png", alt: "Der Postraub des Jahrhunderts, Still 5" },
+      { src: "film-postraub-6.png", alt: "Der Postraub des Jahrhunderts, Still 6" },
     ],
-    description: `One of Switzerland's largest robberies — and the story behind it.
+    description: `One of Switzerland's largest robberies and the story behind it.
 
 Produced under tight budget constraints, the project relied on a lean setup and precise scheduling.
 
@@ -291,12 +291,12 @@ Sensitive locations, safety requirements and coordination with authorities were 
     tags: ["TV"],
     coverStillIndex: 1,
     stills: [
-      { src: "film-geisterzug-1.png", alt: "Der Geisterzug von Spiez — Still 1" },
-      { src: "film-geisterzug-2.png", alt: "Der Geisterzug von Spiez — Still 2" },
-      { src: "film-geisterzug-3.png", alt: "Der Geisterzug von Spiez — Still 3" },
-      { src: "film-geisterzug-4.png", alt: "Der Geisterzug von Spiez — Still 4" },
-      { src: "film-geisterzug-5.png", alt: "Der Geisterzug von Spiez — Still 5" },
-      { src: "film-geisterzug-6.png", alt: "Der Geisterzug von Spiez — Still 6" },
+      { src: "film-geisterzug-1.png", alt: "Der Geisterzug von Spiez, Still 1" },
+      { src: "film-geisterzug-2.png", alt: "Der Geisterzug von Spiez, Still 2" },
+      { src: "film-geisterzug-3.png", alt: "Der Geisterzug von Spiez, Still 3" },
+      { src: "film-geisterzug-4.png", alt: "Der Geisterzug von Spiez, Still 4" },
+      { src: "film-geisterzug-5.png", alt: "Der Geisterzug von Spiez, Still 5" },
+      { src: "film-geisterzug-6.png", alt: "Der Geisterzug von Spiez, Still 6" },
     ],
     description: `A runaway freight train and a race against time.
 
@@ -326,12 +326,12 @@ Working with limited resources, the focus was on efficient structures and high a
     tags: ["CINEMA"],
     coverStillIndex: 0,
     stills: [
-      { src: "film-der-unschuldige-1.png", alt: "Der Unschuldige — Titelbild" },
-      { src: "film-der-unschuldige-2.png", alt: "Der Unschuldige — Ruth vor Publikum" },
-      { src: "film-der-unschuldige-3.png", alt: "Der Unschuldige — Familie am Esstisch" },
-      { src: "film-der-unschuldige-4.png", alt: "Der Unschuldige — Ruth allein im Saal" },
-      { src: "film-der-unschuldige-5.png", alt: "Der Unschuldige — Nachtszene in Blau" },
-      { src: "film-der-unschuldige-6.png", alt: "Der Unschuldige — Konfrontation" },
+      { src: "film-der-unschuldige-1.png", alt: "Der Unschuldige, Titelbild" },
+      { src: "film-der-unschuldige-2.png", alt: "Der Unschuldige, Ruth vor Publikum" },
+      { src: "film-der-unschuldige-3.png", alt: "Der Unschuldige, Familie am Esstisch" },
+      { src: "film-der-unschuldige-4.png", alt: "Der Unschuldige, Ruth allein im Saal" },
+      { src: "film-der-unschuldige-5.png", alt: "Der Unschuldige, Nachtszene in Blau" },
+      { src: "film-der-unschuldige-6.png", alt: "Der Unschuldige, Konfrontation" },
     ],
     description: "Feature film directed by Simon Jaquemet, produced by 8horses and Augenschein.",
     metaLine: "Cinema · 8horses · Augenschein · Feature film · 2018",
@@ -357,12 +357,12 @@ Working with limited resources, the focus was on efficient structures and high a
     tags: ["CINEMA"],
     coverStillIndex: 0,
     stills: [
-      { src: "film-zwischenstopp-1.png", alt: "Zwischenstopp — Titelbild" },
-      { src: "film-zwischenstopp-2.png", alt: "Zwischenstopp — Fahrerin im Spiegel" },
-      { src: "film-zwischenstopp-3.png", alt: "Zwischenstopp — Passagiere im Bus" },
-      { src: "film-zwischenstopp-4.png", alt: "Zwischenstopp — Junger Mann am Bus" },
-      { src: "film-zwischenstopp-5.png", alt: "Zwischenstopp — Busbahnhof" },
-      { src: "film-zwischenstopp-6.png", alt: "Zwischenstopp — Gespräch im Bus" },
+      { src: "film-zwischenstopp-1.png", alt: "Zwischenstopp, Titelbild" },
+      { src: "film-zwischenstopp-2.png", alt: "Zwischenstopp, Fahrerin im Spiegel" },
+      { src: "film-zwischenstopp-3.png", alt: "Zwischenstopp, Passagiere im Bus" },
+      { src: "film-zwischenstopp-4.png", alt: "Zwischenstopp, Junger Mann am Bus" },
+      { src: "film-zwischenstopp-5.png", alt: "Zwischenstopp, Busbahnhof" },
+      { src: "film-zwischenstopp-6.png", alt: "Zwischenstopp, Gespräch im Bus" },
     ],
     description: "Short film directed by Cosima Frei, produced by 2:1 Film.",
     metaLine: "Cinema · 2:1 Film · Short film · 2017",
@@ -388,12 +388,12 @@ Working with limited resources, the focus was on efficient structures and high a
     tags: ["CINEMA"],
     coverStillIndex: 0,
     stills: [
-      { src: "film-peripherie-1.png", alt: "Peripherie — Titelbild" },
-      { src: "film-peripherie-2.png", alt: "Peripherie — Junge Frau mit Kopfhörern" },
-      { src: "film-peripherie-3.png", alt: "Peripherie — Mann in Verzweiflung" },
-      { src: "film-peripherie-4.png", alt: "Peripherie — Eddie raucht" },
-      { src: "film-peripherie-5.png", alt: "Peripherie — Mädchen im Auto" },
-      { src: "film-peripherie-6.png", alt: "Peripherie — Feuerwerk" },
+      { src: "film-peripherie-1.png", alt: "Peripherie, Titelbild" },
+      { src: "film-peripherie-2.png", alt: "Peripherie, Junge Frau mit Kopfhörern" },
+      { src: "film-peripherie-3.png", alt: "Peripherie, Mann in Verzweiflung" },
+      { src: "film-peripherie-4.png", alt: "Peripherie, Eddie raucht" },
+      { src: "film-peripherie-5.png", alt: "Peripherie, Mädchen im Auto" },
+      { src: "film-peripherie-6.png", alt: "Peripherie, Feuerwerk" },
     ],
     description: "Episodic feature film project by ZHdK Master students, produced at ZHdK.",
     metaLine: "Cinema · ZHdK · Episodic feature film · 2016",

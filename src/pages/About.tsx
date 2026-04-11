@@ -59,14 +59,14 @@ const About = () => (
                 precise, but never detached from the practical side of getting things made.
               </p>
               <p>
-                Photography runs alongside this as a parallel practice. Important, yes&nbsp;— but not
+                Photography runs alongside this as a parallel practice. Important, yes. But not
                 the main headline. More a way of staying close to images, atmosphere and the small
                 details that usually decide whether something works or not.
               </p>
               <p>
                 Further studies in cultural funding and cultural policy at ZHAW, and my current CAS
-                in AI in Media Production at FHGR, continue to expand that perspective&nbsp;— across
-                storytelling, systems and the tools that keep changing, whether we like it or not.
+                in AI in Media Production at FHGR, continue to expand that perspective across
+                storytelling, systems and the tools that keep changing.
               </p>
             </div>
 
