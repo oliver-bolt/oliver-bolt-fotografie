@@ -38,13 +38,14 @@ export const filmsData: Film[] = [
     embedType: "vimeo",
     credits: [],
     tags: ["CINEMA"],
-    coverStillIndex: 4,
+    coverStillIndex: 0,
     stills: [
-      { src: "film-inbetween-title.jpg", alt: "In Between — Titelbild" },
-      { src: "film-inbetween-1.jpg", alt: "In Between — Still 1" },
-      { src: "film-inbetween-2.jpg", alt: "In Between — Still 2" },
-      { src: "film-inbetween-3.jpg", alt: "In Between — Still 3" },
-      { src: "film-inbetween-4.jpg", alt: "In Between — Still 4" },
+      { src: "film-inbetween-4.jpg", alt: "In Between — Still 1" },
+      { src: "film-inbetween-1.jpg", alt: "In Between — Still 2" },
+      { src: "film-inbetween-title.jpg", alt: "In Between — Still 3" },
+      { src: "film-inbetween-2.jpg", alt: "In Between — Still 4" },
+      { src: "film-inbetween-3.jpg", alt: "In Between — Still 5" },
+      { src: "film-inbetween-5.jpg", alt: "In Between — Still 6" },
     ],
     description: `A cinematic freeride film about what happens between the lines — between movement and stillness, speed and silence, presence and perception.
 
