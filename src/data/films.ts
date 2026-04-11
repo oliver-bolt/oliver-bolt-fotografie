@@ -47,17 +47,17 @@ export const filmsData: Film[] = [
       { src: "film-inbetween-3.jpg", alt: "In Between — Still 5" },
       { src: "film-inbetween-5.jpg", alt: "In Between — Still 6" },
     ],
-    description: `A cinematic freeride film about what happens between the lines — between movement and stillness, speed and silence, presence and perception.
+    description: `A cinematic freeride film about what happens between the lines, between movement and stillness, speed and silence, presence and perception.
 
-In between follows freerider and photographer Phil Bucher through the alpine landscape of Valais. Not as a hero, but as an observer — moving through snow, light and texture.
+In between follows freerider and photographer Phil Bucher through the alpine landscape of Valais. Not as a hero, but as an observer, moving through snow, light and texture.
 
 There is no competition, no performance narrative. The film focuses on what remains: shared moments, quiet intensity, and the physical experience of being in the mountains.
 
-Structured as an associative visual journey, IN BETWEEN moves between riding and seeing — carried by image, rhythm and sound. Phil's photography becomes part of the film's language, echoing the way perception and movement overlap.
+Structured as an associative visual journey, IN BETWEEN moves between riding and seeing, carried by image, rhythm and sound. Phil's photography becomes part of the film's language, echoing the way perception and movement overlap.
 
 Currently in postproduction, the film is set for a festival release in autumn 2026.
 
-A project by Freeride Film Kollektiv — an independent collective for auteur-driven outdoor films.`,
+A project by Freeride Film Kollektiv, an independent collective for auteur-driven outdoor films.`,
     metaLine: "In Production · Freeride Filmkollektiv · Short film · 2026",
     status: "in-production",
   },
