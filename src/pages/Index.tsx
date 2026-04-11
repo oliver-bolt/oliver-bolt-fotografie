@@ -39,11 +39,11 @@ type Block =
 
 const LANDING_SEQUENCE: Block[] = [
   { type: "photo", seriesId: "riethuesli-2025" },
-  { type: "film", filmId: "tsunami-2004", caption: "Der Tsunami von 2004\nSRF docudrama series ES GESCHAH AM…" },
+  { type: "film", filmId: "tsunami-2004", caption: "Der Tsunami von 2004:\nSRF docudrama series ES GESCHAH AM…" },
   { type: "photo", seriesId: "sternwarte-2025" },
-  { type: "film", filmId: "postraub", caption: "Der Postraub des Jahrhunderts\nSRF docudrama series ES GESCHAH AM…" },
+  { type: "film", filmId: "postraub", caption: "Der Postraub des Jahrhunderts:\nSRF docudrama series ES GESCHAH AM…" },
   { type: "photo", seriesId: "new-zealand" },
-  { type: "film", filmId: "sr111-halifax", caption: "Absturz über Halifax\nSRF docudrama series ES GESCHAH AM…" },
+  { type: "film", filmId: "sr111-halifax", caption: "Absturz über Halifax:\nSRF docudrama series ES GESCHAH AM…" },
   { type: "photo", seriesId: "frauenstreik-2025" },
   { type: "photo", seriesId: "amplid" },
 ];
