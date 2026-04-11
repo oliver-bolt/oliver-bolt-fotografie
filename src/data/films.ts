@@ -28,6 +28,34 @@ export interface Film {
 
 export const filmsData: Film[] = [
   {
+    id: "in-between",
+    title: "In Between",
+    year: 2025,
+    format: "Short film",
+    broadcaster: "Freeride Film Kollektiv",
+    duration: "3–5 min",
+    embedUrl: "",
+    embedType: "vimeo",
+    credits: [],
+    tags: ["CINEMA"],
+    coverStillIndex: 0,
+    stills: [
+      { src: "film-inbetween-title.jpg", alt: "In Between — Titelbild" },
+      { src: "film-inbetween-1.jpg", alt: "In Between — Still 1" },
+      { src: "film-inbetween-2.jpg", alt: "In Between — Still 2" },
+      { src: "film-inbetween-3.jpg", alt: "In Between — Still 3" },
+    ],
+    description: `A cinematic freeride film about what happens between the lines — between movement and stillness, speed and silence, presence and perception.
+
+IN BETWEEN follows Phil Bucher, freerider and photographer, through a world of snow, light and texture. No hero story. No competition. Instead: a collective, artistic process that captures the feeling of freeriding — emotional, visual, tangible.
+
+The film is structured in five sequences, shot with two cameras, drone and action cam. The visual language blends cinematic breadth with intimate detail, carried by composed sound design and a reduced score. Phil's photography is woven into the imagery as a recurring visual layer.
+
+A project by Freeride Film Kollektiv — an independent collective dedicated to auteur-driven outdoor filmmaking.`,
+    metaLine: "Cinema · Freeride Film Kollektiv · Short film · 2025 · In Production",
+    status: "in-production",
+  },
+  {
     id: "tsunami-2004",
     title: "Der Tsunami von 2004",
     year: 2024,
