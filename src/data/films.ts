@@ -38,7 +38,7 @@ export const filmsData: Film[] = [
     embedType: "vimeo",
     credits: [],
     tags: ["CINEMA"],
-    coverStillIndex: 0,
+    coverStillIndex: 4,
     stills: [
       { src: "film-inbetween-title.jpg", alt: "In Between — Titelbild" },
       { src: "film-inbetween-1.jpg", alt: "In Between — Still 1" },
