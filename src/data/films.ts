@@ -44,6 +44,7 @@ export const filmsData: Film[] = [
       { src: "film-inbetween-1.jpg", alt: "In Between — Still 1" },
       { src: "film-inbetween-2.jpg", alt: "In Between — Still 2" },
       { src: "film-inbetween-3.jpg", alt: "In Between — Still 3" },
+      { src: "film-inbetween-4.jpg", alt: "In Between — Still 4" },
     ],
     description: `A cinematic freeride film about what happens between the lines — between movement and stillness, speed and silence, presence and perception.
 
