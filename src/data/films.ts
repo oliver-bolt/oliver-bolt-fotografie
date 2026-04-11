@@ -40,12 +40,12 @@ export const filmsData: Film[] = [
     tags: ["CINEMA"],
     coverStillIndex: 0,
     stills: [
-      { src: "film-inbetween-4.jpg", alt: "IN BETWEEN — Still 1" },
-      { src: "film-inbetween-1.jpg", alt: "IN BETWEEN — Still 2" },
-      { src: "film-inbetween-title.jpg", alt: "IN BETWEEN — Still 3" },
-      { src: "film-inbetween-2.jpg", alt: "IN BETWEEN — Still 4" },
-      { src: "film-inbetween-3.jpg", alt: "IN BETWEEN — Still 5" },
-      { src: "film-inbetween-5.jpg", alt: "IN BETWEEN — Still 6" },
+      { src: "film-inbetween-4.jpg", alt: "IN BETWEEN, Still 1" },
+      { src: "film-inbetween-1.jpg", alt: "IN BETWEEN, Still 2" },
+      { src: "film-inbetween-title.jpg", alt: "IN BETWEEN, Still 3" },
+      { src: "film-inbetween-2.jpg", alt: "IN BETWEEN, Still 4" },
+      { src: "film-inbetween-3.jpg", alt: "IN BETWEEN, Still 5" },
+      { src: "film-inbetween-5.jpg", alt: "IN BETWEEN, Still 6" },
     ],
     description: `A cinematic freeride film about what happens between the lines, between movement and stillness, speed and silence, presence and perception.
 
