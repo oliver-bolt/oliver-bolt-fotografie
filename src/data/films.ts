@@ -52,7 +52,7 @@ IN BETWEEN follows Phil Bucher, freerider and photographer, through a world of s
 The film is structured in five sequences, shot with two cameras, drone and action cam. The visual language blends cinematic breadth with intimate detail, carried by composed sound design and a reduced score. Phil's photography is woven into the imagery as a recurring visual layer.
 
 A project by Freeride Film Kollektiv — an independent collective dedicated to auteur-driven outdoor filmmaking.`,
-    metaLine: "Cinema · Freeride Film Kollektiv · Short film · 2025 · In Production",
+    metaLine: "In Production · Freeride Filmkollektiv · Short film · 2026",
     status: "in-production",
   },
   {
