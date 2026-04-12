@@ -44,39 +44,40 @@ const WorkGallery = ({ images }: WorkGalleryProps) => {
       <section className="pt-10 md:pt-14 pb-6">
         <div className="max-w-[1600px] mx-auto px-10 md:px-14">
           <div
-            style={{
-              columns: 2,
-              columnGap: `${GUTTER}px`,
-            }}
+            className="grid grid-cols-2"
+            style={{ gap: `${GUTTER}px` }}
           >
-            {images.map((img, i) => (
-              <div
-                key={`${img.src}-${i}`}
-                style={{
-                  breakInside: "avoid",
-                  marginBottom: `${GUTTER}px`,
-                }}
-              >
-                <button
-                  onClick={() => openLightbox(i)}
-                  className="block w-full bg-transparent border-none p-0 cursor-pointer"
-                  aria-label={`Open image ${i + 1}`}
-                >
-                  <div className="relative overflow-hidden">
-                    <img
-                      src={img.src}
-                      alt={img.alt}
-                      loading={i < 6 ? "eager" : "lazy"}
-                      decoding={i < 6 ? "sync" : "async"}
-                      {...(i < 2 ? { fetchPriority: "high" as const } : {})}
-                      className="block w-full h-auto"
-                      style={{
-                        objectFit: "cover",
-                        objectPosition: img.focus ?? "50% 42%",
-                      }}
-                    />
-                  </div>
-                </button>
+            {/* Split images into two columns for masonry-like layout */}
+            {[0, 1].map((col) => (
+              <div key={col} className="flex flex-col" style={{ gap: `${GUTTER}px` }}>
+                {images
+                  .filter((_, i) => i % 2 === col)
+                  .map((img, idx) => {
+                    const originalIndex = idx * 2 + col;
+                    return (
+                      <button
+                        key={`${img.src}-${originalIndex}`}
+                        onClick={() => openLightbox(originalIndex)}
+                        className="block w-full bg-transparent border-none p-0 cursor-pointer"
+                        aria-label={`Open image ${originalIndex + 1}`}
+                      >
+                        <div className="relative overflow-hidden">
+                          <img
+                            src={img.src}
+                            alt={img.alt}
+                            loading={originalIndex < 6 ? "eager" : "lazy"}
+                            decoding={originalIndex < 6 ? "sync" : "async"}
+                            {...(originalIndex < 2 ? { fetchPriority: "high" as const } : {})}
+                            className="block w-full h-auto"
+                            style={{
+                              objectFit: "cover",
+                              objectPosition: img.focus ?? "50% 42%",
+                            }}
+                          />
+                        </div>
+                      </button>
+                    );
+                  })}
               </div>
             ))}
           </div>
