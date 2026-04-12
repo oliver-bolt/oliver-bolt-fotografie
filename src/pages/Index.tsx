@@ -39,11 +39,11 @@ type Block =
 
 const LANDING_SEQUENCE: Block[] = [
   { type: "photo", seriesId: "riethuesli-2025" },
-  { type: "film", filmId: "tsunami-2004", caption: "Der Tsunami von 2004:\nSRF docudrama series ES GESCHAH AM…" },
+  { type: "film", filmId: "tsunami-2004", caption: "Der Tsunami von 2004:\nSRF docudrama series\nES GESCHAH AM…" },
   { type: "photo", seriesId: "sternwarte-2025" },
-  { type: "film", filmId: "postraub", caption: "Der Postraub des Jahrhunderts:\nSRF docudrama series ES GESCHAH AM…" },
+  { type: "film", filmId: "postraub", caption: "Der Postraub des Jahrhunderts:\nSRF docudrama series\nES GESCHAH AM…" },
   { type: "photo", seriesId: "new-zealand" },
-  { type: "film", filmId: "sr111-halifax", caption: "Absturz über Halifax:\nSRF docudrama series ES GESCHAH AM…" },
+  { type: "film", filmId: "sr111-halifax", caption: "Absturz über Halifax:\nSRF docudrama series\nES GESCHAH AM…" },
   { type: "photo", seriesId: "frauenstreik-2025" },
   { type: "photo", seriesId: "amplid" },
 ];
@@ -173,7 +173,17 @@ const Index = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 mt-6">
                     <div>
                       <div className="text-[22px] md:text-[32px] font-medium leading-snug">
-                        {captionLines.length > 1 ? (
+                        {captionLines.length > 2 ? (
+                          <>
+                            {captionLines[0]}
+                            <br />
+                            <span className="hidden md:inline">{captionLines[1]} {captionLines[2]}</span>
+                            <span className="md:hidden">{captionLines[1]}</span>
+                            <br className="md:hidden" />
+                            <span className="md:hidden">{captionLines[2]}</span>
+                            {" "}
+                          </>
+                        ) : captionLines.length > 1 ? (
                           <>
                             {captionLines[0]}
                             <br />
