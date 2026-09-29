@@ -119,22 +119,20 @@ const FilmEntry = ({
       )}
 
       {/* 6. Video player — 16:9, same width as stills grid */}
-      {videoUrl && (
-        <div className="relative w-full aspect-video bg-black/5 overflow-hidden">
-          <iframe
-            src={videoUrl}
-            title={title}
-            className="absolute inset-0 w-full h-full border-none"
-            allow={
-              videoType === "srf"
-                ? "autoplay; fullscreen; encrypted-media"
-                : "autoplay; fullscreen; picture-in-picture"
-            }
-            allowFullScreen
-            loading="lazy"
-          />
-        </div>
-      )}
+      <div className="relative w-full aspect-video bg-black/5 overflow-hidden">
+        <iframe
+          src={videoUrl}
+          title={title}
+          className="absolute inset-0 w-full h-full border-none"
+          allow={
+            videoType === "srf"
+              ? "autoplay; fullscreen; encrypted-media"
+              : "autoplay; fullscreen; picture-in-picture"
+          }
+          allowFullScreen
+          loading="lazy"
+        />
+      </div>
     </motion.article>
   );
 };

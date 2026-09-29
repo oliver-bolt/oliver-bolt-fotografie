@@ -43,30 +43,31 @@ const About = () => (
 
             <div className="space-y-5 text-foreground leading-relaxed">
               <p>
-                I'm a creative producer based in St.&nbsp;Gallen, Switzerland, with a background
-                in media engineering and more than nine years in moving-image production at Swiss
-                public broadcaster SRF.
+                I’m a project lead and creative producer based in St.&nbsp;Gallen, Switzerland. My
+                work brings together content, people and the practical decisions that turn an idea
+                into something worth sharing.
               </p>
               <p>
-                I studied Media Engineering at FHGR in Chur, focused on TV and video, with an
-                Erasmus semester at Hochschule der Medien in Stuttgart. After that came years of
-                documentary and docudrama production&nbsp;— the kind of work where storytelling,
-                budgets, schedules, logistics and reality are in constant negotiation.
+                Over nearly nine years at Swiss public broadcaster SRF, I moved from hands-on
+                production into broader responsibility for budgets, resources and multiple
+                productions. Working across editorial, creative and production teams taught me to
+                balance different priorities while keeping the story and its audience in view.
               </p>
               <p>
-                That background still shapes how I work. I like strong ideas, clear structures and
-                productions that survive contact with the real world. Editorially ambitious, visually
-                precise, but never detached from the practical side of getting things made.
+                I’m now building on that experience with a focus on corporate communication.
+                Alongside my work in press photography at the St. Galler Tagblatt, I’m studying
+                Strategic &amp; Corporate Communication at HSLU. I’m particularly interested in how
+                organisations choose what to communicate, whose perspectives they consider and how
+                those decisions shape the content they produce.
               </p>
               <p>
-                Photography runs alongside this as a parallel practice. Important, yes. But not
-                the main headline. More a way of staying close to images, atmosphere and the small
-                details that usually decide whether something works or not.
+                Photography keeps me close to people and their stories. It gives me space to
+                observe, follow my curiosity and develop my own visual work.
               </p>
               <p>
-                Further studies in cultural funding and cultural policy at ZHAW, and my current CAS
-                in AI in Media Production at FHGR, continue to expand that perspective across
-                storytelling, systems and the tools that keep changing.
+                My background includes a degree in Media Engineering from FHGR, with a semester at
+                Hochschule der Medien in Stuttgart, and completed certificates in Cultural Funding
+                and Cultural Policy at ZHAW and AI in Media Production at FHGR.
               </p>
             </div>
 
