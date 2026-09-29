@@ -25,7 +25,7 @@ const About = () => (
           <motion.div initial="hidden" animate="visible" variants={fade} className="w-full md:w-[45%]">
             <img
               src={portraitImage}
-              alt="Oliver Bolt — photographer and creative producer, St. Gallen Switzerland"
+              alt="Oliver Bolt, photographer and creative producer, St. Gallen Switzerland"
               className="w-full aspect-[3/4] object-cover object-[center_20%]"
               loading="eager"
             />
