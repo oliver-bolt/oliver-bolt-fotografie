@@ -25,7 +25,7 @@ const About = () => (
           <motion.div initial="hidden" animate="visible" variants={fade} className="w-full md:w-[45%]">
             <img
               src={portraitImage}
-              alt="Oliver Bolt — photographer and creative producer, St. Gallen Switzerland"
+              alt="Oliver Bolt, photographer and creative producer, St. Gallen Switzerland"
               className="w-full aspect-[3/4] object-cover object-[center_20%]"
               loading="eager"
             />
@@ -55,10 +55,10 @@ const About = () => (
               </p>
               <p>
                 I’m now building on that experience with a focus on corporate communication.
-                Alongside my work in press photography at the St. Galler Tagblatt, I’m studying
-                Strategic &amp; Corporate Communication at HSLU. I’m particularly interested in how
-                organisations choose what to communicate, whose perspectives they consider and how
-                those decisions shape the content they produce.
+                Alongside my work in press photography at CH Media (St. Galler Tagblatt), I’m
+                studying Strategic &amp; Corporate Communication at HSLU. I’m particularly
+                interested in how organisations choose what to communicate, whose perspectives they
+                consider and how those decisions shape the content they produce.
               </p>
               <p>
                 Photography keeps me close to people and their stories. It gives me space to
