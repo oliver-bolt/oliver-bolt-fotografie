@@ -1,6 +1,14 @@
 export interface FilmCredit {
   label: string;
   value: string;
+  /** Optional: the part of `value` that should link to `href` (e.g. a name). */
+  hrefName?: string;
+  href?: string;
+}
+
+export interface FilmLink {
+  label: string;
+  href: string;
 }
 
 export interface FilmStill {
@@ -16,7 +24,7 @@ export interface Film {
   broadcaster: string;
   duration: string;
   embedUrl: string;
-  embedType: "srf" | "vimeo";
+  embedType: "srf" | "vimeo" | "file";
   credits: FilmCredit[];
   tags: string[];
   stills: FilmStill[];
@@ -24,6 +32,13 @@ export interface Film {
   metaLine: string;
   status: "released" | "in-production";
   coverStillIndex?: number;
+  /** Plain text links shown below the body text on the detail page. */
+  links?: FilmLink[];
+  /** Native video file poster (filename resolved via filmAssets). */
+  videoPoster?: string;
+  /** Per-film SEO overrides for the detail page. */
+  seoTitle?: string;
+  seoDescription?: string;
 }
 
 export const filmsData: Film[] = [
