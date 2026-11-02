@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { resolveFilmAsset } from "@/data/filmAssets";
-import type { FilmCredit, FilmStill } from "@/data/films";
+import type { FilmCredit, FilmLink, FilmStill } from "@/data/films";
 
 interface FilmEntryProps {
   title: string;
@@ -9,8 +9,10 @@ interface FilmEntryProps {
   text: string;
   stills: FilmStill[];
   videoUrl: string;
-  videoType: "srf" | "vimeo";
+  videoType: "srf" | "vimeo" | "file";
   credits: FilmCredit[];
+  links?: FilmLink[];
+  videoPoster?: string;
 }
 
 const fade = {
@@ -61,6 +63,27 @@ function splitDescription(text: string): { lead: string; body: string[] } {
   return { lead, body };
 }
 
+/** Render a credit value, linking `hrefName` to `href` when provided. */
+function CreditValue({ credit }: { credit: FilmCredit }) {
+  if (!credit.href || !credit.hrefName) {
+    return <>{credit.value}</>;
+  }
+  const rest = credit.value.slice(credit.hrefName.length);
+  return (
+    <>
+      <a
+        href={credit.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="underline underline-offset-4"
+      >
+        {credit.hrefName}
+      </a>
+      {rest}
+    </>
+  );
+}
+
 const FilmEntry = ({
   title,
   text,
@@ -68,8 +91,11 @@ const FilmEntry = ({
   videoUrl,
   videoType,
   credits,
+  links,
+  videoPoster,
 }: FilmEntryProps) => {
   const { lead, body } = splitDescription(text);
+  const posterSrc = videoPoster ? resolveFilmAsset(videoPoster) : undefined;
 
   return (
     <motion.article
@@ -89,7 +115,7 @@ const FilmEntry = ({
           {credits.map((credit, i) => (
             <p key={i} className="text-[14px] md:text-[16px] text-foreground/50 leading-normal">
               <span className="font-medium text-foreground/70">{credit.label}</span>{" "}
-              {credit.value}
+              <CreditValue credit={credit} />
             </p>
           ))}
         </div>
@@ -109,6 +135,23 @@ const FilmEntry = ({
         </div>
       )}
 
+      {/* 4b. Plain text links shown with the project text */}
+      {links && links.length > 0 && (
+        <div className="mb-10 md:mb-14 space-y-1 text-[16px] md:text-[18px]">
+          {links.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block w-fit text-foreground underline underline-offset-4"
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+      )}
+
       {/* 5. Stills grid — 2 columns at all breakpoints (2×3), 16:9 */}
       {stills.length > 0 && (
         <div className="grid grid-cols-2 gap-[18px] mb-10 md:mb-14">
@@ -118,21 +161,36 @@ const FilmEntry = ({
         </div>
       )}
 
-      {/* 6. Video player — 16:9, same width as stills grid */}
-      <div className="relative w-full aspect-video bg-black/5 overflow-hidden">
-        <iframe
-          src={videoUrl}
-          title={title}
-          className="absolute inset-0 w-full h-full border-none"
-          allow={
-            videoType === "srf"
-              ? "autoplay; fullscreen; encrypted-media"
-              : "autoplay; fullscreen; picture-in-picture"
-          }
-          allowFullScreen
-          loading="lazy"
-        />
-      </div>
+      {/* 6. Video player — 16:9, same width as stills grid. Native player for
+          self-hosted files, iframe embed for SRF/Vimeo, nothing when absent. */}
+      {videoUrl ? (
+        <div className="relative w-full aspect-video bg-black/5 overflow-hidden">
+          {videoType === "file" ? (
+            <video
+              src={videoUrl}
+              poster={posterSrc}
+              title={`${title} — Trailer`}
+              controls
+              playsInline
+              preload="none"
+              className="absolute inset-0 w-full h-full object-cover bg-black"
+            />
+          ) : (
+            <iframe
+              src={videoUrl}
+              title={title}
+              className="absolute inset-0 w-full h-full border-none"
+              allow={
+                videoType === "srf"
+                  ? "autoplay; fullscreen; encrypted-media"
+                  : "autoplay; fullscreen; picture-in-picture"
+              }
+              allowFullScreen
+              loading="lazy"
+            />
+          )}
+        </div>
+      ) : null}
     </motion.article>
   );
 };
