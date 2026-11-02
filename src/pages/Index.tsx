@@ -38,6 +38,7 @@ type Block =
   | { type: "film"; filmId: string; caption: string };
 
 const LANDING_SEQUENCE: Block[] = [
+  { type: "film", filmId: "in-between", caption: "IN BETWEEN follows photographer and freerider Phil Bucher through a winter in Valais." },
   { type: "photo", seriesId: "riethuesli-2025" },
   { type: "film", filmId: "tsunami-2004", caption: "Der Tsunami von 2004 — SRF docudrama series\nES GESCHAH AM…" },
   { type: "photo", seriesId: "sternwarte-2025" },
@@ -55,6 +56,7 @@ const PHOTO_IMAGE_PICKS: Record<string, number[]> = {
 };
 
 const FILM_STILL_PICKS: Record<string, number[]> = {
+  "in-between": [0, 1, 4, 5],
   "tsunami-2004": [1, 2, 0, 4],
   "postraub": [1, 3, 2, 5],
   "sr111-halifax": [3, 0, 4, 5],

@@ -17,11 +17,12 @@ const fade = {
 
 const SHELL = "max-w-[1600px] mx-auto px-10 md:px-14";
 
-function filterFilms(films: Film[], filter: string): Film[] {
+export function filterFilms(films: Film[], filter: string): Film[] {
   if (!filter || filter === "All") return films;
   if (filter === "In Production") return films.filter((f) => f.status === "in-production");
   if (filter === "Television") return films.filter((f) => f.tags.includes("TV"));
-  if (filter === "Cinema") return films.filter((f) => f.tags.includes("CINEMA"));
+  if (filter === "Cinema")
+    return films.filter((f) => f.tags.includes("CINEMA") && f.status !== "in-production");
   return films;
 }
 

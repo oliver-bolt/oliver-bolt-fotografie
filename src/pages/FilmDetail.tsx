@@ -1,4 +1,5 @@
 import { useParams, Link } from "react-router-dom";
+import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FilmEntry from "@/components/FilmEntry";
@@ -10,6 +11,15 @@ const SHELL = "max-w-[1600px] mx-auto px-10 md:px-14";
 const FilmDetail = () => {
   const { id } = useParams<{ id: string }>();
   const film = filmsData.find((f) => f.id === id);
+
+  useEffect(() => {
+    if (!film) return;
+    if (film.seoTitle) document.title = film.seoTitle;
+    if (film.seoDescription) {
+      const meta = document.querySelector('meta[name="description"]');
+      if (meta) meta.setAttribute("content", film.seoDescription);
+    }
+  }, [film]);
 
   if (!film) return <NotFound />;
 
@@ -28,6 +38,8 @@ const FilmDetail = () => {
               videoUrl={film.embedUrl}
               videoType={film.embedType}
               credits={film.credits}
+              links={film.links}
+              videoPoster={film.videoPoster}
             />
 
             {/* Back link */}
