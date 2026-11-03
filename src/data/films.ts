@@ -34,6 +34,10 @@ export interface Film {
   coverStillIndex?: number;
   /** Plain text links shown below the body text on the detail page. */
   links?: FilmLink[];
+  /** Custom public URL (default: /film/:id). */
+  path?: string;
+  /** Supporter logo shown on the detail page. */
+  supportLogo?: { src: string; alt: string; label: string };
   /** Native video file poster (filename resolved via filmAssets). */
   videoPoster?: string;
   /** Per-film SEO overrides for the detail page. */
@@ -43,8 +47,9 @@ export interface Film {
 
 export const filmsData: Film[] = [
   {
-    id: "in-between",
-    title: "IN BETWEEN",
+    id: "inbetween",
+    path: "/inbetween",
+    title: "InBetween",
     year: 2026,
     format: "Freeride short film",
     broadcaster: "Freeride Film Kollektiv",
@@ -52,7 +57,7 @@ export const filmsData: Film[] = [
     embedUrl: "/videos/in-between-trailer.mp4",
     embedType: "file",
     credits: [
-      { label: "Role", value: "Co-director & Producer" },
+      { label: "Role", value: "Co-director, Camera & Producer" },
       {
         label: "Direction",
         value: "Benno Odermatt, Oliver Bolt",
@@ -60,37 +65,46 @@ export const filmsData: Film[] = [
         href: "https://www.instagram.com/benno_benno2/",
       },
       {
-        label: "Cinematography",
-        value: "Benno Odermatt",
+        label: "Camera",
+        value: "Benno Odermatt, Oliver Bolt",
         hrefName: "Benno Odermatt",
         href: "https://www.instagram.com/benno_benno2/",
       },
       { label: "Editing & Sound Design", value: "Nico Kast" },
       { label: "Production", value: "Freeride Film Kollektiv" },
+      {
+        label: "Official Selection 2026",
+        value: "Mountainfilm, Freeride Filmbase, Bansko Mountain Film Festival, IFMF Poprad, Krakow Mountain Festival",
+      },
     ],
     tags: [],
     coverStillIndex: 0,
     stills: [
-      { src: "film-inbetween-1.jpg", alt: "IN BETWEEN still, photographer working a film camera in falling snow" },
-      { src: "film-inbetween-2.jpg", alt: "IN BETWEEN still, a freestanding window in deep snow" },
-      { src: "film-inbetween-3.jpg", alt: "IN BETWEEN still, black and white film strip" },
-      { src: "film-inbetween-4.jpg", alt: "IN BETWEEN still, headlamp in falling snow at night" },
-      { src: "film-inbetween-5.jpg", alt: "IN BETWEEN still, tracks on a steep snow slope in blue light" },
-      { src: "film-inbetween-6.jpg", alt: "IN BETWEEN still, rider descending a steep snow face" },
+      { src: "film-inbetween-1.jpg", alt: "InBetween still, photographer working a film camera in falling snow" },
+      { src: "film-inbetween-2.jpg", alt: "InBetween still, a freestanding window in deep snow" },
+      { src: "film-inbetween-3.jpg", alt: "InBetween still, black and white film strip" },
+      { src: "film-inbetween-4.jpg", alt: "InBetween still, headlamp in falling snow at night" },
+      { src: "film-inbetween-5.jpg", alt: "InBetween still, tracks on a steep snow slope in blue light" },
+      { src: "film-inbetween-6.jpg", alt: "InBetween still, rider descending a steep snow face" },
     ],
-    description: `IN BETWEEN follows photographer and freerider Phil Bucher through a winter in Valais, with friends and his dog Osmo. A film about riding, taking photographs and deciding when to put the camera down.
+    description: `InBetween follows photographer and freerider Phil Bucher through a winter in Valais, with friends and his dog Osmo. A film about riding, taking photographs and deciding when to put the camera down.
 
-I produced IN BETWEEN and co-directed it with Benno Odermatt. We made the film through Freeride Film Kollektiv, with editing and sound design by Nico Kast and support from Mammut.`,
+Phil appears not as a hero, but as an observer, moving through snow, light and texture. There is no competition, no performance narrative. The film focuses on what remains: shared moments, quiet intensity and the physical experience of being in the mountains.
+
+Structured as an associative sequence, InBetween moves between riding and seeing, carried by image, rhythm and sound. Phil's photography becomes part of the film's language, echoing the way perception and movement overlap.
+
+Benno Odermatt and I directed and shot the film together and produced it through Freeride Film Kollektiv, an independent collective for auteur-driven outdoor films. Editing and sound design by Nico Kast, with support from Mammut. In 2026, InBetween was selected for Mountainfilm, Freeride Filmbase, Bansko Mountain Film Festival, IFMF Poprad and Krakow Mountain Festival.`,
     metaLine: "In Production · Freeride Film Kollektiv · Short film · 2026",
     status: "in-production",
     links: [
-      { label: "Phil Bucher · IN BETWEEN", href: "https://www.philbucher.com/inbetween" },
+      { label: "Phil Bucher · InBetween", href: "https://www.philbucher.com/inbetween" },
       { label: "@inbetween__film", href: "https://www.instagram.com/inbetween__film/" },
     ],
+    supportLogo: { src: "film-inbetween-mammut.png", alt: "Mammut", label: "With support from" },
     videoPoster: "film-inbetween-1.jpg",
-    seoTitle: "IN BETWEEN — Co-direction & Production | Oliver Bolt",
+    seoTitle: "InBetween – Co-direction, Camera & Production | Oliver Bolt",
     seoDescription:
-      "A freeride short with photographer Phil Bucher, filmed in Valais. Co-directed and produced by Oliver Bolt for Freeride Film Kollektiv.",
+      "A freeride short with photographer Phil Bucher, filmed in Valais. Co-directed, shot and produced by Oliver Bolt and Benno Odermatt for Freeride Film Kollektiv.",
   },
 
   {
