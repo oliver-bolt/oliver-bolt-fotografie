@@ -37,7 +37,7 @@ function FilmCard({ film }: { film: Film }) {
       viewport={{ once: true, margin: "-40px" }}
       variants={fade}
     >
-      <Link to={`/film/${film.id}`} className="block group">
+      <Link to={film.path ?? `/film/${film.id}`} className="block group">
         {/* Thumbnail — selected still, 16:9 */}
         <div className="relative w-full aspect-[16/9] bg-neutral-200 overflow-hidden">
           {coverStill ? (
