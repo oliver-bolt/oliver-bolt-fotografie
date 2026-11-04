@@ -49,6 +49,8 @@ const App = () => (
             {/* Film */}
             <Route path="/film" element={<Film />} />
             <Route path="/film/:id" element={<FilmDetail />} />
+            <Route path="/inbetween" element={<FilmDetail fixedId="inbetween" />} />
+            <Route path="/film/in-between" element={<Navigate to="/inbetween" replace />} />
             <Route path="/about" element={<About />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

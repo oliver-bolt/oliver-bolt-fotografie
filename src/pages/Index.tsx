@@ -38,7 +38,7 @@ type Block =
   | { type: "film"; filmId: string; caption: string };
 
 const LANDING_SEQUENCE: Block[] = [
-  { type: "film", filmId: "in-between", caption: "IN BETWEEN follows photographer and freerider Phil Bucher through a winter in Valais." },
+  { type: "film", filmId: "inbetween", caption: "InBetween follows photographer and freerider Phil Bucher through a winter in Valais." },
   { type: "photo", seriesId: "riethuesli-2025" },
   { type: "film", filmId: "tsunami-2004", caption: "Der Tsunami von 2004 — SRF docudrama series\nES GESCHAH AM…" },
   { type: "photo", seriesId: "sternwarte-2025" },
@@ -56,7 +56,7 @@ const PHOTO_IMAGE_PICKS: Record<string, number[]> = {
 };
 
 const FILM_STILL_PICKS: Record<string, number[]> = {
-  "in-between": [0, 1, 4, 5],
+  "inbetween": [0, 1, 4, 5],
   "tsunami-2004": [1, 2, 0, 4],
   "postraub": [1, 3, 2, 5],
   "sr111-halifax": [3, 0, 4, 5],
@@ -65,6 +65,11 @@ const FILM_STILL_PICKS: Record<string, number[]> = {
 // Per-film, per-grid-slot object-position overrides (keyed by filmId, slot index 0-3)
 const FILM_SLOT_POSITIONS: Record<string, Record<number, string>> = {
   "sr111-halifax": { 3: "center top" }, // slot 3 = top-right: crop from bottom only
+};
+
+// Per-film slot image replacements (slot index -> asset filename), e.g. a poster
+const FILM_SLOT_IMAGES: Record<string, Record<number, { src: string; alt: string; position?: string }>> = {
+  inbetween: { 2: { src: "film-inbetween-poster.jpg", alt: "InBetween film poster", position: "center top" } },
 };
 
 const PHOTO_SLOT_POSITIONS: Record<string, Record<number, string>> = {
@@ -149,9 +154,15 @@ const Index = () => {
                 alt: film.stills[i].alt,
               }));
               if (stills.length < 4) return null;
+              const slotImgs = FILM_SLOT_IMAGES[block.filmId] ?? {};
+              const slotPos: Record<number, string> = { ...(FILM_SLOT_POSITIONS[block.filmId] ?? {}) };
+              for (const [k, v] of Object.entries(slotImgs)) {
+                stills[Number(k)] = { src: resolveFilmAsset(v.src) ?? "", alt: v.alt };
+                if (v.position) slotPos[Number(k)] = v.position;
+              }
 
               const captionLines = block.caption.split("\n");
-              const posMap = FILM_SLOT_POSITIONS[block.filmId];
+              const posMap = slotPos;
 
               return (
                 <motion.div
@@ -184,7 +195,7 @@ const Index = () => {
                         ) : (
                           <>{captionLines[0]}{" "}</>
                         )}
-                        <Link to={`/film/${film.id}`} className="underline underline-offset-4 whitespace-nowrap">
+                        <Link to={film.path ?? `/film/${film.id}`} className="underline underline-offset-4 whitespace-nowrap">
                           View Work →
                         </Link>
                       </div>

@@ -13,6 +13,7 @@ interface FilmEntryProps {
   credits: FilmCredit[];
   links?: FilmLink[];
   videoPoster?: string;
+  supportLogo?: { src: string; alt: string; label: string };
 }
 
 const fade = {
@@ -93,6 +94,7 @@ const FilmEntry = ({
   credits,
   links,
   videoPoster,
+  supportLogo,
 }: FilmEntryProps) => {
   const { lead, body } = splitDescription(text);
   const posterSrc = videoPoster ? resolveFilmAsset(videoPoster) : undefined;
@@ -149,6 +151,13 @@ const FilmEntry = ({
               {link.label}
             </a>
           ))}
+        </div>
+      )}
+
+      {supportLogo && resolveFilmAsset(supportLogo.src) && (
+        <div className="mb-10 md:mb-14 flex items-center gap-4 text-[14px] md:text-[16px] text-foreground/50">
+          <span>{supportLogo.label}</span>
+          <img src={resolveFilmAsset(supportLogo.src)} alt={supportLogo.alt} className="h-6 md:h-7 w-auto" loading="lazy" />
         </div>
       )}
 

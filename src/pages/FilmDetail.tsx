@@ -8,8 +8,9 @@ import NotFound from "./NotFound";
 
 const SHELL = "max-w-[1600px] mx-auto px-10 md:px-14";
 
-const FilmDetail = () => {
-  const { id } = useParams<{ id: string }>();
+const FilmDetail = ({ fixedId }: { fixedId?: string } = {}) => {
+  const params = useParams<{ id: string }>();
+  const id = fixedId ?? params.id;
   const film = filmsData.find((f) => f.id === id);
 
   useEffect(() => {
@@ -40,6 +41,7 @@ const FilmDetail = () => {
               credits={film.credits}
               links={film.links}
               videoPoster={film.videoPoster}
+              supportLogo={film.supportLogo}
             />
 
             {/* Back link */}
