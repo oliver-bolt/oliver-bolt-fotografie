@@ -58,23 +58,13 @@ export const filmsData: Film[] = [
     embedType: "file",
     credits: [
       { label: "Role", value: "Co-director, Camera & Producer" },
-      {
-        label: "Direction",
-        value: "Benno Odermatt, Oliver Bolt",
-        hrefName: "Benno Odermatt",
-        href: "https://www.instagram.com/benno_benno2/",
-      },
-      {
-        label: "Camera",
-        value: "Benno Odermatt, Oliver Bolt",
-        hrefName: "Benno Odermatt",
-        href: "https://www.instagram.com/benno_benno2/",
-      },
+      { label: "Direction", value: "Benno Odermatt, Oliver Bolt" },
+      { label: "Camera", value: "Benno Odermatt, Oliver Bolt" },
       { label: "Editing & Sound Design", value: "Nico Kast" },
       { label: "Production", value: "Freeride Film Kollektiv" },
       {
         label: "Official Selection 2026",
-        value: "Mountainfilm, Freeride Filmbase, Bansko Mountain Film Festival, IFMF Poprad, Krakow Mountain Festival",
+        value: "Mountainfilm Graz, Freeride Filmbase Innsbruck, Bansko Mountain Film Festival, IFMF Poprad, Krakow Mountain Festival",
       },
     ],
     tags: [],
@@ -93,7 +83,7 @@ Phil appears not as a hero, but as an observer, moving through snow, light and t
 
 Structured as an associative sequence, InBetween moves between riding and seeing, carried by image, rhythm and sound. Phil's photography becomes part of the film's language, echoing the way perception and movement overlap.
 
-Benno Odermatt and I directed and shot the film together and produced it through Freeride Film Kollektiv, an independent collective for auteur-driven outdoor films. Editing and sound design by Nico Kast, with support from Mammut. In 2026, InBetween was selected for Mountainfilm, Freeride Filmbase, Bansko Mountain Film Festival, IFMF Poprad and Krakow Mountain Festival.`,
+Benno Odermatt and I directed and shot the film together and produced it through Freeride Film Kollektiv, an independent collective for auteur-driven outdoor films. Editing and sound design by Nico Kast, with support from Mammut. In 2026, the film was selected for five festivals, among them Mountainfilm Graz and Freeride Filmbase Innsbruck.`,
     metaLine: "In Production · Freeride Film Kollektiv · Short film · 2026",
     status: "in-production",
     links: [
