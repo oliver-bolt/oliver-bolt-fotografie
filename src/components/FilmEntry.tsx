@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { motion } from "framer-motion";
+import { Play } from "lucide-react";
 import { resolveFilmAsset } from "@/data/filmAssets";
 import type { FilmCredit, FilmLink, FilmStill } from "@/data/films";
 
@@ -157,7 +158,7 @@ const FilmEntry = ({
       {supportLogo && resolveFilmAsset(supportLogo.src) && (
         <div className="mb-10 md:mb-14 flex items-center gap-4 text-[14px] md:text-[16px] text-foreground/50">
           <span>{supportLogo.label}</span>
-          <img src={resolveFilmAsset(supportLogo.src)} alt={supportLogo.alt} className="h-6 md:h-7 w-auto" loading="lazy" />
+          <img src={resolveFilmAsset(supportLogo.src)} alt={supportLogo.alt} className="h-10 md:h-12 w-auto" loading="lazy" />
         </div>
       )}
 
