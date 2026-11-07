@@ -83,7 +83,7 @@ Phil appears not as a hero, but as an observer, moving through snow, light and t
 
 Structured as an associative sequence, InBetween moves between riding and seeing, carried by image, rhythm and sound. Phil's photography becomes part of the film's language, echoing the way perception and movement overlap.
 
-Benno Odermatt and I directed and shot the film together and produced it through Freeride Film Kollektiv, an independent collective for auteur-driven outdoor films. Editing and sound design by Nico Kast, with support from Mammut. In 2026, the film was selected for five festivals, among them Mountainfilm Graz and Freeride Filmbase Innsbruck.`,
+Benno Odermatt and I directed and shot the film together and produced it through Freeride Film Kollektiv, an independent collective for auteur-driven outdoor films. Editing and sound design by Nico Kast, with support from Mammut. In 2026, the film was selected for Mountainfilm Graz and Freeride Filmbase Innsbruck.`,
     metaLine: "In Production · Freeride Film Kollektiv · Short film · 2026",
     status: "in-production",
     links: [

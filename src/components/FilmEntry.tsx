@@ -163,8 +163,7 @@ const FilmEntry = ({
       )}
 
       {supportLogo && resolveFilmAsset(supportLogo.src) && (
-        <div className="mb-10 md:mb-14 flex items-center gap-4 text-[14px] md:text-[16px] text-foreground/50">
-          <span>{supportLogo.label}</span>
+        <div className="mb-10 md:mb-14 flex items-center">
           <img src={resolveFilmAsset(supportLogo.src)} alt={supportLogo.alt} className="h-10 md:h-12 w-auto" loading="lazy" />
         </div>
       )}
