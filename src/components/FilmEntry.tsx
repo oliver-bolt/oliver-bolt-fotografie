@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { motion } from "framer-motion";
+import { Play } from "lucide-react";
 import { resolveFilmAsset } from "@/data/filmAssets";
 import type { FilmCredit, FilmLink, FilmStill } from "@/data/films";
 
@@ -98,6 +99,13 @@ const FilmEntry = ({
 }: FilmEntryProps) => {
   const { lead, body } = splitDescription(text);
   const posterSrc = videoPoster ? resolveFilmAsset(videoPoster) : undefined;
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [playing, setPlaying] = useState(false);
+
+  const startTrailer = () => {
+    setPlaying(true);
+    videoRef.current?.play();
+  };
 
   return (
     <motion.article
@@ -157,7 +165,7 @@ const FilmEntry = ({
       {supportLogo && resolveFilmAsset(supportLogo.src) && (
         <div className="mb-10 md:mb-14 flex items-center gap-4 text-[14px] md:text-[16px] text-foreground/50">
           <span>{supportLogo.label}</span>
-          <img src={resolveFilmAsset(supportLogo.src)} alt={supportLogo.alt} className="h-6 md:h-7 w-auto" loading="lazy" />
+          <img src={resolveFilmAsset(supportLogo.src)} alt={supportLogo.alt} className="h-10 md:h-12 w-auto" loading="lazy" />
         </div>
       )}
 
@@ -175,15 +183,29 @@ const FilmEntry = ({
       {videoUrl ? (
         <div className="relative w-full aspect-video bg-black/5 overflow-hidden">
           {videoType === "file" ? (
-            <video
-              src={videoUrl}
-              poster={posterSrc}
-              title={`${title} — Trailer`}
-              controls
-              playsInline
-              preload="none"
-              className="absolute inset-0 w-full h-full object-cover bg-black"
-            />
+            <>
+              <video
+                ref={videoRef}
+                src={videoUrl}
+                poster={posterSrc}
+                title={`${title} — Trailer`}
+                controls={playing}
+                playsInline
+                preload="none"
+                className="absolute inset-0 w-full h-full object-cover bg-black"
+              />
+              {!playing && (
+                <button
+                  type="button"
+                  onClick={startTrailer}
+                  aria-label="Watch Trailer"
+                  className="absolute inset-0 w-full h-full flex flex-col items-center justify-center gap-3 text-white bg-black/20 hover:bg-black/30 transition-colors cursor-pointer"
+                >
+                  <Play className="w-12 h-12 md:w-16 md:h-16" fill="currentColor" strokeWidth={1} />
+                  <span className="text-[16px] md:text-[18px] tracking-wide">Watch Trailer</span>
+                </button>
+              )}
+            </>
           ) : (
             <iframe
               src={videoUrl}
